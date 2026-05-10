@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <title>ລົງທະບຽນ | B-One</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .auth-container { max-width: 400px; margin: 80px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+    .auth-container h2 { text-align: center; color: #b30000; margin-bottom: 20px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+    .btn { width: 100%; padding: 12px; background: #b30000; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .error { background: #fee; color: #c00; padding: 10px; border-radius: 6px; margin-bottom: 15px; display: none; }
+    .link { text-align: center; margin-top: 15px; }
+    .link a { color: #b30000; }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>ລົງທະບຽນ</h2>
+    <div id="error" class="error"></div>
+    <form id="registerForm">
+      <div class="form-group"><input type="text" id="name" placeholder="ຊື່ເຕັມ" required></div>
+      <div class="form-group"><input type="tel" id="phone" placeholder="ເບີໂທລະສັບ" required></div>
+      <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ" required></div>
+      <div class="form-group"><input type="password" id="password" placeholder="ລະຫັດຜ່ານ (6 ຕົວຂຶ້ນໄປ)" required minlength="6"></div>
+      <button type="submit" class="btn">ລົງທະບຽນ</button>
+    </form>
+    <div class="link"><a href="login.html">ມີບັນຊີຢູ່ແລ້ວ? ເຂົ້າສູ່ລະບົບ</a></div>
+    <div class="link"><a href="index.html">← ກັບໜ້າຫຼັກ</a></div>
+  </div>
+
+  <script type="module">
+    import { auth, db, createUserWithEmailAndPassword, updateProfile, doc, setDoc, serverTimestamp } from './firebase-config.js';
+    const form = document.getElementById('registerForm');
+    const errorDiv = document.getElementById('error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      errorDiv.style.display = 'none';
+
+      try {
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCred.user, { displayName: name });
+        // ບັນທຶກຂໍ້ມູນຜູ້ໃຊ້ໃນ Firestore
+        await setDoc(doc(db, 'users', userCred.user.uid), {
+          displayName: name,
+          email: email,
+          phone: phone,
+          role: 'customer',
+          createdAt: serverTimestamp()
+        });
+        window.location.href = 'profile.html';
+      } catch (err) {
+        if (err.code === 'auth/email-already-in-use') {
+          errorDiv.textContent = 'ອີເມວນີ້ຖືກໃຊ້ງານແລ້ວ';
+        } else {
+          errorDiv.textContent = 'ການລົງທະບຽນລົ້ມເຫຼວ: ' + err.message;
+        }
+        errorDiv.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

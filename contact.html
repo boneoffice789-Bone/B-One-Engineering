@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>B-One Engineering | ຕິດຕໍ່</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <h1>B-One Engineering</h1>
+        <p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p>
+      </a>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="contact.html" class="active"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section id="contact" style="background: #fff7f5;">
+    <div class="container">
+      <h2 class="section-title">ຕິດຕໍ່ພວກເຮົາ <span style="font-size:1.4rem;">| CONTACT US</span></h2>
+      
+      <!-- ສ່ວນສະແດງການແຈ້ງເຕືອນ -->
+      <div id="alertBox" style="padding: 15px; border-radius: 10px; margin-bottom: 20px; display: none;"></div>
+
+      <div class="contact-grid">
+        <div>
+          <h3 style="color:#b91c1c; font-size:1.7rem;">ຂໍ້ມູນຕິດຕໍ່</h3>
+          <ul class="contact-list">
+            <li><i class="fas fa-building" style="color:#b91c1c;"></i> B-One Engineering Sole Co., Ltd</li>
+            <li><i class="fas fa-location-dot" style="color:#b91c1c;"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ</li>
+            <li><i class="fas fa-phone" style="color:#b91c1c;"></i> 020 59478899</li>
+            <li><i class="fas fa-envelope" style="color:#b91c1c;"></i> info@b-one-engineering.com</li>
+          </ul>
+          <div style="margin: 28px 0; border-radius: 28px; overflow: hidden;">
+            <iframe src="https://maps.google.com/maps?q=%E0%BA%9A%E0%BB%89%E0%BA%B2%E0%BA%99%E0%BB%82%E0%BA%8A%E0%BA%81%E0%BA%99%E0%BB%89%E0%BA%AD%E0%BA%8D%2C+%E0%BB%80%E0%BA%A1%E0%BA%B7%E0%BA%AD%E0%BA%87%E0%BB%84%E0%BA%8A%E0%BB%80%E0%BA%AA%E0%BA%94%E0%BA%96%E0%BA%B2%2C+%E0%BA%A7%E0%BA%BD%E0%BA%87%E0%BA%88%E0%BA%B1%E0%BA%99&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="230" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+          <div><i class="fab fa-whatsapp" style="color:#25D366; font-size:1.3rem;"></i> WhatsApp / Line : 020 59478899</div>
+          <div style="margin-top: 15px;">
+            <a href="https://maps.app.goo.gl/48GEodSBPEPsDbLr5" target="_blank" class="btn" style="display: inline-block; background: #b91c1c; color: white; padding: 10px 20px; border-radius: 30px; text-decoration: none;">
+              <i class="fas fa-map-marked-alt"></i> ເບິ່ງແຜນທີ່ Google Maps
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 style="color:#b91c1c; font-size:1.7rem;">ສົ່ງຂໍ້ຄວາມ | SEND MESSAGE</h3>
+          <form id="contactForm">
+            <div class="form-group"><input type="text" id="fullName" placeholder="ຊື່ ແລະ ນາມສະກຸນ / Full Name" required></div>
+            <div class="form-group"><input type="tel" id="phone" placeholder="ເບີໂທລະສັບ / Phone" required></div>
+            <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ / Email"></div>
+            <div class="form-group"><textarea id="message" rows="4" placeholder="ລາຍລະອຽດວຽກ ຫຼື ສອບຖາມ... / Project details or inquiry..." required></textarea></div>
+            <button type="submit" class="btn" id="submitBtn"><i class="fas fa-paper-plane"></i> <span id="btnText">ສົ່ງຂໍ້ມູນ | SEND</span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
+    <p style="margin-top: 10px;"><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  // ສະຄຣິບສຳລັບເມນູມືຖື
+  const mobileBtn = document.getElementById('mobile-menu');
+  const navLinks = document.getElementById('nav-links');
+  mobileBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+
+<!-- ສະຄຣິບສຳລັບຟອມຕິດຕໍ່, Firebase ແລະ Discord -->
+<script type="module">
+  // ນຳເຂົ້າ Firebase
+  import { db, collection, addDoc, serverTimestamp } from './firebase-config.js';
+
+  // ຕັ້ງຄ່າ Discord Webhook URL
+  const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1502603905455100065/VRnI9yjjf-VWcIJnSVOqGquAhn7hOLqWCPHpWuFfCQEBDImACDRBzc93hn1msc-fINX8'; 
+
+  // ຟັງຊັນສະແດງການແຈ້ງເຕືອນ
+  function showAlert(message, type) {
+    const alertBox = document.getElementById('alertBox');
+    alertBox.textContent = message;
+    alertBox.style.display = 'block';
+    if (type === 'success') {
+      alertBox.style.background = '#d4edda';
+      alertBox.style.color = '#155724';
+    } else {
+      alertBox.style.background = '#f8d7da';
+      alertBox.style.color = '#721c24';
+    }
+    // ຊ່ອນຂໍ້ຄວາມຫຼັງຈາກ 5 ວິນາທີ
+    setTimeout(() => {
+      alertBox.style.display = 'none';
+    }, 5000);
+  }
+
+  // ຟັງຊັນສົ່ງແຈ້ງເຕືອນໄປ Discord
+  async function sendDiscordNotification(fullName, phone, email, message) {
+    const payload = {
+      content: `📩 **ມີຂໍ້ຄວາມໃໝ່ຈາກເວັບໄຊ B-One Engineering**\n\n` +
+               `👤 **ຊື່:** ${fullName}\n` +
+               `📞 **ເບີໂທ:** ${phone}\n` +
+               `📧 **ອີເມວ:** ${email || 'ບໍ່ລະບຸ'}\n` +
+               `💬 **ຂໍ້ຄວາມ:** ${message}\n` +
+               `⏰ **ເວລາ:** ${new Date().toLocaleString('lo-LA')}`
+    };
+
+    try {
+      await fetch(DISCORD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      console.log('Discord notification sent successfully');
+    } catch (error) {
+      console.error('Discord notification failed:', error);
+      // ຈະບໍ່ສະແດງຂໍ້ຜິດພາດນີ້ໃຫ້ຜູ້ໃຊ້ເຫັນ, ເພາະວ່າຂໍ້ມູນໄດ້ຖືກບັນທຶກລົງ Firebase ແລ້ວ
+    }
+  }
+
+  // ຈັດການການສົ່ງຟອມ
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // ຢຸດການສົ່ງຟອມແບບທຳມະດາ
+
+    // ອ່ານຄ່າຈາກຟອມ
+    const fullName = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // ການກວດສອບຂໍ້ມູນພື້ນຖານ
+    if (!fullName || !phone || !message) {
+      showAlert('ກະລຸນາຕື່ມຊື່, ເບີໂທ ແລະ ຂໍ້ຄວາມ', 'error');
+      return;
+    }
+
+    // ປ່ຽນປຸ່ມເປັນສະຖານະ "ກຳລັງສົ່ງ"
+    submitBtn.disabled = true;
+    btnText.textContent = 'ກຳລັງສົ່ງ... | SENDING...';
+
+    try {
+      // 1. ບັນທຶກລົງ Firestore
+      await addDoc(collection(db, 'contact_messages'), {
+        fullName: fullName,
+        phone: phone,
+        email: email || '',
+        message: message,
+        source: 'website',
+        status: 'new',
+        createdAt: serverTimestamp()
+      });
+
+      // 2. ສົ່ງແຈ້ງເຕືອນໄປ Discord (ບໍ່ຕ້ອງລໍຖ້າໃຫ້ສຳເລັດ)
+      sendDiscordNotification(fullName, phone, email, message);
+
+      // 3. ສະແດງຜົນສຳເລັດ ແລະ ລ້າງຟອມ
+      showAlert('✅ ສົ່ງສຳເລັດ! ພວກເຮົາຈະຕິດຕໍ່ກັບໄວໆນີ້.', 'success');
+      form.reset();
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      showAlert('❌ ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃໝ່ພາຍຫຼັງ.', 'error');
+    } finally {
+      // ປ່ຽນປຸ່ມກັບຄືນສູ່ສະຖານະປົກກະຕິ
+      submitBtn.disabled = false;
+      btnText.textContent = 'ສົ່ງຂໍ້ມູນ | SEND';
+    }
+  });
+</script>
+</body>
+</html>

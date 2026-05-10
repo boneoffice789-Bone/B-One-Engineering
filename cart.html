@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <title>ຕະກອນ | B-One</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container { max-width: 800px; margin: 40px auto; padding: 20px; }
+    .cart-item { display: flex; align-items: center; gap: 15px; padding: 15px; background: #fff; margin-bottom: 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+    .cart-item .details { flex: 1; }
+    .qty { width: 60px; padding: 5px; }
+    .btn { padding: 12px 24px; background: #b30000; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .btn-remove { background: #ccc; color: #333; padding: 5px 10px; border-radius: 5px; margin-left: 10px; cursor: pointer; }
+    .total { text-align: right; font-size: 1.2rem; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ຕະກອນສິນຄ້າ</h2>
+    <div id="cartItems"></div>
+    <div class="total">ລວມທັງໝົດ: ₭<span id="totalPrice">0</span></div>
+    <a href="checkout.html" class="btn" id="checkoutBtn">ສັ່ງຊື້</a>
+    <a href="products.html" style="display:block; margin-top:15px;">← ເລືອກສິນຄ້າຕໍ່</a>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
+    const container = document.getElementById('cartItems');
+    let total = 0;
+
+    function renderCart() {
+      container.innerHTML = '';
+      total = 0;
+      if (cart.length === 0) {
+        container.innerHTML = '<p>ຕະກອນຫວ່າງເປົ່າ</p>';
+        return;
+      }
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image || 'https://via.placeholder.com/80'}" alt="${item.name}">
+          <div class="details">
+            <strong>${item.name}</strong><br>
+            ₭${item.price.toLocaleString()} x 
+            <input type="number" class="qty" value="${item.quantity}" min="1" data-index="${index}">
+          </div>
+          <div>₭${(item.price * item.quantity).toLocaleString()}</div>
+          <button class="btn-remove" data-index="${index}">ລຶບ</button>
+        `;
+        container.appendChild(div);
+      });
+      document.getElementById('totalPrice').textContent = total.toLocaleString();
+    }
+
+    renderCart();
+
+    container.addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn-remove')) {
+        const index = e.target.dataset.index;
+        cart.splice(index, 1);
+        localStorage.setItem('b_one_cart', JSON.stringify(cart));
+        renderCart();
+      }
+    });
+
+    container.addEventListener('change', (e) => {
+      if (e.target.classList.contains('qty')) {
+        const index = e.target.dataset.index;
+        cart[index].quantity = parseInt(e.target.value);
+        localStorage.setItem('b_one_cart', JSON.stringify(cart));
+        renderCart();
+      }
+    });
+  </script>
+</body>
+</html>

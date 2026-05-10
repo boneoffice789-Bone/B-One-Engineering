@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <title>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ | B-One</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container { max-width: 800px; margin: 40px auto; padding: 20px; }
+    .order { background: #fff; padding: 15px; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .order h4 { color: #b30000; margin: 0 0 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ</h2>
+    <div id="orderList"></div>
+    <a href="profile.html">← ກັບໄປບັນຊີ</a>
+  </div>
+
+  <script type="module">
+    import { auth, db, collection, query, where, orderBy, getDocs, onAuthStateChanged } from './firebase-config.js';
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = 'login.html'; return; }
+      const q = query(collection(db, 'orders'), where('userId', '==', user.uid), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      const list = document.getElementById('orderList');
+      list.innerHTML = '';
+      if (snapshot.empty) {
+        list.innerHTML = '<p>ຍັງບໍ່ມີຄຳສັ່ງຊື້</p>';
+        return;
+      }
+      snapshot.forEach(doc => {
+        const order = doc.data();
+        const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '';
+        list.innerHTML += `
+          <div class="order">
+            <h4>ເລກຄຳສັ່ງ: ${doc.id.slice(0,8)}</h4>
+            <p>ວັນທີ: ${date} | ລວມ: ₭${order.totalAmount.toLocaleString()}</p>
+            <p>ສະຖານະ: ${order.orderStatus}</p>
+          </div>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <title>ສັ່ງຊື້ | B-One</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container { max-width: 600px; margin: 40px auto; padding: 20px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+    .btn { width: 100%; padding: 14px; background: #b30000; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .info-box { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; }
+    .cart-summary { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ຢືນຢັນຄຳສັ່ງຊື້</h2>
+    <div class="cart-summary" id="cartSummary"></div>
+    <form id="orderForm">
+      <div class="form-group"><input type="text" id="name" placeholder="ຊື່ຜູ້ຮັບ *" required></div>
+      <div class="form-group"><input type="tel" id="phone" placeholder="ເບີໂທລະສັບ *" required></div>
+      <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ"></div>
+      <div class="form-group"><textarea id="address" rows="3" placeholder="ທີ່ຢູ່ຈັດສົ່ງ *" required></textarea></div>
+      <div class="form-group">
+        <select id="paymentMethod" required>
+          <option value="">-- ວິທີຊຳລະເງິນ --</option>
+          <option value="cash">ເງິນສົດ (ເກັບປາຍທາງ)</option>
+          <option value="transfer">ໂອນເງິນ</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">ສັ່ງຊື້</button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { db, auth, collection, addDoc, serverTimestamp } from './firebase-config.js';
+    const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
+    if (cart.length === 0) window.location.href = 'cart.html';
+
+    let total = 0;
+    const summary = document.getElementById('cartSummary');
+    summary.innerHTML = cart.map(item => {
+      total += item.price * item.quantity;
+      return `<p>${item.name} x ${item.quantity} = ₭${(item.price * item.quantity).toLocaleString()}</p>`;
+    }).join('');
+    summary.innerHTML += `<h3>ລວມ: ₭${total.toLocaleString()}</h3>`;
+
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = auth.currentUser;
+      const orderData = {
+        userId: user ? user.uid : null,
+        customerInfo: {
+          name: document.getElementById('name').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          email: document.getElementById('email').value.trim()
+        },
+        items: cart.map(item => ({
+          productId: item.id,
+          productName: item.name,
+          quantity: item.quantity,
+          unitPrice: item.price,
+          totalPrice: item.price * item.quantity
+        })),
+        totalAmount: total,
+        paymentMethod: document.getElementById('paymentMethod').value,
+        paymentStatus: 'pending',
+        orderStatus: 'pending',
+        shippingAddress: document.getElementById('address').value.trim(),
+        createdAt: serverTimestamp()
+      };
+      
+      try {
+        await addDoc(collection(db, 'orders'), orderData);
+        localStorage.removeItem('b_one_cart');
+        alert('ສັ່ງຊື້ສຳເລັດ!');
+        window.location.href = 'orders.html';
+      } catch (err) {
+        console.error(err);
+        alert('ເກີດຂໍ້ຜິດພາດ');
+      }
+    });
+  </script>
+</body>
+</html>

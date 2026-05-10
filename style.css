@@ -1,0 +1,487 @@
+/* ========== ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ========== */
+:root {
+  --primary: #b91c1c;
+  --primary-dark: #8b1515;
+  --primary-light: #fef0f0;
+  --accent: #f5a623;
+  --text-dark: #1a1a2e;
+  --text-medium: #434356;
+  --text-light: #6b7280;
+  --bg-white: #ffffff;
+  --bg-light: #f9fafb;
+  --border-light: #f0f0f0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 12px 28px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans Lao', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ========== Header ແບບທັນສະໄໝ ========== */
+header {
+  background: rgba(185, 28, 28, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: white;
+  line-height: 1.2;
+}
+
+.logo p {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.logo a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  border-radius: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.nav-links li a {
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 30px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-links li a .lao {
+  color: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.nav-links li a .eng {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+}
+
+.nav-links li a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.nav-links li a:hover .eng {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-links li a.active {
+  background: white;
+  color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.nav-links li a.active .lao {
+  color: var(--primary);
+  border-bottom: none;
+}
+
+.nav-links li a.active .eng {
+  color: var(--primary-dark);
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+  background: none;
+  border: none;
+}
+
+/* ========== ປຸ່ມ ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: var(--primary);
+  padding: 12px 28px;
+  border-radius: 48px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+  gap: 6px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(185,28,28,0.3);
+}
+
+.btn:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
+/* ========== Hero Section ========== */
+.hero {
+  background: linear-gradient(135deg, #fff5f0 0%, #ffffff 30%, #fffbf7 100%);
+  padding: 90px 0 80px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.hero-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-content {
+  flex: 1;
+}
+
+.hero-content h1 {
+  font-size: 3.3rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--text-medium);
+  margin-bottom: 32px;
+  max-width: 90%;
+}
+
+.hero-badge {
+  background: rgba(185,28,28,0.1);
+  color: var(--primary-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 60px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.hero-image img {
+  max-width: 100%;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  transition: transform 0.4s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.02) rotate(0.2deg);
+}
+
+/* ========== Sections ທົ່ວໄປ ========== */
+section {
+  padding: 80px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.section-sub {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 56px auto;
+  color: var(--text-light);
+  font-size: 1.05rem;
+}
+
+/* ========== ກາດບໍລິການ ແລະ ຜົນງານ ========== */
+.services-grid, .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 28px;
+}
+
+.service-card, .portfolio-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-card:hover, .portfolio-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(185,28,28,0.3);
+  box-shadow: 0 24px 34px -12px rgba(185,28,28,0.2);
+}
+
+.card-icon {
+  background: linear-gradient(145deg, #fff0f0, #ffffff);
+  padding: 28px 20px 16px;
+  text-align: center;
+  font-size: 2.6rem;
+  color: var(--primary);
+}
+
+.service-card h3, .portfolio-card h3 {
+  font-size: 1.5rem;
+  padding: 14px 24px 6px;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.service-card p, .portfolio-card p {
+  padding: 0 24px 28px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.portfolio-img {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-card:hover .portfolio-img {
+  transform: scale(1.03);
+}
+
+/* ========== ກ່ຽວກັບ ========== */
+.about-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+.contact-list {
+  margin-top: 24px;
+  list-style: none;
+}
+
+.contact-list li {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  color: var(--text-medium);
+}
+
+.ev-badge {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  margin-top: 24px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* ========== ຟອມຕິດຕໍ່ ========== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  background: var(--bg-white);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
+}
+
+/* ========== Footer ========== */
+footer {
+  background: #000000;
+  color: #d1d5db;
+  text-align: center;
+  padding: 40px 0;
+  margin-top: 40px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #f0a0a0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* ========== WhatsApp Float ========== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #25D366;
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+  z-index: 99;
+  transition: var(--transition);
+}
+
+.whatsapp-float:hover {
+  background: #128C7E;
+  transform: scale(1.12);
+}
+
+/* ========== Responsive ທີ່ລຽນໄຫຼ ========== */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 14px 0;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(185, 28, 28, 0.98);
+    padding: 20px;
+    margin-top: 16px;
+    gap: 12px;
+    border-radius: var(--radius-xl);
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .hero-content h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero-content p {
+    max-width: 100%;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}

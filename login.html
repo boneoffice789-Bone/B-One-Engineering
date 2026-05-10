@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ເຂົ້າສູ່ລະບົບ | B-One</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .auth-container { max-width: 400px; margin: 80px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+    .auth-container h2 { text-align: center; color: #b30000; margin-bottom: 20px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+    .btn { width: 100%; padding: 12px; background: #b30000; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .error { background: #fee; color: #c00; padding: 10px; border-radius: 6px; margin-bottom: 15px; display: none; }
+    .link { text-align: center; margin-top: 15px; }
+    .link a { color: #b30000; }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>ເຂົ້າສູ່ລະບົບ</h2>
+    <div id="error" class="error"></div>
+    <form id="loginForm">
+      <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ" required></div>
+      <div class="form-group"><input type="password" id="password" placeholder="ລະຫັດຜ່ານ" required></div>
+      <button type="submit" class="btn">ເຂົ້າສູ່ລະບົບ</button>
+    </form>
+    <div class="link"><a href="register.html">ຍັງບໍ່ມີບັນຊີ? ລົງທະບຽນ</a></div>
+    <div class="link"><a href="index.html">← ກັບໜ້າຫຼັກ</a></div>
+  </div>
+
+  <script type="module">
+    import { auth, signInWithEmailAndPassword } from './firebase-config.js';
+    const form = document.getElementById('loginForm');
+    const errorDiv = document.getElementById('error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      errorDiv.style.display = 'none';
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = 'profile.html';
+      } catch (err) {
+        errorDiv.textContent = 'ອີເມວ ຫຼື ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ';
+        errorDiv.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

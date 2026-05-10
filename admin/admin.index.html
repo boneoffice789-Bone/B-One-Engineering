@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | B-One</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans Lao', sans-serif; margin: 0; }
+    .sidebar { width: 220px; background: #b30000; color: white; position: fixed; height: 100%; padding: 20px; }
+    .sidebar a { color: white; text-decoration: none; display: block; padding: 8px 0; }
+    .main { margin-left: 240px; padding: 20px; }
+    .btn { padding: 6px 12px; background: #b30000; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h3>Admin Panel</h3>
+    <a href="#" onclick="showTab('dashboard')">Dashboard</a>
+    <a href="#" onclick="showTab('products')">ສິນຄ້າ</a>
+    <a href="#" onclick="showTab('contacts')">ຂໍ້ຄວາມ</a>
+    <a href="#" onclick="showTab('orders')">ຄຳສັ່ງຊື້</a>
+    <button id="logoutBtn" class="btn" style="margin-top:20px;">ອອກລະບົບ</button>
+  </div>
+  <div class="main">
+    <div id="dashboard" class="tab-content active"><h2>Dashboard</h2><p>ຍິນດີຕ້ອນຮັບ</p></div>
+    <div id="products" class="tab-content">
+      <h2>ຈັດການສິນຄ້າ</h2>
+      <button class="btn" onclick="addProduct()">+ ເພີ່ມສິນຄ້າ</button>
+      <table id="productTable"><thead><tr><th>ຊື່</th><th>ລາຄາ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table>
+    </div>
+    <div id="contacts" class="tab-content"><h2>ຂໍ້ຄວາມ</h2><div id="contactsList"></div></div>
+    <div id="orders" class="tab-content"><h2>ຄຳສັ່ງຊື້</h2><div id="ordersList"></div></div>
+  </div>
+
+  <script type="module">
+    import { auth, db, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, serverTimestamp, onAuthStateChanged, signOut, getDoc } from '../firebase-config.js';
+
+    // ກວດ admin
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = '../login.html'; return; }
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      if (!snap.exists() || snap.data().role !== 'admin') {
+        alert('ບໍ່ມີສິດ');
+        window.location.href = '../login.html';
+        return;
+      }
+      loadProducts();
+      loadContacts();
+      loadOrders();
+    });
+
+    window.showTab = (tabId) => {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    };
+
+    // Products CRUD
+    async function loadProducts() {
+      const table = document.getElementById('productTable').querySelector('tbody');
+      table.innerHTML = '';
+      const snapshot = await getDocs(collection(db, 'products'));
+      snapshot.forEach(doc => {
+        const p = doc.data();
+        table.innerHTML += `<tr><td>${p.name}</td><td>₭${p.price?.toLocaleString()}</td>
+          <td><button onclick="deleteProduct('${doc.id}')">ລຶບ</button></td></tr>`;
+      });
+    }
+    window.deleteProduct = async (id) => {
+      if (confirm('ຢືນຢັນ?')) {
+        await deleteDoc(doc(db, 'products', id));
+        loadProducts();
+      }
+    };
+    window.addProduct = async () => {
+      const name = prompt('ຊື່ສິນຄ້າ:');
+      const price = parseFloat(prompt('ລາຄາ:'));
+      if (name && price) {
+        await addDoc(collection(db, 'products'), { name, price, status: 'active', createdAt: serverTimestamp() });
+        loadProducts();
+      }
+    };
+
+    // Contacts
+    async function loadContacts() {
+      const list = document.getElementById('contactsList');
+      list.innerHTML = '';
+      const snapshot = await getDocs(collection(db, 'contact_messages'));
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        list.innerHTML += `<p><strong>${d.fullName}</strong> (${d.phone}) - ${d.message} <small>(${d.status})</small></p>`;
+      });
+    }
+
+    // Orders
+    async function loadOrders() {
+      const list = document.getElementById('ordersList');
+      list.innerHTML = '';
+      const snapshot = await getDocs(collection(db, 'orders'));
+      snapshot.forEach(doc => {
+        const o = doc.data();
+        list.innerHTML += `<p><strong>#${doc.id.slice(0,8)}</strong> - ₭${o.totalAmount.toLocaleString()} - ${o.orderStatus}</p>`;
+      });
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = '../login.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>B-One Engineering | ຜົນງານ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <h1>B-One Engineering</h1>
+        <p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p>
+      </a>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="portfolio.html" class="active"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section id="portfolio">
+    <div class="container">
+      <h2 class="section-title">ຜົນງານທີ່ພົ້ນເດັ່ນ <span style="font-size:1.4rem;">| FEATURED PROJECTS</span></h2>
+      <p class="section-sub">ຕົວຢ່າງໂຄງການ ແລະ ຜົນງານທີ່ຜ່ານມາ ທີ່ສະແດງເຖິງຄວາມຊ່ຽວຊານຂອງພວກເຮົາ</p>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop');"></div>
+          <h3>PLC & ລະບົບຄວບຄຸມອັດຕະໂນມັດ</h3>
+          <p>ອອກແບບ ແລະ ຕິດຕັ້ງລະບົບຄວບຄຸມອັດຕະໂນມັດດ້ວຍ PLC.</p>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1616400619175-5beda3a178c8?w=600&h=400&fit=crop');"></div>
+          <h3>ຕິດຕັ້ງຕູ້ຊາກ EV Charger</h3>
+          <p>ສະຖານີອັດລົດໄຟຟ້າ ປອດໄພ ທັນສະໄໝ.</p>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop');"></div>
+          <h3>ສາຍພານລຳລຽງອັດຕະໂນມັດ</h3>
+          <p>ອອກແບບ ແລະ ຜະລິດສາຍພານລຳລຽງ.</p>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-img" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&h=400&fit=crop');"></div>
+          <h3>ຕູ້ຄວບຄຸມໄຟຟ້າ MDB</h3>
+          <p>ຜະລິດ ແລະ ຕິດຕັ້ງຕູ້ MDB, Inverter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
+    <p style="margin-top: 10px;"><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  const mobileBtn = document.getElementById('mobile-menu');
+  const navLinks = document.getElementById('nav-links');
+  mobileBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+</body>
+</html>
