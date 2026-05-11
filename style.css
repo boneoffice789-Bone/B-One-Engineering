@@ -1,6 +1,6 @@
 /* =============================================
-   B-One Engineering - COMPLETE FIXED CSS
-   (Responsive for all devices, no overflow)
+   B-One Engineering - COMPLETE FIXED CSS (2025)
+   Responsive for all devices | No overflow | Clean UI
    ============================================= */
 
 /* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
@@ -161,7 +161,7 @@ header {
   color: var(--primary);
 }
 
-/* ---------- ປຸ່ມ ---------- */
+/* ---------- ປຸ່ມ (ປັບຂະໜາດສຳລັບມືຖື) ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -222,6 +222,7 @@ header {
   font-size: 1.05rem;
   color: var(--text-medium);
   margin-bottom: 28px;
+  word-break: break-word;
 }
 
 .hero-badge {
@@ -280,7 +281,7 @@ section {
   word-break: break-word;
 }
 
-/* ---------- Grid ທົ່ວໄປ (ປັບອັດຕະໂນມັດ) ---------- */
+/* ---------- Grid ທົ່ວໄປ ---------- */
 .services-grid, .portfolio-grid, .brands-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -413,6 +414,7 @@ footer {
   padding: 40px 20px;
   margin-top: 50px;
   font-size: 0.85rem;
+  word-break: break-word;
 }
 
 /* ---------- WhatsApp Float ---------- */
@@ -438,115 +440,6 @@ footer {
 .whatsapp-float:hover {
   transform: scale(1.08);
   background: #128C7E;
-}
-
-/* ========== RESPONSIVE (ສຳຄັນທີ່ສຸດ) ========== */
-@media (max-width: 900px) {
-  .menu-toggle {
-    display: block;
-  }
-  .nav-links {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    background: rgba(185, 28, 28, 0.98);
-    padding: 20px;
-    margin-top: 12px;
-    border-radius: 28px;
-  }
-  .nav-links.active {
-    display: flex;
-  }
-  .nav-links li a .lao, .nav-links li a .eng {
-    white-space: normal;
-  }
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  .section-title {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 18px;
-  }
-  section {
-    padding: 50px 0;
-  }
-  /* header ບັງຄັບຫໍ່ຕົວ */
-  .logo h1 {
-    font-size: 1.2rem !important;
-  }
-  .logo p {
-    font-size: 0.55rem !important;
-  }
-  /* grid ທັງໝົດ ຫຼຸດເປັນ 2 ຖັນ */
-  .services-grid, .portfolio-grid, .brands-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  .hero-grid {
-    flex-direction: column;
-  }
-  .hero-content h1 {
-    font-size: 1.8rem;
-  }
-  .hero-content p {
-    font-size: 0.95rem;
-  }
-  .btn {
-    padding: 8px 18px;
-    font-size: 0.8rem;
-    white-space: normal;
-  }
-}
-
-@media (max-width: 550px) {
-  .services-grid, .portfolio-grid, .brands-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .logo h1 {
-    font-size: 1rem !important;
-  }
-  .logo p {
-    font-size: 0.5rem !important;
-  }
-  .section-title {
-    font-size: 1.6rem;
-  }
-  .section-sub {
-    font-size: 0.85rem;
-  }
-  .hero-content h1 {
-    font-size: 1.5rem;
-  }
-  .btn {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin: 5px 0;
-    white-space: normal;
-    text-align: center;
-  }
-  .hero-content .btn-outline {
-    margin-left: 0 !important;
-    margin-top: 10px;
-  }
-  .stat-number {
-    font-size: 1.4rem;
-  }
-  .whatsapp-float {
-    width: 45px;
-    height: 45px;
-    font-size: 24px;
-    bottom: 18px;
-    right: 18px;
-  }
 }
 
 /* ========== SLIDER (ຖ້າມີ) ========== */
@@ -634,38 +527,70 @@ footer {
   transform: scale(1.2);
 }
 
-@media (max-width: 768px) {
-  .slide { height: 350px; }
-  .slide-content h3 { font-size: 1.3rem; }
-  .slider-btn { font-size: 1.2rem; padding: 5px 12px; }
-}
-/* ========== FIX: ຕົວໜັງສືຍາວ ແລະ ປຸ່ມໃຫຍ່ເກີນໄປ (Mobile) ========== */
-@media (max-width: 768px) {
-  /* ແກ້ໄຂຕົວໜັງສືຍາວລົງ */
-  .service-card p, .portfolio-card p, .about-text p, .hero-content p,
-  .service-cat ul li, .contact-list li, .section-sub {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+/* ========== RESPONSIVE (ສຳຄັນທີ່ສຸດ) ========== */
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block;
   }
-  
-  /* ບັງຄັບໃຫ້ຂໍ້ຄວາມໃນ hero ຕັດບັນທັດສວຍງາມ */
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(185, 28, 28, 0.98);
+    padding: 20px;
+    margin-top: 12px;
+    border-radius: 28px;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .nav-links li a .lao, .nav-links li a .eng {
+    white-space: normal;
+  }
   .hero-content h1 {
-    word-break: break-word;
-    line-height: 1.3;
+    font-size: 2rem;
   }
-  
-  /* ປຸ່ມທັງໝົດໃຫ້ເຫມາະສົມກັບມືຖື */
-  .btn, .btn-outline, .hero-content .btn, .hero-content .btn-outline {
-    padding: 8px 16px !important;
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 18px;
+  }
+  section {
+    padding: 50px 0;
+  }
+  /* header ບັງຄັບຫໍ່ຕົວ */
+  .logo h1 {
+    font-size: 1.2rem !important;
+  }
+  .logo p {
+    font-size: 0.55rem !important;
+  }
+  /* grid ທັງໝົດ : 2 ຖັນ */
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .hero-grid {
+    flex-direction: column;
+  }
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+  .btn, .btn-outline {
+    padding: 8px 18px !important;
     font-size: 0.8rem !important;
-    min-width: auto !important;
-    width: auto !important;
-    display: inline-flex !important;
-    white-space: nowrap !important;
+    white-space: nowrap;
   }
-  
-  /* ປຸ່ມຄູ່ (ຕິດກັນ) ໃຫ້ສະແດງແນວນອນ ຫຼື ຫໍ່ຕາມຄວາມເໝາະສົມ */
   .hero-content .btn-outline {
     margin-left: 10px !important;
     margin-top: 0 !important;
@@ -673,34 +598,67 @@ footer {
 }
 
 @media (max-width: 550px) {
-  /* ສຳລັບມືຖືແຄບຫຼາຍ, ປຸ່ມອາດຕ້ອງສະແດງເປັນບລັອກ ຫຼື ຫຼຸດເຫຼືອ 1 ແຖວ ຖ້າຈຳເປັນ */
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .logo h1 {
+    font-size: 1rem !important;
+  }
+  .logo p {
+    font-size: 0.5rem !important;
+  }
+  .section-title {
+    font-size: 1.6rem;
+  }
+  .section-sub {
+    font-size: 0.85rem;
+  }
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
   .hero-content .btn-outline {
     margin-left: 0 !important;
     margin-top: 10px !important;
   }
-  
-  /* ລົດຂະໜາດຕົວພິມຂອງປຸ່ມເລັກນ້ອຍ */
   .btn, .btn-outline {
-    font-size: 0.75rem !important;
-    padding: 6px 14px !important;
+    display: inline-flex;
+    width: auto;
+    white-space: nowrap;
   }
-  
-  /* ແກ້ໄຂຕົວໜັງສືທີ່ຍາວຫຼາຍ (ເຊັ່ນ: ຊື່ບໍລິສັດ, ຫົວຂໍ້ຍາວ) */
-  .logo h1, .logo p, .section-title, .service-card h3 {
-    word-break: break-word;
+  .stat-number {
+    font-size: 1.4rem;
+  }
+  .whatsapp-float {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    bottom: 18px;
+    right: 18px;
+  }
+  .slide {
+    height: 350px;
+  }
+  .slide-content h3 {
+    font-size: 1.3rem;
+  }
+  .slider-btn {
+    font-size: 1.2rem;
+    padding: 5px 12px;
   }
 }
 
-/* ຖ້າປຸ່ມໃດຍັງໃຫຍ່ຢູ່ (ເຊັ່ນ: ປຸ່ມ "ຕິດຕໍ່" ໃນ hero) ໃຫ້ບັງຄັບອີກຊັ້ນ */
-.hero .btn, .hero .btn-outline {
+/* ປັບຕົວໜັງສືຍາວ ແລະ ປຸ່ມໃຫຍ່ເກີນ (ການປັບພິເສດ) */
+.service-card p, .portfolio-card p, .about-text p, .hero-content p,
+.service-cat ul li, .contact-list li, .section-sub,
+.logo h1, .logo p, .section-title, .service-card h3 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* ຮັບປະກັນປຸ່ມທີ່ເປັນລິ້ງບໍ່ໃຫຍ່ເກີນ */
+a.btn, button.btn {
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-/* ສຳລັບ card ທີ່ມີປຸ່ມ "ເບິ່ງລາຍລະອຽດ" ໃຫ້ປັບຂະໜາດອັດຕະໂນມັດ */
-.service-card .btn, .portfolio-card .btn, .product-card .btn {
-  width: auto;
-  display: inline-block;
-  margin: 10px auto;
 }
