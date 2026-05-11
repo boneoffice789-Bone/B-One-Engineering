@@ -753,3 +753,109 @@ footer a:hover {
   .slide-content h3 { font-size: 1.5rem; }
   .slider-btn { font-size: 1.2rem; padding: 8px 12px; }
 }
+/* ========== ປັບປຸງການສະແດງຜົນບົນມືຖື (Mobile Responsive) ========== */
+
+/* ສຳລັບໜ້າ About Page */
+@media (max-width: 768px) {
+  /* ປັບ grid ຂອງ service categories ໃຫ້ເປັນຖັນດຽວ */
+  .about-grid > div:first-child > div[style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* ປັບຂະໜາດຕົວພິມ ແລະ ຄວາມຍາວຂອງຂໍ້ຄວາມ */
+  .about-text h2 {
+    font-size: 1.6rem !important;
+  }
+  
+  .about-text p {
+    font-size: 0.95rem !important;
+    text-align: justify;
+  }
+  
+  /* ປັບ ev badge ໃຫ້ຫໍ່ຂໍ້ຄວາມ */
+  .ev-badge {
+    white-space: normal !important;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  
+  /* ປັບ contact list ໃຫ້ຫໍ່ຂໍ້ຄວາມ */
+  .contact-list li {
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+  }
+  
+  /* ປັບຮູບພາບໃຫ້ເຕັມຂະໜາດ ແລະ ມີຂອບເໝາະສົມ */
+  .about-image {
+    order: -1; /* ເອົາຮູບຂຶ້ນໄປຂ້າງເທິງກ່ອນ */
+    margin-bottom: 20px;
+  }
+  
+  .about-image img {
+    max-height: 250px;
+    object-fit: cover;
+  }
+}
+
+/* ປັບສ່ວນສະຖິຕິ ແລະ ຄຸນຄ່າຫຼັກ (ສຳລັບທຸກໜ້າ) */
+@media (max-width: 768px) {
+  .services-grid[style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .services-grid[style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stat-number {
+    font-size: 2rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* ປັບການສະແດງທີມງານ (team cards) ໃນມືຖື */
+@media (max-width: 640px) {
+  .services-grid[style*="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr))"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+  }
+  
+  .service-card .service-card > div[style*="width: 150px; height: 150px;"] {
+    width: 100px !important;
+    height: 100px !important;
+    margin: 20px auto 15px !important;
+  }
+  
+  .service-card h4 {
+    font-size: 1rem;
+  }
+  
+  .service-card p {
+    font-size: 0.8rem;
+  }
+}
+
+/* ແກ້ໄຂຂໍ້ຄວາມທີ່ຍາວເກີນໄປ (ຄໍລຳບໍ່ງາມ) */
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.6rem !important;
+  }
+  
+  .section-sub {
+    font-size: 0.85rem !important;
+  }
+  
+  .contact-list li {
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+  
+  .ev-badge {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+}
