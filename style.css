@@ -821,3 +821,154 @@ body, .container, .about-text, .ev-badge, .logo, .navbar, h1, h2, h3, h4, p, li,
     grid-template-columns: 1fr !important;
   }
 }
+/* ========== FIX RESPONSIVE FOR ALL PAGES (Mobile & Tablet) ========== */
+
+/* 1. ບັງຄັບການຫໍ່ຕົວຂອງຂໍ້ຄວາມທຸກບ່ອນ */
+body, .container, .logo, .navbar, h1, h2, h3, h4, p, li, span, a, div, .service-card, .portfolio-card, .brand-card, .ev-badge, .contact-list li {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* 2. ປັບ header ໃນມືຖື */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+  .logo h1 {
+    font-size: 1.3rem !important;
+    line-height: 1.3;
+  }
+  .logo p {
+    font-size: 0.6rem !important;
+  }
+  .nav-links {
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 12px;
+  }
+  .nav-links li a {
+    padding: 8px 12px;
+  }
+  .nav-links li a .lao {
+    font-size: 0.85rem;
+  }
+  .nav-links li a .eng {
+    font-size: 0.55rem;
+  }
+}
+
+/* 3. ປັບ grid ຂອງທຸກຫນ້າ (services, products, portfolio, brands) */
+@media (max-width: 768px) {
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 4. ປັບ card ຕ່າງໆ */
+@media (max-width: 768px) {
+  .service-card, .portfolio-card, .brand-card {
+    padding: 20px 12px !important;
+  }
+  .card-icon i, .card-icon img {
+    font-size: 2.2rem;
+    width: 50px;
+    height: 50px;
+  }
+  .service-card h3, .portfolio-card h3, .brand-name {
+    font-size: 1.2rem !important;
+  }
+  .service-card p, .portfolio-card p {
+    font-size: 0.85rem;
+    padding: 0 12px 20px;
+  }
+  .portfolio-img {
+    height: 160px;
+  }
+}
+
+/* 5. ປັບ contact page ແລະ form */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px;
+  }
+  .contact-list li {
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+  input, textarea, .btn {
+    font-size: 0.9rem;
+  }
+}
+
+/* 6. ປັບ hero section (index ແລະ ຫນ້າອື່ນ) */
+@media (max-width: 768px) {
+  .hero-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .hero-content h1 {
+    font-size: 2rem !important;
+  }
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+  .hero-image img {
+    max-height: 280px;
+    object-fit: cover;
+  }
+  .btn {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+  }
+}
+
+/* 7. ປັບສ່ວນ statistics ແລະ team */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat-number {
+    font-size: 1.6rem !important;
+  }
+  .service-card[style*="border-radius: 50%"] > div {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
+
+/* 8. ປ້ອງກັນຂໍ້ຄວາມຍາວລົ້ນ (ສຳລັບ about page ແລະ ອື່ນ) */
+.ev-badge, .about-text p, .contact-list li, .service-cat ul li {
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+/* 9. ສຳລັບ footer */
+@media (max-width: 768px) {
+  footer {
+    padding: 30px 15px;
+    font-size: 0.8rem;
+  }
+}
+
+/* 10. ສຳລັບ Bradcrumb ຫຼື ສ່ວນອື່ນ (ຖ້າມີ) */
+.section-title {
+  font-size: 2rem;
+}
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.6rem;
+  }
+  .section-sub {
+    font-size: 0.9rem;
+  }
+}
