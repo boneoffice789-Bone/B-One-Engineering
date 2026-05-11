@@ -662,3 +662,58 @@ a.btn, button.btn {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+/* ========== HOTFIX: ແກ້ໄຂຕົວໜັງສື ແລະ ປຸ່ມໃນ SLIDER ========== */
+
+/* 1. ບັງຄັບການຕັດບັນທັດສຳລັບຂໍ້ຄວາມຍາວ (ທຸກບ່ອນ) */
+p, li, .service-card p, .portfolio-card p, .about-text p,
+.hero-content p, .section-sub, .ev-badge, .contact-list li {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+}
+
+/* 2. ປຸ່ມ "ເບິ່ງລາຍລະອຽດ" ພາຍໃນ SLIDER ໃຫ້ນ້ອຍລົງ */
+.slide-content .btn,
+.slide-content a.btn,
+.slide-content button {
+  display: inline-block !important;
+  padding: 6px 16px !important;
+  font-size: 0.75rem !important;
+  background: rgba(185,28,28,0.9) !important;
+  border-radius: 30px !important;
+  margin-top: 12px !important;
+  white-space: nowrap !important;
+}
+
+/* 3. ຖ້າປຸ່ມໃນ slider ຍັງໃຫຍ່ ຫຼື ກວ້າງເກີນ, ຫຸ້ມຂອບເຂົ້າ */
+@media (max-width: 768px) {
+  .slide-content .btn,
+  .slide-content a.btn {
+    padding: 5px 12px !important;
+    font-size: 0.7rem !important;
+  }
+}
+
+/* 4. ສຳລັບຕົວໜັງສືທີ່ຍາວໂດຍສະເພາະ (ຕົວຢ່າງ: ຄຳອະທິບາຍຍາວ) */
+.service-card p, .portfolio-card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 5. ຖ້າຕ້ອງການໃຫ້ຂໍ້ຄວາມສະແດງທັງໝົດ (ບໍ່ຕັດ) ໃຫ້ລຶບຂໍ້ 4 ອອກ, ຫຼື ປ່ຽນ -webkit-line-clamp: ຕາມຈຳນວນບັນທັດທີ່ຕ້ອງການ */
+
+/* 6. ແກ້ໄຂສ່ວນຫົວຂໍ້ທີ່ຍາວ (section-title, card title) */
+.section-title, .service-card h3, .portfolio-card h3, .brand-name {
+  word-break: break-word;
+  hyphens: auto;
+}
+.service-card, .portfolio-card, .brand-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
