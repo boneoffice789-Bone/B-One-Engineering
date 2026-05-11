@@ -793,3 +793,6 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     padding: 8px 14px !important;
   }
 }
+<div class="service-card small-frame">
+  ...
+</div>
