@@ -793,3 +793,63 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     padding: 8px 14px !important;
   }
 }
+/* ========== SLIDER BUTTON: ນ້ອຍ, ສວຍ, ຄ້າຍຮູບທີ 1 ========== */
+
+/* ປຸ່ມ “ເບິ່ງລາຍລະອຽດ” ໃນ slider */
+.slide-content .btn, 
+.slide-content a.btn,
+.slide-content button {
+  display: inline-block !important;
+  background: var(--primary) !important;
+  color: white !important;
+  padding: 6px 20px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  border-radius: 30px !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+  border: none !important;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  letter-spacing: 0.3px;
+}
+
+.slide-content .btn:hover {
+  background: var(--primary-dark) !important;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(185,28,28,0.4);
+}
+
+/* ສຳລັບມືຖື ໃຫ້ນ້ອຍລົງອີກ */
+@media (max-width: 768px) {
+  .slide-content .btn, 
+  .slide-content a.btn {
+    padding: 5px 16px !important;
+    font-size: 0.7rem !important;
+  }
+}
+
+/* ເພີ່ມຄວາມສະຫງ່າງາມໃຫ້ຂໍ້ຄວາມໃນ slider */
+.slide-content h3 {
+  font-size: 1.8rem !important;
+  word-break: break-word;
+  margin-bottom: 8px;
+}
+
+.slide-content p {
+  font-size: 0.95rem !important;
+  word-break: break-word;
+  margin-bottom: 16px;
+}
+
+/* ທາງເລືອກ: ຖ້າຕ້ອງການປຸ່ມແບບມີຂອບ (outline) ໃຫ້ເພີ່ມ class "btn-outline" */
+.slide-content .btn-outline {
+  background: transparent !important;
+  border: 2px solid white !important;
+  color: white !important;
+  box-shadow: none;
+}
+.slide-content .btn-outline:hover {
+  background: white !important;
+  color: var(--primary) !important;
+}
