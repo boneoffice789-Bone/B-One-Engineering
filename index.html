@@ -296,36 +296,5 @@
   loadFeaturedServices();
   loadFeaturedProducts();
 </script>
-  <script>
-(function() {
-  // ແກ້ໄຂ header ໃນມືຖື
-  function fixMobileHeader() {
-    if (window.innerWidth > 768) return;
-    
-    var logoH1 = document.querySelector('.logo h1');
-    var logoP = document.querySelector('.logo p');
-    if (logoH1) {
-      logoH1.style.fontSize = '1rem';
-      logoH1.style.lineHeight = '1.2';
-      logoH1.style.whiteSpace = 'normal';
-      logoH1.style.wordBreak = 'break-word';
-    }
-    if (logoP) {
-      logoP.style.fontSize = '0.5rem';
-      logoP.style.whiteSpace = 'normal';
-      logoP.style.wordBreak = 'break-word';
-    }
-    // ບັງຄັບໃຫ້ navbar ຫໍ່ຕົວ
-    var navbar = document.querySelector('.navbar');
-    if (navbar) navbar.style.flexWrap = 'wrap';
-    var logo = document.querySelector('.logo');
-    if (logo) logo.style.maxWidth = '70%';
-  }
-  
-  // ເມື່ອໂຫຼດໜ້າ ແລະ ເມື່ອປ່ຽນຂະໜາດໜ້າຈໍ
-  window.addEventListener('load', fixMobileHeader);
-  window.addEventListener('resize', fixMobileHeader);
-})();
-</script>
 </body>
 </html>
