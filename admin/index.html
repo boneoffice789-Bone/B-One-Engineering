@@ -2,64 +2,192 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B-One Engineering | ແບຣນຕົວແທນ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>B-One Engineering | ໜ້າຫຼັກ</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .brands-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; margin-top: 40px; }
-    .brand-card { background: white; border-radius: 16px; padding: 30px 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.07); transition: all 0.3s ease; border: 2px solid transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; }
-    .brand-card:hover { transform: translateY(-5px); border-color: #b91c1c; }
-    .brand-logo { width: 120px; height: 120px; border-radius: 50%; background: #f9fafb; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; overflow: hidden; border: 3px solid #f0f0f0; transition: all 0.3s ease; }
-    .brand-card:hover .brand-logo { border-color: #b91c1c; background: #fff5f5; }
-    .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
-    .brand-logo i { font-size: 3rem; color: #b91c1c; }
-    .brand-name { font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; }
-    .brand-category { font-size: 0.9rem; color: #6b7280; background: #f3f4f6; padding: 5px 15px; border-radius: 20px; }
-    @media (max-width: 768px) { .brands-grid { grid-template-columns: repeat(2,1fr); gap: 15px; } .brand-logo { width: 80px; height: 80px; } }
-  </style>
 </head>
 <body>
-<header>...(navbar same as services.html)...</header>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <h1>B-One Engineering</h1>
+        <p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p>
+      </a>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+    </ul>
+  </div>
+</header>
+
 <main>
-  <section style="background: linear-gradient(135deg, #fef2f2 0%, #fff7f5 50%); padding: 60px 0 40px;">
-    <div class="container">
-      <h2 class="section-title">ແບຣນທີ່ເປັນຕົວແທນຈຳໜ່າຍ <span style="font-size:1.4rem;">| OUR BRANDS</span></h2>
-      <p class="section-sub">ພວກເຮົາເປັນຕົວແທນຈຳໜ່າຍຢ່າງເປັນທາງການຈາກຫຼາຍແບຣນຊັ້ນນຳທົ່ວໂລກ</p>
-      <div style="text-align:center;"><span style="display:inline-flex; align-items:center; gap:8px; background:#b91c1c; color:white; padding:8px 20px; border-radius:30px;"><i class="fas fa-check-circle"></i> ຕົວແທນຈຳໜ່າຍຢ່າງເປັນທາງການ</span></div>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-cogs"></i> ຜູ້ນຳດ້ານວິສະວະກຳ ແລະ ບໍລິການອຸດສາຫະກຳ | Industry Leader</div>
+        <h1>- ຕິດຕັ້ງ <br>- ຈຳໜ່າຍ <br>- ບໍລິການ ຄົບວົງຈອນ</h1>
+        <p>ບໍລິສັດ ບີ-ວັນ ເອັນຈິເນຍຣິງ ຈຳກັດຜູ້ດຽວ — ທີມງານວິສະວະກອນມືອາຊີບ ພ້ອມໃຫ້ບໍລິການທີ່ເຊື່ອຖືໄດ້ໃນທຸກງານອຸດສາຫະກຳ.</p>
+        <a href="contact.html" class="btn"><i class="fas fa-phone-alt"></i> ຕິດຕໍ່ສອບຖາມ | CONTACT</a>
+        <a href="services.html" class="btn btn-outline" style="margin-left: 14px;"><i class="fas fa-chart-line"></i> ບໍລິການຂອງພວກເຮົາ | SERVICES</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=600&h=420&fit=crop" alt="B-One Engineering">
+      </div>
     </div>
   </section>
-  <section style="padding: 20px 0 60px;">
+
+  <!-- ເປັນຫຍັງຕ້ອງເລືອກ B-One (static) -->
+  <section style="padding: 60px 0; background: #fefaf8;">
     <div class="container">
-      <div class="brands-grid" id="brandsGrid">ກຳລັງໂຫຼດ...</div>
+      <h2 class="section-title">ເປັນຫຍັງຕ້ອງເລືອກ B-One?</h2>
+      <p class="section-sub">ພວກເຮົາມີປະສົບການຫຼາຍກວ່າ 10 ປີ ໃນການໃຫ້ບໍລິການດ້ານວິສະວະກຳ ແລະ ໄດ້ຮັບຄວາມໄວ້ໃຈຈາກລູກຄ້າຫຼາຍກວ່າ 500 ທ່ານ</p>
+      <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="service-card"><div class="card-icon"><i class="fas fa-medal"></i></div><h3>ມາດຕະຖານສາກົນ</h3><p>ຮັບປະກັນຄຸນນະພາບຕາມມາດຕະຖານ ISO ແລະ ສາກົນ.</p></div>
+        <div class="service-card"><div class="card-icon"><i class="fas fa-clock"></i></div><h3>ບໍລິການວ່ອງໄວ</h3><p>ສົ່ງງານທັນເວລາ ພ້ອມບໍລິການຫຼັງການຂາຍ.</p></div>
+        <div class="service-card"><div class="card-icon"><i class="fas fa-hand-holding-heart"></i></div><h3>ລາຄາຍຸຕິທຳ</h3><p>ລາຄາແຂ່ງຂັນໄດ້ ຄຸ້ມຄ່າທີ່ສຸດ.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ບໍລິການແນະນຳ (dynamic ຈາກ Firestore) -->
+  <section style="padding: 60px 0;">
+    <div class="container">
+      <h2 class="section-title">ບໍລິການທີ່ເດັ່ນຂອງພວກເຮົາ</h2>
+      <p class="section-sub">ບໍລິການທີ່ລູກຄ້າໃຫ້ຄວາມໄວ້ໃຈສູງສຸດ</p>
+      <div class="services-grid" id="featuredServicesGrid">
+        <div style="text-align:center; width:100%;">ກຳລັງໂຫຼດ...</div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="services.html" class="btn btn-outline">ເບິ່ງບໍລິການທັງໝົດ →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ສິນຄ້າແນະນຳ (dynamic ຈາກ Firestore) -->
+  <section style="padding: 60px 0; background: #fefaf8;">
+    <div class="container">
+      <h2 class="section-title">ສິນຄ້າແນະນຳ</h2>
+      <p class="section-sub">ສິນຄ້າຄຸນນະພາບສູງ ລາຄາຍຸດຕິທຳ</p>
+      <div class="services-grid" id="featuredProductsGrid">
+        <div style="text-align:center; width:100%;">ກຳລັງໂຫຼດ...</div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="products.html" class="btn btn-outline">ເບິ່ງສິນຄ້າທັງໝົດ →</a>
+      </div>
     </div>
   </section>
 </main>
-<footer>...</footer>
-<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-<script> const mobileBtn = document.getElementById('mobile-menu'); const navLinks = document.getElementById('nav-links'); mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active')); </script>
+
+<footer>
+  <div class="container">
+    <p>© 2025 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
+    <p style="margin-top: 10px;"><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899 | info@b-one-engineering.com</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  const mobileBtn = document.getElementById('mobile-menu');
+  const navLinks = document.getElementById('nav-links');
+  mobileBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+
 <script type="module">
-  import { db, collection, getDocs } from './firebase-config.js';
-  async function loadBrands() {
-    const grid = document.getElementById('brandsGrid');
-    grid.innerHTML = 'ກຳລັງໂຫຼດ...';
+  import { db, collection, getDocs, query, where, limit } from './firebase-config.js';
+
+  // ໂຫຼດບໍລິການແນະນຳ (3 ລາຍການ)
+  async function loadFeaturedServices() {
+    const grid = document.getElementById('featuredServicesGrid');
     try {
-      const snapshot = await getDocs(collection(db, 'brands'));
-      if (snapshot.empty) { grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີແບຣນ</div>'; return; }
+      const q = query(collection(db, 'services'), where('status', '==', 'active'), limit(3));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) {
+        grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີຂໍ້ມູນບໍລິການ</div>';
+        return;
+      }
       grid.innerHTML = '';
       snapshot.forEach(doc => {
-        const b = doc.data();
-        let logoHtml = '';
-        if (b.logoUrl) logoHtml = `<img src="${b.logoUrl}" alt="${b.name}">`;
-        else logoHtml = `<i class="fas fa-building"></i>`;
-        const card = document.createElement('div'); card.className = 'brand-card';
-        card.innerHTML = `<div class="brand-logo">${logoHtml}</div><div class="brand-name">${b.name}</div><span class="brand-category">${b.category || 'ທົ່ວໄປ'}</span>`;
+        const s = doc.data();
+        let iconHtml = '';
+        const imgOrIcon = s.imageUrl || '';
+        if (imgOrIcon.match(/^https?:\/\//i)) {
+          iconHtml = `<img src="${imgOrIcon}" style="width:60px; height:60px; object-fit:contain; margin:0 auto;">`;
+        } else if (imgOrIcon) {
+          iconHtml = `<i class="fas ${imgOrIcon}"></i>`;
+        } else {
+          iconHtml = `<i class="fas fa-cog"></i>`;
+        }
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.innerHTML = `
+          <div class="card-icon">${iconHtml}</div>
+          <h3>${s.name}</h3>
+          <p>${s.description ? s.description.substring(0, 80) + '...' : ''}</p>
+        `;
         grid.appendChild(card);
       });
-    } catch (err) { console.error(err); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
+    } catch (err) {
+      console.error('Error loading featured services:', err);
+      grid.innerHTML = '<div style="text-align:center;">ເກີດຂໍ້ຜິດພາດໃນການໂຫຼດຂໍ້ມູນ</div>';
+    }
   }
-  loadBrands();
+
+  // ໂຫຼດສິນຄ້າແນະນຳ (3 ລາຍການ)
+  async function loadFeaturedProducts() {
+    const grid = document.getElementById('featuredProductsGrid');
+    try {
+      const q = query(collection(db, 'products'), where('status', '==', 'active'), limit(3));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) {
+        grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີສິນຄ້າ</div>';
+        return;
+      }
+      grid.innerHTML = '';
+      snapshot.forEach(doc => {
+        const p = doc.data();
+        const imageUrl = p.image || 'https://via.placeholder.com/300x200?text=No+Image';
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.innerHTML = `
+          <div style="width:100%; height:180px; overflow:hidden; border-radius:10px; margin-bottom:15px;">
+            <img src="${imageUrl}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <h4 style="color: var(--text-dark); margin-bottom: 5px;">${p.name}</h4>
+          <p style="color: var(--text-light); font-size:0.9rem;">${p.category || 'ທົ່ວໄປ'}</p>
+          <p style="font-weight:700; color: #b30000; font-size:1.2rem;">₭${(p.price || 0).toLocaleString()}</p>
+        `;
+        grid.appendChild(card);
+      });
+    } catch (err) {
+      console.error('Error loading featured products:', err);
+      grid.innerHTML = '<div style="text-align:center;">ເກີດຂໍ້ຜິດພາດໃນການໂຫຼດສິນຄ້າ</div>';
+    }
+  }
+
+  // ເລີ່ມຕົ້ນ
+  loadFeaturedServices();
+  loadFeaturedProducts();
 </script>
 </body>
 </html>
