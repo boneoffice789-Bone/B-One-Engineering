@@ -32,8 +32,18 @@
     </ul>
   </div>
 </header>
-
 <main>
+  <!-- Slider Section (dynamic) -->
+<section class="slider-section">
+  <div class="slider-container">
+    <div class="slider-wrapper" id="sliderWrapper">
+      <!-- slides ຈະຖືກເພີ່ມດ້ວຍ JavaScript -->
+    </div>
+    <button class="slider-btn slider-prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-btn slider-next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+    <div class="slider-dots" id="sliderDots"></div>
+  </div>
+</section>
   <section id="home" class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
@@ -72,7 +82,6 @@
 <a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank">
   <i class="fab fa-whatsapp"></i>
 </a>
-
 <script>
   const mobileBtn = document.getElementById('mobile-menu');
   const navLinks = document.getElementById('nav-links');
@@ -80,5 +89,115 @@
     navLinks.classList.toggle('active');
   });
 </script>
+  // ========== Slider ຈາກ Firestore ==========
+import { db, collection, getDocs, query, where } from './firebase-config.js';
+
+let currentSlide = 0;
+let sliders = [];
+let autoSlideInterval;
+
+async function loadSliders() {
+  const wrapper = document.getElementById('sliderWrapper');
+  const dotsContainer = document.getElementById('sliderDots');
+  if (!wrapper) return;
+
+  try {
+    const q = query(collection(db, 'sliders'), where('status', '==', 'active'));
+    const snapshot = await getDocs(q);
+    
+    if (snapshot.empty) {
+      wrapper.innerHTML = '<div class="slide" style="background-image: url(\'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=550&fit=crop\');"><div class="slide-content"><h3>B-One Engineering</h3><p>ວິສະວະກຳຄົບວົງຈອນ</p><a href="contact.html">ຕິດຕໍ່ພວກເຮົາ →</a></div></div>';
+      dotsContainer.innerHTML = '';
+      return;
+    }
+
+    sliders = [];
+    snapshot.forEach(doc => {
+      sliders.push({ id: doc.id, ...doc.data() });
+    });
+
+    // ສ້າງ slides
+    wrapper.innerHTML = '';
+    sliders.forEach((slide, index) => {
+      const slideDiv = document.createElement('div');
+      slideDiv.className = 'slide';
+      slideDiv.style.backgroundImage = `url('${slide.image || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=550&fit=crop'}')`;
+      slideDiv.style.backgroundSize = 'cover';
+      slideDiv.style.backgroundPosition = 'center';
+      slideDiv.innerHTML = `
+        <div class="slide-content">
+          <h3>${slide.title || 'B-One Engineering'}</h3>
+          ${slide.linkUrl ? `<a href="${slide.linkUrl}">ເບິ່ງລາຍລະອຽດ →</a>` : ''}
+        </div>
+      `;
+      wrapper.appendChild(slideDiv);
+    });
+
+    // ສ້າງ dots
+    dotsContainer.innerHTML = '';
+    sliders.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      if (idx === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(idx));
+      dotsContainer.appendChild(dot);
+    });
+
+    // ເລີ່ມສະໄລເດີ
+    goToSlide(0);
+    startAutoSlide();
+
+  } catch (err) {
+    console.error('Error loading sliders:', err);
+  }
+}
+
+function goToSlide(index) {
+  const wrapper = document.getElementById('sliderWrapper');
+  const dots = document.querySelectorAll('.dot');
+  if (!wrapper) return;
+  
+  currentSlide = index;
+  wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+  
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentSlide);
+  });
+}
+
+function nextSlide() {
+  if (sliders.length === 0) return;
+  currentSlide = (currentSlide + 1) % sliders.length;
+  goToSlide(currentSlide);
+  resetAutoSlide();
+}
+
+function prevSlide() {
+  if (sliders.length === 0) return;
+  currentSlide = (currentSlide - 1 + sliders.length) % sliders.length;
+  goToSlide(currentSlide);
+  resetAutoSlide();
+}
+
+function startAutoSlide() {
+  if (autoSlideInterval) clearInterval(autoSlideInterval);
+  autoSlideInterval = setInterval(() => {
+    if (sliders.length > 0) nextSlide();
+  }, 5000);
+}
+
+function resetAutoSlide() {
+  clearInterval(autoSlideInterval);
+  startAutoSlide();
+}
+
+// ຜູກປຸ່ມ
+const prevBtn = document.getElementById('prevSlide');
+const nextBtn = document.getElementById('nextSlide');
+if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+// ໂຫຼດ slider ເມື່ອຫນ້າໂຫຼດສຳເລັດ
+document.addEventListener('DOMContentLoaded', loadSliders);
 </body>
 </html>
