@@ -2,25 +2,23 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc, query, where, orderBy, limit, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
+// ⚠️ ປ່ຽນເປັນຄ່າຈາກ Firebase Console ຂອງທ່ານ
 const firebaseConfig = {
-  apiKey: "AIzaSyDxxxxxxxxxxxxxxxxxxxxxx",        // ປ່ຽນ
-  authDomain: "b-one-engineering.firebaseapp.com",   // ປ່ຽນ
-  projectId: "b-one-engineering",                    // ປ່ຽນ
-  storageBucket: "b-one-engineering.appspot.com",    // ປ່ຽນ
-  messagingSenderId: "123456789",                    // ປ່ຽນ
-  appId: "1:123456789:web:abc123def456"             // ປ່ຽນ
+  apiKey: "AIzaSyBkLZAa0YR5QzWFyaHkoA2rxQREI8D9DeA",
+  authDomain: "b-one-engineering-39728.firebaseapp.com",
+  projectId: "b-one-engineering-39728",
+  storageBucket: "b-one-engineering-39728.firebasestorage.app",
+  messagingSenderId: "952177236727",
+  appId: "1:952177236727:web:2d1cb669ca76286d83d1f2"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const storage = getStorage(app);
 
 export { 
-  db, auth, storage,
+  db, auth,
   collection, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc, query, where, orderBy, limit, serverTimestamp, onSnapshot,
-  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updateProfile,
-  ref, uploadBytes, getDownloadURL, deleteObject
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updateProfile
 };
