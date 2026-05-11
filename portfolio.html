@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>... same navbar ...</header>
+<header>...(navbar same as services.html)...</header>
 <main>
-  <section id="portfolio">
+  <section id="portfolio" style="padding: 80px 0;">
     <div class="container">
       <h2 class="section-title">ຜົນງານທີ່ພົ້ນເດັ່ນ <span style="font-size:1.4rem;">| FEATURED PROJECTS</span></h2>
       <p class="section-sub">ຕົວຢ່າງໂຄງການ ແລະ ຜົນງານທີ່ຜ່ານມາ</p>
@@ -21,14 +21,9 @@
 </main>
 <footer>...</footer>
 <a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-<script>
-  const mobileBtn = document.getElementById('mobile-menu');
-  const navLinks = document.getElementById('nav-links');
-  mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-</script>
+<script> const mobileBtn = document.getElementById('mobile-menu'); const navLinks = document.getElementById('nav-links'); mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active')); </script>
 <script type="module">
   import { db, collection, getDocs } from './firebase-config.js';
-
   async function loadPortfolio() {
     const grid = document.getElementById('portfolioGrid');
     grid.innerHTML = 'ກຳລັງໂຫຼດ...';
@@ -39,13 +34,8 @@
       snapshot.forEach(doc => {
         const p = doc.data();
         const imageUrl = p.imageUrl || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop';
-        const card = document.createElement('div');
-        card.className = 'portfolio-card';
-        card.innerHTML = `
-          <div class="portfolio-img" style="background-image: url('${imageUrl}'); background-size: cover; background-position: center; height: 220px;"></div>
-          <h3>${p.title || 'ໂຄງການ'}</h3>
-          <p>${p.description || ''}</p>
-        `;
+        const card = document.createElement('div'); card.className = 'portfolio-card';
+        card.innerHTML = `<div class="portfolio-img" style="background-image: url('${imageUrl}'); background-size: cover; background-position: center; height: 220px;"></div><h3>${p.title || 'ໂຄງການ'}</h3><p>${p.description || ''}</p>`;
         grid.appendChild(card);
       });
     } catch (err) { console.error(err); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
