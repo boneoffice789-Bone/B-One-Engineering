@@ -618,34 +618,27 @@ footer a:hover {
   opacity: 0.95;
 }
 
-/* ປຸ່ມພາຍໃນ SLIDER - ແບບກອບສີແດງ ໂຕໜັງສືສີຂາວ ບໍ່ມີເສັ້ນຂີດ */
+/* ປຸ່ມພາຍໃນ SLIDER ໃຫ້ນ້ອຍ ແລະ ສວຍງາມ */
 .slide-content .btn, 
 .slide-content a.btn,
 .slide-content button {
   display: inline-block !important;
-  background: transparent !important;
+  background: var(--primary) !important;
   color: white !important;
-  border: 2px solid var(--primary) !important;
-  padding: 6px 16px !important;
-  font-size: 0.78rem !important;
+  padding: 8px 22px !important;
+  font-size: 0.85rem !important;
   font-weight: 600 !important;
   border-radius: 40px !important;
   text-decoration: none !important;
   transition: var(--transition) !important;
+  border: none !important;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  letter-spacing: 0.2px;
 }
 
-.slide-content .btn:hover,
-.slide-content a.btn:hover,
-.slide-content button:hover {
-  background: var(--primary) !important;
-  color: white !important;
-  border-color: var(--primary) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(185,28,28,0.4);
-  text-decoration: none !important;
+.slide-content .btn:hover {
+  background: var(--primary-dark) !important;
+  transform: scale(1.02) translateY(-2px);
 }
 
 /* Slider controls */
@@ -750,14 +743,7 @@ footer a:hover {
   
   .slide { height: 400px; }
   .slide-content h3 { font-size: 1.5rem; }
-  /* ປຸ່ມ slider ໃນແທັບເລັດ */
-  .slide-content .btn,
-  .slide-content a.btn,
-  .slide-content button { 
-    padding: 5px 14px !important; 
-    font-size: 0.7rem !important; 
-    border-width: 1.8px !important;
-  }
+  .slide-content .btn { padding: 6px 16px !important; font-size: 0.75rem !important; }
   .slider-btn { width: 36px; height: 36px; font-size: 1.2rem; }
 }
 
@@ -779,14 +765,7 @@ footer a:hover {
   .slide { height: 320px; }
   .slide-content { padding: 18px 24px; max-width: 90%; }
   .slide-content h3 { font-size: 1.2rem; }
-  /* ປຸ່ມ slider ໃນມືຖື */
-  .slide-content .btn,
-  .slide-content a.btn,
-  .slide-content button { 
-    padding: 4px 12px !important; 
-    font-size: 0.65rem !important; 
-    border-width: 1.5px !important;
-  }
+  .slide-content .btn { padding: 5px 12px !important; font-size: 0.7rem !important; }
   
   .whatsapp-float { width: 48px; height: 48px; font-size: 26px; bottom: 20px; right: 20px; }
   
