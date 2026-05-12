@@ -793,3 +793,151 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     padding: 8px 14px !important;
   }
 }
+/* =============================================
+   SUPERIOR BUTTON STYLES (ເບິ່ງງາມກວ່າຮູບເກົ່າ)
+   ============================================= */
+
+/* 1. ປຸ່ມ "ເບິ່ງລາຍລະອຽດ" (Outline Red but smoother) */
+.service-card .btn,
+.portfolio-card .btn,
+.product-card .btn-add-to-cart,
+.card-btn {
+  background: transparent !important;
+  border: 2px solid #b91c1c !important;
+  color: #b91c1c !important;
+  padding: 6px 20px !important;
+  border-radius: 50px !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  cursor: pointer;
+  display: inline-block !important;
+  width: auto !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Hover effect: ເຕີມສີແດງ ມີເງົາ ແລະ ຍົກສູງ */
+.service-card .btn:hover,
+.portfolio-card .btn:hover,
+.product-card .btn-add-to-cart:hover,
+.card-btn:hover {
+  background: #b91c1c !important;
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -8px rgba(185,28,28,0.5);
+}
+
+/* 2. ປຸ່ມຫຼັກ (Submit / ຕິດຕໍ່) - Gradient + Shadow */
+.btn-primary,
+.btn-solid-red,
+button[type="submit"] {
+  background: linear-gradient(135deg, #b91c1c 0%, #e03a3a 100%) !important;
+  border: none !important;
+  color: white !important;
+  padding: 10px 28px !important;
+  border-radius: 50px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(185,28,28,0.3);
+  cursor: pointer;
+}
+
+.btn-primary:hover,
+.btn-solid-red:hover,
+button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -8px rgba(185,28,28,0.5);
+  background: linear-gradient(135deg, #8b1515 0%, #b91c1c 100%) !important;
+}
+
+/* 3. ປຸ່ມໃນ Slider (ພື້ນມືດ → ຂອບຂາວ ໂປ່ງ ມີ blur) */
+.slide-content .btn {
+  background: rgba(255,255,255,0.15) !important;
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255,255,255,0.8) !important;
+  color: white !important;
+  padding: 6px 18px !important;
+  border-radius: 50px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.slide-content .btn:hover {
+  background: white !important;
+  color: #b91c1c !important;
+  transform: scale(1.02);
+  border-color: white !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* 4. ປຸ່ມເພີ່ມສິນຄ້າໃສ່ຕະກອນ (ສຳລັບໜ້າ products) */
+.btn-add-to-cart {
+  background: #b91c1c;
+  border: none;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: all 0.25s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.btn-add-to-cart:hover {
+  background: #8b1515;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(185,28,28,0.4);
+}
+
+/* 5. ປຸ່ມອື່ນໆ ທີ່ໃຊ້ class .btn (ແບບ gradient ດູດຕາ) */
+.btn {
+  background: linear-gradient(135deg, #b91c1c, #d43f3f);
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(185,28,28,0.4);
+  background: linear-gradient(135deg, #8b1515, #b91c1c);
+}
+
+/* ເພີ່ມ ripple effect ເມື່ອກົດ (ທາງເລືອກ) */
+.btn, .btn-add-to-cart, .card-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:after, .btn-add-to-cart:after, .card-btn:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+.btn:active:after, .btn-add-to-cart:active:after, .card-btn:active:after {
+  width: 120%;
+  height: 120%;
+  opacity: 0;
+  transition: 0s;
+}
