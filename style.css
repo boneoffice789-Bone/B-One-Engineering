@@ -774,3 +774,11 @@ body, p, li, h1, h2, h3, h4, .section-title, .section-sub {
     letter-spacing: 0 !important;
   }
 }
+/* ບັງຄັບສະແດງຂ່າວໝົດ (ບໍ່ຕັດ) */
+.news-card p {
+  display: block !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  max-height: none !important;
+}
