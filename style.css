@@ -863,29 +863,3 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin-left: auto;
   margin-right: auto;
 }
-/* ຈັດຂໍ້ຄວາມພາຍໃນກາດ (cards) ໃຫ້ຢູ່ກາງ (ສຳລັບຄອມພິວເຕີ ແລະ ອຸປະກອນທີ່ກວ້າງກວ່າ 768px) */
-@media (min-width: 769px) {
-  .service-card,
-  .portfolio-card,
-  .product-card {
-    text-align: center;
-  }
-  
-  .service-card h3,
-  .portfolio-card h3,
-  .product-card h3,
-  .service-card p,
-  .portfolio-card p,
-  .product-card p {
-    text-align: center;
-  }
-  
-  /* ຖ້າມີປຸ່ມຢູ່ໃນກາດ ແລະ ຕ້ອງການໃຫ້ຢູ່ກາງ */
-  .service-card .btn,
-  .portfolio-card .btn,
-  .product-card .btn {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
