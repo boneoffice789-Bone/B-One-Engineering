@@ -790,3 +790,25 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin-bottom: 8px;
   padding-left: 0;
 }
+/* EMERGENCY OVERRIDE - ບັງຄັບປຸ່ມ SLIDER ໃຫ້ຖືກຕ້ອງ */
+.slider-section .slide-content .btn,
+.slider-section .slide-content a,
+.slide-content .btn,
+.slide-content a {
+  background: rgba(255,255,255,0.15) !important;
+  border: 2px solid rgba(255,255,255,0.8) !important;
+  color: white !important;
+  padding: 6px 22px !important;
+  font-size: 0.85rem !important;
+  border-radius: 60px !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(8px);
+}
+.slider-section .slide-content .btn:hover,
+.slide-content .btn:hover,
+.slide-content a:hover {
+  background: white !important;
+  color: #b91c1c !important;
+  border-color: white !important;
+}
