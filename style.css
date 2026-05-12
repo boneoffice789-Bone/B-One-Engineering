@@ -1,6 +1,6 @@
 /* =============================================
    B-One Engineering - COMPLETE FIXED CSS (2025)
-   Responsive for all devices | No overflow | Clean UI
+   Fully responsive | Glassmorphism slider buttons | No overflow
    ============================================= */
 
 /* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
@@ -51,7 +51,7 @@ body {
   width: 100%;
 }
 
-/* ---------- HEADER - ແກ້ໄຂບໍ່ໃຫ້ລົ້ນຂອບ ---------- */
+/* ---------- HEADER (ບໍ່ລົ້ນຂອບ) ---------- */
 header {
   background: rgba(185, 28, 28, 0.96);
   backdrop-filter: blur(12px);
@@ -304,7 +304,7 @@ section {
 
 .service-card:hover, .portfolio-card:hover, .brand-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-hover);
 }
 
 .card-icon {
@@ -462,7 +462,7 @@ footer a:hover {
   box-shadow: 0 10px 25px rgba(37,211,102,0.5);
 }
 
-/* ========== SLIDER ========== */
+/* ========== SLIDER ສວຍງາມ ພ້ອມປຸ່ມ GLASSMORPHISM ========== */
 .slider-section {
   padding: 0;
 }
@@ -525,7 +525,7 @@ footer a:hover {
   opacity: 0.95;
 }
 
-/* ປຸ່ມພາຍໃນ SLIDER (ປັບຂະໜາດນ້ອຍ ແລະ ສວຍງາມ) */
+/* ປຸ່ມພາຍໃນ SLIDER (Glassmorphism: ຂອບຂາວ, ຕົວພິມຂາວ, ໂປ່ງ) */
 .slide-content .btn, 
 .slide-content a.btn,
 .slide-content .btn-slider,
@@ -677,7 +677,7 @@ footer a:hover {
   gap: 6px;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIVE (ຄອມ, ແທັບ, ມືຖື) ========== */
 @media (max-width: 1024px) {
   .hero-content h1 { font-size: 2.5rem; }
   .section-title { font-size: 2.2rem; }
@@ -765,7 +765,7 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   hyphens: auto;
 }
 
-/* ຮັບປະກັນປຸ່ມບໍ່ແຕກແຖວຜິດ */
+/* ຮັບປະກັນປຸ່ມບໍ່ແຕກແຖວຜິດ (ຍົກເວັ້ນມືຖືແຄບຫຼາຍ) */
 .btn, .btn-outline, .slide-content .btn, .slide-content a.btn {
   white-space: nowrap;
 }
@@ -778,7 +778,7 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   }
 }
 
-/* ປິດການໃຊ້ງານເຄື່ອງໝາຍຈ້ຳທີ່ຊ້ອນ (ຖ້າມີ) */
+/* ປິດການໃຊ້ງານເຄື່ອງໝາຍຈ້ຳທີ່ຊ້ອນ (ແກ້ໄຂ bullet point ສອງອັນໃນ about) */
 .service-cat ul li:before {
   content: none !important;
   display: none !important;
@@ -789,42 +789,4 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   list-style: none;
   margin-bottom: 8px;
   padding-left: 0;
-}
-/* ========== ບັງຄັບປຸ່ມໃນ SLIDER ໃຫ້ເປັນແບບ OUTLINE ຂາວ (ແກ້ໄຂກັບໄປແບບເກົ່າ) ========== */
-.slide-content .btn,
-.slide-content a.btn,
-.slide-content .btn-slider,
-.slide-content button {
-  background: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(8px);
-  border: 2px solid rgba(255, 255, 255, 0.9) !important;
-  color: white !important;
-  padding: 6px 20px !important;
-  font-size: 0.8rem !important;
-  font-weight: 600 !important;
-  border-radius: 60px !important;
-  text-decoration: none !important;
-  transition: all 0.3s ease !important;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.slide-content .btn:hover,
-.slide-content a.btn:hover,
-.slide-content .btn-slider:hover,
-.slide-content button:hover {
-  background: white !important;
-  color: #b91c1c !important;
-  transform: translateY(-2px);
-  border-color: white !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-/* ສຳລັບມືຖື ໃຫ້ນ້ອຍລົງອີກ */
-@media (max-width: 768px) {
-  .slide-content .btn,
-  .slide-content a.btn {
-    padding: 4px 14px !important;
-    font-size: 0.7rem !important;
-  }
 }
