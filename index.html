@@ -7,6 +7,80 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ສະໄຕລ໌ສຳລັບສ່ວນຂ່າວ */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .news-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .news-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(185,28,28,0.2);
+      box-shadow: var(--shadow-hover);
+    }
+    .news-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin: 15px 20px 0;
+    }
+    .news-badge.news {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+    .news-badge.promotion {
+      background: #fef0f0;
+      color: #b91c1c;
+    }
+    .news-card h3 {
+      font-size: 1.3rem;
+      padding: 12px 20px 8px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .news-card p {
+      padding: 0 20px 20px;
+      color: var(--text-light);
+      line-height: 1.6;
+      flex: 1;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .news-date {
+      padding: 0 20px 15px;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--border-light);
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    @media (max-width: 768px) {
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -106,6 +180,17 @@
       </div>
     </div>
   </section>
+
+  <!-- ========== ຂ່າວ ແລະ ໂປຣໂມຊັ່ນ (NEWS SECTION) ========== -->
+  <section style="padding: 60px 0;">
+    <div class="container">
+      <h2 class="section-title">ຂ່າວ ແລະ ໂປຣໂມຊັ່ນ</h2>
+      <p class="section-sub">ອັບເດດຂ່າວສານ ແລະ ໂປຣໂມຊັ່ນລ່າສຸດຈາກພວກເຮົາ</p>
+      <div class="news-grid" id="newsGrid">
+        <div style="text-align:center; width:100%;">ກຳລັງໂຫຼດຂ່າວ...</div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -128,7 +213,7 @@
 </script>
 
 <script type="module">
-  import { db, collection, getDocs, query, where, limit } from './firebase-config.js';
+  import { db, collection, getDocs, query, where, limit, orderBy } from './firebase-config.js';
 
   // ========== SLIDER ຈາກ Firestore ==========
   let currentSlide = 0;
@@ -145,7 +230,6 @@
       const snapshot = await getDocs(q);
       
       if (snapshot.empty) {
-        // fallback ຖ້າບໍ່ມີຂໍ້ມູນ
         wrapper.innerHTML = `
           <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop');">
             <div class="slide-content">
@@ -170,17 +254,15 @@
         slideDiv.style.backgroundImage = `url('${slide.image || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop'}')`;
         slideDiv.style.backgroundSize = 'cover';
         slideDiv.style.backgroundPosition = 'center';
-        // ພາຍໃນ loop ສ້າງ slide
         slideDiv.innerHTML = `
           <div class="slide-content">
-          <h3>${slide.title || 'B-One Engineering'}</h3>
-         ${slide.linkUrl ? `<a href="${slide.linkUrl}" class="btn-slider">ເບິ່ງລາຍລະອຽດ →</a>` : ''}
-        </div>
-          `;
+            <h3>${slide.title || 'B-One Engineering'}</h3>
+            ${slide.linkUrl ? `<a href="${slide.linkUrl}">ເບິ່ງລາຍລະອຽດ →</a>` : ''}
+          </div>
+        `;
         wrapper.appendChild(slideDiv);
       });
 
-      // ສ້າງ dots
       dotsContainer.innerHTML = '';
       sliders.forEach((_, idx) => {
         const dot = document.createElement('div');
@@ -236,7 +318,6 @@
     startAutoSlide();
   }
 
-  // ຜູກປຸ່ມ
   const prevBtn = document.getElementById('prevSlide');
   const nextBtn = document.getElementById('nextSlide');
   if (prevBtn) prevBtn.addEventListener('click', prevSlide);
@@ -292,10 +373,46 @@
     } catch (err) { console.error(err); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
   }
 
+  // ========== ຂ່າວ ແລະ ໂປຣໂມຊັ່ນ ==========
+  async function loadNews() {
+    const grid = document.getElementById('newsGrid');
+    try {
+      const q = query(collection(db, 'news'), orderBy('createdAt', 'desc'), limit(3));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) {
+        grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີຂ່າວ ຫຼື ໂປຣໂມຊັ່ນ</div>';
+        return;
+      }
+      grid.innerHTML = '';
+      snapshot.forEach(doc => {
+        const news = doc.data();
+        const date = news.createdAt ? new Date(news.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '';
+        const badgeClass = news.category === 'promotion' ? 'promotion' : 'news';
+        const badgeText = news.category === 'promotion' ? '🎉 ໂປຣໂມຊັ່ນ' : '📰 ຂ່າວ';
+        
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.innerHTML = `
+          <div class="news-badge ${badgeClass}">${badgeText}</div>
+          <h3>${news.title || 'ຫົວຂໍ້'}</h3>
+          <p>${news.content ? news.content.substring(0, 150) + '...' : ''}</p>
+          <div class="news-date">
+            <i class="far fa-calendar-alt"></i> ${date}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    } catch (err) {
+      console.error('Error loading news:', err);
+      grid.innerHTML = '<div style="text-align:center;">ເກີດຂໍ້ຜິດພາດໃນການໂຫຼດຂ່າວ</div>';
+    }
+  }
+
   // ເລີ່ມຕົ້ນທຸກຢ່າງ
   loadSliders();
   loadFeaturedServices();
   loadFeaturedProducts();
+  loadNews();
 </script>
 </body>
 </html>
