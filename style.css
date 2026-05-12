@@ -717,3 +717,60 @@ a.btn, button.btn {
   transform: translateY(-3px);            /* ຍົກປຸ່ມຂຶ້ນເລັກນ້ອຍ */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+/* ========== ແກ້ໄຂຊ່ອງຫວ່າງ ແລະ ຕົວພິມໃຫ້ພໍດີ ========== */
+
+/* ຣີເຊັດຊ່ອງຫວ່າງທົ່ວໄປ */
+body, p, li, h1, h2, h3, h4, .section-title, .section-sub {
+  letter-spacing: normal !important;
+}
+
+/* ປັບຂະໜາດຫົວຂໍ້ຫຼັກ (section-title) ໃຫ້ພໍດີກັບມືຖື */
+.section-title {
+  font-size: 2rem;
+  letter-spacing: 0 !important;
+  word-break: normal;
+}
+
+/* ປັບຂະໜາດຫົວຂໍ້ຍ່ອຍ (h3 ໃນ about) */
+.about-text h3 {
+  letter-spacing: 0 !important;
+  font-size: 1.6rem;
+}
+
+/* ປັບຂໍ້ຄວາມທົ່ວໄປໃຫ້ຊັດເຈນ */
+.about-text p, .service-cat ul li {
+  letter-spacing: 0 !important;
+  line-height: 1.6;
+}
+
+/* ປັບຊ່ອງຫວ່າງຂອງຕົວພິມໃນ header (ຖ້າມີບັນຫາ) */
+.logo h1, .logo p {
+  letter-spacing: normal !important;
+}
+
+/* ສຳລັບ hero-badge ຖ້າມີຊ່ອງຫວ່າງຜິດປົກກະຕິ */
+.hero-badge {
+  letter-spacing: normal !important;
+}
+
+/* ປັບສະເພາະຂໍ້ຄວາມທີ່ຍາວຫຼາຍ */
+.service-cat h5 {
+  letter-spacing: 0 !important;
+  font-size: 1rem;
+}
+
+/* ສຳລັບມືຖື (ໃຫ້ຕົວພິມນ້ອຍລົງອີກ) */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.6rem;
+  }
+  .about-text h3 {
+    font-size: 1.3rem;
+  }
+  .service-cat h5 {
+    font-size: 0.9rem;
+  }
+  .hero-content h1 {
+    letter-spacing: 0 !important;
+  }
+}
