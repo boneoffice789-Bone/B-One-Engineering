@@ -793,3 +793,63 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     padding: 8px 14px !important;
   }
 }
+/* ========== ປຸ່ມ "ເບິ່ງລາຍລະອຽດ" ແບບ OUTLINE ຄືຮູບທີ່ເຈົ້າຕ້ອງການ ========== */
+.card-btn, 
+.portfolio-card .btn, 
+.service-card .btn,
+.product-card .btn-add-to-cart {
+  background: transparent !important;
+  border: 2px solid #b91c1c !important;
+  color: #b91c1c !important;
+  padding: 5px 16px !important;
+  border-radius: 40px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+  display: inline-block !important;
+  width: auto !important;
+  cursor: pointer;
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+.card-btn:hover, 
+.portfolio-card .btn:hover, 
+.service-card .btn:hover,
+.product-card .btn-add-to-cart:hover {
+  background: #b91c1c !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(185,28,28,0.25);
+}
+
+/* ສຳລັບປຸ່ມໃນ slider (ພື້ນມືດ → ຂອບຂາວ ຕົວພິມຂາວ) */
+.slide-content .btn {
+  background: transparent !important;
+  border: 2px solid white !important;
+  color: white !important;
+  padding: 4px 14px !important;
+  font-size: 0.7rem !important;
+  border-radius: 40px !important;
+}
+
+.slide-content .btn:hover {
+  background: white !important;
+  color: #b91c1c !important;
+}
+
+/* ປັບຂະໜາດໃນມືຖືໃຫ້ນ້ອຍລົງອີກ */
+@media (max-width: 768px) {
+  .card-btn, 
+  .portfolio-card .btn, 
+  .service-card .btn,
+  .product-card .btn-add-to-cart {
+    padding: 4px 12px !important;
+    font-size: 0.65rem !important;
+  }
+  .slide-content .btn {
+    padding: 3px 10px !important;
+    font-size: 0.65rem !important;
+  }
+}
