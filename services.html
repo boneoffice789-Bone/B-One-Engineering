@@ -29,7 +29,7 @@
     <div class="container">
       <h2 class="section-title">ບໍລິການຂອງພວກເຮົາ <span style="font-size:1.4rem;">| OUR SERVICES</span></h2>
       <p class="section-sub">ຄົບຄັນທຸກງານດ້ານວິສະວະກຳ ຕັ້ງແຕ່ການອອກແບບ, ຈຳໜ່າຍ, ຕິດຕັ້ງ ແລະ ບຳລຸງຮັກສາ</p>
-      <div class="services-grid" id="servicesGrid"><div style="text-align:center; width:100%;">ກຳລັງໂຫຼດ...</div></div>
+      <div class="services-grid" id="servicesGrid"></div>
     </div>
   </section>
 </main>
@@ -40,33 +40,123 @@
 <script> const mobileBtn = document.getElementById('mobile-menu'); const navLinks = document.getElementById('nav-links'); mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active')); </script>
 <script type="module">
   import { db, collection, getDocs, query, where } from './firebase-config.js';
+
+  // ========== ຂໍ້ມູນບໍລິການເລີ່ມຕົ້ນ (ຈະສະແດງຕະຫຼອດ, ບໍ່ຖືກແທນທີ່) ==========
+  const defaultServices = [
+    { 
+      name: "ນຳເຂົ້າ ແລະ ຈຳໜ່າຍ", 
+      icon: "fa-exchange-alt",
+      description: "ເຄື່ອງຈັກຮັບໃຊ້ວຽກງານການຜະລິດອຸດສາຫະກຳ-ກະສິກຳ ພ້ອມອາໄຫຼ່ ແລະ ອຸປະກອນຄົບຊຸດ, ນໍ້າກະແລດ, ນໍ້າມັນລໍ່ລືນ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄອທີ, ອຸປະກອນຄວາມປອດໄພ, ຈັກປັ່ນໄຟຟ້າ ແລະ ເຟີນິເຈີ."
+    },
+    { 
+      name: "ຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກ", 
+      icon: "fa-tools",
+      description: "ບໍລິການຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກທຸກປະເພດ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄຟຟ້າ, ແລະ ຈັກປັ່ນໄຟຟ້າ."
+    },
+    { 
+      name: "ກວດສອບຄ່າມາດຕະຖານ (Calibration)", 
+      icon: "fa-chart-line",
+      description: "ກວດສອບຄ່າມາດຕະຖານອຸປະກອນວັດແທກຄວາມດັນ, ອຸນນະພູມ, ກະແສໄຟຟ້າ, ແຮງດັນ, ຊິງຊັ່ງນໍ້າໜັກ, ເຄື່ອງມືໂຮງງານ ແລະ ຫ້ອງທົດລອງ."
+    },
+    { 
+      name: "ລະບົບທໍ່-ຖັງ, ແອ ແລະ ລິບ", 
+      icon: "fa-wind",
+      description: "ຕິດຕັ້ງ ແລະ ສ້ອມແປງລະບົບທໍ່-ຖັງໃນໂຮງງານ, ແອເຮືອນ, ແອອຸດສາຫະກຳ, ລະບົບບຳບັດນໍ້າ, ລິບທຸກຊະນິດ, ແລະ ໄຟຟ້າໃນຄົວເຮືອນ."
+    },
+    { 
+      name: "ໄຟຟ້າ ແລະ ໝໍ້ແປງ", 
+      icon: "fa-bolt",
+      description: "ຕິດຕັ້ງ ແລະ ບຳລຸງຮັກສາໝໍ້ແປງໄຟຟ້າ, ສຳຫຼວດ ແລະ ອອກແບບຕາຂ່າຍໄຟຟ້າແຮງດັນສູງ-ກາງ-ຕໍ່າ."
+    },
+    { 
+      name: "ສຳຫຼວດ ອອກແບບ ຕາຂ່າຍໄຟຟ້າ", 
+      icon: "fa-drafting-compass",
+      description: "ບໍລິການສຳຫຼວດ ແລະ ອອກແບບ ຕາຂ່າຍໄຟຟ້າແຮງດັນສູງ-ກາງ ແລະ ຕໍ່າ."
+    },
+    { 
+      name: "ຝຶກອົບຮົມວິສະວະກຳ ແລະ ຄວາມປອດໄພ", 
+      icon: "fa-chalkboard-user",
+      description: "ຝຶກອົບຮົມດ້ານວິສະວະກຳ, ໄຟຟ້າ, ເຄື່ອງຈັກ, ແອເຢັນ, ຄອມພິວເຕີ, ໄອທີ, ອຸປະກອນຄວາມປອດໄພ ແລະ ລະບົບຄວາມປອດໄພ."
+    },
+    { 
+      name: "ກໍ່ສ້າງ ແລະ ສ້ອມແປງໂຄງສ້າງ", 
+      icon: "fa-hard-hat",
+      description: "ຮັບເໝົາກໍ່ສ້າງ ແລະ ສ້ອມແປງ ເຄຫາສະຖານ, ຂົວ-ທາງ, ແລະ ລະບົບຊົນລະປະທານ."
+    },
+    { 
+      name: "ບໍລິການລົດເຊົ່າ, ລົດເຄນ, ລົດກະເຊົ້າ", 
+      icon: "fa-truck",
+      description: "ບໍລິການລົດເຊົ່າທົ່ວໄປ, ລົດເຄນ, ແລະ ລົດກະເຊົ້າ."
+    }
+  ];
+
+  // ຟັງຊັນສ້າງ HTML ສຳລັບບັດບໍລິການ
+  function createServiceCard(service, iconIsImage = false) {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    let iconHtml = '';
+    if (iconIsImage) {
+      iconHtml = `<img src="${service.imageUrl}" style="width:60px; height:60px; object-fit:contain; margin:0 auto;">`;
+    } else {
+      iconHtml = `<i class="fas ${service.icon}"></i>`;
+    }
+    card.innerHTML = `
+      <div class="card-icon">${iconHtml}</div>
+      <h3>${service.name}</h3>
+      <p>${service.description || ''}</p>
+    `;
+    return card;
+  }
+
+  // ຟັງຊັນໂຫຼດຂໍ້ມູນຈາກ Firestore ແລະ ຕໍ່ທ້າຍ
   async function loadServices() {
     const grid = document.getElementById('servicesGrid');
-    grid.innerHTML = '<div style="text-align:center;">ກຳລັງໂຫຼດ...</div>';
+    if (!grid) return;
+
+    // 1. ສະແດງຂໍ້ມູນ default ກ່ອນ (ຈະຢູ່ຕະຫຼອດ)
+    grid.innerHTML = '';
+    defaultServices.forEach(service => {
+      const card = createServiceCard(service, false);
+      grid.appendChild(card);
+    });
+
+    // 2. ດຶງຂໍ້ມູນຈາກ Firestore (ຖ້າມີ) ແລ້ວຕໍ່ທ້າຍ
     try {
       const q = query(collection(db, 'services'), where('status', '==', 'active'));
       const snapshot = await getDocs(q);
-      if (snapshot.empty) { grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີຂໍ້ມູນບໍລິການ</div>'; return; }
-      grid.innerHTML = '';
+      
       snapshot.forEach(doc => {
         const s = doc.data();
-        let iconHtml = '';
-        const imgOrIcon = s.imageUrl || '';
-        // ກວດວ່າເປັນ URL ຮູບ (ເລີ່ມຕົ້ນດ້ວຍ http ຫຼື https)
-        if (imgOrIcon.match(/^https?:\/\//i)) {
-          iconHtml = `<img src="${imgOrIcon}" style="width:60px; height:60px; object-fit:contain; margin:0 auto;">`;
-        } else if (imgOrIcon) {
-          // ຖ້າບໍ່ແມ່ນ URL ໃຫ້ສະແດງເປັນໄອຄອນ Font Awesome
-          iconHtml = `<i class="fas ${imgOrIcon}"></i>`;
+        let card;
+        // ກວດວ່າມີ imageUrl ຫຼື ໃຊ້ icon ປົກກະຕິ
+        if (s.imageUrl && s.imageUrl.match(/^https?:\/\//i)) {
+          // ຖ້າເປັນ URL ຮູບ
+          card = document.createElement('div');
+          card.className = 'service-card';
+          card.innerHTML = `
+            <div class="card-icon"><img src="${s.imageUrl}" style="width:60px; height:60px; object-fit:contain; margin:0 auto;"></div>
+            <h3>${s.name}</h3>
+            <p>${s.description || ''}</p>
+          `;
         } else {
-          iconHtml = `<i class="fas fa-cog"></i>`;
+          // ໃຊ້ icon ປົກກະຕິ (ຖ້າມີກຳນົດ) ຫຼື ໃຊ້ default
+          let icon = s.imageUrl && s.imageUrl.trim() !== '' ? s.imageUrl : 'fa-cog';
+          card = document.createElement('div');
+          card.className = 'service-card';
+          card.innerHTML = `
+            <div class="card-icon"><i class="fas ${icon}"></i></div>
+            <h3>${s.name}</h3>
+            <p>${s.description || ''}</p>
+          `;
         }
-        const card = document.createElement('div'); card.className = 'service-card';
-        card.innerHTML = `<div class="card-icon">${iconHtml}</div><h3>${s.name}</h3><p>${s.description || ''}</p>`;
         grid.appendChild(card);
       });
-    } catch (err) { console.error(err); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
+    } catch (err) {
+      console.error('Error loading services from Firestore:', err);
+      // ຖ້າ error, ຍັງມີ default ສະແດງຢູ່ແລ້ວ
+    }
   }
+
   loadServices();
 </script>
 </body>
