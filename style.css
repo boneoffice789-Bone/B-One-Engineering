@@ -812,3 +812,54 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   color: #b91c1c !important;
   border-color: white !important;
 }
+/* ========== ປັບສ່ວນ HERO ໃຫ້ຢູ່ກາງ ແລະ ຕົວພິມນ້ອຍລົງ (ທຸກໜ້າ) ========== */
+.hero {
+  text-align: center;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ເຮັດໃຫ້ປຸ່ມຄູ່ຢູ່ກາງ ແລະ ສາມາດຫໍ່ໄດ້ */
+.hero-content .btn,
+.hero-content .btn-outline {
+  display: inline-flex;
+  margin: 0.5rem 0.5rem;
+}
+
+/* ປັບຂະໜາດຕົວພິມຂອງຫົວຂໍ້ (ລາຍການ - ຕິດຕັ້ງ, ຈຳໜ່າຍ, ບໍລິການ) ໃຫ້ນ້ອຍລົງ */
+.hero-content h1 {
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+/* ສຳລັບແທັບເລັດ ແລະ ມືຖື */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+  .hero-content .btn,
+  .hero-content .btn-outline {
+    margin: 0.5rem 0.3rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .hero-content h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ໃຫ້ຂໍ້ຄວາມ ແລະ badge ຢູ່ກາງ */
+.hero-badge {
+  display: inline-flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-content p {
+  margin-left: auto;
+  margin-right: auto;
+}
