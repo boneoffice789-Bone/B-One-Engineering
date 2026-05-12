@@ -1,9 +1,6 @@
 /* =============================================
-   B-One Engineering - CLEAN & WORKING CSS
-   (ປຸ່ມຖືກປັບຕາມຄຳຮ້ອງຂໍ)
+   B-One Engineering - STABLE VERSION (NO EXTRA BUTTON TWEAKS)
    ============================================= */
-
-/* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
 :root {
   --primary: #b91c1c;
   --primary-dark: #8b1515;
@@ -27,13 +24,7 @@
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --font-sans: 'Inter', 'Noto Sans Lao', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-white);
@@ -43,17 +34,14 @@ body {
   overflow-x: hidden;
   width: 100%;
 }
-
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
   width: 100%;
 }
-
-/* ---------- HEADER (ທັນສະໄໝ, ໂປ່ງ, ບໍ່ລົ້ນ) ---------- */
 header {
-  background: rgba(185, 28, 28, 0.96);
+  background: rgba(185,28,28,0.96);
   backdrop-filter: blur(12px);
   color: white;
   position: sticky;
@@ -63,7 +51,6 @@ header {
   width: 100%;
   overflow-x: hidden;
 }
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -74,19 +61,12 @@ header {
   gap: 20px;
   flex-wrap: wrap;
 }
-
 .logo {
   flex: 1;
   min-width: 0;
   max-width: 65%;
 }
-
-.logo a {
-  text-decoration: none;
-  display: inline-block;
-  width: 100%;
-}
-
+.logo a { text-decoration: none; display: inline-block; width: 100%; }
 .logo h1 {
   font-size: 1.5rem;
   font-weight: 800;
@@ -97,16 +77,13 @@ header {
   word-break: break-word;
   white-space: normal;
 }
-
 .logo p {
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255,255,255,0.8);
   font-weight: 500;
   margin-top: 2px;
   word-break: break-word;
-  white-space: normal;
 }
-
 .menu-toggle {
   display: none;
   font-size: 1.6rem;
@@ -116,72 +93,50 @@ header {
   border: none;
   padding: 8px 12px;
   border-radius: 40px;
-  transition: var(--transition);
 }
-
-.menu-toggle:hover {
-  background: rgba(255,255,255,0.25);
-}
-
 .nav-links {
   display: flex;
   gap: 6px;
-  list-style: none;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0,0,0,0.2);
   padding: 6px 12px;
   border-radius: 48px;
   flex-wrap: wrap;
-  justify-content: center;
 }
-
 .nav-links li a {
   text-decoration: none;
   font-weight: 600;
-  transition: var(--transition);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 6px 16px;
   border-radius: 40px;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255,255,255,0.92);
 }
-
-.nav-links li a .lao {
-  font-size: 0.85rem;
+.nav-links li a .lao { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+.nav-links li a .eng { font-size: 0.55rem; opacity: 0.8; white-space: nowrap; }
+.nav-links li a.active { background: white; color: var(--primary); }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 48px;
+  font-size: 0.9rem;
   font-weight: 700;
-  white-space: nowrap;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
 }
-
-.nav-links li a .eng {
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  margin-top: 2px;
-  opacity: 0.8;
-  white-space: nowrap;
-}
-
-.nav-links li a:hover {
-  background: rgba(255,255,255,0.18);
-  transform: translateY(-1px);
-}
-
-.nav-links li a.active {
-  background: white;
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
   color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
-.nav-links li a.active .eng {
-  color: var(--primary-dark);
-}
-
-/* ---------- HERO ແລະ ສ່ວນທົ່ວໄປອື່ນໆ (ຕັດມາໃຫ້ສັ້ນ) ---------- */
 .hero {
-  background: linear-gradient(125deg, #fff8f3 0%, #ffffff 40%, #fffaf7 100%);
+  background: linear-gradient(125deg, #fff8f3, #ffffff, #fffaf7);
   padding: 80px 0;
-  position: relative;
-  overflow: hidden;
 }
 .hero-grid {
   display: flex;
@@ -189,38 +144,29 @@ header {
   align-items: center;
   gap: 50px;
 }
-.hero-content {
-  flex: 1.2;
-}
+.hero-content { flex: 1.2; }
 .hero-content h1 {
   font-size: 3rem;
-  line-height: 1.2;
-  margin: 15px 0 20px;
   font-weight: 800;
-  letter-spacing: -0.5px;
+  margin: 15px 0;
 }
 .hero-content p {
   font-size: 1.05rem;
   color: var(--text-medium);
   margin-bottom: 30px;
-  max-width: 90%;
 }
-.hero-image {
-  flex: 0.9;
-}
+.hero-image { flex: 0.9; }
 .hero-image img {
   width: 100%;
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
 }
-section {
-  padding: 70px 0;
-}
+section { padding: 70px 0; }
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 15px;
   font-weight: 800;
+  margin-bottom: 15px;
 }
 .section-title::after {
   content: '';
@@ -229,14 +175,12 @@ section {
   height: 3px;
   background: var(--primary-gradient);
   margin: 18px auto 0;
-  border-radius: 3px;
 }
 .section-sub {
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 55px auto;
+  margin: 0 auto 55px;
   color: var(--text-light);
-  font-size: 1.05rem;
 }
 .services-grid, .portfolio-grid, .brands-grid {
   display: grid;
@@ -247,8 +191,8 @@ section {
   background: var(--bg-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: var(--transition);
   border: 1px solid var(--border-light);
+  transition: var(--transition);
   box-shadow: var(--shadow-sm);
   height: 100%;
   display: flex;
@@ -256,11 +200,10 @@ section {
 }
 .service-card:hover, .portfolio-card:hover, .brand-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(185,28,28,0.2);
   box-shadow: var(--shadow-hover);
 }
 .card-icon {
-  background: linear-gradient(145deg, #fff6f6, #ffffff);
+  background: linear-gradient(145deg, #fff6f6, #fff);
   padding: 32px 20px 22px;
   text-align: center;
   font-size: 3rem;
@@ -271,93 +214,115 @@ section {
   padding: 18px 22px 10px;
   font-weight: 700;
 }
-/* ຕັດສ່ວນ contact, footer, slider ອອກເພື່ອຄວາມກະທັດຮັດ ແຕ່ທ່ານສາມາດເກັບໄວ້ຕາມເດີມໄດ້ */
-
-/* ========== ປັບປຸງປຸ່ມໃຫ້ດູດຕາ (ສະເພາະສ່ວນທີ່ຕ້ອງການ) ========== */
-/* ປຸ່ມ "ເບິ່ງລາຍລະອຽດ" */
-.service-card .btn,
-.portfolio-card .btn,
-.card-btn {
-  background: transparent !important;
-  border: 2px solid var(--primary) !important;
-  color: var(--primary) !important;
-  padding: 6px 22px !important;
-  border-radius: 60px !important;
-  font-size: 0.75rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  transition: 0.25s ease !important;
-  display: inline-block !important;
-  width: auto !important;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+.service-card p, .portfolio-card p {
+  padding: 0 22px 24px;
+  color: var(--text-light);
 }
-.service-card .btn:hover,
-.portfolio-card .btn:hover,
-.card-btn:hover {
-  background: var(--primary) !important;
-  color: white !important;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(185,28,28,0.3);
-}
-
-/* ປຸ່ມໃນ Slider */
-.slide-content .btn {
-  background: rgba(255,255,255,0.15) !important;
-  backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(255,255,255,0.8) !important;
-  color: white !important;
-  padding: 5px 18px !important;
-  border-radius: 60px !important;
-  font-size: 0.75rem !important;
+.card-btn, .portfolio-card .btn, .service-card .btn {
+  background: transparent;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  padding: 6px 18px;
+  border-radius: 40px;
+  font-size: 0.8rem;
   font-weight: 600;
-  transition: 0.25s;
+  margin: 0 22px 24px;
+  display: inline-block;
+  text-align: center;
+  transition: var(--transition);
 }
-.slide-content .btn:hover {
-  background: white !important;
-  color: var(--primary) !important;
-  transform: scale(1.02);
-}
-
-/* ປຸ່ມທົ່ວໄປທີ່ໃຊ້ class .btn (ສີແດງ gradient) */
-.btn {
-  background: linear-gradient(135deg, #b91c1c, #d43f3f);
-  border: none;
-  color: white;
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-weight: 700;
-  transition: 0.25s;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(185,28,28,0.4);
-  background: linear-gradient(135deg, #8b1515, #b91c1c);
-}
-
-/* ປັບປຸງປຸ່ມ "ໃສ່ຕະກອນ" ໃຫ້ງາມຂຶ້ນ */
-.btn-add-to-cart {
+.card-btn:hover, .portfolio-card .btn:hover, .service-card .btn:hover {
   background: var(--primary);
-  border: none;
   color: white;
-  padding: 5px 16px;
-  border-radius: 50px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  transition: 0.2s;
-  cursor: pointer;
-}
-.btn-add-to-cart:hover {
-  background: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(185,28,28,0.3);
 }
-
-/* RESPONSIVE */
+footer {
+  background: #0a0a0f;
+  color: #b0b3c0;
+  text-align: center;
+  padding: 45px 20px;
+  margin-top: 60px;
+  font-size: 0.85rem;
+}
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #25D366;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: white;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+  transition: var(--transition);
+}
+.slider-section { padding: 0; }
+.slide {
+  height: 500px;
+  background-size: cover;
+  position: relative;
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+}
+.slide-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  padding: 28px 38px;
+  border-radius: 32px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.slide-content h3 { font-size: 2rem; margin-bottom: 12px; color: white; }
+.slide-content .btn {
+  background: var(--primary);
+  color: white;
+  padding: 8px 22px;
+  border-radius: 40px;
+  font-size: 0.85rem;
+}
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(185,28,28,0.98);
+    margin-top: 12px;
+    border-radius: 28px;
+    padding: 20px;
+  }
+  .nav-links.active { display: flex; }
+}
 @media (max-width: 768px) {
-  .btn, .btn-outline { padding: 6px 16px; font-size: 0.7rem; white-space: nowrap; }
-  .service-card .btn { padding: 4px 14px !important; font-size: 0.65rem !important; }
-  .slide-content .btn { padding: 3px 12px !important; font-size: 0.65rem !important; }
+  .logo h1 { font-size: 1.2rem; }
+  .logo p { font-size: 0.55rem; }
+  .hero-content h1 { font-size: 1.8rem; }
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .slide { height: 400px; }
+  .slide-content h3 { font-size: 1.5rem; }
+}
+@media (max-width: 550px) {
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: 1fr;
+  }
+  .logo h1 { font-size: 1rem; }
+  .logo p { font-size: 0.5rem; }
+  .hero-content h1 { font-size: 1.5rem; }
+  .slide { height: 320px; }
+  .slide-content h3 { font-size: 1.2rem; }
 }
