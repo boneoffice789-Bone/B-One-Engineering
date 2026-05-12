@@ -662,3 +662,24 @@ a.btn, button.btn {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+/* ປຸ່ມພາຍໃນ slider (ຕາມແບບທີ່ຕ້ອງການ) */
+.slide-content .btn-slider {
+  display: inline-block;
+  background: transparent !important;
+  border: 2px solid white !important;
+  color: white !important;
+  padding: 6px 20px !important;
+  border-radius: 50px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  margin-top: 15px;
+  backdrop-filter: blur(4px);
+}
+.slide-content .btn-slider:hover {
+  background: white !important;
+  color: #b91c1c !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
