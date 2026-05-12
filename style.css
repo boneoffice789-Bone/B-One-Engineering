@@ -683,3 +683,37 @@ a.btn, button.btn {
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
+/* ========== ປັບປຸງປຸ່ມໃນ SLIDER (ຕາມຮູບທີ່ຕ້ອງການ) ========== */
+.slide-content .btn,
+.slide-content a.btn,
+.slide-content .btn-slider,
+.slide-content a {
+  /* ຂະໜາດ ແລະ ລັກສະນະ */
+  padding: 8px 28px !important;      /* ຄວາມສູງ ແລະ ຄວາມກວ້າງ (ຊ້າຍ-ຂວາ) */
+  font-size: 0.9rem !important;      /* ຂະໜາດຕົວພິມ */
+  border-radius: 60px !important;    /* ຄວາມມົນ (ຄ່າຫຼາຍ = ມົນຫຼາຍ) */
+  
+  /* ສີຂອບ ແລະ ພື້ນຫຼັງ */
+  border: 2px solid rgba(255, 255, 255, 0.9) !important;  /* ສີຂອບ: ຂາວເຂັ້ມ 90% */
+  background: rgba(255, 255, 255, 0.15) !important;       /* ພື້ນຫຼັງ: ຂາວໂປ່ງ 15% */
+  backdrop-filter: blur(8px);                             /* ເຮັດໃຫ້ພື້ນຫຼັງມົວ */
+  
+  /* ສີຕົວພິມ */
+  color: white !important;
+  font-weight: 600 !important;
+  
+  /* ການປ່ຽນແປງເມື່ອຊີ້ເມົາ */
+  transition: all 0.3s ease !important;
+}
+
+/* ສະຖານະເມື່ອຊີ້ເມົາ (Hover) */
+.slide-content .btn:hover,
+.slide-content a.btn:hover,
+.slide-content .btn-slider:hover,
+.slide-content a:hover {
+  background: white !important;           /* ພື້ນຫຼັງກາຍເປັນຂາວ */
+  color: #b91c1c !important;              /* ຕົວພິມປ່ຽນເປັນສີແດງ */
+  border-color: white !important;         /* ຂອບເປັນສີຂາວ */
+  transform: translateY(-3px);            /* ຍົກປຸ່ມຂຶ້ນເລັກນ້ອຍ */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
