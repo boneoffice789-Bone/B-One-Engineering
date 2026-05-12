@@ -19,6 +19,7 @@
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
   --shadow-md: 0 8px 20px rgba(0,0,0,0.06);
   --shadow-lg: 0 20px 35px -10px rgba(0,0,0,0.1);
+  --shadow-hover: 0 25px 40px -12px rgba(185,28,28,0.2);
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -50,7 +51,7 @@ body {
   width: 100%;
 }
 
-/* ---------- HEADER - ແກ້ໄຂບໍ່ໃຫ້ລົ້ນຂອບ (ສຳຄັນທີ່ສຸດ) ---------- */
+/* ---------- HEADER - ແກ້ໄຂບໍ່ໃຫ້ລົ້ນຂອບ ---------- */
 header {
   background: rgba(185, 28, 28, 0.96);
   backdrop-filter: blur(12px);
@@ -161,7 +162,7 @@ header {
   color: var(--primary);
 }
 
-/* ---------- ປຸ່ມ (ປັບຂະໜາດສຳລັບມືຖື) ---------- */
+/* ---------- ປຸ່ມທົ່ວໄປ ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -379,6 +380,12 @@ section {
   flex-wrap: wrap;
 }
 
+.contact-list i {
+  width: 28px;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
 /* ---------- Contact Form ---------- */
 .contact-grid {
   display: grid;
@@ -404,6 +411,7 @@ input:focus, textarea:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
+  transform: translateY(-1px);
 }
 
 /* ---------- Footer ---------- */
@@ -415,6 +423,17 @@ footer {
   margin-top: 50px;
   font-size: 0.85rem;
   word-break: break-word;
+}
+
+footer a {
+  color: #f0a0a0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: white;
+  text-decoration: underline;
 }
 
 /* ---------- WhatsApp Float ---------- */
@@ -440,9 +459,10 @@ footer {
 .whatsapp-float:hover {
   transform: scale(1.08);
   background: #128C7E;
+  box-shadow: 0 10px 25px rgba(37,211,102,0.5);
 }
 
-/* ========== SLIDER (ຖ້າມີ) ========== */
+/* ========== SLIDER ========== */
 .slider-section {
   padding: 0;
 }
@@ -453,11 +473,11 @@ footer {
 }
 .slider-wrapper {
   display: flex;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .slide {
   flex: 0 0 100%;
-  height: 450px;
+  height: 500px;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -472,66 +492,199 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
+  z-index: 1;
 }
 .slide-content {
   position: relative;
   z-index: 2;
   text-align: center;
   color: white;
-  padding: 25px 35px;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(8px);
-  border-radius: 24px;
+  padding: 28px 38px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
   max-width: 80%;
+  animation: fadeInUp 0.7s ease;
 }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .slide-content h3 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  font-size: 2rem;
+  margin-bottom: 12px;
+  font-weight: 700;
   word-break: break-word;
 }
+.slide-content p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+/* ປຸ່ມພາຍໃນ SLIDER (ປັບຂະໜາດນ້ອຍ ແລະ ສວຍງາມ) */
+.slide-content .btn, 
+.slide-content a.btn,
+.slide-content .btn-slider,
+.slide-content button {
+  display: inline-block !important;
+  background: rgba(255,255,255,0.15) !important;
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255,255,255,0.8) !important;
+  color: white !important;
+  padding: 6px 22px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  border-radius: 60px !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.slide-content .btn:hover,
+.slide-content a.btn:hover,
+.slide-content .btn-slider:hover,
+.slide-content button:hover {
+  background: white !important;
+  color: #b91c1c !important;
+  transform: translateY(-2px);
+  border-color: white !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Slider controls */
 .slider-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(0,0,0,0.4);
-  color: white;
+  backdrop-filter: blur(4px);
   border: none;
-  font-size: 1.8rem;
-  padding: 8px 16px;
+  color: white;
+  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border-radius: 50%;
   z-index: 3;
+  transition: var(--transition);
 }
-.slider-prev { left: 15px; }
-.slider-next { right: 15px; }
+
+.slider-btn:hover {
+  background: var(--primary);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.slider-prev { left: 20px; }
+.slider-next { right: 20px; }
+
 .slider-dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 24px;
   left: 0;
   right: 0;
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
   z-index: 3;
 }
+
 .dot {
   width: 10px;
   height: 10px;
   background: rgba(255,255,255,0.6);
   border-radius: 50%;
   cursor: pointer;
-}
-.dot.active {
-  background: var(--primary);
-  transform: scale(1.2);
+  transition: var(--transition);
 }
 
-/* ========== RESPONSIVE (ສຳຄັນທີ່ສຸດ) ========== */
+.dot.active {
+  background: var(--primary);
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(185,28,28,0.6);
+}
+
+/* ========== NEWS SECTION ========== */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+.news-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.news-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(185,28,28,0.2);
+  box-shadow: var(--shadow-hover);
+}
+.news-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 15px 20px 0;
+  width: fit-content;
+}
+.news-badge.news {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+.news-badge.promotion {
+  background: #fef0f0;
+  color: #b91c1c;
+}
+.news-card h3 {
+  font-size: 1.3rem;
+  padding: 12px 20px 8px;
+  font-weight: 700;
+  word-break: break-word;
+}
+.news-card p {
+  padding: 0 20px 20px;
+  color: var(--text-light);
+  line-height: 1.6;
+  flex: 1;
+  word-break: break-word;
+  display: block !important;
+  overflow: visible !important;
+}
+.news-date {
+  padding: 0 20px 15px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .hero-content h1 { font-size: 2.5rem; }
+  .section-title { font-size: 2.2rem; }
+}
+
 @media (max-width: 900px) {
-  .menu-toggle {
-    display: block;
-  }
+  .menu-toggle { display: block; }
   .nav-links {
     display: none;
     width: 100%;
@@ -541,244 +694,99 @@ footer {
     margin-top: 12px;
     border-radius: 28px;
   }
-  .nav-links.active {
-    display: flex;
-  }
-  .nav-links li a .lao, .nav-links li a .eng {
-    white-space: normal;
-  }
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  .section-title {
-    font-size: 2rem;
-  }
+  .nav-links.active { display: flex; }
+  .nav-links li a .lao, .nav-links li a .eng { white-space: normal; }
+  .hero-content h1 { font-size: 2rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 35px; }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 0 18px;
-  }
-  section {
-    padding: 50px 0;
-  }
-  /* header ບັງຄັບຫໍ່ຕົວ */
-  .logo h1 {
-    font-size: 1.2rem !important;
-  }
-  .logo p {
-    font-size: 0.55rem !important;
-  }
-  /* grid ທັງໝົດ : 2 ຖັນ */
+  .container { padding: 0 20px; }
+  section { padding: 55px 0; }
+  
+  .logo h1 { font-size: 1.2rem !important; }
+  .logo p { font-size: 0.55rem !important; }
+  .logo { max-width: 70% !important; }
+  
   .services-grid, .portfolio-grid, .brands-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  .hero-grid {
-    flex-direction: column;
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
-  .hero-content h1 {
-    font-size: 1.8rem;
-  }
-  .hero-content p {
-    font-size: 0.95rem;
-  }
-  .btn, .btn-outline {
-    padding: 8px 18px !important;
-    font-size: 0.8rem !important;
-    white-space: nowrap;
-  }
-  .hero-content .btn-outline {
-    margin-left: 10px !important;
-    margin-top: 0 !important;
-  }
+  
+  .hero-grid { flex-direction: column; }
+  .hero-content h1 { font-size: 1.8rem; }
+  .hero-content p { font-size: 0.95rem; max-width: 100%; }
+  
+  .btn, .btn-outline { padding: 8px 18px !important; font-size: 0.8rem !important; }
+  .hero-content .btn-outline { margin-left: 10px !important; margin-top: 0 !important; }
+  
+  .slide { height: 400px; }
+  .slide-content h3 { font-size: 1.5rem; }
+  .slide-content .btn, .slide-content a.btn { padding: 5px 16px !important; font-size: 0.75rem !important; }
+  .slider-btn { width: 36px; height: 36px; font-size: 1.2rem; }
 }
 
 @media (max-width: 550px) {
   .services-grid, .portfolio-grid, .brands-grid {
     grid-template-columns: 1fr !important;
   }
-  .logo h1 {
-    font-size: 1rem !important;
-  }
-  .logo p {
-    font-size: 0.5rem !important;
-  }
-  .section-title {
-    font-size: 1.6rem;
-  }
-  .section-sub {
-    font-size: 0.85rem;
-  }
-  .hero-content h1 {
-    font-size: 1.5rem;
-  }
-  .hero-content .btn-outline {
-    margin-left: 0 !important;
-    margin-top: 10px !important;
-  }
-  .btn, .btn-outline {
-    display: inline-flex;
-    width: auto;
-    white-space: nowrap;
-  }
-  .stat-number {
-    font-size: 1.4rem;
-  }
-  .whatsapp-float {
-    width: 45px;
-    height: 45px;
-    font-size: 24px;
-    bottom: 18px;
-    right: 18px;
-  }
-  .slide {
-    height: 350px;
-  }
-  .slide-content h3 {
-    font-size: 1.3rem;
-  }
-  .slider-btn {
-    font-size: 1.2rem;
-    padding: 5px 12px;
-  }
+  .logo h1 { font-size: 1rem !important; }
+  .logo p { font-size: 0.5rem !important; }
+  .logo { max-width: 75% !important; }
+  
+  .section-title { font-size: 1.6rem; }
+  .section-sub { font-size: 0.85rem; }
+  
+  .hero-content h1 { font-size: 1.5rem; }
+  .hero-content .btn-outline { margin-left: 0 !important; margin-top: 10px !important; }
+  .hero-content .btn, .hero-content .btn-outline { width: auto; display: inline-block; }
+  
+  .slide { height: 320px; }
+  .slide-content { padding: 18px 24px; max-width: 90%; }
+  .slide-content h3 { font-size: 1.2rem; }
+  .slide-content .btn, .slide-content a.btn { padding: 4px 12px !important; font-size: 0.7rem !important; }
+  
+  .whatsapp-float { width: 48px; height: 48px; font-size: 26px; bottom: 20px; right: 20px; }
+  
+  footer { padding: 30px 15px; font-size: 0.75rem; }
 }
 
-/* ປັບຕົວໜັງສືຍາວ ແລະ ປຸ່ມໃຫຍ່ເກີນ (ການປັບພິເສດ) */
-.service-card p, .portfolio-card p, .about-text p, .hero-content p,
-.service-cat ul li, .contact-list li, .section-sub,
-.logo h1, .logo p, .section-title, .service-card h3 {
+/* ແກ້ໄຂຂໍ້ຄວາມຍາວ ແລະ ການຫໍ່ຕົວ */
+p, li, .service-card p, .portfolio-card p, .about-text p,
+.hero-content p, .section-sub, .ev-badge, .contact-list li,
+.logo h1, .logo p, .section-title, .service-card h3,
+.news-card p, .news-card h3 {
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
-/* ຮັບປະກັນປຸ່ມທີ່ເປັນລິ້ງບໍ່ໃຫຍ່ເກີນ */
-a.btn, button.btn {
-  max-width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-/* ປຸ່ມພາຍໃນ slider (ຕາມແບບທີ່ຕ້ອງການ) */
-.slide-content .btn-slider {
-  display: inline-block;
-  background: transparent !important;
-  border: 2px solid white !important;
-  color: white !important;
-  padding: 6px 20px !important;
-  border-radius: 50px !important;
-  font-size: 0.8rem !important;
-  font-weight: 600 !important;
-  text-decoration: none !important;
-  transition: all 0.3s ease !important;
-  margin-top: 15px;
-  backdrop-filter: blur(4px);
-}
-.slide-content .btn-slider:hover {
-  background: white !important;
-  color: #b91c1c !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
-}
-/* ========== ປັບປຸງປຸ່ມໃນ SLIDER (ຕາມຮູບທີ່ຕ້ອງການ) ========== */
-.slide-content .btn,
-.slide-content a.btn,
-.slide-content .btn-slider,
-.slide-content a {
-  /* ຂະໜາດ ແລະ ລັກສະນະ */
-  padding: 8px 28px !important;      /* ຄວາມສູງ ແລະ ຄວາມກວ້າງ (ຊ້າຍ-ຂວາ) */
-  font-size: 0.9rem !important;      /* ຂະໜາດຕົວພິມ */
-  border-radius: 60px !important;    /* ຄວາມມົນ (ຄ່າຫຼາຍ = ມົນຫຼາຍ) */
-  
-  /* ສີຂອບ ແລະ ພື້ນຫຼັງ */
-  border: 2px solid rgba(255, 255, 255, 0.9) !important;  /* ສີຂອບ: ຂາວເຂັ້ມ 90% */
-  background: rgba(255, 255, 255, 0.15) !important;       /* ພື້ນຫຼັງ: ຂາວໂປ່ງ 15% */
-  backdrop-filter: blur(8px);                             /* ເຮັດໃຫ້ພື້ນຫຼັງມົວ */
-  
-  /* ສີຕົວພິມ */
-  color: white !important;
-  font-weight: 600 !important;
-  
-  /* ການປ່ຽນແປງເມື່ອຊີ້ເມົາ */
-  transition: all 0.3s ease !important;
+/* ຮັບປະກັນປຸ່ມບໍ່ແຕກແຖວຜິດ */
+.btn, .btn-outline, .slide-content .btn, .slide-content a.btn {
+  white-space: nowrap;
 }
 
-/* ສະຖານະເມື່ອຊີ້ເມົາ (Hover) */
-.slide-content .btn:hover,
-.slide-content a.btn:hover,
-.slide-content .btn-slider:hover,
-.slide-content a:hover {
-  background: white !important;           /* ພື້ນຫຼັງກາຍເປັນຂາວ */
-  color: #b91c1c !important;              /* ຕົວພິມປ່ຽນເປັນສີແດງ */
-  border-color: white !important;         /* ຂອບເປັນສີຂາວ */
-  transform: translateY(-3px);            /* ຍົກປຸ່ມຂຶ້ນເລັກນ້ອຍ */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-/* ========== ແກ້ໄຂຊ່ອງຫວ່າງ ແລະ ຕົວພິມໃຫ້ພໍດີ ========== */
-
-/* ຣີເຊັດຊ່ອງຫວ່າງທົ່ວໄປ */
-body, p, li, h1, h2, h3, h4, .section-title, .section-sub {
-  letter-spacing: normal !important;
-}
-
-/* ປັບຂະໜາດຫົວຂໍ້ຫຼັກ (section-title) ໃຫ້ພໍດີກັບມືຖື */
-.section-title {
-  font-size: 2rem;
-  letter-spacing: 0 !important;
-  word-break: normal;
-}
-
-/* ປັບຂະໜາດຫົວຂໍ້ຍ່ອຍ (h3 ໃນ about) */
-.about-text h3 {
-  letter-spacing: 0 !important;
-  font-size: 1.6rem;
-}
-
-/* ປັບຂໍ້ຄວາມທົ່ວໄປໃຫ້ຊັດເຈນ */
-.about-text p, .service-cat ul li {
-  letter-spacing: 0 !important;
-  line-height: 1.6;
-}
-
-/* ປັບຊ່ອງຫວ່າງຂອງຕົວພິມໃນ header (ຖ້າມີບັນຫາ) */
-.logo h1, .logo p {
-  letter-spacing: normal !important;
-}
-
-/* ສຳລັບ hero-badge ຖ້າມີຊ່ອງຫວ່າງຜິດປົກກະຕິ */
-.hero-badge {
-  letter-spacing: normal !important;
-}
-
-/* ປັບສະເພາະຂໍ້ຄວາມທີ່ຍາວຫຼາຍ */
-.service-cat h5 {
-  letter-spacing: 0 !important;
-  font-size: 1rem;
-}
-
-/* ສຳລັບມືຖື (ໃຫ້ຕົວພິມນ້ອຍລົງອີກ) */
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 1.6rem;
-  }
-  .about-text h3 {
-    font-size: 1.3rem;
-  }
-  .service-cat h5 {
-    font-size: 0.9rem;
-  }
-  .hero-content h1 {
-    letter-spacing: 0 !important;
+@media (max-width: 480px) {
+  .btn, .btn-outline {
+    white-space: normal;
+    text-align: center;
+    padding: 8px 14px !important;
   }
 }
-/* ບັງຄັບສະແດງຂ່າວໝົດ (ບໍ່ຕັດ) */
-.news-card p {
-  display: block !important;
-  overflow: visible !important;
-  -webkit-line-clamp: unset !important;
-  line-clamp: unset !important;
-  max-height: none !important;
+
+/* ປິດການໃຊ້ງານເຄື່ອງໝາຍຈ້ຳທີ່ຊ້ອນ (ຖ້າມີ) */
+.service-cat ul li:before {
+  content: none !important;
+  display: none !important;
+}
+
+/* ປັບຂໍ້ຄວາມຢູ່ໃນ about page service categories */
+.service-cat ul li {
+  list-style: none;
+  margin-bottom: 8px;
+  padding-left: 0;
 }
