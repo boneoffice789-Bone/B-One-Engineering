@@ -395,7 +395,7 @@
         card.innerHTML = `
           <div class="news-badge ${badgeClass}">${badgeText}</div>
           <h3>${news.title || 'ຫົວຂໍ້'}</h3>
-          <p>${news.content ? news.content.substring(0, 150) + '...' : ''}</p>
+          <p>${news.content ? news.content : ''}</p>
           <div class="news-date">
             <i class="far fa-calendar-alt"></i> ${date}
           </div>
