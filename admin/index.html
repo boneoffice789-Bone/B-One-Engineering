@@ -129,7 +129,7 @@
 <div class="modal" id="sliderModal"><div class="modal-content"><h3>ເພີ່ມສະໄລເດີ</h3><form id="sliderForm"><input type="hidden" id="sliderId"><div class="form-group"><label>ຫົວຂໍ້</label><input type="text" id="sliderTitle" required></div><div class="form-group"><label>ລິ້ງ</label><input type="text" id="sliderLink"></div><div class="form-group"><label>ຮູບພາບ URL</label><input type="text" id="sliderImage"><button type="button" class="btn btn-sm" onclick="uploadSliderImage()">ອັບໂຫຼດຮູບ</button></div><div class="form-group"><label>ສະຖານະ</label><select id="sliderStatus"><option value="active">ເປີດ</option><option value="inactive">ປິດ</option></select></div><div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('sliderModal')">ຍົກເລີກ</button></div></form></div></div>
 
 <script type="module">
-  import { auth, db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, onAuthStateChanged, signOut, getDoc, query, orderBy, where } from './firebase-config.js';
+  import { auth, db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, onAuthStateChanged, signOut, getDoc, query, orderBy, where } from '../firebase-config.js';
 
   onAuthStateChanged(auth, async (user) => {
     if (!user) { window.location.href = '../login.html'; return; }
