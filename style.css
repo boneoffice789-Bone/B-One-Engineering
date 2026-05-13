@@ -820,31 +820,41 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin-bottom: 8px;
   padding-left: 0;
 }
-/* ປຸ່ມສະໄຕລ໌ Glassmorphism ພ້ອມ hover animation */
-.slide-content .btn {
-  background: rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
-  border-radius: 50px !important;
-  padding: 10px 28px !important;
+/* ========== ປຸ່ມໃນ Slider ແບບດຽວກັບປຸ່ມ Login ========== */
+.slide-content .btn,
+.slide-content a.btn,
+.slider-section .slide-content .btn {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  border-radius: 40px !important;
+  padding: 8px 24px !important;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: none;
+  text-transform: none;
 }
 
-.slide-content .btn:hover {
+/* ເມື່ອ hover: ປ່ຽນເປັນສີຂາວ-ແດງ, ຂຶ້ນເລັກນ້ອຍ, ມີເງົາ */
+.slide-content .btn:hover,
+.slide-content a.btn:hover {
   background: white !important;
   color: #b91c1c !important;
   border-color: white !important;
-  transform: scale(1.03) translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-.slide-content .btn i {
-  margin-right: 8px;
-  transition: transform 0.2s;
+/* ເຄື່ອນໄຫວໄອຄອນ (ຖ້າມີ) – ເພື່ອຄວາມສວຍງາມ */
+.slide-content .btn i,
+.slide-content a.btn i {
+  transition: transform 0.2s ease;
+  margin-right: 6px;
 }
 
-.slide-content .btn:hover i {
-  transform: translateX(5px);
+.slide-content .btn:hover i,
+.slide-content a.btn:hover i {
+  transform: translateX(4px);
 }
