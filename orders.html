@@ -15,7 +15,7 @@
       padding: 40px 20px;
     }
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
       background: white;
       border-radius: 32px;
@@ -29,7 +29,8 @@
       color: white;
     }
     .page-header i { font-size: 2rem; margin-bottom: 10px; }
-    .page-header h2 { font-size: 1.5rem; font-weight: 700; }
+    .page-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+    .page-header p { font-size: 0.8rem; opacity: 0.9; }
     .page-body { padding: 30px 25px; }
     .order-card {
       background: #f8f9fa;
@@ -39,7 +40,7 @@
       transition: all 0.3s ease;
       border: 1px solid #e9ecef;
     }
-    .order-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+    .order-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
     .order-header {
       display: flex;
       justify-content: space-between;
@@ -51,14 +52,17 @@
     .order-id {
       background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
       color: white;
-      padding: 5px 12px;
-      border-radius: 20px;
+      padding: 5px 14px;
+      border-radius: 30px;
       font-size: 0.8rem;
       font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
     .order-status {
-      padding: 5px 12px;
-      border-radius: 20px;
+      padding: 5px 14px;
+      border-radius: 30px;
       font-size: 0.8rem;
       font-weight: 600;
     }
@@ -68,63 +72,178 @@
     .status-shipped { background: #d1e7dd; color: #0f5132; }
     .status-delivered { background: #d4edda; color: #155724; }
     .status-cancelled { background: #f8d7da; color: #721c24; }
-    .order-details p { margin: 8px 0; color: #555; }
-    .order-details i { width: 25px; color: #b91c1c; }
-    .empty-state { text-align: center; padding: 40px; color: #6c757d; }
-    .back-link { display: block; text-align: center; margin-top: 20px; color: #6c757d; text-decoration: none; }
+    .order-details p { margin: 8px 0; color: #4a5568; font-size: 0.9rem; }
+    .order-details i { width: 28px; color: #b91c1c; }
+    .order-items {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed #dee2e6;
+      font-size: 0.85rem;
+    }
+    .order-items summary {
+      font-weight: 600;
+      cursor: pointer;
+      color: #b91c1c;
+    }
+    .empty-state, .error-state {
+      text-align: center;
+      padding: 50px 20px;
+      color: #6c757d;
+    }
+    .empty-state i, .error-state i { font-size: 3.5rem; margin-bottom: 15px; opacity: 0.6; }
+    .btn-reload {
+      background: #b91c1c;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 40px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 25px;
+      color: #6c757d;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
     .back-link:hover { color: #b91c1c; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    @media (max-width: 550px) {
+      .order-header { flex-direction: column; align-items: flex-start; }
+      .page-body { padding: 20px; }
+    }
   </style>
 </head>
 <body>
+
 <div class="container">
   <div class="page-header">
     <i class="fas fa-shopping-bag"></i>
-    <h2>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ</h2>
+    <h2>ປະຫວັດຄຳສັ່ງຊື້</h2>
+    <p>ລາຍການສັ່ງຊື້ທັງໝົດຂອງທ່ານ</p>
   </div>
   <div class="page-body">
     <div id="orderList"></div>
-    <a href="profile.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປບັນຊີ</a>
+    <div class="flex-between">
+      <a href="profile.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປບັນຊີ</a>
+      <button id="refreshBtn" class="back-link" style="background:none; border:none;"><i class="fas fa-sync-alt"></i> ຣີໂຫຼດ</button>
+    </div>
   </div>
 </div>
+
 <script type="module">
   import { auth, db, collection, query, where, orderBy, getDocs, onAuthStateChanged } from './firebase-config.js';
-  function getStatusClass(status) {
-    const map = { pending:'status-pending', confirmed:'status-confirmed', processing:'status-processing', shipped:'status-shipped', delivered:'status-delivered', cancelled:'status-cancelled' };
-    return map[status] || 'status-pending';
+
+  const orderListDiv = document.getElementById('orderList');
+  const refreshBtn = document.getElementById('refreshBtn');
+
+  // ຟັງຊັນສະແດງສະຖານະ
+  function showLoading() {
+    orderListDiv.innerHTML = `<div class="empty-state"><i class="fas fa-spinner fa-pulse"></i><p>ກຳລັງໂຫຼດຂໍ້ມູນ...</p></div>`;
   }
-  function getStatusText(status) {
-    const map = { pending:'ກຳລັງດຳເນີນ', confirmed:'ຢືນຢັນແລ້ວ', processing:'ກຳລັງກະກຽມ', shipped:'ຈັດສົ່ງແລ້ວ', delivered:'ສຳເລັດ', cancelled:'ຍົກເລີກ' };
-    return map[status] || status;
+  function showEmpty() {
+    orderListDiv.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><p>ທ່ານຍັງບໍ່ມີຄຳສັ່ງຊື້</p><a href="products.html" style="color:#b91c1c; text-decoration:underline;">ເລີ່ມສັ່ງຊື້ສິນຄ້າ →</a></div>`;
   }
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = 'login.html'; return; }
-    const list = document.getElementById('orderList');
-    list.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-pulse"></i><p>ກຳລັງໂຫຼດ...</p></div>';
-    const q = query(collection(db, 'orders'), where('userId', '==', user.uid), orderBy('createdAt', 'desc'));
-    const snapshot = await getDocs(q);
-    if (snapshot.empty) {
-      list.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>ຍັງບໍ່ມີຄຳສັ່ງຊື້</p><a href="products.html" style="color:#b91c1c">ເລີ່ມສັ່ງຊື້ສິນຄ້າ →</a></div>';
+  function showError(errMsg) {
+    orderListDiv.innerHTML = `<div class="error-state"><i class="fas fa-exclamation-triangle"></i><p>${errMsg || 'ເກີດຂໍ້ຜິດພາດ, ກະລຸນາລອງໃໝ່'}</p><button class="btn-reload" onclick="location.reload()"><i class="fas fa-redo-alt"></i> ລອງໃໝ່</button></div>`;
+  }
+
+  // ຟັງຊັນດຶງຂໍ້ມູນຄຳສັ່ງຊື້
+  async function loadOrders(userId) {
+    showLoading();
+    try {
+      const q = query(
+        collection(db, 'orders'),
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc')
+      );
+      const querySnapshot = await getDocs(q);
+      
+      if (querySnapshot.empty) {
+        showEmpty();
+        return;
+      }
+
+      // ສ້າງ HTML ສະແດງລາຍການ
+      let html = '';
+      querySnapshot.forEach(doc => {
+        const order = doc.data();
+        const orderId = doc.id.slice(0, 8);
+        const date = order.createdAt 
+          ? new Date(order.createdAt.seconds * 1000).toLocaleDateString('lo-LA') 
+          : 'ບໍ່ລະບຸ';
+        
+        // ສະຖານະ ແລະ ສີ
+        const statusMap = {
+          pending: { text: 'ກຳລັງດຳເນີນ', class: 'status-pending' },
+          confirmed: { text: 'ຢືນຢັນແລ້ວ', class: 'status-confirmed' },
+          processing: { text: 'ກຳລັງກະກຽມ', class: 'status-processing' },
+          shipped: { text: 'ຈັດສົ່ງແລ້ວ', class: 'status-shipped' },
+          delivered: { text: 'ສຳເລັດ', class: 'status-delivered' },
+          cancelled: { text: 'ຍົກເລີກ', class: 'status-cancelled' }
+        };
+        const status = statusMap[order.orderStatus] || { text: order.orderStatus || 'ກຳລັງດຳເນີນ', class: 'status-pending' };
+        
+        // ລາຍການສິນຄ້າ (ຖ້າມີ)
+        let itemsHtml = '';
+        if (order.items && order.items.length) {
+          itemsHtml = `<details class="order-items"><summary><i class="fas fa-list-ul"></i> ລາຍການສິນຄ້າ (${order.items.length})</summary><div style="margin-top:8px;">`;
+          order.items.forEach(item => {
+            itemsHtml += `<div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span>${item.productName} x ${item.quantity}</span><span>₭${(item.totalPrice || item.unitPrice * item.quantity).toLocaleString()}</span></div>`;
+          });
+          itemsHtml += `</div></details>`;
+        }
+        
+        html += `
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-id"><i class="fas fa-hashtag"></i> ${orderId}</span>
+              <span class="order-status ${status.class}">${status.text}</span>
+            </div>
+            <div class="order-details">
+              <p><i class="fas fa-calendar-alt"></i> ວັນທີສັ່ງ: ${date}</p>
+              <p><i class="fas fa-money-bill-wave"></i> ຍອດລວມ: ₭${(order.totalAmount || 0).toLocaleString()}</p>
+              <p><i class="fas fa-truck"></i> ທີ່ຢູ່ຈັດສົ່ງ: ${order.shippingAddress || 'ບໍ່ລະບຸ'}</p>
+              <p><i class="fas fa-credit-card"></i> ວິທີຊຳລະ: ${order.paymentMethod === 'cash' ? 'ເງິນສົດ (ເກັບປາຍທາງ)' : 'ໂອນເງິນ'}</p>
+              ${itemsHtml}
+            </div>
+          </div>
+        `;
+      });
+      orderListDiv.innerHTML = html;
+    } catch (error) {
+      console.error('Error loading orders:', error);
+      showError('ບໍ່ສາມາດໂຫຼດຂໍ້ມູນຄຳສັ່ງຊື້ໄດ້. ກະລຸນາກວດສອບເນັດວຽກ ຫຼື ລອງໃໝ່.');
+    }
+  }
+
+  // ກວດສອບສະຖານະຜູ້ໃຊ້
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // ຖ້າບໍ່ໄດ້ login ໃຫ້ກັບໄປ login
+      window.location.href = 'login.html';
       return;
     }
-    list.innerHTML = '';
-    snapshot.forEach(doc => {
-      const order = doc.data();
-      const date = order.createdAt ? new Date(order.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '';
-      list.innerHTML += `
-        <div class="order-card">
-          <div class="order-header">
-            <span class="order-id"><i class="fas fa-hashtag"></i> ${doc.id.slice(0,8)}</span>
-            <span class="order-status ${getStatusClass(order.orderStatus)}">${getStatusText(order.orderStatus)}</span>
-          </div>
-          <div class="order-details">
-            <p><i class="fas fa-calendar-alt"></i> ວັນທີ: ${date}</p>
-            <p><i class="fas fa-money-bill-wave"></i> ລວມ: ₭${(order.totalAmount || 0).toLocaleString()}</p>
-            <p><i class="fas fa-truck"></i> ທີ່ຢູ່: ${order.shippingAddress || '-'}</p>
-          </div>
-        </div>
-      `;
-    });
+    // ມີ user ແລ້ວ, ໂຫຼດຄຳສັ່ງຊື້
+    loadOrders(user.uid);
   });
+
+  // ປຸ່ມຣີໂຫຼດ
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+      const user = auth.currentUser;
+      if (user) loadOrders(user.uid);
+      else window.location.href = 'login.html';
+    });
+  }
 </script>
 </body>
 </html>
