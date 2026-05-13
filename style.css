@@ -839,76 +839,85 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin-bottom: 8px;
   padding-left: 0;
 }
-/* ========== ປຸ່ມໃນ Slider ສະບັບມືອາຊີບ (Professional Button) ========== */
+/* =============================================
+   1. ປຸ່ມ "ເບິ່ງລາຍລະອຽດ" ໃນ Slider (ໜ້າຫຼັກ)
+   ============================================= */
 .slide-content .btn,
 .slide-content a.btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255,255,255,0.5) !important;
-  border-radius: 50px !important;
-  padding: 12px 32px !important;
-  font-size: 0.95rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.5px !important;
+  background: transparent !important;
+  border: 2px solid white !important;
+  border-radius: 40px !important;
+  padding: 10px 28px !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
   color: white !important;
   text-decoration: none !important;
-  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1) !important;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  transition: all 0.3s ease !important;
+  box-shadow: none !important;
 }
 
-/* ເພີ່ມແສບສີຂາວເລື່ອນຜ່ານ (shine effect) */
-.slide-content .btn::before,
-.slide-content a.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transition: left 0.6s ease;
-  z-index: -1;
-}
-
-.slide-content .btn:hover::before,
-.slide-content a.btn:hover::before {
-  left: 100%;
-}
-
-/* Hover effect: ປ່ຽນສີ, ຂະຫຍາຍ, ເງົາແຮງຂຶ້ນ */
 .slide-content .btn:hover,
 .slide-content a.btn:hover {
   background: white !important;
   color: #b91c1c !important;
   border-color: white !important;
-  transform: translateY(-5px) scale(1.05) !important;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3) !important;
+  transform: translateY(-2px) !important;
 }
 
-/* ປັບໄອຄອນ ໃຫ້ມີການເຄື່ອນໄຫວ */
-.slide-content .btn i,
-.slide-content a.btn i {
-  transition: transform 0.3s ease !important;
-  font-size: 0.9rem;
+/* =============================================
+   2. ໜ້າແບຣນຕົວແທນ (Brands) - ປັບຂອບ ແລະ ຕົວໜັງສື
+   ============================================= */
+.brands-grid .brand-card {
+  background: white !important;
+  border: 1px solid #e0e0e0 !important;  /* ຂອບສີເທົາອ່ອນ, ບໍ່ທຶບຕາ */
+  border-radius: 20px !important;
+  padding: 20px 15px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
 }
 
-.slide-content .btn:hover i,
-.slide-content a.btn:hover i {
-  transform: translateX(6px) !important;
+.brands-grid .brand-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: #b91c1c !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
 }
 
-/* ສຳລັບມືຖື (ເຮັດໃຫ້ປຸ່ມເບິ່ງບໍ່ແອບເກີນໄປ) */
+.brand-card .brand-logo {
+  width: 80px !important;
+  height: 80px !important;
+  margin: 0 auto 15px !important;
+}
+
+.brand-card .brand-name {
+  font-size: 1rem !important;         /* ຕົວໜັງສືນ້ອຍລົງ */
+  font-weight: 600 !important;
+  margin-bottom: 5px !important;
+  color: #333 !important;
+}
+
+.brand-card .brand-category {
+  font-size: 0.75rem !important;      /* ຕົວໜັງສືນ້ອຍລົງ */
+  color: #6c757d !important;
+  background: #f8f9fa !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+  display: inline-block !important;
+}
+
+/* ປັບໄລຍະຫ່າງໃນ grid ຂອງ brands */
+.brands-grid {
+  gap: 25px !important;
+}
+
+/* ສຳລັບມືຖື: ໃຫ້ຂອບ ແລະ ຕົວໜັງສືເໝາະສົມຂຶ້ນ */
 @media (max-width: 768px) {
-  .slide-content .btn,
-  .slide-content a.btn {
-    padding: 10px 24px !important;
-    font-size: 0.85rem !important;
+  .brands-grid .brand-card {
+    padding: 15px 10px !important;
+  }
+  .brand-card .brand-name {
+    font-size: 0.9rem !important;
+  }
+  .brand-card .brand-category {
+    font-size: 0.7rem !important;
   }
 }
