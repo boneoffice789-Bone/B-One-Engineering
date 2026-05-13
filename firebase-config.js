@@ -3,7 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getFirestore, collection, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc, query, where, orderBy, limit, serverTimestamp, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-// ⚠️ ປ່ຽນເປັນຄ່າຈາກ Firebase Console ຂອງທ່ານ
 const firebaseConfig = {
   apiKey: "AIzaSyBkLZAa0YR5QzWFyaHkoA2rxQREI8D9DeA",
   authDomain: "b-one-engineering-39728.firebaseapp.com",
