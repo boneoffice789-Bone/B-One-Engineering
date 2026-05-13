@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>B-One Engineering | ກ່ຽວກັບພວກເຮົາ</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700;800&family=Noto+Sans+Lao:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>ກ່ຽວກັບພວກເຮົາ | B-One Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ປັບປຸງການສະແດງຜົນສະເພາະໜ້າ about */
+    /* Additional styles for about page (keep existing) */
     .service-cat {
       background: #fff;
       border-radius: 12px;
@@ -23,19 +21,6 @@
       transform: translateY(-3px);
       border-color: rgba(185,28,28,0.2);
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-    .service-cat ul {
-      margin: 0;
-      padding-left: 0;
-    }
-    .service-cat ul li {
-      margin-bottom: 8px;
-      line-height: 1.5;
-      word-break: break-word;
-      font-size: 0.9rem;
-      color: #4a5568;
-      padding-left: 18px;
-      position: relative;
     }
     .service-cat ul li:before {
       content: "•";
@@ -54,31 +39,16 @@
       border-bottom: 2px solid #e0e0e0;
       padding-bottom: 10px;
     }
-    .ev-badge {
-      white-space: normal;
-      word-break: break-word;
-    }
     @media (max-width: 768px) {
-      .service-cat {
-        padding: 14px;
-      }
-      .service-cat h5 {
-        font-size: 0.95rem;
-      }
-      .service-cat ul li {
-        font-size: 0.8rem;
-        padding-left: 14px;
-      }
-      .about-text h2 {
-        font-size: 1.5rem;
-      }
+      .service-cat h5 { font-size: 0.95rem; }
+      .service-cat ul li { font-size: 0.8rem; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="container navbar">
+  <div class="navbar">
     <div class="logo">
       <a href="index.html">
         <h1>B-One Engineering</h1>
@@ -89,35 +59,35 @@
       <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links" id="nav-links">
-  <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
-  <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
-  <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
-  <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
-  <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
-  <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
-  <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
-  
-  <!-- Auth section -->
-  <li id="auth-section">
-    <div id="userDisplay" style="display: none;">
-      <a href="profile.html">
-        <i class="fas fa-user-circle"></i>
-        <span id="userName" class="lao"></span>
-      </a>
-    </div>
-    <div id="loginDisplay">
-      <a href="login.html">
-        <i class="fas fa-sign-in-alt"></i>
-        <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
-        <span class="eng">LOGIN</span>
-      </a>
-    </div>
-  </li>
-</ul>
+      <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="about.html" class="active"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+      <!-- Auth section -->
+      <li id="auth-section">
+        <div id="userDisplay" style="display: none;">
+          <a href="profile.html">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName" class="lao"></span>
+          </a>
+        </div>
+        <div id="loginDisplay">
+          <a href="login.html">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
+            <span class="eng">LOGIN</span>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
 </header>
 
 <main>
+  <!-- Hero section -->
   <section class="hero" style="padding: 60px 0;">
     <div class="container">
       <h2 class="section-title">ກ່ຽວກັບພວກເຮົາ <span style="font-size:1.5rem;">| ABOUT US</span></h2>
@@ -125,165 +95,38 @@
     </div>
   </section>
 
+  <!-- Main content -->
   <section id="about" style="padding: 60px 0;">
     <div class="container">
-      <div class="about-grid" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
-        
-        <div class="about-text" style="flex: 1; min-width: 300px;">
-          <h2 style="color: #b30000; margin-bottom: 15px; font-size: 1.8rem;">B-One Engineering Sole Co., Ltd</h2>
-          <p style="margin-bottom: 25px; line-height: 1.7;"><strong>ບໍລິສັດ ບີ-ວັນ ເອັນຈິເນຍຣິງ ຈຳກັດຜູ້ດຽວ</strong> ຕັ້ງຢູ່ ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ. ພວກເຮົາແມ່ນຜູ້ຊ່ຽວຊານດ້ານວິສະວະກຳຄົບວົງຈອນ ທີ່ໃຫ້ບໍລິການກວມເອົາຫຼາຍຂົງເຂດ ດັ່ງນີ້:</p>
-
-          <!-- ລາຍການບໍລິການ 11 ຂໍ້ (ຕາມຮູບ) -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 30px 0;">
-            
-            <div class="service-cat">
-              <h5><i class="fas fa-exchange-alt"></i> ນຳເຂົ້າ ແລະ ຈຳໜ່າຍ</h5>
-              <ul>
-                <li>ເຄື່ອງຈັກຮັບໃຊ້ວຽກງານການຜະລິດອຸດສາຫະກຳ-ກະສິກຳ ພ້ອມອາໄຫຼ່ ແລະ ອຸປະກອນຄົບຊຸດ, ນໍ້າກະແລດ, ນໍ້າມັນລໍ່ລືນ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄອທີ, ອຸປະກອນຄວາມປອດໄພ, ຈັກປັ່ນໄຟຟ້າ ແລະ ເຟີນິເຈີ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-tools"></i> ຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກ</h5>
-              <ul>
-                <li>ບໍລິການຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກທຸກປະເພດ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄຟຟ້າ, ແລະ ຈັກປັ່ນໄຟຟ້າ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-chart-line"></i> ກວດສອບຄ່າມາດຕະຖານ</h5>
-              <ul>
-                <li>ກວດສອບຄ່າມາດຕະຖານອຸປະກອນວັດແທກຄວາມດັນ, ອຸນນະພູມ, ກະແສໄຟຟ້າ, ແຮງດັນ, ຊິງຊັ່ງນໍ້າໜັກ, ເຄື່ອງມືໂຮງງານ ແລະ ຫ້ອງທົດລອງ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-wind"></i> ລະບົບທໍ່-ຖັງ, ແອ, ລິບ</h5>
-              <ul>
-                <li>ຕິດຕັ້ງ ແລະ ສ້ອມແປງລະບົບທໍ່-ຖັງໃນໂຮງງານ, ແອເຮືອນ, ແອອຸດສາຫະກຳ, ລະບົບບຳບັດນໍ້າ, ລິບທຸກຊະນິດ, ແລະ ໄຟຟ້າໃນຄົວເຮືອນ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-bolt"></i> ໄຟຟ້າແຮງດັນສູງ-ກາງ-ຕໍ່າ</h5>
-              <ul>
-                <li>ຕິດຕັ້ງ ແລະ ບຳລຸງຮັກສາໝໍ້ແປງໄຟຟ້າ, ສຳຫຼວດ ແລະ ອອກແບບຕາຂ່າຍໄຟຟ້າແຮງດັນສູງ-ກາງ-ຕໍ່າ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-drafting-compass"></i> ສຳຫຼວດ ອອກແບບ ຕາຂ່າຍໄຟຟ້າ</h5>
-              <ul>
-                <li>ບໍລິການສຳຫຼວດ ແລະ ອອກແບບ ຕາຂ່າຍໄຟຟ້າແຮງດັນສູງ-ກາງ ແລະ ຕໍ່າ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-chalkboard-user"></i> ຝຶກອົບຮົມວິສະວະກຳ</h5>
-              <ul>
-                <li>ບໍລິການຝຶກອົບຮົມທາງດ້ານວິສະວະກຳທຸກປະເພດ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-shield-alt"></i> ຝຶກອົບຮົມດ້ານຄວາມປອດໄພ</h5>
-              <ul>
-                <li>ຝຶກອົບຮົມດ້ານໄຟຟ້າ, ເຄື່ອງຈັກ, ແອເຢັນ, ຄອມພິວເຕີ, ໄອທີ, ອຸປະກອນຄວາມປອດໄພ ແລະ ລະບົບຄວາມປອດໄພ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-hard-hat"></i> ກໍ່ສ້າງ ແລະ ສ້ອມແປງໂຄງສ້າງ</h5>
-              <ul>
-                <li>ຮັບເໝົາກໍ່ສ້າງ ແລະ ສ້ອມແປງ ເຄຫາສະຖານ, ຂົວ-ທາງ, ແລະ ລະບົບຊົນລະປະທານ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-flask"></i> ທົດສອບມາດຕະຖານສານທຳຄວາມເຢັນ</h5>
-              <ul>
-                <li>ບໍລິການທົດສອບມາດຕະຖານສານທຳຄວາມເຢັນທຸກປະເພດ.</li>
-              </ul>
-            </div>
-
-            <div class="service-cat">
-              <h5><i class="fas fa-truck"></i> ບໍລິການລົດເຊົ່າ, ລົດເຄນ, ລົດກະເຊົ້າ</h5>
-              <ul>
-                <li>ບໍລິການລົດເຊົ່າທົ່ວໄປ, ລົດເຄນ, ແລະ ລົດກະເຊົ້າ.</li>
-              </ul>
-            </div>
-
-          </div>
-
-          <div class="ev-badge" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; background: #fff5f5; border-left: 4px solid #b30000; margin-bottom: 25px; border-radius: 8px;">
-            <i class="fas fa-hard-hat" style="color: #b30000; font-size: 1.2rem;"></i> 
-            <span><strong>Total Engineering & Industrial Solutions</strong><br>ບໍລິການຄົບຈົບໃນບ່ອນດຽວ.</span>
-          </div>
-
-          <ul class="contact-list" style="list-style: none; padding: 0;">
-            <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 12px;"><i class="fas fa-map-marker-alt" style="color:#b30000; width: 22px;"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ</li>
-            <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 12px;"><i class="fas fa-phone-alt" style="color:#b30000; width: 22px;"></i> 020 59478899</li>
-            <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 12px;"><i class="fas fa-envelope" style="color:#b30000; width: 22px;"></i> info@b-one-engineering.com</li>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 style="color: #b30000; margin-bottom: 15px;">B-One Engineering Sole Co., Ltd</h2>
+          <p><strong>ບໍລິສັດ ບີ-ວັນ ເອັນຈິເນຍຣິງ ຈຳກັດຜູ້ດຽວ</strong> ຕັ້ງຢູ່ ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ. ພວກເຮົາແມ່ນຜູ້ຊ່ຽວຊານດ້ານວິສະວະກຳຄົບວົງຈອນ.</p>
+          <div class="ev-badge"><i class="fas fa-hard-hat"></i> <strong>Total Engineering & Industrial Solutions</strong><br>ບໍລິການຄົບຈົບໃນບ່ອນດຽວ.</div>
+          <ul class="contact-list">
+            <li><i class="fas fa-map-marker-alt"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ</li>
+            <li><i class="fas fa-phone-alt"></i> 020 59478899</li>
+            <li><i class="fas fa-envelope"></i> info@b-one-engineering.com</li>
           </ul>
         </div>
-
-        <div class="about-image" style="flex: 0.8; min-width: 280px;">
-          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=500&h=420&fit=crop" 
-               style="width: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" 
-               alt="B-One Engineering facility">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=500&h=420&fit=crop" style="width:100%; border-radius:16px;" alt="About us">
         </div>
-        
       </div>
-    </div>
-  </section>
 
-  <!-- ສ່ວນສະຖິຕິ -->
-  <section style="background: var(--bg-light);">
-    <div class="container">
-      <h2 class="section-title">ຕົວເລກທີ່ສະແດງເຖິງຄວາມສຳເລັດ</h2>
-      <p class="section-sub">ຄວາມໄວ້ໃຈທີ່ລູກຄ້າມີຕໍ່ພວກເຮົາ</p>
-      <div class="services-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
-        <div class="service-card" style="text-align: center; padding: 25px 15px;"><div class="stat-number" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">10+</div><div class="stat-label">ປີທີ່ໃຫ້ບໍລິການ</div></div>
-        <div class="service-card" style="text-align: center; padding: 25px 15px;"><div class="stat-number" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">500+</div><div class="stat-label">ໂຄງການທີ່ສຳເລັດ</div></div>
-        <div class="service-card" style="text-align: center; padding: 25px 15px;"><div class="stat-number" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">100%</div><div class="stat-label">ຄວາມພໍໃຈຂອງລູກຄ້າ</div></div>
-        <div class="service-card" style="text-align: center; padding: 25px 15px;"><div class="stat-number" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">24/7</div><div class="stat-label">ບໍລິການຫຼັງການຂາຍ</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ວິໄສທັດ ແລະ ພາລະກິດ -->
-  <section>
-    <div class="container">
-      <div class="about-grid" style="gap: 40px;">
-        <div class="about-text"><h3 style="font-size: 1.6rem;"><i class="fas fa-eye" style="color:var(--primary); margin-right: 12px;"></i> ວິໄສທັດ</h3><p>ເປັນບໍລິສັດຊັ້ນນຳດ້ານວິສະວະກຳ ແລະ ນະວັດຕະກຳ ໃນ ສປປ ລາວ, ເປັນທີ່ໄວ້ໃຈຂອງລູກຄ້າໃນການບໍລິການດ້ານວິສະວະກຳຄົບວົງຈອນ.</p></div>
-        <div class="about-text"><h3 style="font-size: 1.6rem;"><i class="fas fa-bullseye" style="color:var(--primary); margin-right: 12px;"></i> ພາລະກິດ</h3><p>ສະໜອງການບໍລິການດ້ານວິສະວະກຳທີ່ມີຄຸນນະພາບສູງ, ປອດໄພ, ທັນສະໄໝ ແລະ ລາຄາຍຸດຕິທຳ ໃຫ້ແກ່ລູກຄ້າທຸກທ່ານ ພ້ອມທັງພັດທະນາບຸກຄະລາກອນ ແລະ ເຕັກໂນໂລຢີຢ່າງຕໍ່ເນື່ອງ.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ຄຸນຄ່າຫຼັກ -->
-  <section style="background: var(--bg-light);">
-    <div class="container">
-      <h2 class="section-title">ຄຸນຄ່າຫຼັກຂອງອົງກອນ</h2>
-      <p class="section-sub">ຫຼັກການທີ່ພວກເຮົາຍຶດໝັ້ນໃນການເຮັດວຽກ</p>
-      <div class="services-grid" style="grid-template-columns: repeat(3, 1fr); gap: 25px;">
-        <div class="service-card" style="text-align: center; padding: 30px 20px;"><i class="fas fa-shield-alt" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 15px;"></i><div style="font-weight: 700; font-size: 1.1rem;">ຄວາມປອດໄພ</div><div style="color: var(--text-light); font-size: 0.9rem;">ປອດໄພທັງຜູ້ໃຊ້ງານ ແລະ ຜູ້ຮັບບໍລິການ</div></div>
-        <div class="service-card" style="text-align: center; padding: 30px 20px;"><i class="fas fa-gem" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 15px;"></i><div style="font-weight: 700; font-size: 1.1rem;">ຄຸນນະພາບ</div><div style="color: var(--text-light); font-size: 0.9rem;">ຜົນງານທີ່ໄດ້ມາດຕະຖານສາກົນ</div></div>
-        <div class="service-card" style="text-align: center; padding: 30px 20px;"><i class="fas fa-handshake" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 15px;"></i><div style="font-weight: 700; font-size: 1.1rem;">ຄວາມໄວ້ໃຈ</div><div style="color: var(--text-light); font-size: 0.9rem;">ສ້າງຄວາມສໍາພັນທີ່ຍືນຍົງກັບລູກຄ້າ</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ທີມງານ -->
-  <section>
-    <div class="container">
-      <h2 class="section-title">ທີມງານຜູ້ຊ່ຽວຊານ</h2>
-      <p class="section-sub">ພົບກັບວິສະວະກອນມືອາຊີບຂອງພວກເຮົາ</p>
-      <div class="services-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px;">
-        <div class="service-card" style="text-align: center; padding-bottom: 25px;"><div style="width: 130px; height: 130px; border-radius: 50%; margin: 25px auto 20px; background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop'); background-size: cover; background-position: center; border: 3px solid var(--primary);"></div><h4 style="color: var(--primary); font-size: 1.1rem;">ທ່ານ ປອ.ພູມີພົນ ນໍ່ດາລາ</h4><p style="color: var(--text-light);">ຜູ້ອຳນວຍການ</p></div>
-        <div class="service-card" style="text-align: center; padding-bottom: 25px;"><div style="width: 130px; height: 130px; border-radius: 50%; margin: 25px auto 20px; background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop'); background-size: cover; background-position: center; border: 3px solid var(--primary);"></div><h4 style="color: var(--primary); font-size: 1.1rem;">ທ່ານສຸກ ວົງສະຫວັນ</h4><p style="color: var(--text-light);">ຫົວໜ້າວິສະວະກອນ</p></div>
-        <div class="service-card" style="text-align: center; padding-bottom: 25px;"><div style="width: 130px; height: 130px; border-radius: 50%; margin: 25px auto 20px; background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=200&h=200&fit=crop'); background-size: cover; background-position: center; border: 3px solid var(--primary);"></div><h4 style="color: var(--primary); font-size: 1.1rem;">ທ່ານ ຄຳພອນ ສີຫາວົງ</h4><p style="color: var(--text-light);">ວິສະວະກອນໄຟຟ້າ</p></div>
-        <div class="service-card" style="text-align: center; padding-bottom: 25px;"><div style="width: 130px; height: 130px; border-radius: 50%; margin: 25px auto 20px; background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop'); background-size: cover; background-position: center; border: 3px solid var(--primary);"></div><h4 style="color: var(--primary); font-size: 1.1rem;">ທ່ານນາງ ມະນີວັນ ສຸລິຍະ</h4><p style="color: var(--text-light);">ຜູ້ຈັດການຝ່າຍຂາຍ</p></div>
+      <!-- Service categories grid (keep original) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 40px 0;">
+        <div class="service-cat"><h5><i class="fas fa-exchange-alt"></i> ນຳເຂົ້າ ແລະ ຈຳໜ່າຍ</h5><ul><li>ເຄື່ອງຈັກຮັບໃຊ້ວຽກງານການຜະລິດອຸດສາຫະກຳ-ກະສິກຳ ພ້ອມອາໄຫຼ່ ແລະ ອຸປະກອນຄົບຊຸດ, ນໍ້າກະແລດ, ນໍ້າມັນລໍ່ລືນ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄອທີ, ອຸປະກອນຄວາມປອດໄພ, ຈັກປັ່ນໄຟຟ້າ ແລະ ເຟີນິເຈີ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-tools"></i> ຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກ</h5><ul><li>ບໍລິການຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກທຸກປະເພດ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄຟຟ້າ, ແລະ ຈັກປັ່ນໄຟຟ້າ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-chart-line"></i> ກວດສອບຄ່າມາດຕະຖານ</h5><ul><li>ກວດສອບຄ່າມາດຕະຖານອຸປະກອນວັດແທກຄວາມດັນ, ອຸນນະພູມ, ກະແສໄຟຟ້າ, ແຮງດັນ, ຊິງຊັ່ງນໍ້າໜັກ, ເຄື່ອງມືໂຮງງານ ແລະ ຫ້ອງທົດລອງ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-wind"></i> ລະບົບທໍ່-ຖັງ, ແອ, ລິບ</h5><ul><li>ຕິດຕັ້ງ ແລະ ສ້ອມແປງລະບົບທໍ່-ຖັງໃນໂຮງງານ, ແອເຮືອນ, ແອອຸດສາຫະກຳ, ລະບົບບຳບັດນໍ້າ, ລິບທຸກຊະນິດ, ແລະ ໄຟຟ້າໃນຄົວເຮືອນ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-bolt"></i> ໄຟຟ້າແຮງດັນສູງ-ກາງ-ຕໍ່າ</h5><ul><li>ຕິດຕັ້ງ ແລະ ບຳລຸງຮັກສາໝໍ້ແປງໄຟຟ້າ, ສຳຫຼວດ ແລະ ອອກແບບຕາຂ່າຍໄຟຟ້າແຮງດັນສູງ-ກາງ-ຕໍ່າ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-drafting-compass"></i> ສຳຫຼວດ ອອກແບບ ຕາຂ່າຍໄຟຟ້າ</h5><ul><li>ບໍລິການສຳຫຼວດ ແລະ ອອກແບບ ຕາຂ່າຍໄຟຟ້າແຮງດັນສູງ-ກາງ ແລະ ຕໍ່າ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-chalkboard-user"></i> ຝຶກອົບຮົມວິສະວະກຳ</h5><ul><li>ບໍລິການຝຶກອົບຮົມທາງດ້ານວິສະວະກຳທຸກປະເພດ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-shield-alt"></i> ຝຶກອົບຮົມດ້ານຄວາມປອດໄພ</h5><ul><li>ຝຶກອົບຮົມດ້ານໄຟຟ້າ, ເຄື່ອງຈັກ, ແອເຢັນ, ຄອມພິວເຕີ, ໄອທີ, ອຸປະກອນຄວາມປອດໄພ ແລະ ລະບົບຄວາມປອດໄພ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-hard-hat"></i> ກໍ່ສ້າງ ແລະ ສ້ອມແປງໂຄງສ້າງ</h5><ul><li>ຮັບເໝົາກໍ່ສ້າງ ແລະ ສ້ອມແປງ ເຄຫາສະຖານ, ຂົວ-ທາງ, ແລະ ລະບົບຊົນລະປະທານ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-flask"></i> ທົດສອບມາດຕະຖານສານທຳຄວາມເຢັນ</h5><ul><li>ບໍລິການທົດສອບມາດຕະຖານສານທຳຄວາມເຢັນທຸກປະເພດ.</li></ul></div>
+        <div class="service-cat"><h5><i class="fas fa-truck"></i> ບໍລິການລົດເຊົ່າ, ລົດເຄນ, ລົດກະເຊົ້າ</h5><ul><li>ບໍລິການລົດເຊົ່າທົ່ວໄປ, ລົດເຄນ, ແລະ ລົດກະເຊົ້າ.</li></ul></div>
       </div>
     </div>
   </section>
@@ -291,38 +134,28 @@
 
 <footer>
   <div class="container">
-    <p>© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
-    <p style="margin-top: 10px;"><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899 | info@b-one-engineering.com</p>
+    <p>© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ</p>
   </div>
 </footer>
-
-<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
   const mobileBtn = document.getElementById('mobile-menu');
-  const navLinks = document.getElementById('nav-links');
-  mobileBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
+  mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
 </script>
-  <script type="module">
+<script type="module">
   import { auth, onAuthStateChanged } from './firebase-config.js';
-  
   onAuthStateChanged(auth, (user) => {
     const userDisplay = document.getElementById('userDisplay');
     const loginDisplay = document.getElementById('loginDisplay');
     const userNameSpan = document.getElementById('userName');
-    
     if (user) {
-      const displayName = user.displayName || user.email.split('@')[0];
-      if (userNameSpan) userNameSpan.textContent = displayName;
-      if (userDisplay) userDisplay.style.display = 'block';
-      if (loginDisplay) loginDisplay.style.display = 'none';
+      userNameSpan.textContent = user.displayName || user.email.split('@')[0];
+      userDisplay.style.display = 'block';
+      loginDisplay.style.display = 'none';
     } else {
-      if (userDisplay) userDisplay.style.display = 'none';
-      if (loginDisplay) loginDisplay.style.display = 'block';
+      userDisplay.style.display = 'none';
+      loginDisplay.style.display = 'block';
     }
   });
 </script>
