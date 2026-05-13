@@ -1,31 +1,57 @@
-/* ========== B-One Engineering - COMPLETE MODERN CSS (2026) ========== */
-/* ປະກອບດ້ວຍ: Glassmorphism Navbar, Slider Button ແບບ Login, Responsive Full */
+/* =============================================
+   B-One Engineering - COMPLETE CSS (2026)
+   Fully responsive | Glassmorphism slider | Auth section
+   ============================================= */
 
+/* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
 :root {
   --primary: #b91c1c;
   --primary-dark: #8b1515;
   --primary-light: #fef0f0;
   --primary-gradient: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+  --accent: #f5a623;
   --text-dark: #1a1a2e;
+  --text-medium: #434356;
   --text-light: #6b7280;
   --bg-white: #ffffff;
+  --bg-light: #f9fafb;
+  --border-light: #eef2f6;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-md: 0 8px 20px rgba(0,0,0,0.06);
   --shadow-lg: 0 20px 35px -10px rgba(0,0,0,0.1);
+  --shadow-hover: 0 25px 40px -12px rgba(185,28,28,0.2);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --font-sans: 'Inter', 'Noto Sans Lao', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Noto Sans Lao', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-white);
   color: var(--text-dark);
   line-height: 1.5;
+  scroll-behavior: smooth;
   overflow-x: hidden;
+  width: 100%;
 }
 
-/* ========== NAVBAR (ມີສ່ວນ Auth ແລະ ປຸ່ມ Login ແບບ Glass) ========== */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+/* ---------- HEADER & NAVBAR (ປັບປຸງສ່ວນ Auth) ---------- */
 header {
   background: rgba(185, 28, 28, 0.96);
   backdrop-filter: blur(12px);
@@ -33,93 +59,133 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: var(--shadow-sm);
   width: 100%;
+  overflow-x: hidden;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
+  padding: 12px 20px;
   max-width: 1280px;
   margin: 0 auto;
-  gap: 16px;
+  gap: 15px;
   flex-wrap: wrap;
+}
+
+.logo {
+  flex: 1;
+  min-width: 0;
+  max-width: 70%;
 }
 
 .logo a {
   text-decoration: none;
+  display: inline-block;
+  width: 100%;
 }
+
 .logo h1 {
   font-size: 1.5rem;
   font-weight: 800;
+  letter-spacing: -0.3px;
   color: white;
   line-height: 1.2;
+  margin: 0;
+  word-break: break-word;
+  white-space: normal;
 }
+
 .logo p {
   font-size: 0.7rem;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+  margin-top: 2px;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .menu-toggle {
   display: none;
   font-size: 1.6rem;
   cursor: pointer;
+  color: white;
   background: none;
   border: none;
-  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   list-style: none;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   padding: 6px 12px;
   border-radius: 48px;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
 }
+
 .nav-links li a {
   text-decoration: none;
   font-weight: 600;
+  transition: var(--transition);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 6px 14px;
   border-radius: 40px;
-  color: rgba(255,255,255,0.92);
-  transition: var(--transition);
+  color: rgba(255, 255, 255, 0.92);
 }
-.nav-links li a .lao { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
-.nav-links li a .eng { font-size: 0.55rem; margin-top: 2px; opacity: 0.8; white-space: nowrap; }
+
+.nav-links li a .lao {
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nav-links li a .eng {
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
 .nav-links li a.active {
   background: white;
   color: var(--primary);
 }
 
-/* AUTH SECTION (ປຸ່ມເຂົ້າສູ່ລະບົບ ແບບ glass) */
+/* ========== AUTH SECTION STYLES (ປັບປຸງເພີ່ມ) ========== */
 #auth-section {
   margin-left: 10px;
   display: flex;
   align-items: center;
 }
+
 #userDisplay a, #loginDisplay a {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 40px;
   padding: 6px 16px;
-  transition: var(--transition);
+  transition: all 0.3s ease;
   white-space: nowrap;
 }
+
 #userDisplay a:hover, #loginDisplay a:hover {
-  background: white;
-  color: var(--primary);
+  background: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
+
 #userName {
   max-width: 120px;
   overflow: hidden;
@@ -127,8 +193,322 @@ header {
   white-space: nowrap;
 }
 
-/* ========== SLIDER SECTION (ມີປຸ່ມຄ້າຍກັບ Login) ========== */
-.slider-section { padding: 0; }
+/* ---------- ປຸ່ມທົ່ວໄປ ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 48px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(125deg, #fff8f3 0%, #ffffff 40%, #fffaf7 100%);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.hero-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-content {
+  flex: 1.2;
+  text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  line-height: 1.3;
+  margin: 15px 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  word-break: break-word;
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+  color: var(--text-medium);
+  margin-bottom: 28px;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.hero-badge {
+  background: rgba(185,28,28,0.12);
+  color: var(--primary-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 60px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-content .btn,
+.hero-content .btn-outline {
+  display: inline-flex;
+  margin: 0.5rem 0.5rem;
+}
+
+.hero-image {
+  flex: 0.9;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  height: auto;
+}
+
+/* ---------- Sections ທົ່ວໄປ ---------- */
+section {
+  padding: 65px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  word-break: break-word;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--primary-gradient);
+  margin: 15px auto 0;
+  border-radius: 4px;
+}
+
+.section-sub {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 50px auto;
+  color: var(--text-light);
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+/* ---------- Grid ທົ່ວໄປ ---------- */
+.services-grid, .portfolio-grid, .brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* ---------- Cards ---------- */
+.service-card, .portfolio-card, .brand-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover, .portfolio-card:hover, .brand-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+  background: linear-gradient(145deg, #fff6f6, #ffffff);
+  padding: 28px 20px 20px;
+  text-align: center;
+  font-size: 2.8rem;
+  color: var(--primary);
+}
+
+.card-icon img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.service-card h3, .portfolio-card h3, .brand-name {
+  font-size: 1.4rem;
+  padding: 16px 20px 8px;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.service-card p, .portfolio-card p {
+  padding: 0 20px 24px;
+  color: var(--text-light);
+  flex: 1;
+  word-break: break-word;
+}
+
+.portfolio-img {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s;
+}
+
+/* ---------- About page specific ---------- */
+.about-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 45px;
+  align-items: flex-start;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.ev-badge {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  margin: 20px 0;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.contact-list {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  word-break: break-word;
+  flex-wrap: wrap;
+}
+
+.contact-list i {
+  width: 28px;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+/* ---------- Contact Form ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
+  transform: translateY(-1px);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: #0a0a0f;
+  color: #b0b3c0;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 50px;
+  font-size: 0.85rem;
+  word-break: break-word;
+}
+
+footer a {
+  color: #f0a0a0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* ---------- WhatsApp Float ---------- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: white;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 6px 18px rgba(37,211,102,0.4);
+  z-index: 99;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  background: #128C7E;
+  box-shadow: 0 10px 25px rgba(37,211,102,0.5);
+}
+
+/* ========== SLIDER SECTION ========== */
+.slider-section {
+  padding: 0;
+}
 .slider-container {
   position: relative;
   width: 100%;
@@ -136,7 +516,7 @@ header {
 }
 .slider-wrapper {
   display: flex;
-  transition: transform 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .slide {
   flex: 0 0 100%;
@@ -151,18 +531,22 @@ header {
 .slide::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
   z-index: 1;
 }
 .slide-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(12px);
-  border-radius: 40px;
+  color: white;
   padding: 28px 38px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
   max-width: 80%;
   animation: fadeInUp 0.7s ease;
 }
@@ -174,33 +558,34 @@ header {
   font-size: 2rem;
   margin-bottom: 12px;
   font-weight: 700;
-  color: white;
+  word-break: break-word;
 }
 .slide-content p {
   font-size: 1rem;
   margin-bottom: 20px;
-  color: rgba(255,255,255,0.9);
+  opacity: 0.95;
 }
 
-/* ປຸ່ມໃນ Slider (ຮູບແບບດຽວກັບປຸ່ມ Login) */
+/* ========== ປຸ່ມໃນ Slider (ແບບ Glassmorphism ຄ້າຍປຸ່ມ Login) ========== */
 .slide-content .btn,
-.slide-content a.btn,
-.slider-section .slide-content .btn {
+.slide-content a.btn {
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
-  background: rgba(255,255,255,0.2) !important;
-  backdrop-filter: blur(8px) !important;
-  border: 1.5px solid rgba(255,255,255,0.8) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
   border-radius: 50px !important;
   padding: 10px 28px !important;
-  font-weight: 600 !important;
   font-size: 0.9rem !important;
+  font-weight: 600 !important;
   color: white !important;
   text-decoration: none !important;
-  transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
 .slide-content .btn:hover,
 .slide-content a.btn:hover {
   background: white !important;
@@ -209,13 +594,15 @@ header {
   transform: translateY(-3px) scale(1.02) !important;
   box-shadow: 0 10px 20px rgba(0,0,0,0.25) !important;
 }
+
 .slide-content .btn i,
 .slide-content a.btn i {
-  transition: transform 0.2s;
+  transition: transform 0.2s ease !important;
 }
+
 .slide-content .btn:hover i,
 .slide-content a.btn:hover i {
-  transform: translateX(5px);
+  transform: translateX(5px) !important;
 }
 
 /* Slider controls */
@@ -227,10 +614,15 @@ header {
   backdrop-filter: blur(4px);
   border: none;
   color: white;
+  font-size: 1.6rem;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  border-radius: 50%;
+  z-index: 3;
   transition: var(--transition);
 }
 .slider-btn:hover {
@@ -246,7 +638,8 @@ header {
   right: 0;
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
+  z-index: 3;
 }
 .dot {
   width: 10px;
@@ -259,183 +652,190 @@ header {
 .dot.active {
   background: var(--primary);
   transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(185,28,28,0.6);
 }
 
-/* ========== HERO SECTION ========== */
-.hero {
-  background: linear-gradient(125deg, #fff8f3, #fffaf7);
-  padding: 80px 0;
-  text-align: center;
-}
-.hero-grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 40px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.hero-content { flex: 1.2; text-align: center; }
-.hero-content h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1.3;
-  margin: 15px 0;
-}
-.hero-badge {
-  background: rgba(185,28,28,0.12);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 18px;
-  border-radius: 60px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--primary-dark);
-}
-.hero-content .btn, .hero-content .btn-outline { margin: 0.5rem; }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--primary-gradient);
-  color: white;
-  padding: 10px 24px;
-  border-radius: 48px;
-  text-decoration: none;
-  font-weight: 700;
-  transition: var(--transition);
-  border: none;
-  cursor: pointer;
-}
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--primary);
-  color: var(--primary);
-}
-.btn-outline:hover {
-  background: var(--primary);
-  color: white;
-}
-.hero-image { flex: 0.9; }
-.hero-image img {
-  width: 100%;
-  border-radius: 32px;
-  box-shadow: var(--shadow-lg);
-}
-
-/* ========== CARDS, GRID, FOOTER (ຮັກສາເດີມແຕ່ປັບປຸງ) ========== */
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-section { padding: 65px 0; }
-.section-title {
-  text-align: center;
-  font-size: 2.2rem;
-  font-weight: 800;
-}
-.section-title::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--primary-gradient);
-  margin: 15px auto 0;
-  border-radius: 4px;
-}
-.section-sub {
-  text-align: center;
-  max-width: 650px;
-  margin: 0 auto 50px;
-  color: var(--text-light);
-}
-.services-grid, .portfolio-grid, .brands-grid {
+/* ========== NEWS SECTION ========== */
+.news-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 30px;
+  margin-top: 20px;
 }
-.service-card, .portfolio-card, .brand-card {
+.news-card {
   background: var(--bg-white);
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   transition: var(--transition);
-  border: 1px solid #eef2f6;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.service-card:hover, .portfolio-card:hover {
+.news-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 25px 40px -12px rgba(185,28,28,0.2);
+  border-color: rgba(185,28,28,0.2);
+  box-shadow: var(--shadow-hover);
 }
-.card-icon {
-  background: linear-gradient(145deg, #fff6f6, #ffffff);
-  padding: 28px 20px 20px;
-  text-align: center;
-  font-size: 2.8rem;
-  color: var(--primary);
+.news-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 15px 20px 0;
+  width: fit-content;
 }
-.service-card h3, .portfolio-card h3 {
+.news-badge.news {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+.news-badge.promotion {
+  background: #fef0f0;
+  color: #b91c1c;
+}
+.news-card h3 {
   font-size: 1.3rem;
-  padding: 16px 20px 8px;
+  padding: 12px 20px 8px;
   font-weight: 700;
+  word-break: break-word;
 }
-.service-card p, .portfolio-card p {
-  padding: 0 20px 24px;
+.news-card p {
+  padding: 0 20px 20px;
   color: var(--text-light);
+  line-height: 1.6;
+  flex: 1;
+  word-break: break-word;
 }
-.whatsapp-float {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: #25D366;
-  color: white;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
+.news-date {
+  padding: 0 20px 15px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  z-index: 99;
-  transition: var(--transition);
-  text-decoration: none;
+  gap: 6px;
 }
-.whatsapp-float:hover {
-  transform: scale(1.08);
-  background: #128C7E;
-}
-footer {
-  background: #0a0a0f;
-  color: #b0b3c0;
-  text-align: center;
-  padding: 40px 20px;
-  font-size: 0.85rem;
-}
-footer a { color: #f0a0a0; text-decoration: none; }
 
 /* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .hero-content h1 { font-size: 2.5rem; }
+  .section-title { font-size: 2.2rem; }
+}
+
+@media (max-width: 900px) {
   .menu-toggle { display: block; }
   .nav-links {
     display: none;
     width: 100%;
     flex-direction: column;
-    background: rgba(185,28,28,0.98);
+    background: rgba(185, 28, 28, 0.98);
     padding: 20px;
+    margin-top: 12px;
     border-radius: 28px;
   }
   .nav-links.active { display: flex; }
+  .nav-links li a .lao, .nav-links li a .eng { white-space: normal; }
+  
   #auth-section {
     margin-left: 0;
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid rgba(255,255,255,0.2);
+    justify-content: center;
   }
-  .hero-content h1 { font-size: 1.5rem; }
+  #userDisplay a, #loginDisplay a {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  section { padding: 55px 0; }
+  
+  .logo h1 { font-size: 1.2rem !important; }
+  .logo p { font-size: 0.55rem !important; }
+  .logo { max-width: 70% !important; }
+  
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .hero-grid { flex-direction: column; }
+  .hero-content h1 { font-size: 1.8rem; }
+  .hero-content p { font-size: 0.95rem; }
+  
+  .hero-content .btn-outline { margin-left: 0 !important; margin-top: 10px !important; }
+  
   .slide { height: 400px; }
   .slide-content h3 { font-size: 1.5rem; }
   .slide-content .btn, .slide-content a.btn { padding: 6px 18px !important; font-size: 0.8rem !important; }
-  .services-grid, .portfolio-grid { grid-template-columns: 1fr; }
+  .slider-btn { width: 36px; height: 36px; font-size: 1.2rem; }
+  
+  .contact-grid { grid-template-columns: 1fr; gap: 35px; }
+}
+
+@media (max-width: 550px) {
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .logo h1 { font-size: 1rem !important; }
+  .logo p { font-size: 0.5rem !important; }
+  .logo { max-width: 75% !important; }
+  
+  .section-title { font-size: 1.6rem; }
+  .section-sub { font-size: 0.85rem; }
+  
+  .hero-content h1 { font-size: 1.5rem; }
+  .hero-content .btn-outline { margin-left: 0 !important; margin-top: 10px !important; }
+  
+  .slide { height: 320px; }
+  .slide-content { padding: 18px 24px; max-width: 90%; }
+  .slide-content h3 { font-size: 1.2rem; }
+  .slide-content .btn, .slide-content a.btn { padding: 5px 14px !important; font-size: 0.75rem !important; }
+  
+  .whatsapp-float { width: 48px; height: 48px; font-size: 26px; bottom: 20px; right: 20px; }
+  
+  footer { padding: 30px 15px; font-size: 0.75rem; }
+}
+
+/* ຕົວໜັງສືທີ່ຍາວ ໃຫ້ຫໍ່ອັດຕະໂນມັດ */
+p, li, .service-card p, .portfolio-card p, .about-text p,
+.hero-content p, .section-sub, .ev-badge, .contact-list li,
+.logo h1, .logo p, .section-title, .service-card h3,
+.news-card p, .news-card h3 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.btn, .btn-outline, .slide-content .btn, .slide-content a.btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .btn, .btn-outline {
+    white-space: normal;
+    text-align: center;
+    padding: 8px 14px !important;
+  }
+}
+
+/* ປ້ອງກັນ bullet point ຊ້ອນ */
+.service-cat ul li:before {
+  content: none !important;
+  display: none !important;
+}
+.service-cat ul li {
+  list-style: none;
+  margin-bottom: 8px;
+  padding-left: 0;
 }
