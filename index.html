@@ -103,6 +103,22 @@
       <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
       <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
       <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+      <!-- ສ່ວນສະແດງສະຖານະຜູ້ໃຊ້ -->
+<li id="auth-section" style="border-left: 1px solid rgba(255,255,255,0.2); margin-left: 10px; padding-left: 10px;">
+  <div id="userDisplay" style="display: none;">
+    <a href="profile.html" style="display: flex; align-items: center; gap: 8px;">
+      <i class="fas fa-user-circle"></i>
+      <span id="userName" class="lao"></span>
+    </a>
+  </div>
+  <div id="loginDisplay">
+    <a href="login.html" style="display: flex; align-items: center; gap: 8px;">
+      <i class="fas fa-sign-in-alt"></i>
+      <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
+      <span class="eng">LOGIN</span>
+    </a>
+  </div>
+</li>
     </ul>
   </div>
 </header>
@@ -413,6 +429,25 @@
   loadFeaturedServices();
   loadFeaturedProducts();
   loadNews();
+</script>
+  <script type="module">
+  import { auth, onAuthStateChanged } from './firebase-config.js';
+  
+  onAuthStateChanged(auth, (user) => {
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    
+    if (user) {
+      const displayName = user.displayName || user.email.split('@')[0];
+      if (userNameSpan) userNameSpan.textContent = displayName;
+      if (userDisplay) userDisplay.style.display = 'block';
+      if (loginDisplay) loginDisplay.style.display = 'none';
+    } else {
+      if (userDisplay) userDisplay.style.display = 'none';
+      if (loginDisplay) loginDisplay.style.display = 'block';
+    }
+  });
 </script>
 </body>
 </html>
