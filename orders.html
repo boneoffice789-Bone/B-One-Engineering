@@ -2,86 +2,124 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
-  <title>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ | B-One</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ | B-One Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    .container { max-width: 800px; margin: 40px auto; padding: 20px; }
-    .order { background: #fff; padding: 15px; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .order h4 { color: #b30000; margin: 0 0 5px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans Lao', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      padding: 30px 25px;
+      text-align: center;
+      color: white;
+    }
+    .page-header i { font-size: 2rem; margin-bottom: 10px; }
+    .page-header h2 { font-size: 1.5rem; font-weight: 700; }
+    .page-body { padding: 30px 25px; }
+    .order-card {
+      background: #f8f9fa;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      border: 1px solid #e9ecef;
+    }
+    .order-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .order-id {
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .order-status {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-confirmed { background: #cfe2ff; color: #084298; }
+    .status-processing { background: #cff4fc; color: #055160; }
+    .status-shipped { background: #d1e7dd; color: #0f5132; }
+    .status-delivered { background: #d4edda; color: #155724; }
+    .status-cancelled { background: #f8d7da; color: #721c24; }
+    .order-details p { margin: 8px 0; color: #555; }
+    .order-details i { width: 25px; color: #b91c1c; }
+    .empty-state { text-align: center; padding: 40px; color: #6c757d; }
+    .back-link { display: block; text-align: center; margin-top: 20px; color: #6c757d; text-decoration: none; }
+    .back-link:hover { color: #b91c1c; }
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
+  <div class="page-header">
+    <i class="fas fa-shopping-bag"></i>
     <h2>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ</h2>
-    <div id="orderList"></div>
-    <a href="profile.html">← ກັບໄປບັນຊີ</a>
   </div>
-
-  <script type="module">
-  import { auth, db, collection, query, where, orderBy, getDocs } from './firebase-config.js';
-  import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-
+  <div class="page-body">
+    <div id="orderList"></div>
+    <a href="profile.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປບັນຊີ</a>
+  </div>
+</div>
+<script type="module">
+  import { auth, db, collection, query, where, orderBy, getDocs, onAuthStateChanged } from './firebase-config.js';
   function getStatusClass(status) {
-    const statusMap = {
-      'pending': 'status-pending',
-      'confirmed': 'status-confirmed',
-      'processing': 'status-processing',
-      'shipped': 'status-shipped',
-      'delivered': 'status-delivered',
-      'cancelled': 'status-cancelled'
-    };
-    return statusMap[status] || 'status-pending';
+    const map = { pending:'status-pending', confirmed:'status-confirmed', processing:'status-processing', shipped:'status-shipped', delivered:'status-delivered', cancelled:'status-cancelled' };
+    return map[status] || 'status-pending';
   }
-
   function getStatusText(status) {
-    const statusMap = {
-      'pending': 'ກຳລັງດຳເນີນ',
-      'confirmed': 'ຢືນຢັນແລ້ວ',
-      'processing': 'ກຳລັງກະກຽມ',
-      'shipped': 'ຈັດສົ່ງແລ້ວ',
-      'delivered': 'ສຳເລັດ',
-      'cancelled': 'ຍົກເລີກ'
-    };
-    return statusMap[status] || status;
+    const map = { pending:'ກຳລັງດຳເນີນ', confirmed:'ຢືນຢັນແລ້ວ', processing:'ກຳລັງກະກຽມ', shipped:'ຈັດສົ່ງແລ້ວ', delivered:'ສຳເລັດ', cancelled:'ຍົກເລີກ' };
+    return map[status] || status;
   }
-
   onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = 'login.html'; return; }
     const list = document.getElementById('orderList');
-    
-    // ຖ້າບໍ່ມີຜູ້ໃຊ້ (ອອກລະບົບແລ້ວ) ໃຫ້ກັບໄປຫາໜ້າ login
-    if (!user) {
-      window.location.href = 'login.html';
-      return;
-    }
-    
     list.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-pulse"></i><p>ກຳລັງໂຫຼດ...</p></div>';
-    
     const q = query(collection(db, 'orders'), where('userId', '==', user.uid), orderBy('createdAt', 'desc'));
     const snapshot = await getDocs(q);
-    
     if (snapshot.empty) {
       list.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>ຍັງບໍ່ມີຄຳສັ່ງຊື້</p><a href="products.html" style="color:#b91c1c">ເລີ່ມສັ່ງຊື້ສິນຄ້າ →</a></div>';
       return;
     }
-    
     list.innerHTML = '';
     snapshot.forEach(doc => {
       const order = doc.data();
-      const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '';
-      const statusClass = getStatusClass(order.orderStatus);
-      const statusText = getStatusText(order.orderStatus);
-      
+      const date = order.createdAt ? new Date(order.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '';
       list.innerHTML += `
         <div class="order-card">
           <div class="order-header">
             <span class="order-id"><i class="fas fa-hashtag"></i> ${doc.id.slice(0,8)}</span>
-            <span class="order-status ${statusClass}">${statusText}</span>
+            <span class="order-status ${getStatusClass(order.orderStatus)}">${getStatusText(order.orderStatus)}</span>
           </div>
           <div class="order-details">
             <p><i class="fas fa-calendar-alt"></i> ວັນທີ: ${date}</p>
-            <p><i class="fas fa-money-bill-wave"></i> ລວມທັງໝົດ: ₭${(order.totalAmount || 0).toLocaleString()}</p>
-            <p><i class="fas fa-truck"></i> ທີ່ຢູ່ຈັດສົ່ງ: ${order.shippingAddress || '-'}</p>
+            <p><i class="fas fa-money-bill-wave"></i> ລວມ: ₭${(order.totalAmount || 0).toLocaleString()}</p>
+            <p><i class="fas fa-truck"></i> ທີ່ຢູ່: ${order.shippingAddress || '-'}</p>
           </div>
         </div>
       `;
