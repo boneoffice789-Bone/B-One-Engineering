@@ -8,7 +8,40 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ສະໄຕລ໌ສຳລັບສ່ວນຂ່າວ */
+    /* Extra styles for auth section (in case style.css not updated) */
+    #auth-section {
+      border-left: 1px solid rgba(255,255,255,0.3);
+      margin-left: 10px;
+      padding-left: 10px;
+    }
+    #userDisplay a, #loginDisplay a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+    }
+    #userDisplay a:hover, #loginDisplay a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    #userName {
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      #auth-section {
+        border-left: none;
+        margin-left: 0;
+        padding-left: 0;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255,255,255,0.3);
+      }
+    }
+    /* News grid (already in style.css but ensure) */
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -38,6 +71,7 @@
       font-size: 0.7rem;
       font-weight: 600;
       margin: 15px 20px 0;
+      width: fit-content;
     }
     .news-badge.news {
       background: #e3f2fd;
@@ -59,10 +93,6 @@
       line-height: 1.6;
       flex: 1;
       word-break: break-word;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
     .news-date {
       padding: 0 20px 15px;
@@ -73,12 +103,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-    }
-    @media (max-width: 768px) {
-      .news-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
     }
   </style>
 </head>
@@ -96,36 +120,35 @@
       <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links" id="nav-links">
-  <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
-  <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
-  <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
-  <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
-  <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
-  <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
-  <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
-  
-  <!-- Auth section -->
-  <li id="auth-section">
-    <div id="userDisplay" style="display: none;">
-      <a href="profile.html">
-        <i class="fas fa-user-circle"></i>
-        <span id="userName" class="lao"></span>
-      </a>
-    </div>
-    <div id="loginDisplay">
-      <a href="login.html">
-        <i class="fas fa-sign-in-alt"></i>
-        <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
-        <span class="eng">LOGIN</span>
-      </a>
-    </div>
-  </li>
-</ul>
+      <li><a href="index.html" class="active"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+      <!-- Auth section -->
+      <li id="auth-section">
+        <div id="userDisplay" style="display: none;">
+          <a href="profile.html">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName" class="lao"></span>
+          </a>
+        </div>
+        <div id="loginDisplay">
+          <a href="login.html">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
+            <span class="eng">LOGIN</span>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
 </header>
 
 <main>
-  <!-- ========== SLIDER SECTION (dynamic) ========== -->
+  <!-- ========== SLIDER SECTION ========== -->
   <section class="slider-section">
     <div class="slider-container">
       <div class="slider-wrapper" id="sliderWrapper">
@@ -198,7 +221,7 @@
     </div>
   </section>
 
-  <!-- ========== ຂ່າວ ແລະ ໂປຣໂມຊັ່ນ (NEWS SECTION) ========== -->
+  <!-- ========== ຂ່າວ ແລະ ໂປຣໂມຊັ່ນ ========== -->
   <section style="padding: 60px 0;">
     <div class="container">
       <h2 class="section-title">ຂ່າວ ແລະ ໂປຣໂມຊັ່ນ</h2>
@@ -222,15 +245,34 @@
 </a>
 
 <script>
+  // Mobile menu toggle
   const mobileBtn = document.getElementById('mobile-menu');
   const navLinks = document.getElementById('nav-links');
-  mobileBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  }
 </script>
 
 <script type="module">
-  import { db, collection, getDocs, query, where, limit, orderBy } from './firebase-config.js';
+  import { db, collection, getDocs, query, where, limit, orderBy, auth, onAuthStateChanged } from './firebase-config.js';
+
+  // ========== AUTH STATE FOR NAVBAR ==========
+  onAuthStateChanged(auth, (user) => {
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    if (user) {
+      const displayName = user.displayName || user.email.split('@')[0];
+      if (userNameSpan) userNameSpan.textContent = displayName;
+      if (userDisplay) userDisplay.style.display = 'block';
+      if (loginDisplay) loginDisplay.style.display = 'none';
+    } else {
+      if (userDisplay) userDisplay.style.display = 'none';
+      if (loginDisplay) loginDisplay.style.display = 'block';
+    }
+  });
 
   // ========== SLIDER ຈາກ Firestore ==========
   let currentSlide = 0;
@@ -241,11 +283,9 @@
     const wrapper = document.getElementById('sliderWrapper');
     const dotsContainer = document.getElementById('sliderDots');
     if (!wrapper) return;
-
     try {
       const q = query(collection(db, 'sliders'), where('status', '==', 'active'));
       const snapshot = await getDocs(q);
-      
       if (snapshot.empty) {
         wrapper.innerHTML = `
           <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop');">
@@ -258,12 +298,10 @@
         dotsContainer.innerHTML = '';
         return;
       }
-
       sliders = [];
       snapshot.forEach(doc => {
         sliders.push({ id: doc.id, ...doc.data() });
       });
-
       wrapper.innerHTML = '';
       sliders.forEach(slide => {
         const slideDiv = document.createElement('div');
@@ -279,7 +317,6 @@
         `;
         wrapper.appendChild(slideDiv);
       });
-
       dotsContainer.innerHTML = '';
       sliders.forEach((_, idx) => {
         const dot = document.createElement('div');
@@ -288,10 +325,8 @@
         dot.addEventListener('click', () => goToSlide(idx));
         dotsContainer.appendChild(dot);
       });
-
       goToSlide(0);
       startAutoSlide();
-
     } catch (err) {
       console.error('Error loading sliders:', err);
       wrapper.innerHTML = `<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop');"><div class="slide-content"><h3>B-One Engineering</h3><p>ກະລຸນາກວດສອບການເຊື່ອມຕໍ່ຖານຂໍ້ມູນ</p></div></div>`;
@@ -302,10 +337,8 @@
     const wrapper = document.getElementById('sliderWrapper');
     const dots = document.querySelectorAll('.dot');
     if (!wrapper || sliders.length === 0) return;
-    
     currentSlide = (index + sliders.length) % sliders.length;
     wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-    
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === currentSlide);
     });
@@ -406,7 +439,6 @@
         const date = news.createdAt ? new Date(news.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '';
         const badgeClass = news.category === 'promotion' ? 'promotion' : 'news';
         const badgeText = news.category === 'promotion' ? '🎉 ໂປຣໂມຊັ່ນ' : '📰 ຂ່າວ';
-        
         const card = document.createElement('div');
         card.className = 'news-card';
         card.innerHTML = `
@@ -430,24 +462,6 @@
   loadFeaturedServices();
   loadFeaturedProducts();
   loadNews();
-<script type="module">
-  import { auth, onAuthStateChanged } from './firebase-config.js';
-  
-  onAuthStateChanged(auth, (user) => {
-    const userDisplay = document.getElementById('userDisplay');
-    const loginDisplay = document.getElementById('loginDisplay');
-    const userNameSpan = document.getElementById('userName');
-    
-    if (user) {
-      const displayName = user.displayName || user.email.split('@')[0];
-      if (userNameSpan) userNameSpan.textContent = displayName;
-      if (userDisplay) userDisplay.style.display = 'block';
-      if (loginDisplay) loginDisplay.style.display = 'none';
-    } else {
-      if (userDisplay) userDisplay.style.display = 'none';
-      if (loginDisplay) loginDisplay.style.display = 'block';
-    }
-  });
 </script>
 </body>
 </html>
