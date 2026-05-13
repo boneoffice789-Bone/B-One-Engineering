@@ -2,7 +2,7 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>ລົງທະບຽນ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -30,44 +30,38 @@
       border-radius: 32px;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
       overflow: hidden;
-      animation: fadeInUp 0.5s ease;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      transition: all 0.3s ease;
     }
 
     .auth-header {
       background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
-      padding: 40px 30px;
+      padding: 35px 25px;
       text-align: center;
       color: white;
     }
 
+    .auth-header i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
     .auth-header h2 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 700;
       margin-bottom: 8px;
     }
 
     .auth-header p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       opacity: 0.9;
     }
 
     .auth-body {
-      padding: 40px 30px;
+      padding: 35px 25px;
     }
 
     .form-group {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .form-group label {
@@ -93,6 +87,7 @@
       font-size: 0.95rem;
       transition: all 0.3s ease;
       outline: none;
+      background: #fefefe;
     }
 
     .form-group input:focus {
@@ -103,6 +98,7 @@
 
     .form-group input::placeholder {
       color: #a0aec0;
+      font-size: 0.85rem;
     }
 
     .btn {
@@ -117,6 +113,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       margin-top: 10px;
+      font-family: inherit;
     }
 
     .btn:hover {
@@ -136,20 +133,26 @@
       margin-bottom: 20px;
       font-size: 0.85rem;
       display: none;
+      align-items: center;
+      gap: 10px;
     }
 
     .message.success {
       background: #d4edda;
       color: #155724;
       border-left: 4px solid #28a745;
-      display: block;
+      display: flex;
     }
 
     .message.error {
       background: #f8d7da;
       color: #721c24;
       border-left: 4px solid #dc3545;
-      display: block;
+      display: flex;
+    }
+
+    .message i {
+      font-size: 1.1rem;
     }
 
     .links {
@@ -164,11 +167,15 @@
       text-decoration: none;
       font-size: 0.85rem;
       font-weight: 600;
-      transition: color 0.2s;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .links a:hover {
       text-decoration: underline;
+      color: #8b0000;
     }
 
     .password-requirements {
@@ -177,36 +184,83 @@
       margin-top: 8px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .password-requirements i {
-      font-size: 0.6rem;
-    }
-
-    .password-requirements .valid {
-      color: #28a745;
+      font-size: 0.65rem;
+      color: #b91c1c;
     }
 
     .footer {
       background: #f9fafb;
-      padding: 15px 30px;
+      padding: 15px 25px;
       text-align: center;
       font-size: 0.7rem;
       color: #6b7280;
     }
 
+    /* Responsive for Mobile */
     @media (max-width: 480px) {
-      .auth-header { padding: 30px 20px; }
-      .auth-header h2 { font-size: 1.5rem; }
-      .auth-body { padding: 30px 20px; }
+      body {
+        padding: 10px;
+      }
+      
+      .auth-container {
+        border-radius: 24px;
+      }
+      
+      .auth-header {
+        padding: 25px 20px;
+      }
+      
+      .auth-header h2 {
+        font-size: 1.4rem;
+      }
+      
+      .auth-header p {
+        font-size: 0.75rem;
+      }
+      
+      .auth-body {
+        padding: 25px 20px;
+      }
+      
+      .form-group input {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+      }
+      
+      .btn {
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      
+      .form-group label {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* For very small devices */
+    @media (max-width: 380px) {
+      .auth-header h2 {
+        font-size: 1.2rem;
+      }
+      
+      .auth-body {
+        padding: 20px 15px;
+      }
+      
+      .form-group {
+        margin-bottom: 15px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="auth-container">
     <div class="auth-header">
-      <i class="fas fa-user-plus" style="font-size: 2.5rem; margin-bottom: 10px;"></i>
+      <i class="fas fa-user-plus"></i>
       <h2>ສ້າງບັນຊີ</h2>
       <p>ລົງທະບຽນເພື່ອເຂົ້າໃຊ້ບໍລິການ</p>
     </div>
@@ -217,17 +271,17 @@
       <form id="registerForm">
         <div class="form-group">
           <label><i class="fas fa-user"></i> ຊື່ເຕັມ</label>
-          <input type="text" id="name" placeholder="ຕົວຢ່າງ: ສົມສັກ ແກ້ວສຸວັນ" required>
+          <input type="text" id="name" placeholder="ສົມສັກ ແກ້ວສຸວັນ" required>
         </div>
 
         <div class="form-group">
           <label><i class="fas fa-phone"></i> ເບີໂທລະສັບ</label>
-          <input type="tel" id="phone" placeholder="ຕົວຢ່າງ: 020 12345678" required>
+          <input type="tel" id="phone" placeholder="020 12345678" required>
         </div>
 
         <div class="form-group">
           <label><i class="fas fa-envelope"></i> ອີເມວ</label>
-          <input type="email" id="email" placeholder="ຕົວຢ່າງ: name@example.com" required>
+          <input type="email" id="email" placeholder="name@example.com" required>
         </div>
 
         <div class="form-group">
@@ -264,11 +318,10 @@
     const messageBox = document.getElementById('messageBox');
 
     function showMessage(msg, type) {
-      messageBox.textContent = msg;
+      messageBox.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${msg}`;
       messageBox.className = `message ${type}`;
       setTimeout(() => {
         messageBox.style.display = 'none';
-        messageBox.className = 'message';
       }, 5000);
     }
 
@@ -306,7 +359,7 @@
           createdAt: serverTimestamp()
         });
         
-        showMessage('ລົງທະບຽນສຳເລັດ! ກຳລັງພາທ່ານໄປຍັງໜ້າບັນຊີ...', 'success');
+        showMessage('ລົງທະບຽນສຳເລັດ! ກຳລັງພາທ່ານໄປໜ້າບັນຊີ...', 'success');
         
         setTimeout(() => {
           window.location.href = 'profile.html';
