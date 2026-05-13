@@ -3,102 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>B-One Engineering | ຈຳໜ່າຍສິນຄ້າ</title>
+  <title>ຈຳໜ່າຍສິນຄ້າ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ສະໄຕລ໌ເພີ່ມເຕີມສຳລັບໜ້າສິນຄ້າ */
     .cart-icon-wrapper { position: relative; }
-    .cart-count { position: absolute; top: -10px; right: -12px; background: #ffd700; color: #b30000; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-    .product-card {
-      background: var(--bg-white);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      transition: var(--transition);
-      border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-    .product-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(185,28,28,0.2);
-      box-shadow: var(--shadow-hover);
-    }
-    .product-img {
-      width: 100%;
-      height: 220px;
-      overflow: hidden;
-    }
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .product-card:hover .product-img img {
-      transform: scale(1.05);
-    }
-    .product-info {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .product-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 5px;
-      word-break: break-word;
-    }
-    .product-category {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-bottom: 10px;
-    }
-    .product-price {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin: 10px 0;
-    }
-    .btn-add-to-cart {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      margin-top: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-add-to-cart:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(185,28,28,0.3);
-    }
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #28a745;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      z-index: 9999;
-      display: none;
-      font-weight: bold;
-    }
+    .cart-count { position: absolute; top: -8px; right: -12px; background: #ffd700; color: #b30000; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .product-card .btn-add-to-cart { background: #b91c1c; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: pointer; transition: 0.3s; }
+    .product-card .btn-add-to-cart:hover { background: #8b1515; transform: translateY(-2px); }
+    .notification { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 12px 20px; border-radius: 8px; z-index: 1000; display: none; }
   </style>
 </head>
 <body>
@@ -116,116 +30,93 @@
       <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
       <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
       <li><a href="cart.html" class="cart-icon-wrapper"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a></li>
+      <li id="auth-section">
+        <div id="userDisplay" style="display: none;"><a href="profile.html"><i class="fas fa-user-circle"></i><span id="userName" class="lao"></span></a></div>
+        <div id="loginDisplay"><a href="login.html"><i class="fas fa-sign-in-alt"></i><span class="lao">ເຂົ້າສູ່ລະບົບ</span><span class="eng">LOGIN</span></a></div>
+      </li>
     </ul>
   </div>
 </header>
 
-<div class="notification" id="notification"></div>
-
 <main>
-  <section id="products" style="background: #fefaf8; padding: 60px 0;">
+  <section style="background: #fefaf8; padding: 60px 0;">
     <div class="container">
       <h2 class="section-title">ຈຳໜ່າຍສິນຄ້າ <span style="font-size:1.4rem;">| PRODUCTS</span></h2>
-      <p class="section-sub">ນຳເຂົ້າ ແລະ ຈຳໜ່າຍສິນຄ້າທີ່ຫຼາກຫຼາຍ ຕອບໂຈດທຸກຄວາມຕ້ອງການຂອງທ່ານ</p>
-      <div class="services-grid" id="productsGrid">
-        <div style="text-align:center; width:100%;">ກຳລັງໂຫຼດສິນຄ້າ...</div>
-      </div>
+      <p class="section-sub">ນຳເຂົ້າ ແລະ ຈຳໜ່າຍສິນຄ້າທີ່ຫຼາກຫຼາຍ ຕອບໂຈດທຸກຄວາມຕ້ອງການ</p>
+      <div class="services-grid" id="productsGrid"></div>
     </div>
   </section>
 </main>
 
-<!-- ========== FOOTER ຄົບຖ້ວນ ========== -->
 <footer>
-  <div class="container">
-    <p>© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
-    <p style="margin-top: 10px;"><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899 | info@b-one-engineering.com</p>
-  </div>
+  <div class="container"><p>© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ</p></div>
 </footer>
-
-<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div id="notification" class="notification"></div>
 
 <script>
   const mobileBtn = document.getElementById('mobile-menu');
-  const navLinks = document.getElementById('nav-links');
-  mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-
+  mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
   // Cart helpers
   function getCart() { return JSON.parse(localStorage.getItem('b_one_cart') || '[]'); }
   function saveCart(cart) { localStorage.setItem('b_one_cart', JSON.stringify(cart)); updateCartCount(); }
-  function updateCartCount() {
-    const cart = getCart();
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById('cartCount').textContent = totalItems;
-  }
-  function showNotification(msg) {
-    const n = document.getElementById('notification');
-    n.textContent = msg;
-    n.style.display = 'block';
-    setTimeout(() => n.style.display = 'none', 2000);
-  }
-  window.addToCart = (product) => {
-    let cart = getCart();
-    const existing = cart.find(item => item.id === product.id);
-    if (existing) existing.quantity += 1;
-    else cart.push({ ...product, quantity: 1 });
-    saveCart(cart);
-    showNotification('✅ ເພີ່ມ ' + product.name + ' ໃສ່ຕະກອນ');
-  };
+  function updateCartCount() { document.getElementById('cartCount').innerText = getCart().reduce((s,i)=>s+i.quantity,0); }
+  function showNotification(msg) { const n = document.getElementById('notification'); n.innerText = msg; n.style.display = 'block'; setTimeout(()=>n.style.display='none',2000); }
   updateCartCount();
 </script>
 
 <script type="module">
-  import { db, collection, getDocs, query, where } from './firebase-config.js';
+  import { db, collection, getDocs, query, where, auth, onAuthStateChanged } from './firebase-config.js';
+
+  onAuthStateChanged(auth, (user) => {
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    if (user) {
+      userNameSpan.textContent = user.displayName || user.email.split('@')[0];
+      userDisplay.style.display = 'block';
+      loginDisplay.style.display = 'none';
+    } else {
+      userDisplay.style.display = 'none';
+      loginDisplay.style.display = 'block';
+    }
+  });
 
   async function loadProducts() {
     const grid = document.getElementById('productsGrid');
-    if (!grid) return;
-    grid.innerHTML = '<div style="text-align:center; width:100%;">ກຳລັງໂຫຼດສິນຄ້າ...</div>';
+    grid.innerHTML = '<div style="text-align:center;">ກຳລັງໂຫຼດ...</div>';
     try {
       const q = query(collection(db, 'products'), where('status', '==', 'active'));
-      const snapshot = await getDocs(q);
-      if (snapshot.empty) {
-        grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີສິນຄ້າ, ກະລຸນາກັບມາໃໝ່.</div>';
-        return;
-      }
+      const snap = await getDocs(q);
+      if (snap.empty) { grid.innerHTML = '<div>ຍັງບໍ່ມີສິນຄ້າ</div>'; return; }
       grid.innerHTML = '';
-      snapshot.forEach(doc => {
+      snap.forEach(doc => {
         const p = doc.data();
-        const product = {
-          id: doc.id,
-          name: p.name,
-          price: p.price,
-          image: p.image || 'https://via.placeholder.com/300x220?text=No+Image',
-          category: p.category || 'ທົ່ວໄປ'
-        };
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-          <div class="product-img">
-            <img src="${product.image}" alt="${product.name}" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">${product.name}</h3>
-            <p class="product-category">${product.category}</p>
-            <p class="product-price">₭${product.price.toLocaleString()}</p>
-            <button class="btn-add-to-cart" data-id="${product.id}">
-              <i class="fas fa-cart-plus"></i> ໃສ່ຕະກອນ
-            </button>
+        const product = { id: doc.id, name: p.name, price: p.price, image: p.image || 'https://via.placeholder.com/300x200', category: p.category || 'ທົ່ວໄປ' };
+        grid.innerHTML += `
+          <div class="product-card" style="background:white; border-radius:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <div style="height:200px; overflow:hidden;"><img src="${product.image}" style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:20px;">
+              <h3 style="font-size:1.2rem;">${product.name}</h3>
+              <p style="color:#6c757d;">${product.category}</p>
+              <p style="color:#b91c1c; font-weight:700; font-size:1.2rem;">₭${product.price.toLocaleString()}</p>
+              <button class="btn-add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image}"><i class="fas fa-cart-plus"></i> ໃສ່ຕະກອນ</button>
+            </div>
           </div>
         `;
-        const btn = card.querySelector('.btn-add-to-cart');
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          addToCart(product);
-        });
-        grid.appendChild(card);
       });
-    } catch (err) {
-      console.error(err);
-      grid.innerHTML = '<div style="text-align:center;">ເກີດຂໍ້ຜິດພາດ, ກະລຸນາລອງໃໝ່.</div>';
-    }
+      document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const product = { id: btn.dataset.id, name: btn.dataset.name, price: parseInt(btn.dataset.price), image: btn.dataset.image };
+          let cart = getCart();
+          const existing = cart.find(item => item.id === product.id);
+          if (existing) existing.quantity++;
+          else cart.push({ ...product, quantity: 1 });
+          saveCart(cart);
+          showNotification(`ເພີ່ມ ${product.name} ໃສ່ຕະກອນ`);
+        });
+      });
+    } catch(e) { console.error(e); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
   }
   loadProducts();
 </script>
