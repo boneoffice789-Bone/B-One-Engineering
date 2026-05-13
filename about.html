@@ -89,14 +89,31 @@
       <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
-      <li><a href="about.html" class="active"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
-      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
-      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
-      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
-      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
-      <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
-    </ul>
+  <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+  <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+  <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+  <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+  <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+  <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+  <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+  
+  <!-- Auth section -->
+  <li id="auth-section">
+    <div id="userDisplay" style="display: none;">
+      <a href="profile.html">
+        <i class="fas fa-user-circle"></i>
+        <span id="userName" class="lao"></span>
+      </a>
+    </div>
+    <div id="loginDisplay">
+      <a href="login.html">
+        <i class="fas fa-sign-in-alt"></i>
+        <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
+        <span class="eng">LOGIN</span>
+      </a>
+    </div>
+  </li>
+</ul>
   </div>
 </header>
 
@@ -288,6 +305,25 @@
   const navLinks = document.getElementById('nav-links');
   mobileBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
+  });
+</script>
+  <script type="module">
+  import { auth, onAuthStateChanged } from './firebase-config.js';
+  
+  onAuthStateChanged(auth, (user) => {
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    
+    if (user) {
+      const displayName = user.displayName || user.email.split('@')[0];
+      if (userNameSpan) userNameSpan.textContent = displayName;
+      if (userDisplay) userDisplay.style.display = 'block';
+      if (loginDisplay) loginDisplay.style.display = 'none';
+    } else {
+      if (userDisplay) userDisplay.style.display = 'none';
+      if (loginDisplay) loginDisplay.style.display = 'block';
+    }
   });
 </script>
 </body>
