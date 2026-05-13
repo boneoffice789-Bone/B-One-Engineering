@@ -97,8 +97,8 @@
 
 <!-- ສະຄຣິບສຳລັບຟອມຕິດຕໍ່, Firebase ແລະ Discord -->
 <script type="module">
-  // ນຳເຂົ້າ Firebase
-  import { db, collection, addDoc, serverTimestamp } from './firebase-config.js';
+  // ນຳເຂົ້າ Firebase (ເພີ່ມ auth)
+  import { auth, db, collection, addDoc, serverTimestamp } from './firebase-config.js';
 
   // ຕັ້ງຄ່າ Discord Webhook URL
   const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1502603905455100065/VRnI9yjjf-VWcIJnSVOqGquAhn7hOLqWCPHpWuFfCQEBDImACDRBzc93hn1msc-fINX8'; 
@@ -115,7 +115,6 @@
       alertBox.style.background = '#f8d7da';
       alertBox.style.color = '#721c24';
     }
-    // ຊ່ອນຂໍ້ຄວາມຫຼັງຈາກ 5 ວິນາທີ
     setTimeout(() => {
       alertBox.style.display = 'none';
     }, 5000);
@@ -131,18 +130,28 @@
                `💬 **ຂໍ້ຄວາມ:** ${message}\n` +
                `⏰ **ເວລາ:** ${new Date().toLocaleString('lo-LA')}`
     };
-
     try {
       await fetch(DISCORD_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      console.log('Discord notification sent successfully');
     } catch (error) {
       console.error('Discord notification failed:', error);
-      // ຈະບໍ່ສະແດງຂໍ້ຜິດພາດນີ້ໃຫ້ຜູ້ໃຊ້ເຫັນ, ເພາະວ່າຂໍ້ມູນໄດ້ຖືກບັນທຶກລົງ Firebase ແລ້ວ
     }
+  }
+
+  // ຟັງຊັນກວດສອບສະຖານະການເຂົ້າສູ່ລະບົບ
+  function checkAuthAndRedirect() {
+    const user = auth.currentUser;
+    if (!user) {
+      showAlert('❌ ກະລຸນາເຂົ້າສູ່ລະບົບ ຫຼື ສະໝັກສະມາຊິກກ່ອນສົ່ງຂໍ້ຄວາມ', 'error');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 2000);
+      return false;
+    }
+    return true;
   }
 
   // ຈັດການການສົ່ງຟອມ
@@ -151,7 +160,10 @@
   const btnText = document.getElementById('btnText');
 
   form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // ຢຸດການສົ່ງຟອມແບບທຳມະດາ
+    event.preventDefault();
+
+    // ກວດສອບການເຂົ້າສູ່ລະບົບ
+    if (!checkAuthAndRedirect()) return;
 
     // ອ່ານຄ່າຈາກຟອມ
     const fullName = document.getElementById('fullName').value.trim();
@@ -165,12 +177,10 @@
       return;
     }
 
-    // ປ່ຽນປຸ່ມເປັນສະຖານະ "ກຳລັງສົ່ງ"
     submitBtn.disabled = true;
     btnText.textContent = 'ກຳລັງສົ່ງ... | SENDING...';
 
     try {
-      // 1. ບັນທຶກລົງ Firestore
       await addDoc(collection(db, 'contact_messages'), {
         fullName: fullName,
         phone: phone,
@@ -181,10 +191,7 @@
         createdAt: serverTimestamp()
       });
 
-      // 2. ສົ່ງແຈ້ງເຕືອນໄປ Discord (ບໍ່ຕ້ອງລໍຖ້າໃຫ້ສຳເລັດ)
       sendDiscordNotification(fullName, phone, email, message);
-
-      // 3. ສະແດງຜົນສຳເລັດ ແລະ ລ້າງຟອມ
       showAlert('✅ ສົ່ງສຳເລັດ! ພວກເຮົາຈະຕິດຕໍ່ກັບໄວໆນີ້.', 'success');
       form.reset();
 
@@ -192,7 +199,6 @@
       console.error('Form submission error:', error);
       showAlert('❌ ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃໝ່ພາຍຫຼັງ.', 'error');
     } finally {
-      // ປ່ຽນປຸ່ມກັບຄືນສູ່ສະຖານະປົກກະຕິ
       submitBtn.disabled = false;
       btnText.textContent = 'ສົ່ງຂໍ້ມູນ | SEND';
     }
