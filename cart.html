@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ຕະກອນສິນຄ້າ | B-One Engineering</title>
+  <title>ກະຕ່າສິນຄ້າ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -116,4 +116,92 @@
     @media (max-width: 768px) {
       .cart-item { flex-wrap: wrap; }
       .cart-item img { width: 80px; height: 80px; }
-      .item-total { text-align: left; width: 100%; margin-top: 10
+      .item-total { text-align: left; width: 100%; margin-top: 10px; }
+      .action-buttons { flex-direction: column; }
+      .btn-outline { margin-right: 0; margin-bottom: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <i class="fas fa-shopping-cart"></i>
+      <h2>ຕະກອນສິນຄ້າ</h2>
+    </div>
+    <div class="page-body">
+      <div id="cartItems"></div>
+      <div id="cartSummary" class="cart-summary" style="display: none;">
+        <h3>ລວມທັງໝົດ</h3>
+        <div class="total">₭<span id="totalPrice">0</span></div>
+        <div class="action-buttons">
+          <a href="products.html" class="btn btn-outline"><i class="fas fa-plus"></i> ເພີ່ມສິນຄ້າເພີ່ມ</a>
+          <a href="checkout.html" class="btn" id="checkoutBtn"><i class="fas fa-credit-card"></i> ດຳເນີນການສັ່ງຊື້</a>
+        </div>
+      </div>
+      <a href="products.html" class="back-link" style="display: block; text-align: center; margin-top: 20px; color: #6c757d; text-decoration: none;"><i class="fas fa-arrow-left"></i> ເລືອກສິນຄ້າຕໍ່</a>
+    </div>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
+    const container = document.getElementById('cartItems');
+    const summaryDiv = document.getElementById('cartSummary');
+    let total = 0;
+
+    function renderCart() {
+      container.innerHTML = '';
+      total = 0;
+      
+      if (cart.length === 0) {
+        container.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>ກະຕ່າຫວ່າງເປົ່າ</p><a href="products.html" class="btn" style="display: inline-block; margin-top: 15px;">ເລີ່ມເລືອກຊື້ສິນຄ້າ</a></div>';
+        summaryDiv.style.display = 'none';
+        return;
+      }
+      
+      summaryDiv.style.display = 'block';
+      
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image || 'https://via.placeholder.com/100'}" alt="${item.name}" loading="lazy">
+          <div class="details">
+            <h4>${item.name}</h4>
+            <div class="category">${item.category || 'ສິນຄ້າທົ່ວໄປ'}</div>
+            <div class="price">₭${item.price.toLocaleString()}</div>
+          </div>
+          <input type="number" class="qty" value="${item.quantity}" min="1" data-index="${index}">
+          <div class="item-total">₭${(item.price * item.quantity).toLocaleString()}</div>
+          <button class="btn-remove" data-index="${index}"><i class="fas fa-trash-alt"></i></button>
+        `;
+        container.appendChild(div);
+      });
+      document.getElementById('totalPrice').textContent = total.toLocaleString();
+    }
+
+    renderCart();
+
+    container.addEventListener('click', (e) => {
+      const removeBtn = e.target.closest('.btn-remove');
+      if (removeBtn) {
+        const index = removeBtn.dataset.index;
+        cart.splice(index, 1);
+        localStorage.setItem('b_one_cart', JSON.stringify(cart));
+        renderCart();
+      }
+    });
+
+    container.addEventListener('change', (e) => {
+      if (e.target.classList.contains('qty')) {
+        const index = e.target.dataset.index;
+        let newQty = parseInt(e.target.value);
+        if (isNaN(newQty) || newQty < 1) newQty = 1;
+        cart[index].quantity = newQty;
+        localStorage.setItem('b_one_cart', JSON.stringify(cart));
+        renderCart();
+      }
+    });
+  </script>
+</body>
+</html>
