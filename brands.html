@@ -3,10 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ບໍລິການ | B-One Engineering</title>
+  <title>ແບຣນຕົວແທນ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Enhanced brand card styles */
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .brand-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .brand-card:hover {
+      transform: translateY(-4px);
+      border-color: #b91c1c;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .brand-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      overflow: hidden;
+      border: 2px solid #f0f0f0;
+      transition: all 0.3s;
+    }
+    .brand-card:hover .brand-logo {
+      border-color: #b91c1c;
+      background: #fff5f5;
+    }
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .brand-logo i {
+      font-size: 2.5rem;
+      color: #b91c1c;
+    }
+    .brand-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #1a1a2e;
+    }
+    .brand-category {
+      font-size: 0.75rem;
+      color: #6c757d;
+      background: #f8f9fa;
+      padding: 4px 12px;
+      border-radius: 30px;
+      display: inline-block;
+    }
+    @media (max-width: 768px) {
+      .brands-grid { gap: 15px; }
+      .brand-logo { width: 70px; height: 70px; }
+      .brand-name { font-size: 0.9rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -17,9 +88,9 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
       <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
-      <li><a href="services.html" class="active"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
       <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
-      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="brands.html" class="active"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
       <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
       <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
       <li id="auth-section">
@@ -31,11 +102,16 @@
 </header>
 
 <main>
-  <section style="background: #fefaf8; padding: 80px 0;">
+  <section style="background: linear-gradient(135deg, #fef2f2 0%, #fff7f5 50%); padding: 60px 0 40px;">
     <div class="container">
-      <h2 class="section-title">ບໍລິການຂອງພວກເຮົາ <span style="font-size:1.4rem;">| OUR SERVICES</span></h2>
-      <p class="section-sub">ຄົບຄັນທຸກງານດ້ານວິສະວະກຳ ຕັ້ງແຕ່ການອອກແບບ, ຈຳໜ່າຍ, ຕິດຕັ້ງ ແລະ ບຳລຸງຮັກສາ</p>
-      <div class="services-grid" id="servicesGrid"><div class="loading">ກຳລັງໂຫຼດ...</div></div>
+      <h2 class="section-title">ແບຣນທີ່ເປັນຕົວແທນຈຳໜ່າຍ <span style="font-size:1.4rem;">| OUR BRANDS</span></h2>
+      <p class="section-sub">ພວກເຮົາເປັນຕົວແທນຈຳໜ່າຍຢ່າງເປັນທາງການຈາກຫຼາຍແບຣນຊັ້ນນຳທົ່ວໂລກ</p>
+      <div style="text-align:center;"><span style="display:inline-flex; align-items:center; gap:8px; background:#b91c1c; color:white; padding:8px 20px; border-radius:30px;"><i class="fas fa-check-circle"></i> ຕົວແທນຈຳໜ່າຍຢ່າງເປັນທາງການ</span></div>
+    </div>
+  </section>
+  <section style="padding: 20px 0 60px;">
+    <div class="container">
+      <div class="brands-grid" id="brandsGrid">ກຳລັງໂຫຼດ...</div>
     </div>
   </section>
 </main>
@@ -50,7 +126,7 @@
   mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
 </script>
 <script type="module">
-  import { db, collection, getDocs, query, where, auth, onAuthStateChanged } from './firebase-config.js';
+  import { db, collection, getDocs, auth, onAuthStateChanged } from './firebase-config.js';
 
   onAuthStateChanged(auth, (user) => {
     const userDisplay = document.getElementById('userDisplay');
@@ -66,31 +142,25 @@
     }
   });
 
-  async function loadServices() {
-    const grid = document.getElementById('servicesGrid');
-    grid.innerHTML = '<div class="loading">ກຳລັງໂຫຼດ...</div>';
+  async function loadBrands() {
+    const grid = document.getElementById('brandsGrid');
+    grid.innerHTML = 'ກຳລັງໂຫຼດ...';
     try {
-      const q = query(collection(db, 'services'), where('status', '==', 'active'));
-      const snapshot = await getDocs(q);
+      const snapshot = await getDocs(collection(db, 'brands'));
       if (snapshot.empty) {
-        grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີຂໍ້ມູນບໍລິການ</div>';
+        grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີແບຣນ</div>';
         return;
       }
       grid.innerHTML = '';
       snapshot.forEach(doc => {
-        const s = doc.data();
-        let iconHtml = '';
-        if (s.imageUrl && s.imageUrl.match(/^https?:\/\//i)) {
-          iconHtml = `<img src="${s.imageUrl}" style="width:60px; height:60px; object-fit:contain;">`;
-        } else {
-          iconHtml = `<i class="fas ${s.imageUrl || 'fa-cog'}"></i>`;
-        }
+        const b = doc.data();
+        let logoHtml = b.logoUrl ? `<img src="${b.logoUrl}" alt="${b.name}">` : `<i class="fas fa-building"></i>`;
         const card = document.createElement('div');
-        card.className = 'service-card';
+        card.className = 'brand-card';
         card.innerHTML = `
-          <div class="card-icon">${iconHtml}</div>
-          <h3>${s.name}</h3>
-          <p>${s.description ? s.description.substring(0, 120) + '...' : ''}</p>
+          <div class="brand-logo">${logoHtml}</div>
+          <div class="brand-name">${b.name}</div>
+          <span class="brand-category">${b.category || 'ທົ່ວໄປ'}</span>
         `;
         grid.appendChild(card);
       });
@@ -99,7 +169,7 @@
       grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>';
     }
   }
-  loadServices();
+  loadBrands();
 </script>
 </body>
 </html>
