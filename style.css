@@ -1,6 +1,6 @@
 /* =============================================
-   B-One Engineering - COMPLETE FIXED CSS (2025)
-   Fully responsive | Glassmorphism slider buttons | No overflow
+   B-One Engineering - COMPLETE CSS (2026)
+   Fully responsive | Glassmorphism slider | Auth section
    ============================================= */
 
 /* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
@@ -51,7 +51,7 @@ body {
   width: 100%;
 }
 
-/* ---------- HEADER (ບໍ່ລົ້ນຂອບ) ---------- */
+/* ---------- HEADER & NAVBAR (ປັບປຸງສ່ວນ Auth) ---------- */
 header {
   background: rgba(185, 28, 28, 0.96);
   backdrop-filter: blur(12px);
@@ -121,13 +121,14 @@ header {
 
 .nav-links {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   list-style: none;
   background: rgba(0, 0, 0, 0.2);
   padding: 6px 12px;
   border-radius: 48px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 .nav-links li a {
@@ -160,6 +161,36 @@ header {
 .nav-links li a.active {
   background: white;
   color: var(--primary);
+}
+
+/* ========== AUTH SECTION STYLES (ປັບປຸງເພີ່ມ) ========== */
+#auth-section {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+#userDisplay a, #loginDisplay a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 40px;
+  padding: 6px 16px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+#userDisplay a:hover, #loginDisplay a:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+#userName {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ---------- ປຸ່ມທົ່ວໄປ ---------- */
@@ -197,6 +228,7 @@ header {
 .hero {
   background: linear-gradient(125deg, #fff8f3 0%, #ffffff 40%, #fffaf7 100%);
   padding: 80px 0;
+  text-align: center;
 }
 
 .hero-grid {
@@ -208,11 +240,14 @@ header {
 
 .hero-content {
   flex: 1.2;
+  text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .hero-content h1 {
-  font-size: 2.8rem;
-  line-height: 1.2;
+  font-size: 2rem;
+  line-height: 1.3;
   margin: 15px 0;
   font-weight: 800;
   letter-spacing: -0.5px;
@@ -224,6 +259,7 @@ header {
   color: var(--text-medium);
   margin-bottom: 28px;
   word-break: break-word;
+  max-width: 100%;
 }
 
 .hero-badge {
@@ -236,6 +272,14 @@ header {
   border-radius: 60px;
   font-size: 0.8rem;
   font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-content .btn,
+.hero-content .btn-outline {
+  display: inline-flex;
+  margin: 0.5rem 0.5rem;
 }
 
 .hero-image {
@@ -363,7 +407,6 @@ section {
   margin: 20px 0;
   font-weight: 600;
   word-break: break-word;
-  white-space: normal;
 }
 
 .contact-list {
@@ -462,7 +505,7 @@ footer a:hover {
   box-shadow: 0 10px 25px rgba(37,211,102,0.5);
 }
 
-/* ========== SLIDER ສວຍງາມ ພ້ອມປຸ່ມ GLASSMORPHISM ========== */
+/* ========== SLIDER SECTION ========== */
 .slider-section {
   padding: 0;
 }
@@ -507,12 +550,10 @@ footer a:hover {
   max-width: 80%;
   animation: fadeInUp 0.7s ease;
 }
-
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .slide-content h3 {
   font-size: 2rem;
   margin-bottom: 12px;
@@ -524,12 +565,9 @@ footer a:hover {
   margin-bottom: 20px;
   opacity: 0.95;
 }
-
-/* ປຸ່ມພາຍໃນ SLIDER (Glassmorphism: ຂອບຂາວ, ຕົວພິມຂາວ, ໂປ່ງ) */
-.slide-content .btn, 
+.slide-content .btn,
 .slide-content a.btn,
-.slide-content .btn-slider,
-.slide-content button {
+.slide-content .btn-slider {
   display: inline-block !important;
   background: rgba(255,255,255,0.15) !important;
   backdrop-filter: blur(8px);
@@ -542,21 +580,13 @@ footer a:hover {
   text-decoration: none !important;
   transition: all 0.3s ease !important;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-
 .slide-content .btn:hover,
-.slide-content a.btn:hover,
-.slide-content .btn-slider:hover,
-.slide-content button:hover {
+.slide-content a.btn:hover {
   background: white !important;
   color: #b91c1c !important;
   transform: translateY(-2px);
-  border-color: white !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
-
-/* Slider controls */
 .slider-btn {
   position: absolute;
   top: 50%;
@@ -576,15 +606,12 @@ footer a:hover {
   z-index: 3;
   transition: var(--transition);
 }
-
 .slider-btn:hover {
   background: var(--primary);
   transform: translateY(-50%) scale(1.08);
 }
-
 .slider-prev { left: 20px; }
 .slider-next { right: 20px; }
-
 .slider-dots {
   position: absolute;
   bottom: 24px;
@@ -595,7 +622,6 @@ footer a:hover {
   gap: 14px;
   z-index: 3;
 }
-
 .dot {
   width: 10px;
   height: 10px;
@@ -604,7 +630,6 @@ footer a:hover {
   cursor: pointer;
   transition: var(--transition);
 }
-
 .dot.active {
   background: var(--primary);
   transform: scale(1.3);
@@ -663,8 +688,6 @@ footer a:hover {
   line-height: 1.6;
   flex: 1;
   word-break: break-word;
-  display: block !important;
-  overflow: visible !important;
 }
 .news-date {
   padding: 0 20px 15px;
@@ -677,7 +700,7 @@ footer a:hover {
   gap: 6px;
 }
 
-/* ========== RESPONSIVE (ຄອມ, ແທັບ, ມືຖື) ========== */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
   .hero-content h1 { font-size: 2.5rem; }
   .section-title { font-size: 2.2rem; }
@@ -696,8 +719,18 @@ footer a:hover {
   }
   .nav-links.active { display: flex; }
   .nav-links li a .lao, .nav-links li a .eng { white-space: normal; }
-  .hero-content h1 { font-size: 2rem; }
-  .contact-grid { grid-template-columns: 1fr; gap: 35px; }
+  
+  #auth-section {
+    margin-left: 0;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    justify-content: center;
+  }
+  #userDisplay a, #loginDisplay a {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -719,15 +752,16 @@ footer a:hover {
   
   .hero-grid { flex-direction: column; }
   .hero-content h1 { font-size: 1.8rem; }
-  .hero-content p { font-size: 0.95rem; max-width: 100%; }
+  .hero-content p { font-size: 0.95rem; }
   
-  .btn, .btn-outline { padding: 8px 18px !important; font-size: 0.8rem !important; }
-  .hero-content .btn-outline { margin-left: 10px !important; margin-top: 0 !important; }
+  .hero-content .btn-outline { margin-left: 0 !important; margin-top: 10px !important; }
   
   .slide { height: 400px; }
   .slide-content h3 { font-size: 1.5rem; }
   .slide-content .btn, .slide-content a.btn { padding: 5px 16px !important; font-size: 0.75rem !important; }
   .slider-btn { width: 36px; height: 36px; font-size: 1.2rem; }
+  
+  .contact-grid { grid-template-columns: 1fr; gap: 35px; }
 }
 
 @media (max-width: 550px) {
@@ -743,7 +777,6 @@ footer a:hover {
   
   .hero-content h1 { font-size: 1.5rem; }
   .hero-content .btn-outline { margin-left: 0 !important; margin-top: 10px !important; }
-  .hero-content .btn, .hero-content .btn-outline { width: auto; display: inline-block; }
   
   .slide { height: 320px; }
   .slide-content { padding: 18px 24px; max-width: 90%; }
@@ -755,7 +788,7 @@ footer a:hover {
   footer { padding: 30px 15px; font-size: 0.75rem; }
 }
 
-/* ແກ້ໄຂຂໍ້ຄວາມຍາວ ແລະ ການຫໍ່ຕົວ */
+/* ຕົວໜັງສືທີ່ຍາວ ໃຫ້ຫໍ່ອັດຕະໂນມັດ */
 p, li, .service-card p, .portfolio-card p, .about-text p,
 .hero-content p, .section-sub, .ev-badge, .contact-list li,
 .logo h1, .logo p, .section-title, .service-card h3,
@@ -765,7 +798,6 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   hyphens: auto;
 }
 
-/* ຮັບປະກັນປຸ່ມບໍ່ແຕກແຖວຜິດ (ຍົກເວັ້ນມືຖືແຄບຫຼາຍ) */
 .btn, .btn-outline, .slide-content .btn, .slide-content a.btn {
   white-space: nowrap;
 }
@@ -778,125 +810,13 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   }
 }
 
-/* ປິດການໃຊ້ງານເຄື່ອງໝາຍຈ້ຳທີ່ຊ້ອນ (ແກ້ໄຂ bullet point ສອງອັນໃນ about) */
+/* ປ້ອງກັນ bullet point ຊ້ອນ */
 .service-cat ul li:before {
   content: none !important;
   display: none !important;
 }
-
-/* ປັບຂໍ້ຄວາມຢູ່ໃນ about page service categories */
 .service-cat ul li {
   list-style: none;
   margin-bottom: 8px;
   padding-left: 0;
-}
-/* EMERGENCY OVERRIDE - ບັງຄັບປຸ່ມ SLIDER ໃຫ້ຖືກຕ້ອງ */
-.slider-section .slide-content .btn,
-.slider-section .slide-content a,
-.slide-content .btn,
-.slide-content a {
-  background: rgba(255,255,255,0.15) !important;
-  border: 2px solid rgba(255,255,255,0.8) !important;
-  color: white !important;
-  padding: 6px 22px !important;
-  font-size: 0.85rem !important;
-  border-radius: 60px !important;
-  text-transform: none !important;
-  box-shadow: none !important;
-  backdrop-filter: blur(8px);
-}
-.slider-section .slide-content .btn:hover,
-.slide-content .btn:hover,
-.slide-content a:hover {
-  background: white !important;
-  color: #b91c1c !important;
-  border-color: white !important;
-}
-/* ========== ປັບສ່ວນ HERO ໃຫ້ຢູ່ກາງ ແລະ ຕົວພິມນ້ອຍລົງ (ທຸກໜ້າ) ========== */
-.hero {
-  text-align: center;
-}
-
-.hero-content {
-  text-align: center;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-/* ເຮັດໃຫ້ປຸ່ມຄູ່ຢູ່ກາງ ແລະ ສາມາດຫໍ່ໄດ້ */
-.hero-content .btn,
-.hero-content .btn-outline {
-  display: inline-flex;
-  margin: 0.5rem 0.5rem;
-}
-
-/* ປັບຂະໜາດຕົວພິມຂອງຫົວຂໍ້ (ລາຍການ - ຕິດຕັ້ງ, ຈຳໜ່າຍ, ບໍລິການ) ໃຫ້ນ້ອຍລົງ */
-.hero-content h1 {
-  font-size: 2rem;
-  line-height: 1.3;
-}
-
-/* ສຳລັບແທັບເລັດ ແລະ ມືຖື */
-@media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 1.6rem;
-  }
-  .hero-content .btn,
-  .hero-content .btn-outline {
-    margin: 0.5rem 0.3rem;
-  }
-}
-
-@media (max-width: 550px) {
-  .hero-content h1 {
-    font-size: 1.3rem;
-  }
-}
-
-/* ໃຫ້ຂໍ້ຄວາມ ແລະ badge ຢູ່ກາງ */
-.hero-badge {
-  display: inline-flex;
-  margin-left: auto;
-  margin-right: auto;
-}
-.hero-content p {
-  margin-left: auto;
-  margin-right: auto;
-}
-/* Navbar auth section */
-#auth-section {
-  border-left: 1px solid rgba(255,255,255,0.3);
-  margin-left: 10px;
-  padding-left: 10px;
-}
-
-#userDisplay a, #loginDisplay a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 40px;
-  transition: all 0.3s ease;
-}
-
-#userDisplay a:hover, #loginDisplay a:hover {
-  background: rgba(255,255,255,0.2);
-}
-
-#userName {
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  #auth-section {
-    border-left: none;
-    margin-left: 0;
-    padding-left: 0;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.3);
-  }
 }
