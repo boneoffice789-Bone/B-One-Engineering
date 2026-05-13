@@ -2,33 +2,148 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
-  <title>ບັນຊີຂອງຂ້ອຍ | B-One</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>ບັນຊີຂອງຂ້ອຍ | B-One Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    .container { max-width: 600px; margin: 50px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-    h2 { color: #b30000; }
-    .info { margin: 20px 0; }
-    .info p { margin: 10px 0; }
-    .btn { padding: 10px 20px; background: #b30000; color: white; border: none; border-radius: 8px; cursor: pointer; }
-    .btn-outline { background: #fff; color: #b30000; border: 1px solid #b30000; margin-left: 10px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans Lao', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+    .profile-header {
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      padding: 35px 25px;
+      text-align: center;
+      color: white;
+    }
+    .profile-header i { font-size: 3rem; margin-bottom: 12px; }
+    .profile-header h2 { font-size: 1.6rem; font-weight: 700; }
+    .profile-body { padding: 35px 25px; }
+    .info-card {
+      background: #f8f9fa;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-item i {
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+    .info-item .label { font-weight: 600; color: #555; width: 80px; }
+    .info-item .value { color: #333; font-weight: 500; }
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      color: white;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(185, 28, 28, 0.3); }
+    .btn-outline {
+      background: white;
+      color: #b91c1c;
+      border: 2px solid #b91c1c;
+    }
+    .btn-outline:hover { background: #b91c1c; color: white; transform: translateY(-2px); }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #6c757d;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .back-link:hover { color: #b91c1c; }
+    @media (max-width: 480px) {
+      .profile-header { padding: 25px 20px; }
+      .profile-body { padding: 25px 20px; }
+      .info-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .info-item i { width: 30px; height: 30px; font-size: 0.8rem; }
+      .btn-group { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>ບັນຊີຂອງຂ້ອຍ</h2>
-    <div id="userInfo" class="info">
-      <p><strong>ຊື່:</strong> <span id="displayName">-</span></p>
-      <p><strong>ອີເມວ:</strong> <span id="userEmail">-</span></p>
-      <p><strong>ເບີໂທ:</strong> <span id="userPhone">-</span></p>
+    <div class="profile-header">
+      <i class="fas fa-user-circle"></i>
+      <h2>ບັນຊີຂອງຂ້ອຍ</h2>
     </div>
-    <a href="orders.html" class="btn">ປະຫວັດຄຳສັ່ງຊື້</a>
-    <button id="logoutBtn" class="btn btn-outline">ອອກຈາກລະບົບ</button>
-    <a href="index.html" style="display:block; margin-top: 20px;">← ກັບໜ້າຫຼັກ</a>
+    <div class="profile-body">
+      <div class="info-card">
+        <div class="info-item">
+          <i class="fas fa-user"></i>
+          <span class="label">ຊື່:</span>
+          <span class="value" id="displayName">-</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <span class="label">ອີເມວ:</span>
+          <span class="value" id="userEmail">-</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-phone"></i>
+          <span class="label">ເບີໂທ:</span>
+          <span class="value" id="userPhone">-</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <a href="orders.html" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ປະຫວັດຄຳສັ່ງຊື້</a>
+        <button id="logoutBtn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> ອອກຈາກລະບົບ</button>
+      </div>
+      <a href="index.html" class="back-link"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
+    </div>
   </div>
 
   <script type="module">
-    import { auth, db, doc, getDoc, onAuthStateChanged, signOut } from './firebase-config.js';
+    import { auth, db, doc, getDoc, signOut } from './firebase-config.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
     onAuthStateChanged(auth, async (user) => {
       if (!user) { window.location.href = 'login.html'; return; }
