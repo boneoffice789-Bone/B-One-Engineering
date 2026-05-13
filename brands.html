@@ -67,26 +67,23 @@
 </script>
 
 <script type="module">
-  import { db, collection, getDocs } from './firebase-config.js';
-  async function loadBrands() {
-    const grid = document.getElementById('brandsGrid');
-    grid.innerHTML = 'ກຳລັງໂຫຼດ...';
-    try {
-      const snapshot = await getDocs(collection(db, 'brands'));
-      if (snapshot.empty) { grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີແບຣນ</div>'; return; }
-      grid.innerHTML = '';
-      snapshot.forEach(doc => {
-        const b = doc.data();
-        let logoHtml = '';
-        if (b.logoUrl) logoHtml = `<img src="${b.logoUrl}" alt="${b.name}">`;
-        else logoHtml = `<i class="fas fa-building"></i>`;
-        const card = document.createElement('div'); card.className = 'brand-card';
-        card.innerHTML = `<div class="brand-logo">${logoHtml}</div><div class="brand-name">${b.name}</div><span class="brand-category">${b.category || 'ທົ່ວໄປ'}</span>`;
-        grid.appendChild(card);
-      });
-    } catch (err) { console.error(err); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
-  }
-  loadBrands();
+  import { auth, onAuthStateChanged } from './firebase-config.js';
+  
+  onAuthStateChanged(auth, (user) => {
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    
+    if (user) {
+      const displayName = user.displayName || user.email.split('@')[0];
+      if (userNameSpan) userNameSpan.textContent = displayName;
+      if (userDisplay) userDisplay.style.display = 'block';
+      if (loginDisplay) loginDisplay.style.display = 'none';
+    } else {
+      if (userDisplay) userDisplay.style.display = 'none';
+      if (loginDisplay) loginDisplay.style.display = 'block';
+    }
+  });
 </script>
 </body>
 </html>
