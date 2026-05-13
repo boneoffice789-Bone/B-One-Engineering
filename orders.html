@@ -19,30 +19,74 @@
   </div>
 
   <script type="module">
-    import { auth, db, collection, query, where, orderBy, getDocs, onAuthStateChanged } from './firebase-config.js';
+  import { auth, db, collection, query, where, orderBy, getDocs } from './firebase-config.js';
+  import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.href = 'login.html'; return; }
-      const q = query(collection(db, 'orders'), where('userId', '==', user.uid), orderBy('createdAt', 'desc'));
-      const snapshot = await getDocs(q);
-      const list = document.getElementById('orderList');
-      list.innerHTML = '';
-      if (snapshot.empty) {
-        list.innerHTML = '<p>ຍັງບໍ່ມີຄຳສັ່ງຊື້</p>';
-        return;
-      }
-      snapshot.forEach(doc => {
-        const order = doc.data();
-        const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '';
-        list.innerHTML += `
-          <div class="order">
-            <h4>ເລກຄຳສັ່ງ: ${doc.id.slice(0,8)}</h4>
-            <p>ວັນທີ: ${date} | ລວມ: ₭${order.totalAmount.toLocaleString()}</p>
-            <p>ສະຖານະ: ${order.orderStatus}</p>
+  function getStatusClass(status) {
+    const statusMap = {
+      'pending': 'status-pending',
+      'confirmed': 'status-confirmed',
+      'processing': 'status-processing',
+      'shipped': 'status-shipped',
+      'delivered': 'status-delivered',
+      'cancelled': 'status-cancelled'
+    };
+    return statusMap[status] || 'status-pending';
+  }
+
+  function getStatusText(status) {
+    const statusMap = {
+      'pending': 'ກຳລັງດຳເນີນ',
+      'confirmed': 'ຢືນຢັນແລ້ວ',
+      'processing': 'ກຳລັງກະກຽມ',
+      'shipped': 'ຈັດສົ່ງແລ້ວ',
+      'delivered': 'ສຳເລັດ',
+      'cancelled': 'ຍົກເລີກ'
+    };
+    return statusMap[status] || status;
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    const list = document.getElementById('orderList');
+    
+    // ຖ້າບໍ່ມີຜູ້ໃຊ້ (ອອກລະບົບແລ້ວ) ໃຫ້ກັບໄປຫາໜ້າ login
+    if (!user) {
+      window.location.href = 'login.html';
+      return;
+    }
+    
+    list.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-pulse"></i><p>ກຳລັງໂຫຼດ...</p></div>';
+    
+    const q = query(collection(db, 'orders'), where('userId', '==', user.uid), orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+    
+    if (snapshot.empty) {
+      list.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>ຍັງບໍ່ມີຄຳສັ່ງຊື້</p><a href="products.html" style="color:#b91c1c">ເລີ່ມສັ່ງຊື້ສິນຄ້າ →</a></div>';
+      return;
+    }
+    
+    list.innerHTML = '';
+    snapshot.forEach(doc => {
+      const order = doc.data();
+      const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '';
+      const statusClass = getStatusClass(order.orderStatus);
+      const statusText = getStatusText(order.orderStatus);
+      
+      list.innerHTML += `
+        <div class="order-card">
+          <div class="order-header">
+            <span class="order-id"><i class="fas fa-hashtag"></i> ${doc.id.slice(0,8)}</span>
+            <span class="order-status ${statusClass}">${statusText}</span>
           </div>
-        `;
-      });
+          <div class="order-details">
+            <p><i class="fas fa-calendar-alt"></i> ວັນທີ: ${date}</p>
+            <p><i class="fas fa-money-bill-wave"></i> ລວມທັງໝົດ: ₭${(order.totalAmount || 0).toLocaleString()}</p>
+            <p><i class="fas fa-truck"></i> ທີ່ຢູ່ຈັດສົ່ງ: ${order.shippingAddress || '-'}</p>
+          </div>
+        </div>
+      `;
     });
-  </script>
+  });
+</script>
 </body>
 </html>
