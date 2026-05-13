@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ເຂົ້າສູ່ລະບົບ | B-One Engineering</title>
+  <title>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -12,181 +12,158 @@
       font-family: 'Inter', 'Noto Sans Lao', sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      padding: 40px 20px;
     }
-    .auth-container {
-      max-width: 440px;
-      width: 100%;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
       background: white;
       border-radius: 32px;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
       overflow: hidden;
     }
-    .auth-header {
+    .page-header {
       background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
-      padding: 35px 25px;
+      padding: 30px 25px;
       text-align: center;
       color: white;
     }
-    .auth-header i { font-size: 2.5rem; margin-bottom: 12px; }
-    .auth-header h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
-    .auth-header p { font-size: 0.85rem; opacity: 0.9; }
-    .auth-body { padding: 35px 25px; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #333;
-      font-size: 0.85rem;
-    }
-    .form-group label i { color: #b91c1c; margin-right: 8px; width: 20px; }
-    .form-group input {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      outline: none;
-    }
-    .form-group input:focus {
-      border-color: #b91c1c;
-      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
-      transform: translateY(-1px);
-    }
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
-      color: white;
-      border: none;
-      border-radius: 40px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 10px;
-    }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(185, 28, 28, 0.4); }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .message {
-      padding: 14px 16px;
-      border-radius: 16px;
+    .page-header i { font-size: 2rem; margin-bottom: 10px; }
+    .page-header h2 { font-size: 1.5rem; font-weight: 700; }
+    .page-body { padding: 30px 25px; }
+    .order-card {
+      background: #f8f9fa;
+      border-radius: 20px;
+      padding: 20px;
       margin-bottom: 20px;
-      font-size: 0.85rem;
-      display: none;
+      transition: all 0.3s ease;
+      border: 1px solid #e9ecef;
+    }
+    .order-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
       gap: 10px;
     }
-    .message.error {
-      background: #f8d7da;
-      color: #721c24;
-      border-left: 4px solid #dc3545;
-      display: flex;
+    .order-id {
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
-    .links { text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
-    .links a {
-      color: #b91c1c;
+    .order-status {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-confirmed { background: #cfe2ff; color: #084298; }
+    .status-processing { background: #cff4fc; color: #055160; }
+    .status-shipped { background: #d1e7dd; color: #0f5132; }
+    .status-delivered { background: #d4edda; color: #155724; }
+    .status-cancelled { background: #f8d7da; color: #721c24; }
+    .order-details { color: #555; line-height: 1.6; }
+    .order-details p { margin: 8px 0; }
+    .order-details i { width: 25px; color: #b91c1c; }
+    .empty-state { text-align: center; padding: 40px; color: #6c757d; }
+    .empty-state i { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #6c757d;
       text-decoration: none;
       font-size: 0.85rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
-    .links a:hover { text-decoration: underline; }
-    .footer { background: #f9fafb; padding: 15px 25px; text-align: center; font-size: 0.7rem; color: #6b7280; }
+    .back-link:hover { color: #b91c1c; }
     @media (max-width: 480px) {
-      .auth-header { padding: 25px 20px; }
-      .auth-header h2 { font-size: 1.4rem; }
-      .auth-body { padding: 25px 20px; }
-      .form-group input { padding: 12px 14px; }
-      .btn { padding: 12px; }
+      .page-header { padding: 25px 20px; }
+      .page-body { padding: 25px 20px; }
+      .order-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <div class="auth-container">
-    <div class="auth-header">
-      <i class="fas fa-sign-in-alt"></i>
-      <h2>ຍິນດີຕ້ອນຮັບ</h2>
-      <p>ເຂົ້າສູ່ລະບົບເພື່ອເຂົ້າໃຊ້ບໍລິການ</p>
+  <div class="container">
+    <div class="page-header">
+      <i class="fas fa-shopping-bag"></i>
+      <h2>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ</h2>
     </div>
-    <div class="auth-body">
-      <div id="error" class="message"></div>
-      <form id="loginForm">
-        <div class="form-group">
-          <label><i class="fas fa-envelope"></i> ອີເມວ</label>
-          <input type="email" id="email" placeholder="name@example.com" required>
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-lock"></i> ລະຫັດຜ່ານ</label>
-          <input type="password" id="password" placeholder="ລະຫັດຜ່ານຂອງທ່ານ" required>
-        </div>
-        <button type="submit" class="btn" id="submitBtn">
-          <i class="fas fa-sign-in-alt"></i> ເຂົ້າສູ່ລະບົບ
-        </button>
-      </form>
-      <div class="links">
-        <a href="register.html"><i class="fas fa-user-plus"></i> ຍັງບໍ່ມີບັນຊີ? ລົງທະບຽນ</a>
-        <br><br>
-        <a href="index.html"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
-      </div>
-    </div>
-    <div class="footer">
-      © 2026 B-One Engineering Sole Co., Ltd
+    <div class="page-body">
+      <div id="orderList"></div>
+      <a href="profile.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປບັນຊີ</a>
     </div>
   </div>
 
   <script type="module">
-    import { auth, signInWithEmailAndPassword } from './firebase-config.js';
-    const form = document.getElementById('loginForm');
-    const errorDiv = document.getElementById('error');
-    const submitBtn = document.getElementById('submitBtn');
+    import { auth, db, collection, query, where, orderBy, getDocs } from './firebase-config.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-    function showError(msg) {
-      errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${msg}`;
-      errorDiv.className = 'message error';
-      setTimeout(() => errorDiv.style.display = 'none', 5000);
+    function getStatusClass(status) {
+      const statusMap = {
+        'pending': 'status-pending',
+        'confirmed': 'status-confirmed',
+        'processing': 'status-processing',
+        'shipped': 'status-shipped',
+        'delivered': 'status-delivered',
+        'cancelled': 'status-cancelled'
+      };
+      return statusMap[status] || 'status-pending';
     }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      errorDiv.style.display = 'none';
+    function getStatusText(status) {
+      const statusMap = {
+        'pending': 'ກຳລັງດຳເນີນ',
+        'confirmed': 'ຢືນຢັນແລ້ວ',
+        'processing': 'ກຳລັງກະກຽມ',
+        'shipped': 'ຈັດສົ່ງແລ້ວ',
+        'delivered': 'ສຳເລັດ',
+        'cancelled': 'ຍົກເລີກ'
+      };
+      return statusMap[status] || status;
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = 'login.html'; return; }
       
-      if (!email || !password) {
-        showError('ກະລຸນາຕື່ມອີເມວ ແລະ ລະຫັດຜ່ານ');
+      const list = document.getElementById('orderList');
+      list.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-pulse"></i><p>ກຳລັງໂຫຼດ...</p></div>';
+      
+      const q = query(collection(db, 'orders'), where('userId', '==', user.uid), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      
+      if (snapshot.empty) {
+        list.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>ຍັງບໍ່ມີຄຳສັ່ງຊື້</p><a href="products.html" style="color:#b91c1c">ເລີ່ມສັ່ງຊື້ສິນຄ້າ →</a></div>';
         return;
       }
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ກຳລັງເຂົ້າສູ່ລະບົບ...';
-
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = 'profile.html';
-      } catch (err) {
-        console.error('Login error:', err);
-        if (err.code === 'auth/user-not-found') {
-          showError('ບໍ່ພົບບັນຊີນີ້ ກະລຸນາລົງທະບຽນ');
-        } else if (err.code === 'auth/wrong-password') {
-          showError('ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ');
-        } else if (err.code === 'auth/invalid-email') {
-          showError('ຮູບແບບອີເມວບໍ່ຖືກຕ້ອງ');
-        } else {
-          showError('ອີເມວ ຫຼື ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ');
-        }
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ເຂົ້າສູ່ລະບົບ';
-      }
+      
+      list.innerHTML = '';
+      snapshot.forEach(doc => {
+        const order = doc.data();
+        const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '';
+        const statusClass = getStatusClass(order.orderStatus);
+        const statusText = getStatusText(order.orderStatus);
+        
+        list.innerHTML += `
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-id"><i class="fas fa-hashtag"></i> ${doc.id.slice(0,8)}</span>
+              <span class="order-status ${statusClass}">${statusText}</span>
+            </div>
+            <div class="order-details">
+              <p><i class="fas fa-calendar-alt"></i> ວັນທີ: ${date}</p>
+              <p><i class="fas fa-money-bill-wave"></i> ລວມທັງໝົດ: ₭${(order.totalAmount || 0).toLocaleString()}</p>
+              <p><i class="fas fa-truck"></i> ທີ່ຢູ່ຈັດສົ່ງ: ${order.shippingAddress || '-'}</p>
+            </div>
+          </div>
+        `;
+      });
     });
   </script>
 </body>
