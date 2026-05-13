@@ -66,5 +66,11 @@
       }
     });
   </script>
+  <script type="module">
+  import { auth, db } from './firebase-config.js';
+  console.log('Firebase loaded successfully');
+  console.log('Auth:', auth);
+  console.log('DB:', db);
+</script>
 </body>
 </html>
