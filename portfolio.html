@@ -2,15 +2,14 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B-One Engineering | ຜົນງານ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>ຜົນງານ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ========== HEADER ເຕັມ ========== -->
 <header>
   <div class="navbar">
     <div class="logo"><a href="index.html"><h1>B-One Engineering</h1><p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p></a></div>
@@ -23,49 +22,76 @@
       <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
       <li><a href="portfolio.html" class="active"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
       <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+      <li id="auth-section">
+        <div id="userDisplay" style="display: none;"><a href="profile.html"><i class="fas fa-user-circle"></i><span id="userName" class="lao"></span></a></div>
+        <div id="loginDisplay"><a href="login.html"><i class="fas fa-sign-in-alt"></i><span class="lao">ເຂົ້າສູ່ລະບົບ</span><span class="eng">LOGIN</span></a></div>
+      </li>
     </ul>
   </div>
 </header>
 
 <main>
-  <section id="portfolio" style="padding: 80px 0;">
+  <section style="padding: 80px 0;">
     <div class="container">
       <h2 class="section-title">ຜົນງານທີ່ພົ້ນເດັ່ນ <span style="font-size:1.4rem;">| FEATURED PROJECTS</span></h2>
       <p class="section-sub">ຕົວຢ່າງໂຄງການ ແລະ ຜົນງານທີ່ຜ່ານມາ</p>
-      <div class="portfolio-grid" id="portfolioGrid">ກຳລັງໂຫຼດ...</div>
+      <div class="portfolio-grid" id="portfolioGrid"><div class="loading">ກຳລັງໂຫຼດ...</div></div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="container"><p>© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p><p style="margin-top: 10px;"><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899</p></div>
+  <div class="container"><p>© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ</p></div>
 </footer>
-
 <a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
   const mobileBtn = document.getElementById('mobile-menu');
-  const navLinks = document.getElementById('nav-links');
-  mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+  mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
 </script>
-
 <script type="module">
-  import { db, collection, getDocs } from './firebase-config.js';
+  import { db, collection, getDocs, auth, onAuthStateChanged } from './firebase-config.js';
+
+  onAuthStateChanged(auth, (user) => {
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    if (user) {
+      userNameSpan.textContent = user.displayName || user.email.split('@')[0];
+      userDisplay.style.display = 'block';
+      loginDisplay.style.display = 'none';
+    } else {
+      userDisplay.style.display = 'none';
+      loginDisplay.style.display = 'block';
+    }
+  });
+
   async function loadPortfolio() {
     const grid = document.getElementById('portfolioGrid');
-    grid.innerHTML = 'ກຳລັງໂຫຼດ...';
+    grid.innerHTML = '<div class="loading">ກຳລັງໂຫຼດ...</div>';
     try {
       const snapshot = await getDocs(collection(db, 'portfolio'));
-      if (snapshot.empty) { grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີຜົນງານ</div>'; return; }
+      if (snapshot.empty) {
+        grid.innerHTML = '<div style="text-align:center;">ຍັງບໍ່ມີຜົນງານ</div>';
+        return;
+      }
       grid.innerHTML = '';
       snapshot.forEach(doc => {
         const p = doc.data();
         const imageUrl = p.imageUrl || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop';
-        const card = document.createElement('div'); card.className = 'portfolio-card';
-        card.innerHTML = `<div class="portfolio-img" style="background-image: url('${imageUrl}'); background-size: cover; background-position: center; height: 220px;"></div><h3>${p.title || 'ໂຄງການ'}</h3><p>${p.description || ''}</p>`;
+        const card = document.createElement('div');
+        card.className = 'portfolio-card';
+        card.innerHTML = `
+          <div class="portfolio-img" style="background-image: url('${imageUrl}'); background-size: cover; background-position: center; height: 220px;"></div>
+          <h3>${p.title || 'ໂຄງການ'}</h3>
+          <p>${p.description || ''}</p>
+        `;
         grid.appendChild(card);
       });
-    } catch (err) { console.error(err); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
+    } catch (err) {
+      console.error(err);
+      grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>';
+    }
   }
   loadPortfolio();
 </script>
