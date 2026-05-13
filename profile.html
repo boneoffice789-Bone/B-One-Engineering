@@ -19,7 +19,7 @@
       margin: 0 auto;
       background: white;
       border-radius: 32px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
       overflow: hidden;
     }
     .profile-header {
@@ -54,16 +54,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
     }
     .info-item .label { font-weight: 600; color: #555; width: 80px; }
     .info-item .value { color: #333; font-weight: 500; }
-    .btn-group {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
+    .btn-group { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
     .btn {
       flex: 1;
       padding: 14px;
@@ -72,9 +66,9 @@
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
       text-decoration: none;
       text-align: center;
+      transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -84,13 +78,13 @@
       background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
       color: white;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(185, 28, 28, 0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(185,28,28,0.3); }
     .btn-outline {
       background: white;
       color: #b91c1c;
       border: 2px solid #b91c1c;
     }
-    .btn-outline:hover { background: #b91c1c; color: white; transform: translateY(-2px); }
+    .btn-outline:hover { background: #b91c1c; color: white; }
     .back-link {
       display: block;
       text-align: center;
@@ -100,66 +94,40 @@
       font-size: 0.85rem;
     }
     .back-link:hover { color: #b91c1c; }
-    @media (max-width: 480px) {
-      .profile-header { padding: 25px 20px; }
-      .profile-body { padding: 25px 20px; }
-      .info-item { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .info-item i { width: 30px; height: 30px; font-size: 0.8rem; }
-      .btn-group { flex-direction: column; }
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="profile-header">
-      <i class="fas fa-user-circle"></i>
-      <h2>ບັນຊີຂອງຂ້ອຍ</h2>
-    </div>
-    <div class="profile-body">
-      <div class="info-card">
-        <div class="info-item">
-          <i class="fas fa-user"></i>
-          <span class="label">ຊື່:</span>
-          <span class="value" id="displayName">-</span>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-envelope"></i>
-          <span class="label">ອີເມວ:</span>
-          <span class="value" id="userEmail">-</span>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-phone"></i>
-          <span class="label">ເບີໂທ:</span>
-          <span class="value" id="userPhone">-</span>
-        </div>
-      </div>
-      <div class="btn-group">
-        <a href="orders.html" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ປະຫວັດຄຳສັ່ງຊື້</a>
-        <button id="logoutBtn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> ອອກຈາກລະບົບ</button>
-      </div>
-      <a href="index.html" class="back-link"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
-    </div>
+<div class="container">
+  <div class="profile-header">
+    <i class="fas fa-user-circle"></i>
+    <h2>ບັນຊີຂອງຂ້ອຍ</h2>
   </div>
-
-  <script type="module">
-    import { auth, db, doc, getDoc, signOut } from './firebase-config.js';
-    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.href = 'login.html'; return; }
-      document.getElementById('displayName').textContent = user.displayName || 'ບໍ່ລະບຸ';
-      document.getElementById('userEmail').textContent = user.email;
-      
-      const snap = await getDoc(doc(db, 'users', user.uid));
-      if (snap.exists()) {
-        document.getElementById('userPhone').textContent = snap.data().phone || '-';
-      }
-    });
-
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-      await signOut(auth);
-      window.location.href = 'login.html';
-    });
-  </script>
+  <div class="profile-body">
+    <div class="info-card">
+      <div class="info-item"><i class="fas fa-user"></i><span class="label">ຊື່:</span><span class="value" id="displayName">-</span></div>
+      <div class="info-item"><i class="fas fa-envelope"></i><span class="label">ອີເມວ:</span><span class="value" id="userEmail">-</span></div>
+      <div class="info-item"><i class="fas fa-phone"></i><span class="label">ເບີໂທ:</span><span class="value" id="userPhone">-</span></div>
+    </div>
+    <div class="btn-group">
+      <a href="orders.html" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ປະຫວັດຄຳສັ່ງຊື້</a>
+      <button id="logoutBtn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> ອອກຈາກລະບົບ</button>
+    </div>
+    <a href="index.html" class="back-link"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
+  </div>
+</div>
+<script type="module">
+  import { auth, db, doc, getDoc, signOut, onAuthStateChanged } from './firebase-config.js';
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = 'login.html'; return; }
+    document.getElementById('displayName').textContent = user.displayName || 'ບໍ່ລະບຸ';
+    document.getElementById('userEmail').textContent = user.email;
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    if (snap.exists()) document.getElementById('userPhone').textContent = snap.data().phone || '-';
+  });
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await signOut(auth);
+    window.location.href = 'login.html';
+  });
+</script>
 </body>
 </html>
