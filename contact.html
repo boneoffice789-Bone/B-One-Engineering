@@ -29,9 +29,21 @@
       <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
       <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
       <li><a href="contact.html" class="active"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+      <!-- Auth section -->
       <li id="auth-section">
-        <div id="userDisplay" style="display: none;"><a href="profile.html"><i class="fas fa-user-circle"></i><span id="userName" class="lao"></span></a></div>
-        <div id="loginDisplay"><a href="login.html"><i class="fas fa-sign-in-alt"></i><span class="lao">ເຂົ້າສູ່ລະບົບ</span><span class="eng">LOGIN</span></a></div>
+        <div id="userDisplay" style="display: none;">
+          <a href="profile.html">
+            <i class="fas fa-user-circle"></i>
+            <span id="userName" class="lao"></span>
+          </a>
+        </div>
+        <div id="loginDisplay">
+          <a href="login.html">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
+            <span class="eng">LOGIN</span>
+          </a>
+        </div>
       </li>
     </ul>
   </div>
@@ -51,17 +63,21 @@
             <li><i class="fas fa-phone"></i> 020 59478899</li>
             <li><i class="fas fa-envelope"></i> info@b-one-engineering.com</li>
           </ul>
-          <iframe src="https://maps.google.com/maps?q=%E0%BA%9A%E0%BB%89%E0%BA%B2%E0%BA%99%E0%BB%82%E0%BA%8A%E0%BA%81%E0%BA%99%E0%BB%89%E0%BA%AD%E0%BA%8D%2C+%E0%BB%80%E0%BA%A1%E0%BA%B7%E0%BA%AD%E0%BA%87%E0%BB%84%E0%BA%8A%E0%BB%80%E0%BA%AA%E0%BA%94%E0%BA%96%E0%BA%B2%2C+%E0%BA%A7%E0%BA%BD%E0%BA%87%E0%BA%88%E0%BA%B1%E0%BA%99&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="230" style="border:0; border-radius:16px;" allowfullscreen></iframe>
-          <div><i class="fab fa-whatsapp"></i> WhatsApp / Line : 020 59478899</div>
-          <a href="https://maps.app.goo.gl/48GEodSBPEPsDbLr5" target="_blank" class="btn" style="margin-top:15px; display:inline-block;"><i class="fas fa-map-marked-alt"></i> ເບິ່ງແຜນທີ່ Google Maps</a>
+          <div style="margin: 28px 0; border-radius: 28px; overflow: hidden;">
+            <iframe src="https://maps.google.com/maps?q=%E0%BA%9A%E0%BB%89%E0%BA%B2%E0%BA%99%E0%BB%82%E0%BA%8A%E0%BA%81%E0%BA%99%E0%BB%89%E0%BA%AD%E0%BA%8D%2C+%E0%BB%80%E0%BA%A1%E0%BA%B7%E0%BA%AD%E0%BA%87%E0%BB%84%E0%BA%8A%E0%BB%80%E0%BA%AA%E0%BA%94%E0%BA%96%E0%BA%B2%2C+%E0%BA%A7%E0%BA%BD%E0%BA%87%E0%BA%88%E0%BA%B1%E0%BA%99&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="230" style="border:0; border-radius:16px;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+          <div><i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp / Line : 020 59478899</div>
+          <div style="margin-top: 15px;">
+            <a href="https://maps.app.goo.gl/48GEodSBPEPsDbLr5" target="_blank" class="btn" style="display: inline-block;"><i class="fas fa-map-marked-alt"></i> ເບິ່ງແຜນທີ່ Google Maps</a>
+          </div>
         </div>
         <div>
           <h3 style="color:#b91c1c;">ສົ່ງຂໍ້ຄວາມ | SEND MESSAGE</h3>
           <form id="contactForm">
-            <div class="form-group"><input type="text" id="fullName" placeholder="ຊື່ ແລະ ນາມສະກຸນ" required></div>
-            <div class="form-group"><input type="tel" id="phone" placeholder="ເບີໂທລະສັບ" required></div>
-            <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ"></div>
-            <div class="form-group"><textarea id="message" rows="4" placeholder="ລາຍລະອຽດວຽກ ຫຼື ສອບຖາມ..." required></textarea></div>
+            <div class="form-group"><input type="text" id="fullName" placeholder="ຊື່ ແລະ ນາມສະກຸນ / Full Name" required></div>
+            <div class="form-group"><input type="tel" id="phone" placeholder="ເບີໂທລະສັບ / Phone" required></div>
+            <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ / Email"></div>
+            <div class="form-group"><textarea id="message" rows="4" placeholder="ລາຍລະອຽດວຽກ ຫຼື ສອບຖາມ... / Project details or inquiry..." required></textarea></div>
             <button type="submit" class="btn" id="submitBtn"><i class="fas fa-paper-plane"></i> <span id="btnText">ສົ່ງຂໍ້ມູນ | SEND</span></button>
           </form>
         </div>
@@ -73,15 +89,19 @@
 <footer>
   <div class="container">
     <p>© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
-    <p><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899</p>
+    <p style="margin-top: 10px;"><i class="fas fa-map-pin"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ | ໂທ: 020 59478899 | info@b-one-engineering.com</p>
   </div>
 </footer>
-<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
 
 <script>
   const mobileBtn = document.getElementById('mobile-menu');
   mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
 </script>
+
 <script type="module">
   import { auth, db, collection, addDoc, serverTimestamp, onAuthStateChanged } from './firebase-config.js';
 
@@ -90,50 +110,71 @@
   const btnText = document.getElementById('btnText');
   const alertBox = document.getElementById('alertBox');
 
-  function showAlert(msg, type) {
-    alertBox.textContent = msg;
+  function showAlert(message, type) {
+    alertBox.textContent = message;
     alertBox.style.display = 'block';
     alertBox.style.background = type === 'success' ? '#d4edda' : '#f8d7da';
     alertBox.style.color = type === 'success' ? '#155724' : '#721c24';
     setTimeout(() => alertBox.style.display = 'none', 5000);
   }
 
-  // Check auth on page load
-  let currentUser = null;
+  // ອັບເດດ navbar ສະແດງຊື່ຜູ້ໃຊ້ (ຖ້າເຂົ້າສູ່ລະບົບ)
   onAuthStateChanged(auth, (user) => {
-    currentUser = user;
-    if (!user) {
-      // optional: show message but still allow form? We'll check on submit.
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    if (user) {
+      userNameSpan.textContent = user.displayName || user.email.split('@')[0];
+      userDisplay.style.display = 'block';
+      loginDisplay.style.display = 'none';
+    } else {
+      userDisplay.style.display = 'none';
+      loginDisplay.style.display = 'block';
     }
   });
 
+  // ຈັດການສົ່ງຟອມ (ໃຊ້ auth.currentUser ໂດຍກົງ ບໍ່ຕ້ອງລໍ onAuthStateChanged)
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // ກວດສອບສະຖານະຜູ້ໃຊ້ປັດຈຸບັນໂດຍກົງຈາກ Firebase Auth
+    const currentUser = auth.currentUser;
     if (!currentUser) {
-      showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສົ່ງຂໍ້ຄວາມ', 'error');
-      setTimeout(() => window.location.href = 'login.html', 2000);
+      showAlert('❌ ກະລຸນາເຂົ້າສູ່ລະບົບ ຫຼື ສະໝັກສະມາຊິກກ່ອນສົ່ງຂໍ້ຄວາມ', 'error');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 2000);
       return;
     }
+
     const fullName = document.getElementById('fullName').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
+
     if (!fullName || !phone || !message) {
       showAlert('ກະລຸນາຕື່ມຊື່, ເບີໂທ ແລະ ຂໍ້ຄວາມ', 'error');
       return;
     }
+
     submitBtn.disabled = true;
-    btnText.textContent = 'ກຳລັງສົ່ງ...';
+    btnText.textContent = 'ກຳລັງສົ່ງ... | SENDING...';
+
     try {
       await addDoc(collection(db, 'contact_messages'), {
-        fullName, phone, email: email || '', message,
-        source: 'website', status: 'new', createdAt: serverTimestamp()
+        fullName: fullName,
+        phone: phone,
+        email: email || '',
+        message: message,
+        source: 'website',
+        status: 'new',
+        createdAt: serverTimestamp()
       });
-      showAlert('ສົ່ງສຳເລັດ! ພວກເຮົາຈະຕິດຕໍ່ຫາທ່ານໄວໆນີ້.', 'success');
+      showAlert('✅ ສົ່ງສຳເລັດ! ພວກເຮົາຈະຕິດຕໍ່ກັບໄວໆນີ້.', 'success');
       form.reset();
-    } catch (err) {
-      console.error(err);
-      showAlert('ເກີດຂໍ້ຜິດພາດ, ກະລຸນາລອງໃໝ່', 'error');
+    } catch (error) {
+      console.error('Form submission error:', error);
+      showAlert('❌ ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃໝ່ພາຍຫຼັງ.', 'error');
     } finally {
       submitBtn.disabled = false;
       btnText.textContent = 'ສົ່ງຂໍ້ມູນ | SEND';
