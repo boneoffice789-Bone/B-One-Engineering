@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>ຄຳສັ່ງຊື້ຂອງຂ້ອຍ | B-One Engineering</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -139,13 +140,19 @@
   </div>
 </div>
 
+<script>
+  const mobileBtn = document.getElementById('mobile-menu');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
+  }
+</script>
+
 <script type="module">
   import { auth, db, collection, query, where, orderBy, getDocs, onAuthStateChanged } from './firebase-config.js';
 
   const orderListDiv = document.getElementById('orderList');
   const refreshBtn = document.getElementById('refreshBtn');
 
-  // ຟັງຊັນສະແດງສະຖານະ
   function showLoading() {
     orderListDiv.innerHTML = `<div class="empty-state"><i class="fas fa-spinner fa-pulse"></i><p>ກຳລັງໂຫຼດຂໍ້ມູນ...</p></div>`;
   }
@@ -156,7 +163,6 @@
     orderListDiv.innerHTML = `<div class="error-state"><i class="fas fa-exclamation-triangle"></i><p>${errMsg || 'ເກີດຂໍ້ຜິດພາດ, ກະລຸນາລອງໃໝ່'}</p><button class="btn-reload" onclick="location.reload()"><i class="fas fa-redo-alt"></i> ລອງໃໝ່</button></div>`;
   }
 
-  // ຟັງຊັນດຶງຂໍ້ມູນຄຳສັ່ງຊື້
   async function loadOrders(userId) {
     showLoading();
     try {
@@ -172,7 +178,6 @@
         return;
       }
 
-      // ສ້າງ HTML ສະແດງລາຍການ
       let html = '';
       querySnapshot.forEach(doc => {
         const order = doc.data();
@@ -181,7 +186,6 @@
           ? new Date(order.createdAt.seconds * 1000).toLocaleDateString('lo-LA') 
           : 'ບໍ່ລະບຸ';
         
-        // ສະຖານະ ແລະ ສີ
         const statusMap = {
           pending: { text: 'ກຳລັງດຳເນີນ', class: 'status-pending' },
           confirmed: { text: 'ຢືນຢັນແລ້ວ', class: 'status-confirmed' },
@@ -192,7 +196,6 @@
         };
         const status = statusMap[order.orderStatus] || { text: order.orderStatus || 'ກຳລັງດຳເນີນ', class: 'status-pending' };
         
-        // ລາຍການສິນຄ້າ (ຖ້າມີ)
         let itemsHtml = '';
         if (order.items && order.items.length) {
           itemsHtml = `<details class="order-items"><summary><i class="fas fa-list-ul"></i> ລາຍການສິນຄ້າ (${order.items.length})</summary><div style="margin-top:8px;">`;
@@ -225,18 +228,14 @@
     }
   }
 
-  // ກວດສອບສະຖານະຜູ້ໃຊ້
   onAuthStateChanged(auth, (user) => {
     if (!user) {
-      // ຖ້າບໍ່ໄດ້ login ໃຫ້ກັບໄປ login
       window.location.href = 'login.html';
       return;
     }
-    // ມີ user ແລ້ວ, ໂຫຼດຄຳສັ່ງຊື້
     loadOrders(user.uid);
   });
 
-  // ປຸ່ມຣີໂຫຼດ
   if (refreshBtn) {
     refreshBtn.addEventListener('click', () => {
       const user = auth.currentUser;
