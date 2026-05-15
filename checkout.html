@@ -2,60 +2,256 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
-  <title>ສັ່ງຊື້ | B-One</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>ຢືນຢັນຄຳສັ່ງຊື້ | B-One Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    .container { max-width: 600px; margin: 40px auto; padding: 20px; }
-    .form-group { margin-bottom: 15px; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
-    .btn { width: 100%; padding: 14px; background: #b30000; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
-    .info-box { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; }
-    .cart-summary { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans Lao', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      padding: 30px 25px;
+      text-align: center;
+      color: white;
+    }
+    .page-header i { font-size: 2rem; margin-bottom: 10px; }
+    .page-header h2 { font-size: 1.5rem; font-weight: 700; }
+    .page-body { padding: 30px 25px; }
+    .cart-summary {
+      background: #f8f9fa;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+    .cart-summary h3 { margin-bottom: 15px; color: #b91c1c; }
+    .cart-item-line { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .cart-total { font-size: 1.2rem; font-weight: 700; margin-top: 10px; padding-top: 10px; border-top: 1px solid #dee2e6; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+    .form-group label i { color: #b91c1c; margin-right: 8px; width: 20px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      font-family: inherit;
+      transition: all 0.3s;
+      background: #fefefe;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: #b91c1c;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
+    }
+    .form-group input:disabled {
+      background: #f0f0f0;
+      color: #555;
+    }
+    .info-row {
+      background: #e8f0fe;
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+    .info-row i { color: #b91c1c; font-size: 1.1rem; }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(185,28,28,0.4); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .back-link { display: block; text-align: center; margin-top: 20px; color: #6c757d; text-decoration: none; }
+    .back-link:hover { color: #b91c1c; }
+    @media (max-width: 550px) {
+      .page-body { padding: 20px; }
+      .form-group input, .form-group textarea, .form-group select { padding: 12px 14px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+
+<div class="container">
+  <div class="page-header">
+    <i class="fas fa-credit-card"></i>
     <h2>ຢືນຢັນຄຳສັ່ງຊື້</h2>
+  </div>
+  <div class="page-body">
     <div class="cart-summary" id="cartSummary"></div>
     <form id="orderForm">
-      <div class="form-group"><input type="text" id="name" placeholder="ຊື່ຜູ້ຮັບ *" required></div>
-      <div class="form-group"><input type="tel" id="phone" placeholder="ເບີໂທລະສັບ *" required></div>
-      <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ"></div>
-      <div class="form-group"><textarea id="address" rows="3" placeholder="ທີ່ຢູ່ຈັດສົ່ງ *" required></textarea></div>
+      <!-- ຂໍ້ມູນຜູ້ໃຊ້ (ດຶງມາຈາກ Firebase Auth ແລະ Firestore) ແບບອັດຕະໂນມັດ ບໍ່ໃຫ້ແກ້ໄຂ -->
+      <div class="info-row">
+        <i class="fas fa-user-circle"></i>
+        <span>ຂໍ້ມູນຈາກບັນຊີຂອງທ່ານ</span>
+      </div>
       <div class="form-group">
+        <label><i class="fas fa-user"></i> ຊື່ຜູ້ຮັບ</label>
+        <input type="text" id="name" disabled>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-phone"></i> ເບີໂທລະສັບ</label>
+        <input type="tel" id="phone" disabled>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> ອີເມວ</label>
+        <input type="email" id="email" disabled>
+      </div>
+
+      <!-- ລາຍລະອຽດທີ່ລູກຄ້າຕ້ອງຕື່ມເອງ -->
+      <div class="form-group">
+        <label><i class="fas fa-map-marker-alt"></i> ທີ່ຢູ່ຈັດສົ່ງ *</label>
+        <textarea id="address" rows="3" placeholder="ບ້ານ, ເມືອງ, ແຂວງ..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-money-bill-wave"></i> ວິທີຊຳລະ *</label>
         <select id="paymentMethod" required>
-          <option value="">-- ວິທີຊຳລະເງິນ --</option>
+          <option value="">-- ກະລຸນາເລືອກ --</option>
           <option value="cash">ເງິນສົດ (ເກັບປາຍທາງ)</option>
-          <option value="transfer">ໂອນເງິນ</option>
+          <option value="transfer">ໂອນເງິນ (ຜ່ານທະນາຄານ)</option>
         </select>
       </div>
-      <button type="submit" class="btn">ສັ່ງຊື້</button>
+      <button type="submit" class="btn" id="submitBtn">ຢືນຢັນການສັ່ງຊື້</button>
     </form>
+    <a href="cart.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປຕະກອນ</a>
   </div>
+</div>
 
-  <script type="module">
-    import { db, auth, collection, addDoc, serverTimestamp } from './firebase-config.js';
-    const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
-    if (cart.length === 0) window.location.href = 'cart.html';
+<script>
+  // Mobile menu toggle (ຖ້າມີ navbar ໃນ checkout)
+  const mobileBtn = document.getElementById('mobile-menu');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
+  }
+</script>
 
-    let total = 0;
-    const summary = document.getElementById('cartSummary');
-    summary.innerHTML = cart.map(item => {
-      total += item.price * item.quantity;
-      return `<p>${item.name} x ${item.quantity} = ₭${(item.price * item.quantity).toLocaleString()}</p>`;
-    }).join('');
-    summary.innerHTML += `<h3>ລວມ: ₭${total.toLocaleString()}</h3>`;
+<script type="module">
+  import { auth, db, doc, getDoc, collection, addDoc, serverTimestamp, onAuthStateChanged } from './firebase-config.js';
 
-    document.getElementById('orderForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const user = auth.currentUser;
-      const orderData = {
-        userId: user ? user.uid : null,
+  const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
+  if (cart.length === 0) window.location.href = 'cart.html';
+
+  // ຄຳນວນລວມເງິນ
+  let total = 0;
+  const summaryDiv = document.getElementById('cartSummary');
+  let itemsHtml = '';
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+    itemsHtml += `<div class="cart-item-line"><span>${item.name} x ${item.quantity}</span><span>₭${(item.price * item.quantity).toLocaleString()}</span></div>`;
+  });
+  summaryDiv.innerHTML = `
+    <h3><i class="fas fa-shopping-cart"></i> ລາຍການສິນຄ້າ</h3>
+    ${itemsHtml}
+    <div class="cart-total"><span>ລວມທັງໝົດ:</span> <span>₭${total.toLocaleString()}</span></div>
+  `;
+
+  // ຟັງຊັນສະແດງ Alert (ງ່າຍ)
+  function showAlert(msg, isError = true) {
+    const alertBox = document.createElement('div');
+    alertBox.textContent = msg;
+    alertBox.style.position = 'fixed';
+    alertBox.style.bottom = '20px';
+    alertBox.style.left = '50%';
+    alertBox.style.transform = 'translateX(-50%)';
+    alertBox.style.backgroundColor = isError ? '#dc3545' : '#28a745';
+    alertBox.style.color = 'white';
+    alertBox.style.padding = '12px 24px';
+    alertBox.style.borderRadius = '8px';
+    alertBox.style.zIndex = '9999';
+    alertBox.style.fontWeight = 'bold';
+    document.body.appendChild(alertBox);
+    setTimeout(() => alertBox.remove(), 4000);
+  }
+
+  // ດຶງຂໍ້ມູນຜູ້ໃຊ້ ແລະ ຕື່ມໃສ່ຟອມ (ຫ້າມແກ້ໄຂ)
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້', true);
+      setTimeout(() => window.location.href = 'login.html', 2000);
+      return;
+    }
+
+    // ດຶງຂໍ້ມູນຈາກ Firestore (collection users)
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    const userData = userDoc.data();
+    
+    // ຕື່ມຂໍ້ມູນໃສ່ຊ່ອງ (ຫ້າມແກ້ໄຂ)
+    document.getElementById('name').value = user.displayName || userData?.displayName || 'ບໍ່ລະບຸ';
+    document.getElementById('phone').value = userData?.phone || '';
+    document.getElementById('email').value = user.email || '';
+  });
+
+  // ຈັດການສົ່ງຟອມ
+  const form = document.getElementById('orderForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const user = auth.currentUser;
+    if (!user) {
+      showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນ', true);
+      window.location.href = 'login.html';
+      return;
+    }
+
+    const address = document.getElementById('address').value.trim();
+    const paymentMethod = document.getElementById('paymentMethod').value;
+
+    if (!address) {
+      showAlert('ກະລຸນາຕື່ມທີ່ຢູ່ຈັດສົ່ງ', true);
+      return;
+    }
+    if (!paymentMethod) {
+      showAlert('ກະລຸນາເລືອກວິທີຊຳລະ', true);
+      return;
+    }
+
+    // ດຶງຂໍ້ມູນຜູ້ໃຊ້ລ່າສຸດອີກຄັ້ງ
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    const userData = userDoc.data();
+    const customerName = user.displayName || userData?.displayName || 'ບໍ່ລະບຸ';
+    const customerPhone = userData?.phone || '';
+    const customerEmail = user.email || '';
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ກຳລັງດຳເນີນ...';
+
+    try {
+      await addDoc(collection(db, 'orders'), {
+        userId: user.uid,
         customerInfo: {
-          name: document.getElementById('name').value.trim(),
-          phone: document.getElementById('phone').value.trim(),
-          email: document.getElementById('email').value.trim()
+          name: customerName,
+          phone: customerPhone,
+          email: customerEmail
         },
         items: cart.map(item => ({
           productId: item.id,
@@ -65,23 +261,22 @@
           totalPrice: item.price * item.quantity
         })),
         totalAmount: total,
-        paymentMethod: document.getElementById('paymentMethod').value,
-        paymentStatus: 'pending',
+        paymentMethod: paymentMethod,
         orderStatus: 'pending',
-        shippingAddress: document.getElementById('address').value.trim(),
+        shippingAddress: address,
         createdAt: serverTimestamp()
-      };
+      });
       
-      try {
-        await addDoc(collection(db, 'orders'), orderData);
-        localStorage.removeItem('b_one_cart');
-        alert('ສັ່ງຊື້ສຳເລັດ!');
-        window.location.href = 'orders.html';
-      } catch (err) {
-        console.error(err);
-        alert('ເກີດຂໍ້ຜິດພາດ');
-      }
-    });
-  </script>
+      localStorage.removeItem('b_one_cart');
+      showAlert('ສັ່ງຊື້ສຳເລັດ! ກຳລັງໄປຍັງໜ້າປະຫວັດຄຳສັ່ງຊື້', false);
+      setTimeout(() => window.location.href = 'orders.html', 2000);
+    } catch (err) {
+      console.error(err);
+      showAlert('ເກີດຂໍ້ຜິດພາດ: ' + err.message, true);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'ຢືນຢັນການສັ່ງຊື້';
+    }
+  });
+</script>
 </body>
 </html>
