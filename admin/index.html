@@ -140,20 +140,80 @@
         <button class="btn btn-danger" onclick="exportReportPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
       </div>
     </div>
-    <div class="table-wrapper"><table id="reportTable"><thead><table><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody><tr><td colspan="3">ກະລຸນາເລືອກຊ່ວງວັນທີ</td></tr></tbody></table></div>
+    <div class="table-wrapper">
+      <table id="reportTable">
+        <thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead>
+        <tbody><tr><td colspan="3" style="text-align:center;">ກະລຸນາເລືອກຊ່ວງວັນທີ ແລ້ວກົດ "ສະແດງລາຍງານ"</td></tr></tbody>
+      </table>
+    </div>
   </div>
 
   <!-- Products -->
-  <div id="products" class="tab-content"><h2>📦 ຈັດການສິນຄ້າ <button class="btn btn-primary" onclick="openProductModal()"><i class="fas fa-plus"></i> ເພີ່ມສິນຄ້າ</button></h2><div class="table-wrapper"><table id="productTable"><thead><th>ຊື່</th><th>ລາຄາ</th><th>ສະຕ໋ອກ</th><th>ສະຖານະ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="services" class="tab-content"><h2>🔧 ຈັດການບໍລິການ <button class="btn btn-primary" onclick="openServiceModal()"><i class="fas fa-plus"></i> ເພີ່ມບໍລິການ</button></h2><div class="table-wrapper"><table id="serviceTable"><thead><th>ຊື່</th><th>ໝວດ</th><th>ສະຖານະ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="portfolio" class="tab-content"><h2>🏆 ຈັດການຜົນງານ <button class="btn btn-primary" onclick="openPortfolioModal()"><i class="fas fa-plus"></i> ເພີ່ມຜົນງານ</button></h2><div class="table-wrapper"><table id="portfolioTable"><thead><th>ຊື່ໂຄງການ</th><th>ໝວດ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="brands" class="tab-content"><h2>🏷️ ຈັດການແບຣນ <button class="btn btn-primary" onclick="openBrandModal()"><i class="fas fa-plus"></i> ເພີ່ມແບຣນ</button></h2><div class="table-wrapper"><table id="brandTable"><thead><th>ຊື່ແບຣນ</th><th>ໝວດ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="contacts" class="tab-content"><h2>📩 ຂໍ້ຄວາມຕິດຕໍ່</h2><div class="table-wrapper"><table id="contactTable"><thead><th>ຊື່</th><th>ເບີໂທ</th><th>ຂໍ້ຄວາມ</th><th>ສະຖານະ</th><th>ວັນທີ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="orders" class="tab-content"><h2>🛒 ຄຳສັ່ງຊື້</h2><div class="table-wrapper"><table id="orderTable"><thead><th>ເລກຄຳສັ່ງ</th><th>ລູກຄ້າ</th><th>ລວມ</th><th>ສະຖານະສົ່ງມອບ</th><th>ສະຖານະການຈ່າຍ</th><th>ສະລິບ</th><th>ວັນທີ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="users" class="tab-content"><h2>👥 ຈັດການຜູ້ໃຊ້</h2><div class="table-wrapper"><table id="userTable"><thead><th>ຊື່</th><th>ອີເມວ</th><th>ສິດ</th><th>ສະຖານະ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="news" class="tab-content"><h2>📰 ຈັດການຂ່າວ <button class="btn btn-primary" onclick="openNewsModal()"><i class="fas fa-plus"></i> ເພີ່ມຂ່າວ</button></h2><div class="table-wrapper"><table id="newsTable"><thead><th>ຫົວຂໍ້</th><th>ໝວດ</th><th>ວັນທີ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="sliders" class="tab-content"><h2>🖼️ ຈັດການສະໄລເດີ <button class="btn btn-primary" onclick="openSliderModal()"><i class="fas fa-plus"></i> ເພີ່ມສະໄລເດີ</button></h2><div class="table-wrapper"><table id="sliderTable"><thead><th>ຫົວຂໍ້</th><th>ລິ້ງ</th><th>ສະຖານະ</th><th>ຈັດການ</th></thead><tbody></tbody></table></div></div>
-  <div id="settings" class="tab-content"><h2>⚙️ ຕັ້ງຄ່າທົ່ວໄປ</h2><form id="settingsForm" style="max-width:500px;"><div class="form-group"><label>ຊື່ບໍລິສັດ</label><input type="text" id="setCompanyName" value="B-One Engineering Sole Co., Ltd"></div><div class="form-group"><label>ເບີໂທລະສັບ</label><input type="text" id="setPhone" value="020 59478899"></div><div class="form-group"><label>ອີເມວ</label><input type="email" id="setEmail" value="info@b-one-engineering.com"></div><div class="form-group"><label>ທີ່ຢູ່</label><textarea id="setAddress" rows="2">ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ວຽງຈັນ</textarea></div><div class="form-group"><label>WhatsApp</label><input type="text" id="setWhatsapp" value="8562059478899"></div><button type="submit" class="btn btn-success">ບັນທຶກ</button></form></div>
+  <div id="products" class="tab-content">
+    <h2>📦 ຈັດການສິນຄ້າ <button class="btn btn-primary" onclick="openProductModal()"><i class="fas fa-plus"></i> ເພີ່ມສິນຄ້າ</button></h2>
+    <div class="table-wrapper"><table id="productTable"><thead><tr><th>ຊື່</th><th>ລາຄາ</th><th>ສະຕ໋ອກ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Services -->
+  <div id="services" class="tab-content">
+    <h2>🔧 ຈັດການບໍລິການ <button class="btn btn-primary" onclick="openServiceModal()"><i class="fas fa-plus"></i> ເພີ່ມບໍລິການ</button></h2>
+    <div class="table-wrapper"><table id="serviceTable"><thead><tr><th>ຊື່</th><th>ໝວດ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Portfolio -->
+  <div id="portfolio" class="tab-content">
+    <h2>🏆 ຈັດການຜົນງານ <button class="btn btn-primary" onclick="openPortfolioModal()"><i class="fas fa-plus"></i> ເພີ່ມຜົນງານ</button></h2>
+    <div class="table-wrapper"><table id="portfolioTable"><thead><tr><th>ຊື່ໂຄງການ</th><th>ໝວດ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Brands -->
+  <div id="brands" class="tab-content">
+    <h2>🏷️ ຈັດການແບຣນ <button class="btn btn-primary" onclick="openBrandModal()"><i class="fas fa-plus"></i> ເພີ່ມແບຣນ</button></h2>
+    <div class="table-wrapper"><table id="brandTable"><thead><tr><th>ຊື່ແບຣນ</th><th>ໝວດ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Contacts -->
+  <div id="contacts" class="tab-content">
+    <h2>📩 ຂໍ້ຄວາມຕິດຕໍ່</h2>
+    <div class="table-wrapper"><table id="contactTable"><thead><tr><th>ຊື່</th><th>ເບີໂທ</th><th>ຂໍ້ຄວາມ</th><th>ສະຖານະ</th><th>ວັນທີ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Orders -->
+  <div id="orders" class="tab-content">
+    <h2>🛒 ຄຳສັ່ງຊື້</h2>
+    <div class="table-wrapper"><table id="orderTable"><thead><tr><th>ເລກຄຳສັ່ງ</th><th>ລູກຄ້າ</th><th>ລວມ</th><th>ສະຖານະສົ່ງມອບ</th><th>ສະຖານະການຈ່າຍ</th><th>ສະລິບ</th><th>ວັນທີ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Users -->
+  <div id="users" class="tab-content">
+    <h2>👥 ຈັດການຜູ້ໃຊ້</h2>
+    <div class="table-wrapper"><table id="userTable"><thead><tr><th>ຊື່</th><th>ອີເມວ</th><th>ສິດ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- News -->
+  <div id="news" class="tab-content">
+    <h2>📰 ຈັດການຂ່າວ <button class="btn btn-primary" onclick="openNewsModal()"><i class="fas fa-plus"></i> ເພີ່ມຂ່າວ</button></h2>
+    <div class="table-wrapper"><table id="newsTable"><thead><tr><th>ຫົວຂໍ້</th><th>ໝວດ</th><th>ວັນທີ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Sliders -->
+  <div id="sliders" class="tab-content">
+    <h2>🖼️ ຈັດການສະໄລເດີ <button class="btn btn-primary" onclick="openSliderModal()"><i class="fas fa-plus"></i> ເພີ່ມສະໄລເດີ</button></h2>
+    <div class="table-wrapper"><table id="sliderTable"><thead><tr><th>ຫົວຂໍ້</th><th>ລິ້ງ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Settings -->
+  <div id="settings" class="tab-content">
+    <h2>⚙️ ຕັ້ງຄ່າທົ່ວໄປ</h2>
+    <form id="settingsForm" style="max-width:500px;">
+      <div class="form-group"><label>ຊື່ບໍລິສັດ</label><input type="text" id="setCompanyName" value="B-One Engineering Sole Co., Ltd"></div>
+      <div class="form-group"><label>ເບີໂທລະສັບ</label><input type="text" id="setPhone" value="020 59478899"></div>
+      <div class="form-group"><label>ອີເມວ</label><input type="email" id="setEmail" value="info@b-one-engineering.com"></div>
+      <div class="form-group"><label>ທີ່ຢູ່</label><textarea id="setAddress" rows="2">ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ວຽງຈັນ</textarea></div>
+      <div class="form-group"><label>WhatsApp</label><input type="text" id="setWhatsapp" value="8562059478899"></div>
+      <button type="submit" class="btn btn-success">ບັນທຶກ</button>
+    </form>
+  </div>
 </div>
 
 <!-- Modals -->
@@ -221,16 +281,29 @@
     if(ctxStatus) { if(statusChart) statusChart.destroy(); statusChart = new Chart(ctxStatus, { type:'pie', data:{ labels:['ກຳລັງດຳເນີນ','ຢືນຢັນ','ກຳລັງກະກຽມ','ຈັດສົ່ງ','ສຳເລັດ','ຍົກເລີກ'], datasets:[{ data:[statusCount.pending,statusCount.confirmed,statusCount.processing,statusCount.shipped,statusCount.delivered,statusCount.cancelled], backgroundColor:['#ffc107','#17a2b8','#6c757d','#28a745','#007bff','#dc3545'] }] }, options:{ responsive:true } }); }
   }
 
+  // ຟັງຊັນລາຍງານການຂາຍ (ແກ້ໄຂ error)
   window.loadSalesReport = async () => {
     const start = document.getElementById('reportStartDate').value;
     const end = document.getElementById('reportEndDate').value;
     if(!start || !end){ alert('ກະລຸນາເລືອກຊ່ວງວັນທີ'); return; }
+    
+    const tbody = document.querySelector('#reportTable tbody');
+    if(!tbody){ console.error('ບໍ່ພົບ table tbody'); return; }
+    
     const startMs = new Date(start).setHours(0,0,0,0);
     const endMs = new Date(end).setHours(23,59,59,999);
     const snap = await getDocs(collection(db, 'orders'));
     const filtered = snap.docs.map(d=>d.data()).filter(o => o.createdAt?.seconds && (o.createdAt.seconds*1000) >= startMs && (o.createdAt.seconds*1000) <= endMs);
+    
     const reportMap = new Map();
-    filtered.forEach(o => { const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10); reportMap.set(day, { count: (reportMap.get(day)?.count||0)+1, total: (reportMap.get(day)?.total||0)+(o.totalAmount||0) }); });
+    filtered.forEach(o => {
+      const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10);
+      const cur = reportMap.get(day) || { count:0, total:0 };
+      cur.count++;
+      cur.total += o.totalAmount || 0;
+      reportMap.set(day, cur);
+    });
+    
     const sortedDays = Array.from(reportMap.keys()).sort();
     let totalOrders = 0, totalSales = 0;
     let html = '';
@@ -238,10 +311,11 @@
       const row = reportMap.get(day);
       totalOrders += row.count;
       totalSales += row.total;
-      html += `<tr><td>${day}</td><td>${row.count}</td><td>${row.total.toLocaleString()} ກີບ</td></tr>`;
+      html += `<tr><td data-label="ວັນທີ">${day}</td><td data-label="ຈຳນວນຄຳສັ່ງ">${row.count}</td><td data-label="ຍອດຂາຍລວມ">${row.total.toLocaleString()} ກີບ</td></tr>`;
     }
-    html += `<tr style="font-weight:bold; background:#f0f0f0;"><td>ລວມທັງໝົດ</td><td>${totalOrders}</td><td>${totalSales.toLocaleString()} ກີບ</td></tr>`;
-    document.querySelector('#reportTable tbody').innerHTML = html || '<tr><td colspan="3">ບໍ່ມີຂໍ້ມູນ</td></tr>';
+    html += `<tr style="background:#f0f0f0; font-weight:bold;"><td data-label="ວັນທີ">ລວມທັງໝົດ</td><td data-label="ຈຳນວນຄຳສັ່ງ">${totalOrders}</td><td data-label="ຍອດຂາຍລວມ">${totalSales.toLocaleString()} ກີບ</td></tr>`;
+    
+    tbody.innerHTML = html || '<tr><td colspan="3">ບໍ່ມີຂໍ້ມູນ</td></tr>';
     window.reportData = { filtered, totalOrders, totalSales, start, end };
   };
 
@@ -292,7 +366,7 @@
     const html = `
       <!DOCTYPE html><html><head><meta charset="UTF-8"><title>ລາຍງານການຂາຍ</title>
       <style>body{font-family:'Noto Sans Lao','Saysettha OT',sans-serif;padding:20px;}h1{color:#b30000;}table{width:100%;border-collapse:collapse;margin-top:20px;}th,td{border:1px solid #ddd;padding:8px;text-align:center;}th{background:#b30000;color:white;}@media print{body{margin:0;padding:10px;}}</style>
-      </head><body><h1>B-One Engineering</h1><p>ລາຍງານການຂາຍ ຕັ້ງແຕ່ ${startDate} ຫາ ${endDate}</p><p>ສ້າງເມື່ອ: ${generatedDate}</p><table><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody></table></body></html>
+      </head><body><h1>B-One Engineering</h1><p>ລາຍງານການຂາຍ ຕັ້ງແຕ່ ${startDate} ຫາ ${endDate}</p><p>ສ້າງເມື່ອ: ${generatedDate}</p><td><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody></table></body></html>
     `;
     docIframe.write(html);
     docIframe.close();
