@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ສັ່ງຊື້ | B-One Engineering</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>ກະຕ່າສິນຄ້າ | B-One Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,7 +15,7 @@
       padding: 40px 20px;
     }
     .container {
-      max-width: 700px;
+      max-width: 900px;
       margin: 0 auto;
       background: white;
       border-radius: 32px;
@@ -31,127 +31,180 @@
     .page-header i { font-size: 2rem; margin-bottom: 10px; }
     .page-header h2 { font-size: 1.5rem; font-weight: 700; }
     .page-body { padding: 30px 25px; }
-    .cart-summary {
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
       background: #f8f9fa;
       border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 25px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+      flex-wrap: wrap;
     }
-    .form-group { margin-bottom: 20px; }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #333;
-    }
-    .form-group input, .form-group textarea, .form-group select {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid #e2e8f0;
+    .cart-item:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+    .cart-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
       border-radius: 16px;
-      font-family: inherit;
-      transition: all 0.3s;
     }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      border-color: #b91c1c;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
+    .cart-item .details { flex: 1; min-width: 150px; }
+    .cart-item .details h4 { font-size: 1.1rem; margin-bottom: 5px; color: #333; }
+    .cart-item .details .price { color: #b91c1c; font-weight: 700; font-size: 1.1rem; }
+    .cart-item .details .category { font-size: 0.8rem; color: #6c757d; }
+    .qty {
+      width: 70px;
+      padding: 8px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.9rem;
     }
+    .item-total { font-weight: 700; font-size: 1.1rem; color: #333; min-width: 120px; text-align: right; }
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #dc3545;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 8px;
+      transition: all 0.2s;
+    }
+    .btn-remove:hover { transform: scale(1.1); }
+    .cart-summary {
+      background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 20px;
+      text-align: right;
+      border: 1px solid #e9ecef;
+    }
+    .cart-summary h3 { font-size: 1.3rem; margin-bottom: 10px; }
+    .cart-summary .total { font-size: 1.8rem; font-weight: 800; color: #b91c1c; }
     .btn {
-      width: 100%;
-      padding: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
       background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
       color: white;
       border: none;
       border-radius: 40px;
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-top: 15px;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(185,28,28,0.4); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(185, 28, 28, 0.3); }
+    .btn-outline {
+      background: white;
+      color: #b91c1c;
+      border: 2px solid #b91c1c;
+      margin-right: 10px;
+    }
+    .btn-outline:hover { background: #b91c1c; color: white; }
+    .empty-cart {
+      text-align: center;
+      padding: 50px;
+      color: #6c757d;
+    }
+    .empty-cart i { font-size: 4rem; margin-bottom: 15px; opacity: 0.5; }
+    .action-buttons { display: flex; justify-content: flex-end; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
     .back-link { display: block; text-align: center; margin-top: 20px; color: #6c757d; text-decoration: none; }
+    .back-link:hover { color: #b91c1c; }
+    @media (max-width: 768px) {
+      .cart-item { flex-direction: column; text-align: center; }
+      .cart-item img { width: 120px; height: 120px; }
+      .item-total { text-align: center; width: 100%; }
+      .action-buttons { flex-direction: column; }
+      .btn-outline { margin-right: 0; margin-bottom: 10px; }
+      .cart-summary { text-align: center; }
+    }
   </style>
 </head>
 <body>
+
 <div class="container">
   <div class="page-header">
-    <i class="fas fa-credit-card"></i>
-    <h2>ຢືນຢັນຄຳສັ່ງຊື້</h2>
+    <i class="fas fa-shopping-cart"></i>
+    <h2>ກະຕ່າສິນຄ້າ</h2>
   </div>
   <div class="page-body">
-    <div class="cart-summary" id="cartSummary"></div>
-    <form id="orderForm">
-      <div class="form-group"><input type="text" id="name" placeholder="ຊື່ຜູ້ຮັບ *" required></div>
-      <div class="form-group"><input type="tel" id="phone" placeholder="ເບີໂທລະສັບ *" required></div>
-      <div class="form-group"><input type="email" id="email" placeholder="ອີເມວ"></div>
-      <div class="form-group"><textarea id="address" rows="3" placeholder="ທີ່ຢູ່ຈັດສົ່ງ *" required></textarea></div>
-      <div class="form-group">
-        <select id="paymentMethod" required>
-          <option value="">-- ວິທີຊຳລະເງິນ --</option>
-          <option value="cash">ເງິນສົດ (ເກັບປາຍທາງ)</option>
-          <option value="transfer">ໂອນເງິນ</option>
-        </select>
+    <div id="cartItems"></div>
+    <div id="cartSummary" class="cart-summary" style="display: none;">
+      <h3>ລວມທັງໝົດ</h3>
+      <div class="total">₭<span id="totalPrice">0</span></div>
+      <div class="action-buttons">
+        <a href="products.html" class="btn btn-outline"><i class="fas fa-plus"></i> ເພີ່ມສິນຄ້າເພີ່ມ</a>
+        <a href="checkout.html" class="btn" id="checkoutBtn"><i class="fas fa-credit-card"></i> ດຳເນີນການສັ່ງຊື້</a>
       </div>
-      <button type="submit" class="btn" id="submitBtn">ຢືນຢັນການສັ່ງຊື້</button>
-    </form>
-    <a href="cart.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປກະຕ່າສິນຄ້າ</a>
+    </div>
+    <a href="products.html" class="back-link"><i class="fas fa-arrow-left"></i> ເລືອກສິນຄ້າຕໍ່</a>
   </div>
 </div>
-<script type="module">
-  import { auth, db, collection, addDoc, serverTimestamp, onAuthStateChanged } from './firebase-config.js';
+
+<script>
   const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
-  if (cart.length === 0) window.location.href = 'cart.html';
+  const container = document.getElementById('cartItems');
+  const summaryDiv = document.getElementById('cartSummary');
   let total = 0;
-  const summary = document.getElementById('cartSummary');
-  summary.innerHTML = cart.map(item => {
-    total += item.price * item.quantity;
-    return `<p><strong>${item.name}</strong> x ${item.quantity} = ₭${(item.price * item.quantity).toLocaleString()}</p>`;
-  }).join('');
-  summary.innerHTML += `<h3>ລວມທັງໝົດ: ₭${total.toLocaleString()}</h3>`;
-  
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      alert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້');
-      window.location.href = 'login.html';
-    }
-  });
-  
-  document.getElementById('orderForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const user = auth.currentUser;
-    if (!user) {
-      alert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນ');
-      window.location.href = 'login.html';
+
+  function renderCart() {
+    container.innerHTML = '';
+    total = 0;
+    
+    if (cart.length === 0) {
+      container.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>ກະຕ່າສິນຄ້າຫວ່າງເປົ່າ</p><a href="products.html" class="btn" style="display: inline-block; margin-top: 15px;">ເລີ່ມເລືອກຊື້ສິນຄ້າ</a></div>';
+      summaryDiv.style.display = 'none';
       return;
     }
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ກຳລັງດຳເນີນ...';
-    try {
-      await addDoc(collection(db, 'orders'), {
-        userId: user.uid,
-        customerInfo: {
-          name: document.getElementById('name').value.trim(),
-          phone: document.getElementById('phone').value.trim(),
-          email: document.getElementById('email').value.trim()
-        },
-        items: cart.map(item => ({ productId: item.id, productName: item.name, quantity: item.quantity, unitPrice: item.price, totalPrice: item.price * item.quantity })),
-        totalAmount: total,
-        paymentMethod: document.getElementById('paymentMethod').value,
-        orderStatus: 'pending',
-        shippingAddress: document.getElementById('address').value.trim(),
-        createdAt: serverTimestamp()
-      });
-      localStorage.removeItem('b_one_cart');
-      alert('ສັ່ງຊື້ສຳເລັດ!');
-      window.location.href = 'orders.html';
-    } catch (err) {
-      console.error(err);
-      alert('ເກີດຂໍ້ຜິດພາດ, ກະລຸນາລອງໃໝ່');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = 'ຢືນຢັນການສັ່ງຊື້';
+    
+    summaryDiv.style.display = 'block';
+    
+    cart.forEach((item, index) => {
+      total += item.price * item.quantity;
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <img src="${item.image || 'https://via.placeholder.com/100'}" alt="${item.name}" loading="lazy">
+        <div class="details">
+          <h4>${item.name}</h4>
+          <div class="category">${item.category || 'ສິນຄ້າທົ່ວໄປ'}</div>
+          <div class="price">₭${item.price.toLocaleString()}</div>
+        </div>
+        <input type="number" class="qty" value="${item.quantity}" min="1" data-index="${index}">
+        <div class="item-total">₭${(item.price * item.quantity).toLocaleString()}</div>
+        <button class="btn-remove" data-index="${index}"><i class="fas fa-trash-alt"></i></button>
+      `;
+      container.appendChild(div);
+    });
+    document.getElementById('totalPrice').textContent = total.toLocaleString();
+  }
+
+  renderCart();
+
+  container.addEventListener('click', (e) => {
+    const removeBtn = e.target.closest('.btn-remove');
+    if (removeBtn) {
+      const index = removeBtn.dataset.index;
+      cart.splice(index, 1);
+      localStorage.setItem('b_one_cart', JSON.stringify(cart));
+      renderCart();
+    }
+  });
+
+  container.addEventListener('change', (e) => {
+    if (e.target.classList.contains('qty')) {
+      const index = e.target.dataset.index;
+      let newQty = parseInt(e.target.value);
+      if (isNaN(newQty) || newQty < 1) newQty = 1;
+      cart[index].quantity = newQty;
+      localStorage.setItem('b_one_cart', JSON.stringify(cart));
+      renderCart();
     }
   });
 </script>
