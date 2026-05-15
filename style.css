@@ -821,3 +821,78 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin-bottom: 8px;
   padding-left: 0;
 }
+/* ========== ENHANCED NAVBAR HOVER EFFECTS ========== */
+/* ກຳນົດຄ່າພື້ນຖານ */
+.nav-links li a {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+/* ເສັ້ນຂີດກ້ອງ (underline effect) ສີທອງ */
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #ffd700;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+/* ເມື່ອ hover: ເສັ້ນຂີດກ້ອງຈະຍາວຂຶ້ນ */
+.nav-links li a:hover::after {
+  width: 70%;
+}
+
+/* Hover effect: ຍົກຂຶ້ນເລັກນ້ອຍ + ພື້ນໂປ່ງເບົາ + ເງົາ */
+.nav-links li a:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ສຳລັບລາຍການທີ່ active (ໜ້າປັດຈຸບັນ) */
+.nav-links li a.active {
+  background: white;
+  color: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.nav-links li a.active::after {
+  width: 70%;
+  background: #b91c1c;
+}
+
+/* ສຳລັບປຸ່ມ Login/Register (ສ່ວນ Auth) */
+#userDisplay a, #loginDisplay a {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#userDisplay a:hover, #loginDisplay a:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ເພີ່ມໄອຄອນເລື່ອນເມື່ອ hover */
+.nav-links li a i,
+#userDisplay a i,
+#loginDisplay a i {
+  transition: transform 0.2s ease;
+}
+
+.nav-links li a:hover i,
+#userDisplay a:hover i,
+#loginDisplay a:hover i {
+  transform: translateX(3px);
+}
+/* ເພີ່ມ glow effect ສີແດງ */
+.nav-links li a:hover {
+  box-shadow: 0 0 12px rgba(185, 28, 28, 0.6);
+  transform: translateY(-3px) scale(1.02);
+}
