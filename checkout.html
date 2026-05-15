@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* (ໃຊ້ CSS ດຽວກັບທີ່ມີຢູ່ແລ້ວ ຫຼື ຄັດລອກຈາກຂ້າງເທິງ) */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', 'Noto Sans Lao', sans-serif;
@@ -94,6 +93,25 @@
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .back-link { display: block; text-align: center; margin-top: 20px; color: #6c757d; text-decoration: none; }
     .back-link:hover { color: #b91c1c; }
+    .slip-preview {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .slip-preview img {
+      max-width: 100px;
+      max-height: 100px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .btn-sm {
+      background: #6c757d;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      border-radius: 20px;
+    }
     @media (max-width: 550px) {
       .page-body { padding: 20px; }
       .form-group input, .form-group textarea, .form-group select { padding: 12px 14px; }
@@ -138,6 +156,17 @@
           <option value="transfer">ໂອນເງິນ (ຜ່ານທະນາຄານ)</option>
         </select>
       </div>
+
+      <!-- ສ່ວນອັບໂຫຼດສະລິບ (ຈະສະແດງເມື່ອເລືອກໂອນເງິນ) -->
+      <div id="slipUploadSection" style="display: none;">
+        <div class="form-group">
+          <label><i class="fas fa-receipt"></i> ແນບສະລິບການໂອນເງິນ</label>
+          <input type="file" id="slipFile" accept="image/*">
+          <div id="slipPreview" class="slip-preview"></div>
+          <small>ອັບໂຫຼດຮູບສະລິບ (ສະຫນັບສະຫນູນ JPG, PNG)</small>
+        </div>
+      </div>
+
       <button type="submit" class="btn" id="submitBtn">ຢືນຢັນການສັ່ງຊື້</button>
     </form>
     <a href="cart.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປກະຕ່າສິນຄ້າ</a>
@@ -163,6 +192,88 @@
     <div class="cart-total"><span>ລວມທັງໝົດ:</span> <span>₭${total.toLocaleString()}</span></div>
   `;
 
+  // ຕົວແປສຳລັບເກັບ URL ສະລິບຫຼັງອັບໂຫຼດ
+  let uploadedSlipUrl = '';
+  let isUploading = false;
+
+  const paymentMethodSelect = document.getElementById('paymentMethod');
+  const slipUploadSection = document.getElementById('slipUploadSection');
+  const slipFileInput = document.getElementById('slipFile');
+  const slipPreview = document.getElementById('slipPreview');
+
+  // ຟັງຊັນອັບໂຫຼດຮູບໄປ ImgBB
+  async function uploadImageToImgBB(file) {
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const res = await fetch(`https://api.imgbb.com/1/upload?key=85d8acf7f765f021b6c76dfae3650f53`, {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        return data.data.url;
+      } else {
+        throw new Error('ອັບໂຫຼດບໍ່ສຳເລັດ');
+      }
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+
+  // ເມື່ອເລືອກວິທີຊຳລະ
+  paymentMethodSelect.addEventListener('change', (e) => {
+    if (e.target.value === 'transfer') {
+      slipUploadSection.style.display = 'block';
+    } else {
+      slipUploadSection.style.display = 'none';
+      uploadedSlipUrl = '';
+      slipPreview.innerHTML = '';
+      slipFileInput.value = '';
+    }
+  });
+
+  // ອັບໂຫຼດສະລິບເມື່ອເລືອກໄຟລ໌
+  slipFileInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      alert('ກະລຸນາເລືອກໄຟລ໌ຮູບພາບເທົ່ານັ້ນ');
+      slipFileInput.value = '';
+      return;
+    }
+    // ສະແດງ preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      slipPreview.innerHTML = `<img src="${e.target.result}" alt="preview"><button type="button" class="btn-sm" id="removeSlipBtn">ລຶບ</button>`;
+      const removeBtn = document.getElementById('removeSlipBtn');
+      if (removeBtn) {
+        removeBtn.addEventListener('click', () => {
+          slipPreview.innerHTML = '';
+          slipFileInput.value = '';
+          uploadedSlipUrl = '';
+        });
+      }
+    };
+    reader.readAsDataURL(file);
+
+    // ອັບໂຫຼດຮູບ
+    try {
+      isUploading = true;
+      const url = await uploadImageToImgBB(file);
+      uploadedSlipUrl = url;
+      alert('ອັບໂຫຼດສະລິບສຳເລັດ');
+    } catch (err) {
+      alert('ອັບໂຫຼດສະລິບລົ້ມເຫຼວ, ກະລຸນາລອງໃໝ່');
+      uploadedSlipUrl = '';
+      slipPreview.innerHTML = '';
+      slipFileInput.value = '';
+    } finally {
+      isUploading = false;
+    }
+  });
+
   function showAlert(msg, isError = true) {
     const alertBox = document.createElement('div');
     alertBox.textContent = msg;
@@ -180,6 +291,7 @@
     setTimeout(() => alertBox.remove(), 4000);
   }
 
+  // ດຶງຂໍ້ມູນຜູ້ໃຊ້
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້', true);
@@ -208,6 +320,14 @@
     const paymentMethod = document.getElementById('paymentMethod').value;
     if (!address) { showAlert('ກະລຸນາຕື່ມທີ່ຢູ່ຈັດສົ່ງ', true); return; }
     if (!paymentMethod) { showAlert('ກະລຸນາເລືອກວິທີຊຳລະ', true); return; }
+    if (paymentMethod === 'transfer' && !uploadedSlipUrl) {
+      showAlert('ກະລຸນາອັບໂຫຼດສະລິບການໂອນເງິນ', true);
+      return;
+    }
+    if (paymentMethod === 'transfer' && isUploading) {
+      showAlert('ກຳລັງອັບໂຫຼດສະລິບ, ກະລຸນາລໍຖ້າ...', true);
+      return;
+    }
 
     const userDoc = await getDoc(doc(db, 'users', user.uid));
     const userData = userDoc.data();
@@ -217,17 +337,29 @@
 
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ກຳລັງດຳເນີນ...';
+
     try {
-      await addDoc(collection(db, 'orders'), {
+      const orderData = {
         userId: user.uid,
         customerInfo: { name: customerName, phone: customerPhone, email: customerEmail },
-        items: cart.map(item => ({ productId: item.id, productName: item.name, quantity: item.quantity, unitPrice: item.price, totalPrice: item.price * item.quantity })),
+        items: cart.map(item => ({
+          productId: item.id,
+          productName: item.name,
+          quantity: item.quantity,
+          unitPrice: item.price,
+          totalPrice: item.price * item.quantity
+        })),
         totalAmount: total,
         paymentMethod: paymentMethod,
         orderStatus: 'pending',
         shippingAddress: address,
         createdAt: serverTimestamp()
-      });
+      };
+      if (paymentMethod === 'transfer' && uploadedSlipUrl) {
+        orderData.slipUrl = uploadedSlipUrl;
+        orderData.paymentStatus = 'waiting_verification'; // ເພີ່ມສະຖານະການຢັ້ງຢືນການຈ່າຍ
+      }
+      await addDoc(collection(db, 'orders'), orderData);
       localStorage.removeItem('b_one_cart');
       showAlert('ສັ່ງຊື້ສຳເລັດ! ກຳລັງໄປຍັງໜ້າປະຫວັດຄຳສັ່ງຊື້', false);
       setTimeout(() => window.location.href = 'orders.html', 2000);
