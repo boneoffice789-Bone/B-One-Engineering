@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* (ໃຊ້ CSS ດຽວກັບທີ່ມີຢູ່ແລ້ວ ຫຼື ຄັດລອກຈາກຂ້າງເທິງ) */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', 'Noto Sans Lao', sans-serif;
@@ -109,7 +110,6 @@
   <div class="page-body">
     <div class="cart-summary" id="cartSummary"></div>
     <form id="orderForm">
-      <!-- ຂໍ້ມູນຜູ້ໃຊ້ (ດຶງມາຈາກ Firebase Auth ແລະ Firestore) ແບບອັດຕະໂນມັດ ບໍ່ໃຫ້ແກ້ໄຂ -->
       <div class="info-row">
         <i class="fas fa-user-circle"></i>
         <span>ຂໍ້ມູນຈາກບັນຊີຂອງທ່ານ</span>
@@ -126,8 +126,6 @@
         <label><i class="fas fa-envelope"></i> ອີເມວ</label>
         <input type="email" id="email" disabled>
       </div>
-
-      <!-- ລາຍລະອຽດທີ່ລູກຄ້າຕ້ອງຕື່ມເອງ -->
       <div class="form-group">
         <label><i class="fas fa-map-marker-alt"></i> ທີ່ຢູ່ຈັດສົ່ງ *</label>
         <textarea id="address" rows="3" placeholder="ບ້ານ, ເມືອງ, ແຂວງ..." required></textarea>
@@ -146,21 +144,12 @@
   </div>
 </div>
 
-<script>
-  // Mobile menu toggle (ຖ້າມີ navbar ໃນ checkout)
-  const mobileBtn = document.getElementById('mobile-menu');
-  if (mobileBtn) {
-    mobileBtn.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
-  }
-</script>
-
 <script type="module">
   import { auth, db, doc, getDoc, collection, addDoc, serverTimestamp, onAuthStateChanged } from './firebase-config.js';
 
   const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
   if (cart.length === 0) window.location.href = 'cart.html';
 
-  // ຄຳນວນລວມເງິນ
   let total = 0;
   const summaryDiv = document.getElementById('cartSummary');
   let itemsHtml = '';
@@ -174,7 +163,6 @@
     <div class="cart-total"><span>ລວມທັງໝົດ:</span> <span>₭${total.toLocaleString()}</span></div>
   `;
 
-  // ຟັງຊັນສະແດງ Alert (ງ່າຍ)
   function showAlert(msg, isError = true) {
     const alertBox = document.createElement('div');
     alertBox.textContent = msg;
@@ -192,25 +180,19 @@
     setTimeout(() => alertBox.remove(), 4000);
   }
 
-  // ດຶງຂໍ້ມູນຜູ້ໃຊ້ ແລະ ຕື່ມໃສ່ຟອມ (ຫ້າມແກ້ໄຂ)
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້', true);
       setTimeout(() => window.location.href = 'login.html', 2000);
       return;
     }
-
-    // ດຶງຂໍ້ມູນຈາກ Firestore (collection users)
     const userDoc = await getDoc(doc(db, 'users', user.uid));
     const userData = userDoc.data();
-    
-    // ຕື່ມຂໍ້ມູນໃສ່ຊ່ອງ (ຫ້າມແກ້ໄຂ)
     document.getElementById('name').value = user.displayName || userData?.displayName || 'ບໍ່ລະບຸ';
     document.getElementById('phone').value = userData?.phone || '';
     document.getElementById('email').value = user.email || '';
   });
 
-  // ຈັດການສົ່ງຟອມ
   const form = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -222,20 +204,11 @@
       window.location.href = 'login.html';
       return;
     }
-
     const address = document.getElementById('address').value.trim();
     const paymentMethod = document.getElementById('paymentMethod').value;
+    if (!address) { showAlert('ກະລຸນາຕື່ມທີ່ຢູ່ຈັດສົ່ງ', true); return; }
+    if (!paymentMethod) { showAlert('ກະລຸນາເລືອກວິທີຊຳລະ', true); return; }
 
-    if (!address) {
-      showAlert('ກະລຸນາຕື່ມທີ່ຢູ່ຈັດສົ່ງ', true);
-      return;
-    }
-    if (!paymentMethod) {
-      showAlert('ກະລຸນາເລືອກວິທີຊຳລະ', true);
-      return;
-    }
-
-    // ດຶງຂໍ້ມູນຜູ້ໃຊ້ລ່າສຸດອີກຄັ້ງ
     const userDoc = await getDoc(doc(db, 'users', user.uid));
     const userData = userDoc.data();
     const customerName = user.displayName || userData?.displayName || 'ບໍ່ລະບຸ';
@@ -244,29 +217,17 @@
 
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ກຳລັງດຳເນີນ...';
-
     try {
       await addDoc(collection(db, 'orders'), {
         userId: user.uid,
-        customerInfo: {
-          name: customerName,
-          phone: customerPhone,
-          email: customerEmail
-        },
-        items: cart.map(item => ({
-          productId: item.id,
-          productName: item.name,
-          quantity: item.quantity,
-          unitPrice: item.price,
-          totalPrice: item.price * item.quantity
-        })),
+        customerInfo: { name: customerName, phone: customerPhone, email: customerEmail },
+        items: cart.map(item => ({ productId: item.id, productName: item.name, quantity: item.quantity, unitPrice: item.price, totalPrice: item.price * item.quantity })),
         totalAmount: total,
         paymentMethod: paymentMethod,
         orderStatus: 'pending',
         shippingAddress: address,
         createdAt: serverTimestamp()
       });
-      
       localStorage.removeItem('b_one_cart');
       showAlert('ສັ່ງຊື້ສຳເລັດ! ກຳລັງໄປຍັງໜ້າປະຫວັດຄຳສັ່ງຊື້', false);
       setTimeout(() => window.location.href = 'orders.html', 2000);
