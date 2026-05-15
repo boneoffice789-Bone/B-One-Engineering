@@ -10,9 +10,14 @@
   <style>
     .cart-icon-wrapper { position: relative; }
     .cart-count { position: absolute; top: -8px; right: -12px; background: #ffd700; color: #b30000; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-    .product-card .btn-add-to-cart { background: #b91c1c; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: pointer; transition: 0.3s; }
+    .product-card .btn-add-to-cart { background: #b91c1c; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: pointer; transition: 0.3s; width: 100%; }
     .product-card .btn-add-to-cart:hover { background: #8b1515; transform: translateY(-2px); }
+    .product-card .btn-out-of-stock { background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: not-allowed; width: 100%; }
     .notification { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 12px 20px; border-radius: 8px; z-index: 1000; display: none; }
+    .stock-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-top: 5px; }
+    .stock-in { background: #d4edda; color: #155724; }
+    .stock-low { background: #fff3cd; color: #856404; }
+    .stock-out { background: #f8d7da; color: #721c24; }
   </style>
 </head>
 <body>
@@ -60,7 +65,7 @@
 <script>
   const mobileBtn = document.getElementById('mobile-menu');
   mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
-  // Cart helpers
+  
   function getCart() { return JSON.parse(localStorage.getItem('b_one_cart') || '[]'); }
   function saveCart(cart) { localStorage.setItem('b_one_cart', JSON.stringify(cart)); updateCartCount(); }
   function updateCartCount() { document.getElementById('cartCount').innerText = getCart().reduce((s,i)=>s+i.quantity,0); }
@@ -95,28 +100,57 @@
       grid.innerHTML = '';
       snap.forEach(doc => {
         const p = doc.data();
-        const product = { id: doc.id, name: p.name, price: p.price, image: p.image || 'https://via.placeholder.com/300x200', category: p.category || 'ທົ່ວໄປ' };
+        const stock = p.stock !== undefined ? p.stock : 0;
+        let stockBadge = '';
+        let stockClass = 'stock-out';
+        let stockText = 'ສິນຄ້າຫມົດ';
+        if (stock > 10) {
+          stockClass = 'stock-in';
+          stockText = `ສະຕ໋ອກ: ${stock} ອັນ`;
+        } else if (stock > 0 && stock <= 10) {
+          stockClass = 'stock-low';
+          stockText = `ສະຕ໋ອກ: ${stock} ອັນ (ເຫຼືອໜ້ອຍ)`;
+        } else {
+          stockClass = 'stock-out';
+          stockText = 'ສິນຄ້າຫມົດ';
+        }
+        stockBadge = `<div class="stock-badge ${stockClass}"><i class="fas fa-boxes"></i> ${stockText}</div>`;
+        
+        const product = { id: doc.id, name: p.name, price: p.price, image: p.image || 'https://via.placeholder.com/300x200', category: p.category || 'ທົ່ວໄປ', stock: stock };
+        
         grid.innerHTML += `
-          <div class="product-card" style="background:white; border-radius:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div class="product-card" style="background:white; border-radius:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
             <div style="height:200px; overflow:hidden;"><img src="${product.image}" style="width:100%; height:100%; object-fit:cover;"></div>
-            <div style="padding:20px;">
+            <div style="padding:20px; flex:1; display:flex; flex-direction:column;">
               <h3 style="font-size:1.2rem;">${product.name}</h3>
               <p style="color:#6c757d;">${product.category}</p>
               <p style="color:#b91c1c; font-weight:700; font-size:1.2rem;">₭${product.price.toLocaleString()}</p>
-              <button class="btn-add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image}"><i class="fas fa-cart-plus"></i> ເພີ່ມໃສ່ກະຕ່າ</button>
+              ${stockBadge}
+              ${stock > 0 ? `<button class="btn-add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image}" data-stock="${product.stock}"><i class="fas fa-cart-plus"></i> ເພີ່ມໃສ່ກະຕ່າ</button>` : `<button class="btn-out-of-stock" disabled><i class="fas fa-times-circle"></i> ສິນຄ້າຫມົດ</button>`}
             </div>
           </div>
         `;
       });
       document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
         btn.addEventListener('click', () => {
-          const product = { id: btn.dataset.id, name: btn.dataset.name, price: parseInt(btn.dataset.price), image: btn.dataset.image };
+          const product = { 
+            id: btn.dataset.id, 
+            name: btn.dataset.name, 
+            price: parseInt(btn.dataset.price), 
+            image: btn.dataset.image,
+            stock: parseInt(btn.dataset.stock)
+          };
           let cart = getCart();
           const existing = cart.find(item => item.id === product.id);
+          const currentQtyInCart = existing ? existing.quantity : 0;
+          if (currentQtyInCart >= product.stock) {
+            showNotification(`ສິນຄ້າ ${product.name} ມີສະຕ໋ອກເຫຼືອພຽງ ${product.stock} ອັນ, ທ່ານຈຶ່ງບໍ່ສາມາດເພີ່ມໄດ້ອີກ`);
+            return;
+          }
           if (existing) existing.quantity++;
           else cart.push({ ...product, quantity: 1 });
           saveCart(cart);
-          showNotification(`ເພີ່ມ ${product.name} ເພີ່ມໃສ່ກະຕ່າສິນຄ້າ`);
+          showNotification(`ເພີ່ມ ${product.name} ໃສ່ກະຕ່າສິນຄ້າ`);
         });
       });
     } catch(e) { console.error(e); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
