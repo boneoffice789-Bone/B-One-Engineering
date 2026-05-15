@@ -1,6 +1,7 @@
 /* =============================================
    B-One Engineering - COMPLETE CSS (2026)
    Fully responsive | Glassmorphism slider | Auth section
+   Font: Phetsarath OT (Lao traditional)
    ============================================= */
 
 /* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
@@ -25,7 +26,7 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --font-sans: 'Noto Sans Lao', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Phetsarath OT', 'Noto Sans Lao', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
