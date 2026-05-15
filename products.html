@@ -116,7 +116,7 @@
           if (existing) existing.quantity++;
           else cart.push({ ...product, quantity: 1 });
           saveCart(cart);
-          showNotification(`ເພີ່ມ ${product.name} ໃສ່ຕະກອນ`);
+          showNotification(`ເພີ່ມ ${product.name} ເພີ່ມໃສ່ກະຕ່າສິນຄ້າ`);
         });
       });
     } catch(e) { console.error(e); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
