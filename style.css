@@ -1049,26 +1049,6 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     font-size: 1rem;
   }
 }
-/* ບັງຄັບໃຊ້ Phetsarath OT ສຳລັບຂໍ້ຄວາມລາວ (ຍົກເວັ້ນໄອຄອນ) */
-:lang(lo):not(i):not(.fas):not(.far):not(.fab), 
-[lang="lo"]:not(i):not(.fas):not(.far):not(.fab), 
-.lao-text:not(i):not(.fas):not(.far):not(.fab),
-h1:not(i):not(.fas):not(.far):not(.fab), 
-h2:not(i):not(.fas):not(.far):not(.fab), 
-h3:not(i):not(.fas):not(.far):not(.fab), 
-h4:not(i):not(.fas):not(.far):not(.fab), 
-h5:not(i):not(.fas):not(.far):not(.fab), 
-h6:not(i):not(.fas):not(.far):not(.fab),
-.section-title:not(i):not(.fas):not(.far):not(.fab), 
-.service-card h3:not(i):not(.fas):not(.far):not(.fab), 
-.team-card h4:not(i):not(.fas):not(.far):not(.fab), 
-.customer-item h4:not(i):not(.fas):not(.far):not(.fab),
-.logo h1:not(i):not(.fas):not(.far):not(.fab), 
-.logo p:not(i):not(.fas):not(.far):not(.fab), 
-.hero-content h1:not(i):not(.fas):not(.far):not(.fab), 
-.nav-links li a .lao:not(i):not(.fas):not(.far):not(.fab) {
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
-}
 /* ບັງຄັບໃຊ້ Phetsarath OT ໃຫ້ກັບທຸກ element ທີ່ມີຂໍ້ຄວາມລາວ (ຍົກເວັ້ນໄອຄອນ) */
 *:not(i):not(.fas):not(.far):not(.fab):not([class*="fa-"]) {
   font-family: var(--font-sans);
