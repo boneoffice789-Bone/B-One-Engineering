@@ -1,7 +1,7 @@
 /* =============================================
    B-One Engineering - COMPLETE CSS (2026)
    Fully responsive | Glassmorphism slider | Auth section
-   Font: Phetsarath OT (Lao traditional)
+   Font: Phetsarath OT (Lao) / Tahoma (English)
    ============================================= */
 
 /* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
@@ -26,7 +26,8 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --font-sans: 'Phetsarath OT', 'Noto Sans Lao', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* ປັບຟອນ: Phetsarath OT ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
+  --font-sans: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 * {
@@ -45,6 +46,18 @@ body {
   width: 100%;
 }
 
+/* ກຳນົດຟອນສະເພາະສຳລັບພາສາອັງກິດ (ຄລາສ .eng) */
+.eng {
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* ກຳນົດຟອນສະເພາະສຳລັບພາສາລາວ (ຄລາສ .lao) */
+.lao {
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
+}
+
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -52,7 +65,7 @@ body {
   width: 100%;
 }
 
-/* ---------- HEADER & NAVBAR (ປັບປຸງສ່ວນ Auth) ---------- */
+/* ---------- HEADER & NAVBAR ---------- */
 header {
   background: rgba(185, 28, 28, 0.96);
   backdrop-filter: blur(12px);
@@ -97,6 +110,7 @@ header {
   margin: 0;
   word-break: break-word;
   white-space: normal;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .logo p {
@@ -106,6 +120,7 @@ header {
   margin-top: 2px;
   word-break: break-word;
   white-space: normal;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .menu-toggle {
@@ -148,6 +163,7 @@ header {
   font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .nav-links li a .eng {
@@ -157,6 +173,7 @@ header {
   margin-top: 2px;
   opacity: 0.8;
   white-space: nowrap;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 .nav-links li a.active {
@@ -164,7 +181,7 @@ header {
   color: var(--primary);
 }
 
-/* ========== AUTH SECTION STYLES (ປັບປຸງເພີ່ມ) ========== */
+/* ========== AUTH SECTION STYLES ========== */
 #auth-section {
   margin-left: 10px;
   display: flex;
@@ -180,6 +197,7 @@ header {
   padding: 6px 16px;
   transition: all 0.3s ease;
   white-space: nowrap;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 #userDisplay a:hover, #loginDisplay a:hover {
@@ -211,6 +229,7 @@ header {
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 .btn-outline {
@@ -253,6 +272,7 @@ header {
   font-weight: 800;
   letter-spacing: -0.5px;
   word-break: break-word;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .hero-content p {
@@ -261,6 +281,7 @@ header {
   margin-bottom: 28px;
   word-break: break-word;
   max-width: 100%;
+  font-family: var(--font-sans);
 }
 
 .hero-badge {
@@ -275,6 +296,7 @@ header {
   font-weight: 700;
   margin-left: auto;
   margin-right: auto;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 .hero-content .btn,
@@ -306,6 +328,7 @@ section {
   font-weight: 800;
   letter-spacing: -0.3px;
   word-break: break-word;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .section-title::after {
@@ -325,6 +348,7 @@ section {
   color: var(--text-light);
   font-size: 1rem;
   word-break: break-word;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 /* ---------- Grid ທົ່ວໄປ ---------- */
@@ -371,6 +395,7 @@ section {
   padding: 16px 20px 8px;
   font-weight: 700;
   word-break: break-word;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .service-card p, .portfolio-card p {
@@ -378,6 +403,7 @@ section {
   color: var(--text-light);
   flex: 1;
   word-break: break-word;
+  font-family: var(--font-sans);
 }
 
 .portfolio-img {
@@ -408,6 +434,7 @@ section {
   margin: 20px 0;
   font-weight: 600;
   word-break: break-word;
+  font-family: var(--font-sans);
 }
 
 .contact-list {
@@ -422,6 +449,7 @@ section {
   margin-bottom: 15px;
   word-break: break-word;
   flex-wrap: wrap;
+  font-family: var(--font-sans);
 }
 
 .contact-list i {
@@ -467,6 +495,7 @@ footer {
   margin-top: 50px;
   font-size: 0.85rem;
   word-break: break-word;
+  font-family: var(--font-sans);
 }
 
 footer a {
@@ -560,11 +589,13 @@ footer a:hover {
   margin-bottom: 12px;
   font-weight: 700;
   word-break: break-word;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 .slide-content p {
   font-size: 1rem;
   margin-bottom: 20px;
   opacity: 0.95;
+  font-family: var(--font-sans);
 }
 .slide-content .btn,
 .slide-content a.btn,
@@ -581,6 +612,7 @@ footer a:hover {
   text-decoration: none !important;
   transition: all 0.3s ease !important;
   cursor: pointer;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif !important;
 }
 .slide-content .btn:hover,
 .slide-content a.btn:hover {
@@ -668,6 +700,7 @@ footer a:hover {
   font-weight: 600;
   margin: 15px 20px 0;
   width: fit-content;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 .news-badge.news {
   background: #e3f2fd;
@@ -682,6 +715,7 @@ footer a:hover {
   padding: 12px 20px 8px;
   font-weight: 700;
   word-break: break-word;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 .news-card p {
   padding: 0 20px 20px;
@@ -689,6 +723,7 @@ footer a:hover {
   line-height: 1.6;
   flex: 1;
   word-break: break-word;
+  font-family: var(--font-sans);
 }
 .news-date {
   padding: 0 20px 15px;
@@ -699,6 +734,7 @@ footer a:hover {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 /* ========== RESPONSIVE ========== */
@@ -821,15 +857,14 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin-bottom: 8px;
   padding-left: 0;
 }
+
 /* ========== ENHANCED NAVBAR HOVER EFFECTS ========== */
-/* ກຳນົດຄ່າພື້ນຖານ */
 .nav-links li a {
   position: relative;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow: hidden;
 }
 
-/* ເສັ້ນຂີດກ້ອງ (underline effect) ສີທອງ */
 .nav-links li a::after {
   content: '';
   position: absolute;
@@ -842,19 +877,16 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   transform: translateX(-50%);
 }
 
-/* ເມື່ອ hover: ເສັ້ນຂີດກ້ອງຈະຍາວຂຶ້ນ */
 .nav-links li a:hover::after {
   width: 70%;
 }
 
-/* Hover effect: ຍົກຂຶ້ນເລັກນ້ອຍ + ພື້ນໂປ່ງເບົາ + ເງົາ */
 .nav-links li a:hover {
   transform: translateY(-3px);
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ສຳລັບລາຍການທີ່ active (ໜ້າປັດຈຸບັນ) */
 .nav-links li a.active {
   background: white;
   color: #b91c1c;
@@ -867,7 +899,6 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   background: #b91c1c;
 }
 
-/* ສຳລັບປຸ່ມ Login/Register (ສ່ວນ Auth) */
 #userDisplay a, #loginDisplay a {
   position: relative;
   transition: all 0.3s ease;
@@ -879,7 +910,6 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* ເພີ່ມໄອຄອນເລື່ອນເມື່ອ hover */
 .nav-links li a i,
 #userDisplay a i,
 #loginDisplay a i {
@@ -891,11 +921,13 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
 #loginDisplay a:hover i {
   transform: translateX(3px);
 }
-/* ເພີ່ມ glow effect ສີແດງ */
+
 .nav-links li a:hover {
   box-shadow: 0 0 12px rgba(185, 28, 28, 0.6);
   transform: translateY(-3px) scale(1.02);
 }
+
+/* ========== TEAM GRID (ທີມງານ) ========== */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
@@ -933,11 +965,13 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   color: #b30000;
   font-size: 1rem;
   margin: 0.5rem 1rem 0.2rem;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .team-card p {
   color: #4b5563;
   font-size: 0.85rem;
+  font-family: var(--font-sans);
 }
 
 @media (max-width: 640px) {
@@ -946,11 +980,12 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     height: 100px;
   }
 }
-/* ສ່ວນສະແດງລູກຄ້າ - ຈັດກາງ */
+
+/* ========== CUSTOMER GRID (ລູກຄ້າ) ========== */
 .customer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 260px));
-  justify-content: center;   /* ຈັດກາງຕາມແນວນອນ */
+  justify-content: center;
   gap: 30px;
   margin-top: 40px;
 }
@@ -993,9 +1028,9 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   font-weight: 700;
   color: #b30000;
   margin-bottom: 6px;
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
-/* ປັບສຳລັບມືຖື */
 @media (max-width: 640px) {
   .customer-grid {
     gap: 20px;
