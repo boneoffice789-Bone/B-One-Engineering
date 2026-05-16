@@ -1014,26 +1014,3 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     font-size: 1rem;
   }
 }
-/* ຈັດຂໍ້ຄວາມໃນສ່ວນ "ຂໍ້ດີຂອງເຮົາ" ໃຫ້ຢູ່ກາງ */
-.about-text, .advantage-text {
-  text-align: center;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ຖ້າມີສ່ວນທີ່ໃຊ້ grid ທົ່ວໄປ ຕ້ອງການໃຫ້ຢູ່ກາງ ໃຫ້ໃຊ້ justify-content: center */
-.advantage-grid, .company-info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-/* ສຳລັບຂໍ້ມູນຕິດຕໍ່ (ທີ່ຢູ່, ເບີໂທ) ໃຫ້ຢູ່ກາງ */
-.contact-center {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
