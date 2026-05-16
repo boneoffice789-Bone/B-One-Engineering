@@ -1,0 +1,19 @@
+# =============================================
+# B-One Engineering - .htaccess
+# ຖອນ .html ອອກຈາກ URL ທຸກໜ້າ
+# =============================================
+
+RewriteEngine On
+RewriteBase /
+
+# ໃຫ້ index.html ເປັນໜ້າຫຼັກ
+DirectoryIndex index.html
+
+# ອັດຕະໂນມັດ: ຖ້າເຂົ້າ /about ໃຫ້ໂຫຼດ about.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# ປ່ຽນເສັ້ນທາງ 301: /about.html -> /about (ເພື່ອ SEO)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)\.html\ HTTP/
+RewriteRule ^(.*)\.html$ /$1 [R=301,L]
