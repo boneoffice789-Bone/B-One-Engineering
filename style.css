@@ -53,11 +53,22 @@ body {
   width: 100%;
 }
 
-/* English / Lao language targeting */
-.eng, .nav-links li a .eng, .btn, .section-sub,
-.slide-content .btn, .hero-badge, .news-badge, .news-date,
-#userDisplay a, #loginDisplay a, [lang="en"], :lang(en) {
+.eng,
+.nav-links li a .eng,
+.section-sub,
+.hero-badge,
+.news-badge,
+.news-date,
+#userDisplay a,
+#loginDisplay a,
+[lang="en"] {
   font-family: var(--font-eng) !important;
+}
+
+/* ປຸ່ມພາສາລາວ */
+.btn,
+.slide-content .btn {
+  font-family: var(--font-lao) !important;
 }
 
 .lao, .nav-links li a .lao, h1, h2, h3, h4, h5, h6,
