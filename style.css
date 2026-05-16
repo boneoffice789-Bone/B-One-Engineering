@@ -995,12 +995,6 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin-bottom: 6px;
 }
 
-.customer-item p {
-  font-size: 0.85rem;
-  color: #5a6874;
-  margin: 0;
-}
-
 /* ປັບສຳລັບມືຖື */
 @media (max-width: 640px) {
   .customer-grid {
