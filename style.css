@@ -1069,3 +1069,31 @@ h6:not(i):not(.fas):not(.far):not(.fab),
 .nav-links li a .lao:not(i):not(.fas):not(.far):not(.fab) {
   font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
+/* ບັງຄັບໃຊ້ Phetsarath OT ໃຫ້ກັບທຸກ element ທີ່ມີຂໍ້ຄວາມລາວ (ຍົກເວັ້ນໄອຄອນ) */
+*:not(i):not(.fas):not(.far):not(.fab):not([class*="fa-"]) {
+  font-family: var(--font-sans);
+}
+
+/* ສຳລັບອັງກິດ (ເມນູ, ປຸ່ມ, ຄຳສັ້ນ) ໃຫ້ໃຊ້ Tahoma ຊັດເຈນ */
+.nav-links li a .eng,
+.btn,
+.section-sub,
+.slide-content .btn,
+.eng-text,
+[lang="en"] {
+  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif !important;
+}
+/* ຈັດເມນູຫຼັກໃຫ້ຢູ່ກາງສະເໝີ */
+@media (min-width: 901px) {
+  .navbar {
+    justify-content: space-between;
+  }
+  .nav-links {
+    margin: 0 auto;
+  }
+}
+
+/* ຈັດຂໍ້ຄວາມ Hero ໃຫ້ຢູ່ກາງ */
+.hero-content {
+  text-align: center;
+}
