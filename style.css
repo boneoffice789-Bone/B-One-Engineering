@@ -1,7 +1,7 @@
 /* =============================================
    B-One Engineering - COMPLETE CSS (2026)
    Fully responsive | Glassmorphism slider | Auth section
-   Font: Phetsarath OT (Lao) / Tahoma (English)
+   Font: Noto Sans Lao (Lao) / Tahoma (English)
    ============================================= */
 
 /* ---------- ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ ---------- */
@@ -26,8 +26,8 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* ຟອນຫຼັກ: Phetsarath OT ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
-  --font-lao: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
+  /* ຟອນຫຼັກ: Noto Sans Lao ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
+  --font-lao: 'Noto Sans Lao', 'Phetsarath OT', 'Tahoma', sans-serif;
   --font-eng: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
