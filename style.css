@@ -2,16 +2,7 @@
    B-One Engineering - COMPLETE CSS (2026)
    ============================================= */
 
-/* ໂຫຼດຟອນ Noto Sans Lao ຈາກ Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;500;600;700;800&display=swap');
-
 /* ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ */
-:root {
-  --primary: #b91c1c;
-  ...
-  --font-lao: 'Noto Sans Lao', 'Phetsarath OT', 'Tahoma', sans-serif;
-  --font-eng: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
-}
 :root {
   --primary: #b91c1c;
   --primary-dark: #8b1515;
@@ -33,9 +24,10 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* ຟອນຫຼັກ: Noto Sans Lao ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
-  --font-lao: 'Noto Sans Lao', 'Phetsarath OT', 'Tahoma', sans-serif;
-  --font-eng: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
+  
+  /* ຟອນຫຼັກ: Phetsarath OT ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
+  --font-lao: 'Phetsarath OT', sans-serif;
+  --font-eng: 'Tahoma', sans-serif;
 }
 
 * {
@@ -45,7 +37,8 @@
 }
 
 body {
-  font-family: var(--font-lao);
+  /* ໃຊ້ Tahoma ສຳລັບອັງກິດ, ແລະ Phetsarath OT ສຳລັບລາວ ອັດຕະໂນມັດໃນທຸກໜ້າເວັບ */
+  font-family: var(--font-eng), var(--font-lao);
   background-color: var(--bg-white);
   color: var(--text-dark);
   line-height: 1.5;
@@ -54,14 +47,14 @@ body {
   width: 100%;
 }
 
-/* ຟອນສະເພາະສຳລັບພາສາອັງກິດ */
+/* ຟອນສະເພາະສຳລັບພາສາອັງກິດ (ຖ້າຕ້ອງການກຳນົດເຈາະຈົງ) */
 .eng, .nav-links li a .eng, .btn, .section-sub, 
 .slide-content .btn, .hero-badge, .news-badge, .news-date,
 #userDisplay a, #loginDisplay a, [lang="en"] {
   font-family: var(--font-eng) !important;
 }
 
-/* ຟອນສະເພາະສຳລັບພາສາລາວ */
+/* ຟອນສະເພາະສຳລັບພາສາລາວ (ຖ້າຕ້ອງການກຳນົດເຈາະຈົງ) */
 .lao, .nav-links li a .lao, h1, h2, h3, h4, h5, h6,
 .section-title, .service-card h3, .portfolio-card h3,
 .team-card h4, .customer-item h4, .logo h1, .logo p,
