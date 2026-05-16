@@ -896,16 +896,14 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   box-shadow: 0 0 12px rgba(185, 28, 28, 0.6);
   transform: translateY(-3px) scale(1.02);
 }
-/* ຈັດກຣິດບັດທີມງານໃຫ້ຢູ່ກາງ */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
   justify-content: center;
   gap: 2rem;
   margin: 2rem auto;
 }
 
-/* ບັດແຕ່ລະໃບ */
 .team-card {
   background: #fff;
   border-radius: 1rem;
@@ -919,10 +917,8 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
 .team-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 20px rgba(0,0,0,0.08);
-  border-color: rgba(179,0,0,0.3);
 }
 
-/* ຮູບວົງມົນ */
 .team-avatar {
   width: 120px;
   height: 120px;
@@ -930,27 +926,23 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   margin: 1.5rem auto 1rem;
   background-size: cover;
   background-position: center;
-  border: 3px solid var(--primary, #b30000);
+  border: 3px solid #b30000;
 }
 
 .team-card h4 {
-  color: var(--primary, #b30000);
-  font-size: 1.1rem;
+  color: #b30000;
+  font-size: 1rem;
   margin: 0.5rem 1rem 0.2rem;
 }
 
 .team-card p {
-  color: var(--text-light, #4b5563);
-  font-size: 0.9rem;
+  color: #4b5563;
+  font-size: 0.85rem;
 }
 
-/* ສຳລັບໜ້າຈໍນ້ອຍ */
 @media (max-width: 640px) {
   .team-avatar {
     width: 100px;
     height: 100px;
-  }
-  .team-card h4 {
-    font-size: 1rem;
   }
 }
