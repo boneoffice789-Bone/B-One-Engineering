@@ -1,8 +1,14 @@
 /* =============================================
    B-One Engineering - COMPLETE CSS (2026)
+   Clean version with Lao/English font separation
    ============================================= */
 
-/* ຕົວປ່ຽນສີ ແລະ ຄ່າພື້ນຖານ */
+/* Font setup:
+   - Lao content -> Phetsarath OT
+   - English content -> Tahoma
+   Note: Phetsarath OT must be installed on the device or available on the server.
+*/
+
 :root {
   --primary: #b91c1c;
   --primary-dark: #8b1515;
@@ -24,10 +30,8 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  
-  /* ກຳນົດຟອນໃຫ້ຖືກຕ້ອງ (ລຶບ Noto ຖິ້ມແລ້ວ) */
-  --font-lao: 'Phetsarath OT', sans-serif !important;
-  --font-eng: 'Tahoma', sans-serif !important;
+  --font-lao: 'Phetsarath OT', 'Tahoma', sans-serif;
+  --font-eng: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 * {
@@ -36,33 +40,34 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  /* ໃຊ້ Tahoma ສຳລັບອັງກິດກ່ອນ ແລ້ວ Phetsarath OT ຈະສະແດງຜົນພາສາລາວ */
-  font-family: var(--font-eng), var(--font-lao) !important;
+  font-family: var(--font-lao);
   background-color: var(--bg-white);
   color: var(--text-dark);
   line-height: 1.5;
-  scroll-behavior: smooth;
   overflow-x: hidden;
   width: 100%;
 }
 
-/* ຟອນສະເພາະສຳລັບພາສາອັງກິດ (ຖ້າຕ້ອງການກຳນົດເຈາະຈົງ) */
-.eng, .nav-links li a .eng, .btn, .section-sub, 
+/* English / Lao language targeting */
+.eng, .nav-links li a .eng, .btn, .section-sub,
 .slide-content .btn, .hero-badge, .news-badge, .news-date,
-#userDisplay a, #loginDisplay a, [lang="en"] {
+#userDisplay a, #loginDisplay a, [lang="en"], :lang(en) {
   font-family: var(--font-eng) !important;
 }
 
-/* ຟອນສະເພາະສຳລັບພາສາລາວ (ຖ້າຕ້ອງການກຳນົດເຈາະຈົງ) */
 .lao, .nav-links li a .lao, h1, h2, h3, h4, h5, h6,
 .section-title, .service-card h3, .portfolio-card h3,
 .team-card h4, .customer-item h4, .logo h1, .logo p,
-.hero-content h1, .slide-content h3, .news-card h3 {
+.hero-content h1, .slide-content h3, .news-card h3, [lang="lo"], :lang(lo) {
   font-family: var(--font-lao) !important;
 }
 
-/* ແກ້ໄຂໄອຄອນ Font Awesome ໃຫ້ກັບມາໃຊ້ງານຕາມປົກກະຕິ */
+/* Font Awesome icons */
 i, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands,
 [class*="fa-"] {
   font-family: 'Font Awesome 6 Free' !important;
@@ -79,13 +84,13 @@ i, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands,
   font-weight: 400;
 }
 
-/* ຈັດກາງຂໍ້ຄວາມ ແລະ ອົງປະກອບຕ່າງໆ */
+/* Centering */
 .text-center, .section-title, .section-sub, .hero-content,
 .team-grid, .customer-grid, .nav-links, .slider-dots {
   text-align: center;
 }
 
-/* ການຈັດວາງກຣິດໃຫ້ຢູ່ກາງ */
+/* Grid layout */
 .services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
   display: grid;
   justify-content: center;
