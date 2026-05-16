@@ -25,9 +25,9 @@
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   
-  /* ຟອນຫຼັກ: Phetsarath OT ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
-  --font-lao: 'Phetsarath OT', sans-serif;
-  --font-eng: 'Tahoma', sans-serif;
+  /* ກຳນົດຟອນໃຫ້ຖືກຕ້ອງ (ລຶບ Noto ຖິ້ມແລ້ວ) */
+  --font-lao: 'Phetsarath OT', sans-serif !important;
+  --font-eng: 'Tahoma', sans-serif !important;
 }
 
 * {
@@ -37,8 +37,8 @@
 }
 
 body {
-  /* ໃຊ້ Tahoma ສຳລັບອັງກິດ, ແລະ Phetsarath OT ສຳລັບລາວ ອັດຕະໂນມັດໃນທຸກໜ້າເວັບ */
-  font-family: var(--font-eng), var(--font-lao);
+  /* ໃຊ້ Tahoma ສຳລັບອັງກິດກ່ອນ ແລ້ວ Phetsarath OT ຈະສະແດງຜົນພາສາລາວ */
+  font-family: var(--font-eng), var(--font-lao) !important;
   background-color: var(--bg-white);
   color: var(--text-dark);
   line-height: 1.5;
