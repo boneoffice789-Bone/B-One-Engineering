@@ -26,8 +26,9 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* ປັບຟອນ: Phetsarath OT ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
-  --font-sans: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
+  /* ຟອນຫຼັກ: Phetsarath OT ສຳລັບລາວ, Tahoma ສຳລັບອັງກິດ */
+  --font-lao: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
+  --font-eng: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 * {
@@ -37,7 +38,7 @@
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-lao);
   background-color: var(--bg-white);
   color: var(--text-dark);
   line-height: 1.5;
@@ -46,16 +47,59 @@ body {
   width: 100%;
 }
 
-/* ກຳນົດຟອນສະເພາະສຳລັບພາສາອັງກິດ (ຄລາສ .eng) */
-.eng {
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.2px;
+/* ຟອນສະເພາະສຳລັບພາສາອັງກິດ */
+.eng, .nav-links li a .eng, .btn, .section-sub, 
+.slide-content .btn, .hero-badge, .news-badge, .news-date,
+#userDisplay a, #loginDisplay a, [lang="en"] {
+  font-family: var(--font-eng) !important;
 }
 
-/* ກຳນົດຟອນສະເພາະສຳລັບພາສາລາວ (ຄລາສ .lao) */
-.lao {
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
+/* ຟອນສະເພາະສຳລັບພາສາລາວ */
+.lao, .nav-links li a .lao, h1, h2, h3, h4, h5, h6,
+.section-title, .service-card h3, .portfolio-card h3,
+.team-card h4, .customer-item h4, .logo h1, .logo p,
+.hero-content h1, .slide-content h3, .news-card h3 {
+  font-family: var(--font-lao) !important;
+}
+
+/* ແກ້ໄຂໄອຄອນ Font Awesome ໃຫ້ກັບມາໃຊ້ງານຕາມປົກກະຕິ */
+i, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands,
+[class*="fa-"] {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900;
+}
+
+.fab, .fa-brands {
+  font-family: 'Font Awesome 6 Brands' !important;
+  font-weight: 400;
+}
+
+.far, .fa-regular {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 400;
+}
+
+/* ຈັດກາງຂໍ້ຄວາມ ແລະ ອົງປະກອບຕ່າງໆ */
+.text-center, .section-title, .section-sub, .hero-content,
+.team-grid, .customer-grid, .nav-links, .slider-dots {
+  text-align: center;
+}
+
+/* ການຈັດວາງກຣິດໃຫ້ຢູ່ກາງ */
+.services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
+  display: grid;
+  justify-content: center;
+}
+
+.services-grid, .portfolio-grid, .brands-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+  gap: 30px;
+}
+
+.team-grid, .customer-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
+  gap: 2rem;
+  margin: 2rem auto;
 }
 
 .container {
@@ -109,8 +153,6 @@ header {
   line-height: 1.2;
   margin: 0;
   word-break: break-word;
-  white-space: normal;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .logo p {
@@ -119,8 +161,6 @@ header {
   font-weight: 500;
   margin-top: 2px;
   word-break: break-word;
-  white-space: normal;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .menu-toggle {
@@ -145,6 +185,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 
 .nav-links li a {
@@ -163,7 +204,6 @@ header {
   font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .nav-links li a .eng {
@@ -173,7 +213,6 @@ header {
   margin-top: 2px;
   opacity: 0.8;
   white-space: nowrap;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 .nav-links li a.active {
@@ -181,7 +220,7 @@ header {
   color: var(--primary);
 }
 
-/* ========== AUTH SECTION STYLES ========== */
+/* ========== AUTH SECTION ========== */
 #auth-section {
   margin-left: 10px;
   display: flex;
@@ -197,7 +236,6 @@ header {
   padding: 6px 16px;
   transition: all 0.3s ease;
   white-space: nowrap;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 #userDisplay a:hover, #loginDisplay a:hover {
@@ -229,7 +267,6 @@ header {
   border: none;
   cursor: pointer;
   white-space: nowrap;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 .btn-outline {
@@ -248,7 +285,6 @@ header {
 .hero {
   background: linear-gradient(125deg, #fff8f3 0%, #ffffff 40%, #fffaf7 100%);
   padding: 80px 0;
-  text-align: center;
 }
 
 .hero-grid {
@@ -272,7 +308,6 @@ header {
   font-weight: 800;
   letter-spacing: -0.5px;
   word-break: break-word;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .hero-content p {
@@ -281,7 +316,6 @@ header {
   margin-bottom: 28px;
   word-break: break-word;
   max-width: 100%;
-  font-family: var(--font-sans);
 }
 
 .hero-badge {
@@ -294,9 +328,7 @@ header {
   border-radius: 60px;
   font-size: 0.8rem;
   font-weight: 700;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
+  margin: 0 auto;
 }
 
 .hero-content .btn,
@@ -328,7 +360,6 @@ section {
   font-weight: 800;
   letter-spacing: -0.3px;
   word-break: break-word;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 
 .section-title::after {
@@ -348,18 +379,10 @@ section {
   color: var(--text-light);
   font-size: 1rem;
   word-break: break-word;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
-}
-
-/* ---------- Grid ທົ່ວໄປ ---------- */
-.services-grid, .portfolio-grid, .brands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
 }
 
 /* ---------- Cards ---------- */
-.service-card, .portfolio-card, .brand-card {
+.service-card, .portfolio-card, .brand-card, .team-card, .customer-item {
   background: var(--bg-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -371,7 +394,8 @@ section {
   flex-direction: column;
 }
 
-.service-card:hover, .portfolio-card:hover, .brand-card:hover {
+.service-card:hover, .portfolio-card:hover, .brand-card:hover,
+.team-card:hover, .customer-item:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
 }
@@ -390,20 +414,30 @@ section {
   object-fit: contain;
 }
 
-.service-card h3, .portfolio-card h3, .brand-name {
-  font-size: 1.4rem;
+.service-card h3, .portfolio-card h3, .brand-name, .team-card h4, .customer-item h4 {
+  font-size: 1.2rem;
   padding: 16px 20px 8px;
   font-weight: 700;
   word-break: break-word;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
+  text-align: center;
 }
 
-.service-card p, .portfolio-card p {
+.service-card p, .portfolio-card p, .team-card p {
   padding: 0 20px 24px;
   color: var(--text-light);
   flex: 1;
   word-break: break-word;
-  font-family: var(--font-sans);
+  text-align: center;
+}
+
+.team-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 1.5rem auto 1rem;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid var(--primary);
 }
 
 .portfolio-img {
@@ -413,7 +447,7 @@ section {
   transition: transform 0.4s;
 }
 
-/* ---------- About page specific ---------- */
+/* ---------- About page ---------- */
 .about-grid {
   display: flex;
   flex-wrap: wrap;
@@ -424,6 +458,7 @@ section {
 .about-text {
   flex: 1;
   min-width: 280px;
+  text-align: center;
 }
 
 .ev-badge {
@@ -434,22 +469,23 @@ section {
   margin: 20px 0;
   font-weight: 600;
   word-break: break-word;
-  font-family: var(--font-sans);
+  text-align: center;
 }
 
 .contact-list {
   list-style: none;
   margin-top: 20px;
+  text-align: center;
 }
 
 .contact-list li {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   margin-bottom: 15px;
   word-break: break-word;
   flex-wrap: wrap;
-  font-family: var(--font-sans);
 }
 
 .contact-list i {
@@ -495,7 +531,6 @@ footer {
   margin-top: 50px;
   font-size: 0.85rem;
   word-break: break-word;
-  font-family: var(--font-sans);
 }
 
 footer a {
@@ -536,9 +571,7 @@ footer a:hover {
 }
 
 /* ========== SLIDER SECTION ========== */
-.slider-section {
-  padding: 0;
-}
+.slider-section { padding: 0; }
 .slider-container {
   position: relative;
   width: 100%;
@@ -589,13 +622,11 @@ footer a:hover {
   margin-bottom: 12px;
   font-weight: 700;
   word-break: break-word;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 .slide-content p {
   font-size: 1rem;
   margin-bottom: 20px;
   opacity: 0.95;
-  font-family: var(--font-sans);
 }
 .slide-content .btn,
 .slide-content a.btn,
@@ -612,7 +643,6 @@ footer a:hover {
   text-decoration: none !important;
   transition: all 0.3s ease !important;
   cursor: pointer;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif !important;
 }
 .slide-content .btn:hover,
 .slide-content a.btn:hover {
@@ -700,7 +730,6 @@ footer a:hover {
   font-weight: 600;
   margin: 15px 20px 0;
   width: fit-content;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 .news-badge.news {
   background: #e3f2fd;
@@ -715,7 +744,6 @@ footer a:hover {
   padding: 12px 20px 8px;
   font-weight: 700;
   word-break: break-word;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
 .news-card p {
   padding: 0 20px 20px;
@@ -723,7 +751,6 @@ footer a:hover {
   line-height: 1.6;
   flex: 1;
   word-break: break-word;
-  font-family: var(--font-sans);
 }
 .news-date {
   padding: 0 20px 15px;
@@ -734,7 +761,6 @@ footer a:hover {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif;
 }
 
 /* ========== RESPONSIVE ========== */
@@ -825,20 +851,17 @@ footer a:hover {
   footer { padding: 30px 15px; font-size: 0.75rem; }
 }
 
-/* ຕົວໜັງສືທີ່ຍາວ ໃຫ້ຫໍ່ອັດຕະໂນມັດ */
+/* ການຫໍ່ຂໍ້ຄວາມທີ່ຍາວ */
 p, li, .service-card p, .portfolio-card p, .about-text p,
 .hero-content p, .section-sub, .ev-badge, .contact-list li,
 .logo h1, .logo p, .section-title, .service-card h3,
-.news-card p, .news-card h3 {
+.news-card p, .news-card h3, .team-card h4, .customer-item h4 {
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
-.btn, .btn-outline, .slide-content .btn, .slide-content a.btn {
-  white-space: nowrap;
-}
-
+/* ປຸ່ມໃນໜ້າຈໍນ້ອຍ */
 @media (max-width: 480px) {
   .btn, .btn-outline {
     white-space: normal;
@@ -925,155 +948,4 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
 .nav-links li a:hover {
   box-shadow: 0 0 12px rgba(185, 28, 28, 0.6);
   transform: translateY(-3px) scale(1.02);
-}
-
-/* ========== TEAM GRID (ທີມງານ) ========== */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
-  justify-content: center;
-  gap: 2rem;
-  margin: 2rem auto;
-}
-
-.team-card {
-  background: #fff;
-  border-radius: 1rem;
-  text-align: center;
-  padding-bottom: 1.5rem;
-  transition: 0.25s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border: 1px solid #eef2f6;
-}
-
-.team-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.08);
-}
-
-.team-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 1.5rem auto 1rem;
-  background-size: cover;
-  background-position: center;
-  border: 3px solid #b30000;
-}
-
-.team-card h4 {
-  color: #b30000;
-  font-size: 1rem;
-  margin: 0.5rem 1rem 0.2rem;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
-}
-
-.team-card p {
-  color: #4b5563;
-  font-size: 0.85rem;
-  font-family: var(--font-sans);
-}
-
-@media (max-width: 640px) {
-  .team-avatar {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-/* ========== CUSTOMER GRID (ລູກຄ້າ) ========== */
-.customer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 260px));
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.customer-item {
-  background: #fff;
-  border-radius: 20px;
-  padding: 30px 20px 25px;
-  text-align: center;
-  transition: all 0.25s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  border: 1px solid #f0f0f0;
-}
-
-.customer-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(179,0,0,0.1);
-  border-color: rgba(179,0,0,0.25);
-}
-
-.logo-placeholder {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 18px;
-  background: #fff0f0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s;
-}
-
-.customer-item:hover .logo-placeholder {
-  background: #ffe0e0;
-  transform: scale(1.02);
-}
-
-.customer-item h4 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #b30000;
-  margin-bottom: 6px;
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
-}
-
-@media (max-width: 640px) {
-  .customer-grid {
-    gap: 20px;
-  }
-  .customer-item {
-    padding: 20px 15px;
-  }
-  .logo-placeholder {
-    width: 70px;
-    height: 70px;
-  }
-  .logo-placeholder i {
-    font-size: 2rem !important;
-  }
-  .customer-item h4 {
-    font-size: 1rem;
-  }
-}
-/* ບັງຄັບໃຊ້ Phetsarath OT ໃຫ້ກັບທຸກ element ທີ່ມີຂໍ້ຄວາມລາວ (ຍົກເວັ້ນໄອຄອນ) */
-*:not(i):not(.fas):not(.far):not(.fab):not([class*="fa-"]) {
-  font-family: var(--font-sans);
-}
-
-/* ສຳລັບອັງກິດ (ເມນູ, ປຸ່ມ, ຄຳສັ້ນ) ໃຫ້ໃຊ້ Tahoma ຊັດເຈນ */
-.nav-links li a .eng,
-.btn,
-.section-sub,
-.slide-content .btn,
-.eng-text,
-[lang="en"] {
-  font-family: 'Tahoma', 'Segoe UI', 'Inter', sans-serif !important;
-}
-/* ຈັດເມນູຫຼັກໃຫ້ຢູ່ກາງສະເໝີ */
-@media (min-width: 901px) {
-  .navbar {
-    justify-content: space-between;
-  }
-  .nav-links {
-    margin: 0 auto;
-  }
-}
-
-/* ຈັດຂໍ້ຄວາມ Hero ໃຫ້ຢູ່ກາງ */
-.hero-content {
-  text-align: center;
 }
