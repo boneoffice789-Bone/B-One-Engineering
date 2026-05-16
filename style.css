@@ -1049,3 +1049,15 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     font-size: 1rem;
   }
 }
+/* ບັງຄັບໃຊ້ Phetsarath OT ສຳລັບທຸກຂໍ້ຄວາມທີ່ເປັນພາສາລາວ */
+:lang(lo), [lang="lo"], .lao-text, 
+h1, h2, h3, h4, h5, h6, 
+.section-title, .service-card h3, .team-card h4, .customer-item h4,
+.logo h1, .logo p, .hero-content h1, .nav-links li a .lao {
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif !important;
+}
+
+/* ສຳລັບຂໍ້ຄວາມທົ່ວໄປທີ່ອາດມີທັງລາວ ແລະ ອັງກິດ, ປ່ອຍໃຫ້ເປັນຕາມຄ່າເດີມ */
+body, p, li, .section-sub, .service-card p, .portfolio-card p {
+  font-family: var(--font-sans);
+}
