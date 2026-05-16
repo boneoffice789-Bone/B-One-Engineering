@@ -1049,15 +1049,23 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
     font-size: 1rem;
   }
 }
-/* ບັງຄັບໃຊ້ Phetsarath OT ສຳລັບທຸກຂໍ້ຄວາມທີ່ເປັນພາສາລາວ */
-:lang(lo), [lang="lo"], .lao-text, 
-h1, h2, h3, h4, h5, h6, 
-.section-title, .service-card h3, .team-card h4, .customer-item h4,
-.logo h1, .logo p, .hero-content h1, .nav-links li a .lao {
-  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif !important;
-}
-
-/* ສຳລັບຂໍ້ຄວາມທົ່ວໄປທີ່ອາດມີທັງລາວ ແລະ ອັງກິດ, ປ່ອຍໃຫ້ເປັນຕາມຄ່າເດີມ */
-body, p, li, .section-sub, .service-card p, .portfolio-card p {
-  font-family: var(--font-sans);
+/* ບັງຄັບໃຊ້ Phetsarath OT ສຳລັບຂໍ້ຄວາມລາວ (ຍົກເວັ້ນໄອຄອນ) */
+:lang(lo):not(i):not(.fas):not(.far):not(.fab), 
+[lang="lo"]:not(i):not(.fas):not(.far):not(.fab), 
+.lao-text:not(i):not(.fas):not(.far):not(.fab),
+h1:not(i):not(.fas):not(.far):not(.fab), 
+h2:not(i):not(.fas):not(.far):not(.fab), 
+h3:not(i):not(.fas):not(.far):not(.fab), 
+h4:not(i):not(.fas):not(.far):not(.fab), 
+h5:not(i):not(.fas):not(.far):not(.fab), 
+h6:not(i):not(.fas):not(.far):not(.fab),
+.section-title:not(i):not(.fas):not(.far):not(.fab), 
+.service-card h3:not(i):not(.fas):not(.far):not(.fab), 
+.team-card h4:not(i):not(.fas):not(.far):not(.fab), 
+.customer-item h4:not(i):not(.fas):not(.far):not(.fab),
+.logo h1:not(i):not(.fas):not(.far):not(.fab), 
+.logo p:not(i):not(.fas):not(.far):not(.fab), 
+.hero-content h1:not(i):not(.fas):not(.far):not(.fab), 
+.nav-links li a .lao:not(i):not(.fas):not(.far):not(.fab) {
+  font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Tahoma', sans-serif;
 }
