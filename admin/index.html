@@ -128,7 +128,7 @@
     </div>
   </div>
 
-  <!-- Sales Report (ປັບປຸງດ້ວຍຕາຕະລາງສິນຄ້າ) -->
+  <!-- Sales Report (ສະເພາະຕາຕະລາງສະຫຼຸບຍອດຂາຍລາຍວັນ) -->
   <div id="salesReport" class="tab-content">
     <h2>📈 ລາຍງານການຂາຍ</h2>
     <div class="report-toolbar">
@@ -146,28 +146,7 @@
       <h3 style="margin:15px 0 0 15px;">📊 ສະຫຼຸບຍອດຂາຍລາຍວັນ</h3>
       <table id="reportTable">
         <thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead>
-        <tbody><tr><td colspan="3" style="text-align:center;">ກະລຸນາເລືອກຊ່ວງວັນທີ ແລ້ວກົດ "ສະແດງລາຍງານ"</td></tr></tbody>
-      </table>
-    </div>
-
-    <!-- ຕາຕະລາງລາຍການສິນຄ້າທີ່ຂາຍ (ເພີ່ມໃໝ່) -->
-    <div class="table-wrapper" style="margin-top: 30px;">
-      <h3 style="margin:15px 0 0 15px;">🛍️ ລາຍການສິນຄ້າທີ່ຂາຍ</h3>
-      <table id="salesItemsTable">
-        <thead>
-          <tr>
-            <th>ວັນທີສັ່ງ</th>
-            <th>ເລກຄຳສັ່ງ</th>
-            <th>ລູກຄ້າ</th>
-            <th>ສິນຄ້າ</th>
-            <th>ຈຳນວນ</th>
-            <th>ລາຄາຕໍ່ໜ່ວຍ</th>
-            <th>ລວມ (ກີບ)</th>
-            <th>ສະຖານະ</th>
-          </tr>
-        </thead>
-        <tbody id="salesItemsBody">
-          <tr><td colspan="8" style="text-align:center;">ກະລຸນາກົດ "ສະແດງລາຍງານ"</td></tr>
+        <tbody><tr><td colspan="3" style="text-align:center;">ກະລຸນາເລືອກຊ່ວງວັນທີ ແລ້ວກົດ "ສະແດງລາຍງານ"</td></tr>
         </tbody>
       </table>
     </div>
@@ -182,7 +161,7 @@
   <!-- Services -->
   <div id="services" class="tab-content">
     <h2>🔧 ຈັດການບໍລິການ <button class="btn btn-primary" onclick="openServiceModal()"><i class="fas fa-plus"></i> ເພີ່ມບໍລິການ</button></h2>
-    <div class="table-wrapper"><table id="serviceTable"><thead><tr><th>ຊື່</th><th>ໝວດ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></td></div>
+    <div class="table-wrapper"><table id="serviceTable"><thead><tr><th>ຊື່</th><th>ໝວດ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
   </div>
 
   <!-- Portfolio -->
@@ -194,7 +173,7 @@
   <!-- Brands -->
   <div id="brands" class="tab-content">
     <h2>🏷️ ຈັດການແບຣນ <button class="btn btn-primary" onclick="openBrandModal()"><i class="fas fa-plus"></i> ເພີ່ມແບຣນ</button></h2>
-    <div class="table-wrapper"><table id="brandTable"><thead><tr><th>ຊື່ແບຣນ</th><th>ໝວດ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></td></div>
+    <div class="table-wrapper"><table id="brandTable"><thead><tr><th>ຊື່ແບຣນ</th><th>ໝວດ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
   </div>
 
   <!-- Contacts -->
@@ -218,7 +197,7 @@
   <!-- News -->
   <div id="news" class="tab-content">
     <h2>📰 ຈັດການຂ່າວ <button class="btn btn-primary" onclick="openNewsModal()"><i class="fas fa-plus"></i> ເພີ່ມຂ່າວ</button></h2>
-    <div class="table-wrapper"><table id="newsTable"><thead><tr><th>ຫົວຂໍ້</th><th>ໝວດ</th><th>ວັນທີ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+    <div class="table-wrapper"><table id="newsTable"><thead><tr><th>ຫົວຂໍ້</th><th>ໝວດ</th><th>ວັນທີ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></td></div>
   </div>
 
   <!-- Sliders -->
@@ -312,8 +291,7 @@
     if(!start || !end){ alert('ກະລຸນາເລືອກຊ່ວງວັນທີ'); return; }
     
     const tbody = document.querySelector('#reportTable tbody');
-    const itemsBody = document.getElementById('salesItemsBody');
-    if(!tbody || !itemsBody){ console.error('ບໍ່ພົບ table'); return; }
+    if(!tbody){ console.error('ບໍ່ພົບ table'); return; }
     
     const startMs = new Date(start).setHours(0,0,0,0);
     const endMs = new Date(end).setHours(23,59,59,999);
@@ -343,63 +321,13 @@
       html += `<tr><td data-label="ວັນທີ">${day}</td><td data-label="ຈຳນວນຄຳສັ່ງ">${row.count}</td><td data-label="ຍອດຂາຍລວມ">${row.total.toLocaleString()} ກີບ</td></tr>`;
     }
     html += `<tr style="background:#f0f0f0; font-weight:bold;"><td data-label="ວັນທີ">ລວມທັງໝົດ</td><td data-label="ຈຳນວນຄຳສັ່ງ">${totalOrders}</td><td data-label="ຍອດຂາຍລວມ">${totalSales.toLocaleString()} ກີບ</td></tr>`;
-    tbody.innerHTML = html || '<tr><td colspan="3">ບໍ່ມີຂໍ້ມູນ</td></tr>';
-    
-    // ສ້າງຕາຕະລາງລາຍການສິນຄ້າ
-    let itemsHtml = '';
-    filteredOrders.forEach(order => {
-      const orderDate = order.createdAt ? new Date(order.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-';
-      const orderShortId = order.id.slice(0,8);
-      const customerName = order.customerInfo?.name || '-';
-      const orderStatus = order.orderStatus || 'pending';
-      let statusText = '';
-      if(orderStatus === 'pending') statusText = 'ກຳລັງດຳເນີນ';
-      else if(orderStatus === 'confirmed') statusText = 'ຢືນຢັນ';
-      else if(orderStatus === 'processing') statusText = 'ກຳລັງກະກຽມ';
-      else if(orderStatus === 'shipped') statusText = 'ຈັດສົ່ງ';
-      else if(orderStatus === 'delivered') statusText = 'ສຳເລັດ';
-      else if(orderStatus === 'cancelled') statusText = 'ຍົກເລີກ';
-      else statusText = orderStatus;
-      
-      if(order.items && order.items.length){
-        order.items.forEach(item => {
-          itemsHtml += `
-            <tr>
-              <td>${orderDate}</td>
-              <td>${orderShortId}</td>
-              <td>${customerName}</td>
-              <td>${item.productName || '-'}</td>
-              <td>${item.quantity || 0}</td>
-              <td>₭${(item.unitPrice || 0).toLocaleString()}</td>
-              <td>₭${(item.totalPrice || (item.unitPrice * item.quantity)).toLocaleString()}</td>
-              <td>${statusText}</td>
-            </tr>
-          `;
-        });
-      } else {
-        itemsHtml += `
-          <tr>
-            <td>${orderDate}</td>
-            <td>${orderShortId}</td>
-            <td>${customerName}</td>
-            <td colspan="4">(ບໍ່ມີລາຍການສິນຄ້າ)</td>
-            <td>${statusText}</td>
-          </tr>
-        `;
-      }
-    });
-    if(itemsHtml === ''){
-      itemsBody.innerHTML = '<tr><td colspan="8">ບໍ່ມີລາຍການສິນຄ້າໃນຊ່ວງນີ້</td></tr>';
-    } else {
-      itemsBody.innerHTML = itemsHtml;
-    }
+    tbody.innerHTML = html || '<td><td colspan="3">ບໍ່ມີຂໍ້ມູນ</td></tr>';
     
     window.reportData = { filtered: filteredOrders, totalOrders, totalSales, start, end };
   };
 
   window.exportReportExcel = () => {
     if(!window.reportData || !window.reportData.filtered.length){ alert('ກະລຸນາໂຫຼດລາຍງານກ່ອນ'); return; }
-    // ສ້າງ Excel ສຳລັບສະຫຼຸບລາຍວັນ (ງ່າຍໆ)
     const rows = [['ວັນທີ', 'ຈຳນວນຄຳສັ່ງ', 'ຍອດຂາຍລວມ (ກີບ)']];
     const map = new Map();
     window.reportData.filtered.forEach(o => { const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10); map.set(day, { count: (map.get(day)?.count||0)+1, total: (map.get(day)?.total||0)+(o.totalAmount||0) }); });
@@ -440,29 +368,6 @@
       tableRows += `<tr><td style="padding:10px;border:1px solid #ddd;text-align:center;">${day}</td><td style="padding:10px;border:1px solid #ddd;text-align:center;">${row.count}</td><td style="padding:10px;border:1px solid #ddd;text-align:right;">${row.total.toLocaleString()} ກີບ</td></tr>`;
     }
     tableRows += `<tr style="font-weight:bold;background:#f0f0f0;"><td style="padding:10px;border:1px solid #ddd;text-align:center;">ລວມທັງໝົດ</td><td style="padding:10px;border:1px solid #ddd;text-align:center;">${totalOrders}</td><td style="padding:10px;border:1px solid #ddd;text-align:right;">${totalSales.toLocaleString()} ກີບ</td></tr>`;
-    // ສ້າງຕາຕະລາງລາຍການສິນຄ້າ
-    let itemsRows = '';
-    window.reportData.filtered.forEach(order => {
-      const orderDate = order.createdAt ? new Date(order.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-';
-      const orderShortId = order.id.slice(0,8);
-      const customerName = order.customerInfo?.name || '-';
-      const orderStatus = order.orderStatus || 'pending';
-      let statusText = '';
-      if(orderStatus === 'pending') statusText = 'ກຳລັງດຳເນີນ';
-      else if(orderStatus === 'confirmed') statusText = 'ຢືນຢັນ';
-      else if(orderStatus === 'processing') statusText = 'ກຳລັງກະກຽມ';
-      else if(orderStatus === 'shipped') statusText = 'ຈັດສົ່ງ';
-      else if(orderStatus === 'delivered') statusText = 'ສຳເລັດ';
-      else if(orderStatus === 'cancelled') statusText = 'ຍົກເລີກ';
-      else statusText = orderStatus;
-      if(order.items && order.items.length){
-        order.items.forEach(item => {
-          itemsRows += `<tr><td>${orderDate}</td><td>${orderShortId}</td><td>${customerName}</td><td>${item.productName || '-'}</td><td>${item.quantity || 0}</td><td>${(item.unitPrice || 0).toLocaleString()}</td><td>${(item.totalPrice || (item.unitPrice * item.quantity)).toLocaleString()}</td><td>${statusText}</td></tr>`;
-        });
-      } else {
-        itemsRows += `<tr><td>${orderDate}</td><td>${orderShortId}</td><td>${customerName}</td><td colspan="4">(ບໍ່ມີລາຍການສິນຄ້າ)</td><td>${statusText}</td></tr>`;
-      }
-    });
     const printHtml = `
       <!DOCTYPE html>
       <html>
@@ -479,7 +384,6 @@
         th{background-color:#b30000;color:white;padding:12px;text-align:center;border:1px solid #9a0000;font-weight:bold;}
         td{padding:10px;border:1px solid #ddd;}
         .footer{margin-top:30px;text-align:center;font-size:10px;color:#888;border-top:1px solid #eee;padding-top:15px;}
-        h3{margin-top:30px;color:#b30000;}
         @media print{body{padding:20px;}.no-print{display:none;}}
       </style>
       </head>
@@ -487,10 +391,7 @@
         <div class="header"><h1>B-One Engineering</h1><div class="sub">Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</div></div>
         <div class="report-title">ລາຍງານການຂາຍ</div>
         <div class="report-info">ຊ່ວງວັນທີ: ${startDate} ຫາ ${endDate}<br>ສ້າງເມື່ອ: ${generatedDate}</div>
-        <h3>📊 ສະຫຼຸບຍອດຂາຍລາຍວັນ</h3>
-        <table><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody>~
-        <h3>🛍️ ລາຍການສິນຄ້າທີ່ຂາຍ</h3>
-        <table><thead><tr><th>ວັນທີສັ່ງ</th><th>ເລກຄຳສັ່ງ</th><th>ລູກຄ້າ</th><th>ສິນຄ້າ</th><th>ຈຳນວນ</th><th>ລາຄາຕໍ່ໜ່ວຍ</th><th>ລວມ</th><th>ສະຖານະ</th></tr></thead><tbody>${itemsRows}</tbody>~
+        <table><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody></table>
         <div class="footer">© 2026 B-One Engineering Sole Co., Ltd — ທຸກສິດສະຫງວນ</div>
         <div class="no-print" style="text-align:center;margin-top:20px;"><button onclick="window.print()" style="padding:10px 25px;background:#b30000;color:white;border:none;border-radius:5px;cursor:pointer;">🖨️ ພິມລາຍງານ / Print</button> <button onclick="window.close()" style="padding:10px 25px;background:#6c757d;color:white;border:none;border-radius:5px;cursor:pointer;">❌ ປິດ</button></div>
       </body>
@@ -504,7 +405,7 @@
 
   async function loadAll() { await Promise.all([loadProducts(), loadServices(), loadPortfolio(), loadBrands(), loadContacts(), loadOrders(), loadUsers(), loadNews(), loadSliders()]); }
 
-  // ສ່ວນຟັງຊັນ loadProducts, loadServices, ... (ຄືເກົ່າ)
+  // ຟັງຊັນ CRUD ຕ່າງໆ (ຄືເກົ່າທັງໝົດ)
   async function loadProducts() {
     const tbody = document.querySelector('#productTable tbody');
     tbody.innerHTML = '';
