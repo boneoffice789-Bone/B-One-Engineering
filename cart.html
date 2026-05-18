@@ -139,11 +139,11 @@
       <h3>ລວມທັງໝົດ</h3>
       <div class="total">₭<span id="totalPrice">0</span></div>
       <div class="action-buttons">
-        <a href="products.html" class="btn btn-outline"><i class="fas fa-plus"></i> ເພີ່ມສິນຄ້າເພີ່ມ</a>
-        <a href="checkout.html" class="btn" id="checkoutBtn"><i class="fas fa-credit-card"></i> ດຳເນີນການສັ່ງຊື້</a>
+        <a href="/products" class="btn btn-outline"><i class="fas fa-plus"></i> ເພີ່ມສິນຄ້າເພີ່ມ</a>
+        <a href="/checkout" class="btn" id="checkoutBtn"><i class="fas fa-credit-card"></i> ດຳເນີນການສັ່ງຊື້</a>
       </div>
     </div>
-    <a href="products.html" class="back-link"><i class="fas fa-arrow-left"></i> ເລືອກສິນຄ້າຕໍ່</a>
+    <a href="/products" class="back-link"><i class="fas fa-arrow-left"></i> ເລືອກສິນຄ້າຕໍ່</a>
   </div>
 </div>
 
@@ -158,7 +158,7 @@
     total = 0;
     
     if (cart.length === 0) {
-      container.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>ກະຕ່າສິນຄ້າຫວ່າງເປົ່າ</p><a href="products.html" class="btn" style="display: inline-block; margin-top: 15px;">ເລີ່ມເລືອກຊື້ສິນຄ້າ</a></div>';
+      container.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>ກະຕ່າສິນຄ້າຫວ່າງເປົ່າ</p><a href="/products" class="btn" style="display: inline-block; margin-top: 15px;">ເລີ່ມເລືອກຊື້ສິນຄ້າ</a></div>';
       summaryDiv.style.display = 'none';
       return;
     }
