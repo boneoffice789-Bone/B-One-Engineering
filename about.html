@@ -6,9 +6,8 @@
   <title>ກ່ຽວກັບພວກເຮົາ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
   <style>
-    /* Additional styles for about page (keep existing) */
     .service-cat {
       background: #fff;
       border-radius: 12px;
@@ -39,10 +38,6 @@
       border-bottom: 2px solid #e0e0e0;
       padding-bottom: 10px;
     }
-    @media (max-width: 768px) {
-      .service-cat h5 { font-size: 0.95rem; }
-      .service-cat ul li { font-size: 0.8rem; }
-    }
   </style>
 </head>
 <body>
@@ -50,7 +45,7 @@
 <header>
   <div class="navbar">
     <div class="logo">
-      <a href="index.html">
+      <a href="/">
         <h1>B-One Engineering</h1>
         <p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p>
       </a>
@@ -59,23 +54,22 @@
       <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
-      <li><a href="about.html" class="active"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
-      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
-      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
-      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
-      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
-      <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
-      <!-- Auth section -->
+      <li><a href="/"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="/about" class="active"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="/services"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="/products"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="/brands"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="/portfolio"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="/contact"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
       <li id="auth-section">
         <div id="userDisplay" style="display: none;">
-          <a href="profile.html">
+          <a href="/profile">
             <i class="fas fa-user-circle"></i>
             <span id="userName" class="lao"></span>
           </a>
         </div>
         <div id="loginDisplay">
-          <a href="login.html">
+          <a href="/login">
             <i class="fas fa-sign-in-alt"></i>
             <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
             <span class="eng">LOGIN</span>
@@ -87,7 +81,6 @@
 </header>
 
 <main>
-  <!-- Hero section -->
   <section class="hero" style="padding: 60px 0;">
     <div class="container">
       <h2 class="section-title">ກ່ຽວກັບພວກເຮົາ <span style="font-size:1.5rem;">| ABOUT US</span></h2>
@@ -95,7 +88,6 @@
     </div>
   </section>
 
-  <!-- Main content -->
   <section id="about" style="padding: 60px 0;">
     <div class="container">
       <div class="about-grid">
@@ -114,7 +106,6 @@
         </div>
       </div>
 
-      <!-- Service categories grid (keep original) -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 40px 0;">
         <div class="service-cat"><h5><i class="fas fa-exchange-alt"></i> ນຳເຂົ້າ ແລະ ຈຳໜ່າຍ</h5><ul><li>ເຄື່ອງຈັກຮັບໃຊ້ວຽກງານການຜະລິດອຸດສາຫະກຳ-ກະສິກຳ ພ້ອມອາໄຫຼ່ ແລະ ອຸປະກອນຄົບຊຸດ, ນໍ້າກະແລດ, ນໍ້າມັນລໍ່ລືນ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄອທີ, ອຸປະກອນຄວາມປອດໄພ, ຈັກປັ່ນໄຟຟ້າ ແລະ ເຟີນິເຈີ.</li></ul></div>
         <div class="service-cat"><h5><i class="fas fa-tools"></i> ຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກ</h5><ul><li>ບໍລິການຕິດຕັ້ງ ແລະ ສ້ອມແປງເຄື່ອງຈັກທຸກປະເພດ, ເຄື່ອງໃຊ້ໄຟຟ້າ, ອຸປະກອນໄຟຟ້າ, ແລະ ຈັກປັ່ນໄຟຟ້າ.</li></ul></div>
@@ -130,7 +121,7 @@
       </div>
     </div>
   </section>
-  <!-- ສ່ວນສະຖິຕິ -->
+
   <section style="background: var(--bg-light);">
     <div class="container">
       <h2 class="section-title">ຕົວເລກທີ່ສະແດງເຖິງຄວາມສຳເລັດ</h2>
@@ -144,7 +135,6 @@
     </div>
   </section>
 
-  <!-- ວິໄສທັດ ແລະ ພາລະກິດ -->
   <section>
     <div class="container">
       <div class="about-grid" style="gap: 40px;">
@@ -154,7 +144,6 @@
     </div>
   </section>
 
-  <!-- ຄຸນຄ່າຫຼັກ -->
   <section style="background: var(--bg-light);">
     <div class="container">
       <h2 class="section-title">ຄຸນຄ່າຫຼັກຂອງອົງກອນ</h2>
@@ -167,77 +156,35 @@
     </div>
   </section>
 
- <section>
-  <div class="container">
-    <h2 class="section-title">ທີມງານຜູ້ຊ່ຽວຊານ</h2>
-    <p class="section-sub">ພົບກັບວິສະວະກອນມືອາຊີບຂອງພວກເຮົາ</p>
-    
-    <!-- ຜູ້ອຳນວຍການ (ຢູ່ເທິງ ຈັດກາງ) -->
-    <div style="display: flex; justify-content: center; margin-bottom: 50px;">
-      <div class="team-card" style="max-width: 300px; border: 2px solid #b30000;">
-        <div class="team-avatar" style="background-image: url('https://i.ibb.co/qFsNW0dP/Gemini-Generated-Image-qk9wlxqk9wlxqk9w.png'); width: 150px; height: 150px;"></div>
-        <h4 style="color: #b30000; font-size: 1.2rem;">ທ່ານ ປອ.ພູມີພົນ ນໍ່ດາລາ</h4>
-        <p style="color: #b30000; font-weight: 600;">ຜູ້ອຳນວຍການ</p>
+  <section>
+    <div class="container">
+      <h2 class="section-title">ທີມງານຜູ້ຊ່ຽວຊານ</h2>
+      <p class="section-sub">ພົບກັບວິສະວະກອນມືອາຊີບຂອງພວກເຮົາ</p>
+      <div style="display: flex; justify-content: center; margin-bottom: 50px;">
+        <div class="team-card" style="max-width: 300px; border: 2px solid #b30000;">
+          <div class="team-avatar" style="background-image: url('https://i.ibb.co/qFsNW0dP/Gemini-Generated-Image-qk9wlxqk9wlxqk9w.png'); width: 150px; height: 150px;"></div>
+          <h4 style="color: #b30000; font-size: 1.2rem;">ທ່ານ ປອ.ພູມີພົນ ນໍ່ດາລາ</h4>
+          <p style="color: #b30000; font-weight: 600;">ຜູ້ອຳນວຍການ</p>
+        </div>
+      </div>
+      <h3 style="text-align: center; margin-bottom: 30px; color: #b30000; font-size: 1.5rem;"><i class="fas fa-users"></i> ທີມງານວິສະວະກອນ</h3>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar" style="background-image: url('');"></div><h4>ທ່ານ ສຸກ ວົງສະຫວັນ</h4><p>ຫົວໜ້າວິສະວະກອນ</p></div>
+        <div class="team-card"><div class="team-avatar" style="background-image: url('');"></div><h4>ທ່ານ ຄຳພອນ ສີຫາວົງ</h4><p>ວິສະວະກອນໄຟຟ້າ</p></div>
+        <div class="team-card"><div class="team-avatar" style="background-image: url('');"></div><h4>ທ່ານນາງ ມະນີວັນ ສຸລິຍະ</h4><p>ຜູ້ຈັດການຝ່າຍຂາຍ</p></div>
       </div>
     </div>
+  </section>
 
-    <!-- ຫົວຂໍ້ທີມງານວິສະວະກອນ -->
-    <h3 style="text-align: center; margin-bottom: 30px; color: #b30000; font-size: 1.5rem;">
-      <i class="fas fa-users"></i> ທີມງານວິສະວະກອນ
-    </h3>
-
-    <!-- ກຣິດບັດທີມງານ (ຈັດກາງ) -->
-    <div class="team-grid">
-      <!-- ບັດທີ 1: ທ່ານສຸກ ວົງສະຫວັນ -->
-      <div class="team-card">
-        <div class="team-avatar" style="background-image: url('');"></div>
-        <h4>ທ່ານ ສຸກ ວົງສະຫວັນ</h4>
-        <p>ຫົວໜ້າວິສະວະກອນ</p>
-      </div>
-      
-      <!-- ບັດທີ 2: ທ່ານ ຄຳພອນ ສີຫາວົງ -->
-      <div class="team-card">
-        <div class="team-avatar" style="background-image: url('');"></div>
-        <h4>ທ່ານ ຄຳພອນ ສີຫາວົງ</h4>
-        <p>ວິສະວະກອນໄຟຟ້າ</p>
-      </div>
-      
-      <!-- ບັດທີ 3: ທ່ານນາງ ມະນີວັນ ສຸລິຍະ -->
-      <div class="team-card">
-        <div class="team-avatar" style="background-image: url('');"></div>
-        <h4>ທ່ານນາງ ມະນີວັນ ສຸລິຍະ</h4>
-        <p>ຜູ້ຈັດການຝ່າຍຂາຍ</p>
+  <section style="padding: 60px 0; background: #ffffff;">
+    <div class="container">
+      <h2 class="section-title" style="color: #b30000; text-align: center;"><i class="fas fa-handshake"></i> ບັນດາລູກຄ້າຜູ້ທີ່ໄວ້ໃຈພວກເຮົາ</h2>
+      <p class="section-sub" style="text-align: center;">Our Valued Customers</p>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar" style="background-image: url('https://i.ibb.co/9k6DtPx4/original-1501121873154.jpg');"></div><h4>ບໍລິສັດ A</h4></div>
       </div>
     </div>
-  </div>
-<!-- ສ່ວນລູກຄ້າຂອງເຮົາ ດີໄຊຄືກັບທີມງານວິສະວະກອນ -->
-<section style="padding: 60px 0; background: #ffffff;">
-  <div class="container">
-    <h2 class="section-title" style="color: #b30000; text-align: center;">
-      <i class="fas fa-handshake"></i> ບັນດາລູກຄ້າຜູ້ທີ່ໄວ້ໃຈພວກເຮົາ
-    </h2>
-    <p class="section-sub" style="text-align: center;">Our Valued Customers</p>
-
-    <!-- ໃຊ້ team-grid ເພື່ອໃຫ້ກຣິດ ແລະ ການຈັດກາງຄືກັບທີມງານ -->
-    <div class="team-grid">
-      <!-- ບັດທີ 1: ບໍລິສັດ A (ຕົວຢ່າງ) -->
-      <div class="team-card">
-        <div class="team-avatar" style="background-image: url('https://i.ibb.co/9k6DtPx4/original-1501121873154.jpg');"></div>
-        <h4>ບໍລິສັດ A</h4>
-        <!-- ຖ້າຕ້ອງການຄຳອະທິບາຍ ໃຫ້ເພີ່ມ <p> ໄດ້ -->
-        <!-- <p>ຜູ້ນຳດ້ານເຕັກໂນໂລຢີ</p> -->
-      </div>
-
-      <!-- ທ່ານສາມາດເພີ່ມບັດອື່ນໆໄດ້ທີ່ນີ້ ໂດຍການສຳເນົາຂໍ້ມູນຂ້າງເທິງ -->
-      <!--
-      <div class="team-card">
-        <div class="team-avatar" style="background-image: url('ລີ້ງຮູບບໍລິສັດ B');"></div>
-        <h4>ບໍລິສັດ B</h4>
-      </div>
-      -->
-    </div>
-  </div>
-</section>
+  </section>
 </main>
 
 <footer>
@@ -253,7 +200,7 @@
   mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
 </script>
 <script type="module">
-  import { auth, onAuthStateChanged } from './firebase-config.js';
+  import { auth, onAuthStateChanged } from '/firebase-config.js';
   onAuthStateChanged(auth, (user) => {
     const userDisplay = document.getElementById('userDisplay');
     const loginDisplay = document.getElementById('loginDisplay');
