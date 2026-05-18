@@ -6,14 +6,14 @@
   <title>ຕິດຕໍ່ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
 <header>
   <div class="navbar">
     <div class="logo">
-      <a href="index.html">
+      <a href="/">
         <h1>B-One Engineering</h1>
         <p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p>
       </a>
@@ -22,23 +22,22 @@
       <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
-      <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
-      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
-      <li><a href="products.html"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
-      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
-      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
-      <li><a href="contact.html" class="active"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
-      <!-- Auth section -->
+      <li><a href="/"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="/about"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="/services"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="/products"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="/brands"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="/portfolio"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="/contact" class="active"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
       <li id="auth-section">
         <div id="userDisplay" style="display: none;">
-          <a href="profile.html">
+          <a href="/profile">
             <i class="fas fa-user-circle"></i>
             <span id="userName" class="lao"></span>
           </a>
         </div>
         <div id="loginDisplay">
-          <a href="login.html">
+          <a href="/login">
             <i class="fas fa-sign-in-alt"></i>
             <span class="lao">ເຂົ້າສູ່ລະບົບ</span>
             <span class="eng">LOGIN</span>
@@ -103,7 +102,7 @@
 </script>
 
 <script type="module">
-  import { auth, db, collection, addDoc, serverTimestamp, onAuthStateChanged } from './firebase-config.js';
+  import { auth, db, collection, addDoc, serverTimestamp, onAuthStateChanged } from '/firebase-config.js';
 
   const form = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -118,7 +117,6 @@
     setTimeout(() => alertBox.style.display = 'none', 5000);
   }
 
-  // ອັບເດດ navbar ສະແດງຊື່ຜູ້ໃຊ້ (ຖ້າເຂົ້າສູ່ລະບົບ)
   onAuthStateChanged(auth, (user) => {
     const userDisplay = document.getElementById('userDisplay');
     const loginDisplay = document.getElementById('loginDisplay');
@@ -133,16 +131,14 @@
     }
   });
 
-  // ຈັດການສົ່ງຟອມ (ໃຊ້ auth.currentUser ໂດຍກົງ ບໍ່ຕ້ອງລໍ onAuthStateChanged)
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // ກວດສອບສະຖານະຜູ້ໃຊ້ປັດຈຸບັນໂດຍກົງຈາກ Firebase Auth
     const currentUser = auth.currentUser;
     if (!currentUser) {
       showAlert('❌ ກະລຸນາເຂົ້າສູ່ລະບົບ ຫຼື ສະໝັກສະມາຊິກກ່ອນສົ່ງຂໍ້ຄວາມ', 'error');
       setTimeout(() => {
-        window.location.href = 'login.html';
+        window.location.href = '/login';
       }, 2000);
       return;
     }
