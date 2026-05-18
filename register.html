@@ -105,10 +105,6 @@
       gap: 6px;
     }
     .footer { background: #f9fafb; padding: 15px 25px; text-align: center; font-size: 0.7rem; color: #6b7280; }
-    @media (max-width:480px) {
-      .auth-header { padding: 25px 20px; }
-      .auth-body { padding: 25px 20px; }
-    }
   </style>
 </head>
 <body>
@@ -140,15 +136,15 @@
       <button type="submit" class="btn" id="submitBtn"><i class="fas fa-user-plus"></i> ລົງທະບຽນ</button>
     </form>
     <div class="links">
-      <a href="login.html"><i class="fas fa-sign-in-alt"></i> ມີບັນຊີຢູ່ແລ້ວ? ເຂົ້າສູ່ລະບົບ</a>
+      <a href="/login"><i class="fas fa-sign-in-alt"></i> ມີບັນຊີຢູ່ແລ້ວ? ເຂົ້າສູ່ລະບົບ</a>
       <br><br>
-      <a href="index.html"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
+      <a href="/"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
     </div>
   </div>
   <div class="footer">© 2026 B-One Engineering Sole Co., Ltd</div>
 </div>
 <script type="module">
-  import { auth, db, createUserWithEmailAndPassword, updateProfile, doc, setDoc, serverTimestamp } from './firebase-config.js';
+  import { auth, db, createUserWithEmailAndPassword, updateProfile, doc, setDoc, serverTimestamp } from '/firebase-config.js';
   const form = document.getElementById('registerForm');
   const submitBtn = document.getElementById('submitBtn');
   const messageBox = document.getElementById('messageBox');
@@ -181,7 +177,7 @@
         displayName: name, email, phone, role: 'customer', createdAt: serverTimestamp()
       });
       showMessage('ລົງທະບຽນສຳເລັດ! ກຳລັງໄປໜ້າບັນຊີ...', 'success');
-      setTimeout(() => window.location.href = 'profile.html', 2000);
+      setTimeout(() => window.location.href = '/profile', 2000);
     } catch (err) {
       if (err.code === 'auth/email-already-in-use') showMessage('ອີເມວນີ້ຖືກໃຊ້ແລ້ວ', 'error');
       else if (err.code === 'auth/invalid-email') showMessage('ຮູບແບບອີເມວບໍ່ຖືກຕ້ອງ', 'error');
