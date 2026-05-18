@@ -122,15 +122,15 @@
       <button type="submit" class="btn" id="submitBtn"><i class="fas fa-sign-in-alt"></i> ເຂົ້າສູ່ລະບົບ</button>
     </form>
     <div class="links">
-      <a href="register.html"><i class="fas fa-user-plus"></i> ຍັງບໍ່ມີບັນຊີ? ລົງທະບຽນ</a>
+      <a href="/register"><i class="fas fa-user-plus"></i> ຍັງບໍ່ມີບັນຊີ? ລົງທະບຽນ</a>
       <br><br>
-      <a href="index.html"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
+      <a href="/"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
     </div>
   </div>
   <div class="footer">© 2026 B-One Engineering Sole Co., Ltd</div>
 </div>
 <script type="module">
-  import { auth, signInWithEmailAndPassword } from './firebase-config.js';
+  import { auth, signInWithEmailAndPassword } from '/firebase-config.js';
   const form = document.getElementById('loginForm');
   const errorDiv = document.getElementById('error');
   const submitBtn = document.getElementById('submitBtn');
@@ -149,7 +149,7 @@
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ກຳລັງເຂົ້າສູ່ລະບົບ...';
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      window.location.href = 'profile.html';
+      window.location.href = '/profile';
     } catch (err) {
       if (err.code === 'auth/user-not-found') showError('ບໍ່ພົບບັນຊີນີ້');
       else if (err.code === 'auth/wrong-password') showError('ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ');
