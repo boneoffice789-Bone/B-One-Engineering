@@ -109,16 +109,16 @@
       <div class="info-item"><i class="fas fa-phone"></i><span class="label">ເບີໂທ:</span><span class="value" id="userPhone">-</span></div>
     </div>
     <div class="btn-group">
-      <a href="orders.html" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ປະຫວັດຄຳສັ່ງຊື້</a>
+      <a href="/orders" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ປະຫວັດຄຳສັ່ງຊື້</a>
       <button id="logoutBtn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> ອອກຈາກລະບົບ</button>
     </div>
-    <a href="index.html" class="back-link"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
+    <a href="/" class="back-link"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
   </div>
 </div>
 <script type="module">
-  import { auth, db, doc, getDoc, signOut, onAuthStateChanged } from './firebase-config.js';
+  import { auth, db, doc, getDoc, signOut, onAuthStateChanged } from '/firebase-config.js';
   onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = 'login.html'; return; }
+    if (!user) { window.location.href = '/login'; return; }
     document.getElementById('displayName').textContent = user.displayName || 'ບໍ່ລະບຸ';
     document.getElementById('userEmail').textContent = user.email;
     const snap = await getDoc(doc(db, 'users', user.uid));
@@ -126,7 +126,7 @@
   });
   document.getElementById('logoutBtn').addEventListener('click', async () => {
     await signOut(auth);
-    window.location.href = 'login.html';
+    window.location.href = '/login';
   });
 </script>
 </body>
