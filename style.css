@@ -1,6 +1,6 @@
 /* =============================================
    B-One Engineering - COMPLETE CSS (2026)
-   Clean version with Lao/English font separation
+   Responsive for Mobile, Tablet, Desktop
    ============================================= */
 
 /* Font setup:
@@ -779,111 +779,97 @@ footer a:hover {
   gap: 6px;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== ENHANCED RESPONSIVE (ປັບປຸງໃໝ່) ========== */
+
+/* ສຳລັບແທັບເລັດ ແລະ ມືຖືແນວນອນ */
 @media (max-width: 1024px) {
-  .hero-content h1 { font-size: 2.5rem; }
-  .section-title { font-size: 2.2rem; }
+  .container { padding: 0 20px; }
+  .hero-content h1 { font-size: 2.2rem; }
+  .section-title { font-size: 2rem; }
+  .services-grid, .portfolio-grid, .brands-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
 }
 
-@media (max-width: 900px) {
-  .menu-toggle { display: block; }
+/* ສຳລັບມືຖື (ແນວຕັ້ງ) */
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+  .container { padding: 0 16px; }
+  section { padding: 40px 0; }
+  
+  .navbar { flex-direction: column; align-items: stretch; }
+  .logo { max-width: 100%; text-align: center; margin-bottom: 10px; }
+  .logo h1 { font-size: 1.3rem; }
+  .logo p { font-size: 0.65rem; }
+  
+  .menu-toggle { display: block; align-self: flex-end; margin-top: -50px; }
   .nav-links {
     display: none;
-    width: 100%;
     flex-direction: column;
-    background: rgba(185, 28, 28, 0.98);
-    padding: 20px;
-    margin-top: 12px;
-    border-radius: 28px;
+    width: 100%;
+    background: rgba(185,28,28,0.98);
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: 10px;
   }
   .nav-links.active { display: flex; }
+  .nav-links li a { padding: 10px; flex-direction: row; justify-content: center; gap: 8px; }
   .nav-links li a .lao, .nav-links li a .eng { white-space: normal; }
   
-  #auth-section {
-    margin-left: 0;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    justify-content: center;
-  }
-  #userDisplay a, #loginDisplay a {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .container { padding: 0 20px; }
-  section { padding: 55px 0; }
+  #auth-section { margin-top: 10px; justify-content: center; }
   
-  .logo h1 { font-size: 1.2rem !important; }
-  .logo p { font-size: 0.55rem !important; }
-  .logo { max-width: 70% !important; }
-  
-  .services-grid, .portfolio-grid, .brands-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  .news-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .hero-grid { flex-direction: column; }
+  .hero-grid { flex-direction: column; text-align: center; }
   .hero-content h1 { font-size: 1.8rem; }
-  .hero-content p { font-size: 0.95rem; }
+  .hero-content p { font-size: 0.9rem; }
+  .hero-image img { max-width: 100%; height: auto; }
   
-  .hero-content .btn-outline { margin-left: 0 !important; margin-top: 10px !important; }
+  .services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .news-grid { grid-template-columns: 1fr; }
   
-  .slide { height: 400px; }
-  .slide-content h3 { font-size: 1.5rem; }
-  .slide-content .btn, .slide-content a.btn { padding: 5px 16px !important; font-size: 0.75rem !important; }
-  .slider-btn { width: 36px; height: 36px; font-size: 1.2rem; }
+  .slide { height: 350px; }
+  .slide-content { padding: 15px 20px; max-width: 95%; }
+  .slide-content h3 { font-size: 1.3rem; }
+  .slide-content .btn { padding: 5px 12px; font-size: 0.7rem; }
+  .slider-btn { width: 32px; height: 32px; font-size: 1rem; }
   
-  .contact-grid { grid-template-columns: 1fr; gap: 35px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+  .cart-item { flex-direction: column; text-align: center; }
+  .cart-item img { width: 80px; height: 80px; }
+  .item-total { width: 100%; text-align: center; margin-top: 10px; }
+  
+  footer { font-size: 0.75rem; padding: 30px 15px; }
+  .whatsapp-float { width: 44px; height: 44px; font-size: 24px; bottom: 15px; right: 15px; }
 }
 
+/* ມືຖືຂະໜາດນ້ອຍ (ຕ່ຳກວ່າ 550px) */
 @media (max-width: 550px) {
-  .services-grid, .portfolio-grid, .brands-grid {
+  .services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
     grid-template-columns: 1fr !important;
   }
-  .logo h1 { font-size: 1rem !important; }
-  .logo p { font-size: 0.5rem !important; }
-  .logo { max-width: 75% !important; }
-  
-  .section-title { font-size: 1.6rem; }
-  .section-sub { font-size: 0.85rem; }
-  
   .hero-content h1 { font-size: 1.5rem; }
-  .hero-content .btn-outline { margin-left: 0 !important; margin-top: 10px !important; }
-  
-  .slide { height: 320px; }
-  .slide-content { padding: 18px 24px; max-width: 90%; }
-  .slide-content h3 { font-size: 1.2rem; }
-  .slide-content .btn, .slide-content a.btn { padding: 4px 12px !important; font-size: 0.7rem !important; }
-  
-  .whatsapp-float { width: 48px; height: 48px; font-size: 26px; bottom: 20px; right: 20px; }
-  
-  footer { padding: 30px 15px; font-size: 0.75rem; }
+  .section-title { font-size: 1.5rem; }
+  .section-title::after { width: 50px; height: 2px; }
+  .btn, .btn-outline { padding: 8px 16px; font-size: 0.8rem; white-space: normal; }
+  .cart-summary .total { font-size: 1.4rem; }
+  .order-header { flex-direction: column; align-items: flex-start; }
+  .page-body { padding: 20px; }
 }
 
-/* ການຫໍ່ຂໍ້ຄວາມທີ່ຍາວ */
-p, li, .service-card p, .portfolio-card p, .about-text p,
-.hero-content p, .section-sub, .ev-badge, .contact-list li,
-.logo h1, .logo p, .section-title, .service-card h3,
-.news-card p, .news-card h3, .team-card h4, .customer-item h4 {
-  word-break: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-/* ປຸ່ມໃນໜ້າຈໍນ້ອຍ */
-@media (max-width: 480px) {
-  .btn, .btn-outline {
-    white-space: normal;
-    text-align: center;
-    padding: 8px 14px !important;
+/* ເພີ່ມຄວາມສະດວກໃນການສຳຜັດ (touch) */
+@media (hover: none) and (pointer: coarse) {
+  .btn, .nav-links li a, .product-card .btn-add-to-cart {
+    min-height: 44px; /* ຂະໜາດຕ່ຳສຸດສຳລັບການກົດງ່າຍ */
   }
+}
+
+/* ໃຫ້ຕາຕະລາງໃນ Admin ເລື່ອນນອນໄດ້ລຽບງ່າຍ */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ປ້ອງກັນ bullet point ຊ້ອນ */
@@ -965,8 +951,6 @@ p, li, .service-card p, .portfolio-card p, .about-text p,
   box-shadow: 0 0 12px rgba(185, 28, 28, 0.6);
   transform: translateY(-3px) scale(1.02);
 }
-
-
 
 /* ==================================================
    B-ONE ENGINEERING - CSS PRO VERSION 2026 ULTIMATE
