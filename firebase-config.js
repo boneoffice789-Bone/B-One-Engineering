@@ -1,22 +1,23 @@
-{
-  "hosting": {
-    "public": ".",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "README.md"],
-    "rewrites": [
-      { "source": "/", "destination": "/index.html" },
-      { "source": "/about", "destination": "/about.html" },
-      { "source": "/services", "destination": "/services.html" },
-      { "source": "/products", "destination": "/products.html" },
-      { "source": "/brands", "destination": "/brands.html" },
-      { "source": "/portfolio", "destination": "/portfolio.html" },
-      { "source": "/contact", "destination": "/contact.html" },
-      { "source": "/login", "destination": "/login.html" },
-      { "source": "/register", "destination": "/register.html" },
-      { "source": "/profile", "destination": "/profile.html" },
-      { "source": "/cart", "destination": "/cart.html" },
-      { "source": "/checkout", "destination": "/checkout.html" },
-      { "source": "/orders", "destination": "/orders.html" },
-      { "source": "/admin/**", "destination": "/admin/index.html" }
-    ]
-  }
-}
+// firebase-config.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc, query, where, orderBy, limit, serverTimestamp, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBkLZAa0YR5QzWFyaHkoA2rxQREI8D9DeA",
+  authDomain: "b-one-engineering-39728.firebaseapp.com",
+  projectId: "b-one-engineering-39728",
+  storageBucket: "b-one-engineering-39728.firebasestorage.app",
+  messagingSenderId: "952177236727",
+  appId: "1:952177236727:web:2d1cb669ca76286d83d1f2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+export { 
+  db, auth,
+  collection, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc, query, where, orderBy, limit, serverTimestamp, onSnapshot, setDoc,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updateProfile
+};
