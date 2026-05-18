@@ -157,7 +157,6 @@
         </select>
       </div>
 
-      <!-- ສ່ວນອັບໂຫຼດສະລິບ (ຈະສະແດງເມື່ອເລືອກໂອນເງິນ) -->
       <div id="slipUploadSection" style="display: none;">
         <div class="form-group">
           <label><i class="fas fa-receipt"></i> ແນບສະລິບການໂອນເງິນ</label>
@@ -169,15 +168,15 @@
 
       <button type="submit" class="btn" id="submitBtn">ຢືນຢັນການສັ່ງຊື້</button>
     </form>
-    <a href="cart.html" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປກະຕ່າສິນຄ້າ</a>
+    <a href="/cart" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປກະຕ່າສິນຄ້າ</a>
   </div>
 </div>
 
 <script type="module">
-  import { auth, db, doc, getDoc, collection, addDoc, serverTimestamp, onAuthStateChanged } from './firebase-config.js';
+  import { auth, db, doc, getDoc, collection, addDoc, serverTimestamp, onAuthStateChanged } from '/firebase-config.js';
 
   const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
-  if (cart.length === 0) window.location.href = 'cart.html';
+  if (cart.length === 0) window.location.href = '/cart';
 
   let total = 0;
   const summaryDiv = document.getElementById('cartSummary');
@@ -192,7 +191,6 @@
     <div class="cart-total"><span>ລວມທັງໝົດ:</span> <span>₭${total.toLocaleString()}</span></div>
   `;
 
-  // ຕົວແປສຳລັບເກັບ URL ສະລິບຫຼັງອັບໂຫຼດ
   let uploadedSlipUrl = '';
   let isUploading = false;
 
@@ -201,7 +199,6 @@
   const slipFileInput = document.getElementById('slipFile');
   const slipPreview = document.getElementById('slipPreview');
 
-  // ຟັງຊັນອັບໂຫຼດຮູບໄປ ImgBB
   async function uploadImageToImgBB(file) {
     const formData = new FormData();
     formData.append('image', file);
@@ -222,7 +219,6 @@
     }
   }
 
-  // ເມື່ອເລືອກວິທີຊຳລະ
   paymentMethodSelect.addEventListener('change', (e) => {
     if (e.target.value === 'transfer') {
       slipUploadSection.style.display = 'block';
@@ -234,7 +230,6 @@
     }
   });
 
-  // ອັບໂຫຼດສະລິບເມື່ອເລືອກໄຟລ໌
   slipFileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -243,7 +238,6 @@
       slipFileInput.value = '';
       return;
     }
-    // ສະແດງ preview
     const reader = new FileReader();
     reader.onload = (e) => {
       slipPreview.innerHTML = `<img src="${e.target.result}" alt="preview"><button type="button" class="btn-sm" id="removeSlipBtn">ລຶບ</button>`;
@@ -258,7 +252,6 @@
     };
     reader.readAsDataURL(file);
 
-    // ອັບໂຫຼດຮູບ
     try {
       isUploading = true;
       const url = await uploadImageToImgBB(file);
@@ -291,11 +284,10 @@
     setTimeout(() => alertBox.remove(), 4000);
   }
 
-  // ດຶງຂໍ້ມູນຜູ້ໃຊ້
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້', true);
-      setTimeout(() => window.location.href = 'login.html', 2000);
+      setTimeout(() => window.location.href = '/login', 2000);
       return;
     }
     const userDoc = await getDoc(doc(db, 'users', user.uid));
@@ -313,7 +305,7 @@
     const user = auth.currentUser;
     if (!user) {
       showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນ', true);
-      window.location.href = 'login.html';
+      window.location.href = '/login';
       return;
     }
     const address = document.getElementById('address').value.trim();
@@ -357,12 +349,12 @@
       };
       if (paymentMethod === 'transfer' && uploadedSlipUrl) {
         orderData.slipUrl = uploadedSlipUrl;
-        orderData.paymentStatus = 'waiting_verification'; // ເພີ່ມສະຖານະການຢັ້ງຢືນການຈ່າຍ
+        orderData.paymentStatus = 'waiting_verification';
       }
       await addDoc(collection(db, 'orders'), orderData);
       localStorage.removeItem('b_one_cart');
       showAlert('ສັ່ງຊື້ສຳເລັດ! ກຳລັງໄປຍັງໜ້າປະຫວັດຄຳສັ່ງຊື້', false);
-      setTimeout(() => window.location.href = 'orders.html', 2000);
+      setTimeout(() => window.location.href = '/orders', 2000);
     } catch (err) {
       console.error(err);
       showAlert('ເກີດຂໍ້ຜິດພາດ: ' + err.message, true);
