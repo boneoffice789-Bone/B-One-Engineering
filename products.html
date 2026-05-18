@@ -6,7 +6,7 @@
   <title>ຈຳໜ່າຍສິນຄ້າ | B-One Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
   <style>
     .cart-icon-wrapper { position: relative; }
     .cart-count { position: absolute; top: -8px; right: -12px; background: #ffd700; color: #b30000; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
@@ -24,20 +24,20 @@
 
 <header>
   <div class="navbar">
-    <div class="logo"><a href="index.html"><h1>B-One Engineering</h1><p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p></a></div>
+    <div class="logo"><a href="/"><h1>B-One Engineering</h1><p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p></a></div>
     <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
-      <li><a href="about.html"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
-      <li><a href="services.html"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
-      <li><a href="products.html" class="active"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
-      <li><a href="brands.html"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
-      <li><a href="portfolio.html"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
-      <li><a href="contact.html"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
-      <li><a href="cart.html" class="cart-icon-wrapper"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a></li>
+      <li><a href="/"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="/about"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="/services"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="/products" class="active"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="/brands"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="/portfolio"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="/contact"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+      <li><a href="/cart" class="cart-icon-wrapper"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a></li>
       <li id="auth-section">
-        <div id="userDisplay" style="display: none;"><a href="profile.html"><i class="fas fa-user-circle"></i><span id="userName" class="lao"></span></a></div>
-        <div id="loginDisplay"><a href="login.html"><i class="fas fa-sign-in-alt"></i><span class="lao">ເຂົ້າສູ່ລະບົບ</span><span class="eng">LOGIN</span></a></div>
+        <div id="userDisplay" style="display: none;"><a href="/profile"><i class="fas fa-user-circle"></i><span id="userName" class="lao"></span></a></div>
+        <div id="loginDisplay"><a href="/login"><i class="fas fa-sign-in-alt"></i><span class="lao">ເຂົ້າສູ່ລະບົບ</span><span class="eng">LOGIN</span></a></div>
       </li>
     </ul>
   </div>
@@ -74,7 +74,7 @@
 </script>
 
 <script type="module">
-  import { db, collection, getDocs, query, where, auth, onAuthStateChanged } from './firebase-config.js';
+  import { db, collection, getDocs, query, where, auth, onAuthStateChanged } from '/firebase-config.js';
 
   onAuthStateChanged(auth, (user) => {
     const userDisplay = document.getElementById('userDisplay');
@@ -101,7 +101,6 @@
       snap.forEach(doc => {
         const p = doc.data();
         const stock = p.stock !== undefined ? p.stock : 0;
-        let stockBadge = '';
         let stockClass = 'stock-out';
         let stockText = 'ສິນຄ້າຫມົດ';
         if (stock > 10) {
@@ -114,8 +113,6 @@
           stockClass = 'stock-out';
           stockText = 'ສິນຄ້າຫມົດ';
         }
-        stockBadge = `<div class="stock-badge ${stockClass}"><i class="fas fa-boxes"></i> ${stockText}</div>`;
-        
         const product = { id: doc.id, name: p.name, price: p.price, image: p.image || 'https://via.placeholder.com/300x200', category: p.category || 'ທົ່ວໄປ', stock: stock };
         
         grid.innerHTML += `
@@ -125,7 +122,7 @@
               <h3 style="font-size:1.2rem;">${product.name}</h3>
               <p style="color:#6c757d;">${product.category}</p>
               <p style="color:#b91c1c; font-weight:700; font-size:1.2rem;">₭${product.price.toLocaleString()}</p>
-              ${stockBadge}
+              <div class="stock-badge ${stockClass}"><i class="fas fa-boxes"></i> ${stockText}</div>
               ${stock > 0 ? `<button class="btn-add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image}" data-stock="${product.stock}"><i class="fas fa-cart-plus"></i> ເພີ່ມໃສ່ກະຕ່າ</button>` : `<button class="btn-out-of-stock" disabled><i class="fas fa-times-circle"></i> ສິນຄ້າຫມົດ</button>`}
             </div>
           </div>
