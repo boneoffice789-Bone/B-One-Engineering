@@ -128,7 +128,7 @@
     </div>
   </div>
 
-  <!-- Sales Report (ສະເພາະຕາຕະລາງສະຫຼຸບຍອດຂາຍລາຍວັນ) -->
+  <!-- Sales Report -->
   <div id="salesReport" class="tab-content">
     <h2>📈 ລາຍງານການຂາຍ</h2>
     <div class="report-toolbar">
@@ -140,14 +140,11 @@
         <button class="btn btn-danger" onclick="exportReportPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
       </div>
     </div>
-    
-    <!-- ຕາຕະລາງສະຫຼຸບຍອດຂາຍລາຍວັນ -->
     <div class="table-wrapper">
       <h3 style="margin:15px 0 0 15px;">📊 ສະຫຼຸບຍອດຂາຍລາຍວັນ</h3>
       <table id="reportTable">
         <thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead>
-        <tbody><tr><td colspan="3" style="text-align:center;">ກະລຸນາເລືອກຊ່ວງວັນທີ ແລ້ວກົດ "ສະແດງລາຍງານ"</td></tr>
-        </tbody>
+        <tbody><tr><td colspan="3" style="text-align:center;">ກະລຸນາເລືອກຊ່ວງວັນທີ ແລ້ວກົດ "ສະແດງລາຍງານ"</td></tr></tbody>
       </table>
     </div>
   </div>
@@ -194,16 +191,26 @@
     <div class="table-wrapper"><table id="userTable"><thead><tr><th>ຊື່</th><th>ອີເມວ</th><th>ສິດ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
   </div>
 
-  <!-- News -->
+  <!-- News (ແຍກຕາຕະລາງຊັດເຈນ) -->
   <div id="news" class="tab-content">
     <h2>📰 ຈັດການຂ່າວ <button class="btn btn-primary" onclick="openNewsModal()"><i class="fas fa-plus"></i> ເພີ່ມຂ່າວ</button></h2>
-    <div class="table-wrapper"><table id="newsTable"><thead><tr><th>ຫົວຂໍ້</th><th>ໝວດ</th><th>ວັນທີ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></td></div>
+    <div class="table-wrapper">
+      <table id="newsTable">
+        <thead><tr><th>ຫົວຂໍ້</th><th>ໝວດ</th><th>ວັນທີ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead>
+        <tbody><tr><td colspan="5">ກຳລັງໂຫຼດ...</td></tr></tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- Sliders -->
+  <!-- Sliders (ແຍກຕາຕະລາງຊັດເຈນ) -->
   <div id="sliders" class="tab-content">
     <h2>🖼️ ຈັດການສະໄລເດີ <button class="btn btn-primary" onclick="openSliderModal()"><i class="fas fa-plus"></i> ເພີ່ມສະໄລເດີ</button></h2>
-    <div class="table-wrapper"><table id="sliderTable"><thead><tr><th>ຫົວຂໍ້</th><th>ລິ້ງ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead><tbody></tbody></table></div>
+    <div class="table-wrapper">
+      <table id="sliderTable">
+        <thead><tr><th>ຫົວຂໍ້</th><th>ລິ້ງ</th><th>ຮູບ</th><th>ສະຖານະ</th><th>ຈັດການ</th></tr></thead>
+        <tbody><tr><td colspan="5">ກຳລັງໂຫຼດ...</td></tr></tbody>
+      </table>
+    </div>
   </div>
 
   <!-- Settings -->
@@ -220,20 +227,50 @@
   </div>
 </div>
 
-<!-- Modals (ຄືເກົ່າ) -->
+<!-- Modals -->
 <div class="modal" id="productModal"><div class="modal-content"><h3 id="productModalTitle">ເພີ່ມສິນຄ້າ</h3><form id="productForm"><input type="hidden" id="prodId"><div class="form-group"><label>ຊື່</label><input type="text" id="prodName" required></div><div class="form-group"><label>ລາຄາ</label><input type="number" id="prodPrice" required></div><div class="form-group"><label>ໝວດ</label><input type="text" id="prodCategory"></div><div class="form-group"><label>ຮູບ URL</label><input type="text" id="prodImage"><button type="button" class="btn btn-sm" onclick="uploadProductImage()">ອັບໂຫຼດ</button></div><div class="form-group"><label>ສະຕ໋ອກ</label><input type="number" id="prodStock" value="0"></div><div class="form-group"><label>ສະຖານະ</label><select id="prodStatus"><option value="active">ເປີດ</option><option value="inactive">ປິດ</option></select></div><div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('productModal')">ຍົກເລີກ</button></div></form></div></div>
+
 <div class="modal" id="serviceModal"><div class="modal-content"><h3>ບໍລິການ</h3><form id="serviceForm"><input type="hidden" id="svcId"><div class="form-group"><label>ຊື່</label><input type="text" id="svcName" required></div><div class="form-group"><label>ໝວດ</label><input type="text" id="svcCategory"></div><div class="form-group"><label>ລາຍລະອຽດ</label><textarea id="svcDesc" rows="3"></textarea></div><div class="form-group"><label>ຮູບ/ໄອຄອນ</label><input type="text" id="svcImage"><button type="button" class="btn btn-sm" onclick="uploadServiceImage()">ອັບໂຫຼດ</button></div><div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('serviceModal')">ຍົກເລີກ</button></div></form></div></div>
+
 <div class="modal" id="portfolioModal"><div class="modal-content"><h3>ຜົນງານ</h3><form id="portfolioForm"><input type="hidden" id="portId"><div class="form-group"><label>ຊື່ໂຄງການ</label><input type="text" id="portTitle" required></div><div class="form-group"><label>ໝວດ</label><input type="text" id="portCategory"></div><div class="form-group"><label>ລາຍລະອຽດ</label><textarea id="portDesc" rows="3"></textarea></div><div class="form-group"><label>ຮູບ URL</label><input type="text" id="portImage"><button type="button" class="btn btn-sm" onclick="uploadPortfolioImage()">ອັບໂຫຼດ</button></div><div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('portfolioModal')">ຍົກເລີກ</button></div></form></div></div>
+
 <div class="modal" id="brandModal"><div class="modal-content"><h3>ແບຣນ</h3><form id="brandForm"><input type="hidden" id="brandId"><div class="form-group"><label>ຊື່</label><input type="text" id="brandName" required></div><div class="form-group"><label>ໝວດ</label><input type="text" id="brandCategory"></div><div class="form-group"><label>ໂລໂກ້ URL</label><input type="text" id="brandLogo"><button type="button" class="btn btn-sm" onclick="uploadBrandLogo()">ອັບໂຫຼດ</button></div><div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('brandModal')">ຍົກເລີກ</button></div></form></div></div>
-<div class="modal" id="newsModal"><div class="modal-content"><h3>ຂ່າວ</h3><form id="newsForm"><input type="hidden" id="newsId"><div class="form-group"><label>ຫົວຂໍ້</label><input type="text" id="newsTitle" required></div><div class="form-group"><label>ໝວດ</label><select id="newsCategory"><option value="news">ຂ່າວ</option><option value="promotion">ໂປຣໂມຊັ່ນ</option></select></div><div class="form-group"><label>ເນື້ອໃນ</label><textarea id="newsContent" rows="4"></textarea></div><div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('newsModal')">ຍົກເລີກ</button></div></form></div></div>
-<div class="modal" id="sliderModal"><div class="modal-content"><h3>ສະໄລເດີ</h3><form id="sliderForm"><input type="hidden" id="sliderId"><div class="form-group"><label>ຫົວຂໍ້</label><input type="text" id="sliderTitle" required></div><div class="form-group"><label>ລິ້ງ</label><input type="text" id="sliderLink"></div><div class="form-group"><label>ຮູບ URL</label><input type="text" id="sliderImage"><button type="button" class="btn btn-sm" onclick="uploadSliderImage()">ອັບໂຫຼດ</button></div><div class="form-group"><label>ສະຖານະ</label><select id="sliderStatus"><option value="active">ເປີດ</option><option value="inactive">ປິດ</option></select></div><div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('sliderModal')">ຍົກເລີກ</button></div></form></div></div>
+
+<!-- Modal ຂ່າວ (ສົມບູນ) -->
+<div class="modal" id="newsModal">
+  <div class="modal-content">
+    <h3 id="newsModalTitle">ເພີ່ມຂ່າວ</h3>
+    <form id="newsForm">
+      <input type="hidden" id="newsId">
+      <div class="form-group"><label>ຫົວຂໍ້</label><input type="text" id="newsTitle" required></div>
+      <div class="form-group"><label>ໝວດ</label><select id="newsCategory"><option value="news">ຂ່າວ</option><option value="promotion">ໂປຣໂມຊັ່ນ</option></select></div>
+      <div class="form-group"><label>ເນື້ອໃນ</label><textarea id="newsContent" rows="4"></textarea></div>
+      <div class="form-group"><label>ສະຖານະ</label><select id="newsStatus"><option value="active">ເປີດ</option><option value="inactive">ປິດ</option></select></div>
+      <div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('newsModal')">ຍົກເລີກ</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal ສະໄລເດີ (ສົມບູນ) -->
+<div class="modal" id="sliderModal">
+  <div class="modal-content">
+    <h3 id="sliderModalTitle">ເພີ່ມສະໄລເດີ</h3>
+    <form id="sliderForm">
+      <input type="hidden" id="sliderId">
+      <div class="form-group"><label>ຫົວຂໍ້</label><input type="text" id="sliderTitle" required></div>
+      <div class="form-group"><label>ລິ້ງ</label><input type="text" id="sliderLink"></div>
+      <div class="form-group"><label>ຮູບ URL</label><input type="text" id="sliderImage"><button type="button" class="btn btn-sm" onclick="uploadSliderImage()">ອັບໂຫຼດ</button></div>
+      <div class="form-group"><label>ສະຖານະ</label><select id="sliderStatus"><option value="active">ເປີດ</option><option value="inactive">ປິດ</option></select></div>
+      <div class="btn-group"><button type="submit" class="btn btn-success">ບັນທຶກ</button><button type="button" class="btn btn-danger" onclick="closeModal('sliderModal')">ຍົກເລີກ</button></div>
+    </form>
+  </div>
+</div>
 
 <script type="module">
   import { auth, db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, onAuthStateChanged, signOut, getDoc, query, orderBy, where } from '/firebase-config.js';
 
   let salesChart, statusChart;
 
-  // ========== ຟັງຊັນຊ່ວຍ ==========
   function escapeHtml(str) {
     if (!str) return '';
     return str.replace(/[&<>]/g, function(m) {
@@ -244,7 +281,6 @@
     });
   }
 
-  // ========== ກວດສອບສິດ ==========
   onAuthStateChanged(auth, async (user) => {
     if (!user) { window.location.href = '/login'; return; }
     const snap = await getDoc(doc(db, 'users', user.uid));
@@ -273,7 +309,6 @@
     else if (tabId === 'sliders') loadSliders();
   };
 
-  // ========== DASHBOARD ==========
   async function loadDashboard() {
     const [prod, msg, orders, users] = await Promise.all([
       getDocs(collection(db, 'products')),
@@ -301,7 +336,6 @@
     if(ctxStatus) { if(statusChart) statusChart.destroy(); statusChart = new Chart(ctxStatus, { type:'pie', data:{ labels:['ກຳລັງດຳເນີນ','ຢືນຢັນ','ກຳລັງກະກຽມ','ຈັດສົ່ງ','ສຳເລັດ','ຍົກເລີກ'], datasets:[{ data:[statusCount.pending,statusCount.confirmed,statusCount.processing,statusCount.shipped,statusCount.delivered,statusCount.cancelled], backgroundColor:['#ffc107','#17a2b8','#6c757d','#28a745','#007bff','#dc3545'] }] }, options:{ responsive:true } }); }
   }
 
-  // ========== ລາຍງານການຂາຍ ==========
   window.loadSalesReport = async () => {
     const start = document.getElementById('reportStartDate').value;
     const end = document.getElementById('reportEndDate').value;
@@ -337,15 +371,46 @@
     window.reportData = { filtered: filteredOrders, totalOrders, totalSales, start, end };
   };
 
-  window.exportReportExcel = () => { /* ... ເກົ່າ ... */ alert('ຟັງຊັນ Excel ເຮັດວຽກຕາມເດີມ'); };
-  window.exportReportPDF = () => { /* ... ເກົ່າ ... */ alert('ຟັງຊັນ PDF ເຮັດວຽກຕາມເດີມ'); };
+  window.exportReportExcel = () => {
+    if(!window.reportData || !window.reportData.filtered.length){ alert('ກະລຸນາໂຫຼດລາຍງານກ່ອນ'); return; }
+    const rows = [['ວັນທີ', 'ຈຳນວນຄຳສັ່ງ', 'ຍອດຂາຍລວມ (ກີບ)']];
+    const map = new Map();
+    window.reportData.filtered.forEach(o => { const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10); map.set(day, { count: (map.get(day)?.count||0)+1, total: (map.get(day)?.total||0)+(o.totalAmount||0) }); });
+    for(let [day,val] of map) rows.push([day, val.count, val.total]);
+    rows.push(['ລວມທັງໝົດ', window.reportData.totalOrders, window.reportData.totalSales]);
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'SalesReport');
+    XLSX.writeFile(wb, `sales_report_${window.reportData.start}_to_${window.reportData.end}.xlsx`);
+  };
 
-  // ========== ໂຫຼດຂໍ້ມູນທັງໝົດ ==========
-  async function loadAll() { 
-    await Promise.all([loadProducts(), loadServices(), loadPortfolio(), loadBrands(), loadContacts(), loadOrders(), loadUsers(), loadNews(), loadSliders()]); 
-  }
+  window.exportReportPDF = () => {
+    if (!window.reportData || !window.reportData.filtered.length) { alert('ກະລຸນາໂຫຼດລາຍງານກ່ອນ'); return; }
+    const startDate = window.reportData.start, endDate = window.reportData.end, generatedDate = new Date().toLocaleDateString('lo-LA');
+    const dataMap = new Map();
+    window.reportData.filtered.forEach(order => {
+      if (order.createdAt?.seconds) {
+        const day = new Date(order.createdAt.seconds * 1000).toISOString().slice(0, 10);
+        const cur = dataMap.get(day) || { count: 0, total: 0 };
+        cur.count++; cur.total += (order.totalAmount || 0);
+        dataMap.set(day, cur);
+      }
+    });
+    const sortedDays = Array.from(dataMap.keys()).sort();
+    let totalOrders = 0, totalSales = 0, tableRows = '';
+    for (const day of sortedDays) {
+      const row = dataMap.get(day);
+      totalOrders += row.count; totalSales += row.total;
+      tableRows += `<tr><td style="padding:10px;border:1px solid #ddd;text-align:center;">${day}</td><td style="padding:10px;border:1px solid #ddd;text-align:center;">${row.count}</td><td style="padding:10px;border:1px solid #ddd;text-align:right;">${row.total.toLocaleString()} ກີບ</td></tr>`;
+    }
+    tableRows += `<tr style="font-weight:bold;background:#f0f0f0;"><td style="padding:10px;border:1px solid #ddd;text-align:center;">ລວມທັງໝົດ</td><td style="padding:10px;border:1px solid #ddd;text-align:center;">${totalOrders}</td><td style="padding:10px;border:1px solid #ddd;text-align:right;">${totalSales.toLocaleString()} ກີບ</td></tr>`;
+    const printHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>ລາຍງານການຂາຍ | B-One Engineering</title><style>body{font-family:'Noto Sans Lao',sans-serif;padding:30px;} .header{text-align:center;border-bottom:2px solid #b30000;} h1{color:#b30000;} table{width:100%;border-collapse:collapse;margin-top:15px;} th{background:#b30000;color:white;padding:12px;} td{padding:10px;border:1px solid #ddd;} .footer{margin-top:30px;text-align:center;font-size:10px;}</style></head><body><div class=\"header\"><h1>B-One Engineering</h1><p>ລາຍງານການຂາຍ ${startDate} ຫາ ${endDate}</p></div><table><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody></table><div class=\"footer\">© 2026 B-One Engineering — ສ້າງເມື່ອ ${generatedDate}</div><div style=\"text-align:center;margin-top:20px;\"><button onclick=\"window.print()\">ພິມ</button></div></body></html>`;
+    const win = window.open(); win.document.write(printHtml); win.document.close(); win.focus();
+  };
 
-  // ========== ສິນຄ້າ (Products) ==========
+  async function loadAll() { await Promise.all([loadProducts(), loadServices(), loadPortfolio(), loadBrands(), loadContacts(), loadOrders(), loadUsers(), loadNews(), loadSliders()]); }
+
+  // Products
   async function loadProducts() {
     const tbody = document.querySelector('#productTable tbody');
     if(!tbody) return;
@@ -392,7 +457,7 @@
     loadProducts(); loadDashboard();
   });
 
-  // ========== ບໍລິການ (Services) ==========
+  // Services
   async function loadServices() {
     const tbody = document.querySelector('#serviceTable tbody');
     if(!tbody) return;
@@ -429,7 +494,7 @@
     loadServices();
   });
 
-  // ========== ຜົນງານ (Portfolio) ==========
+  // Portfolio
   async function loadPortfolio() {
     const tbody = document.querySelector('#portfolioTable tbody');
     if(!tbody) return;
@@ -466,7 +531,7 @@
     loadPortfolio();
   });
 
-  // ========== ແບຣນ (Brands) ==========
+  // Brands
   async function loadBrands() {
     const tbody = document.querySelector('#brandTable tbody');
     if(!tbody) return;
@@ -501,7 +566,7 @@
     loadBrands();
   });
 
-  // ========== ຂໍ້ຄວາມຕິດຕໍ່ ==========
+  // Contacts
   async function loadContacts() {
     const tbody = document.querySelector('#contactTable tbody');
     if(!tbody) return;
@@ -515,7 +580,7 @@
     if(snap.empty) tbody.innerHTML = '<tr><td colspan="6">ຍັງບໍ່ມີຂໍ້ຄວາມ</td></tr>';
   }
 
-  // ========== ຄຳສັ່ງຊື້ ==========
+  // Orders
   async function loadOrders() {
     const tbody = document.querySelector('#orderTable tbody');
     if(!tbody) return;
@@ -541,7 +606,7 @@
     catch(e){ alert('ຜິດພາດ: '+e.message); }
   };
 
-  // ========== ຜູ້ໃຊ້ ==========
+  // Users
   async function loadUsers() {
     const tbody = document.querySelector('#userTable tbody');
     if(!tbody) return;
@@ -561,7 +626,7 @@
     }
   };
 
-  // ========== ຂ່າວ (NEWS) - ສະເພາະ ==========
+  // ================== NEWS (ສະເພາະ) ==================
   async function loadNews() {
     const tbody = document.querySelector('#newsTable tbody');
     if (!tbody) return;
@@ -634,7 +699,7 @@
     loadNews();
   });
 
-  // ========== ສະໄລເດີ (SLIDERS) - ສະເພາະ ==========
+  // ================== SLIDERS (ສະເພາະ) ==================
   async function loadSliders() {
     const tbody = document.querySelector('#sliderTable tbody');
     if (!tbody) return;
@@ -706,19 +771,19 @@
     loadSliders();
   });
 
-  // ========== ຟັງຊັນທົ່ວໄປ ==========
+  // General functions
   window.closeModal = (id) => document.getElementById(id).classList.remove('show');
   window.deleteItem = async(col,id) => { if(confirm('ລຶບ?')){ await deleteDoc(doc(db,col,id)); loadAll(); loadDashboard(); } };
   window.updateStatus = async(col,id,field,val) => { if(field==='orderStatus' && !val) return; await updateDoc(doc(db,col,id), { [field]: val||field, updatedAt:serverTimestamp() }); loadAll(); };
   window.logout = async() => { await signOut(auth); window.location.href='/login'; };
-  
-  // ອັບໂຫຼດຮູບ (ImgBB)
+
+  // Image upload
   window.uploadProductImage = () => { uploadImageToImgBB((url)=>document.getElementById('prodImage').value=url); };
   window.uploadServiceImage = () => { uploadImageToImgBB((url)=>document.getElementById('svcImage').value=url); };
   window.uploadPortfolioImage = () => { uploadImageToImgBB((url)=>document.getElementById('portImage').value=url); };
   window.uploadBrandLogo = () => { uploadImageToImgBB((url)=>document.getElementById('brandLogo').value=url); };
   window.uploadSliderImage = () => { uploadImageToImgBB((url)=>document.getElementById('sliderImage').value=url); };
-  
+
   function uploadImageToImgBB(callback){
     const input = document.createElement('input'); input.type='file'; input.accept='image/*';
     input.onchange = async(e) => {
@@ -733,7 +798,6 @@
     input.click();
   }
 
-  // ປິດ modal ເມື່ອກົດນອກ
   document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('show'); }));
 </script>
 </body>
