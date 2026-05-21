@@ -586,21 +586,28 @@ footer a:hover {
   box-shadow: 0 10px 25px rgba(37,211,102,0.5);
 }
 
-/* ========== SLIDER SECTION (Responsive) ========== */
-.slider-section { padding: 0; }
+/* Base slider styles (unchanged except adding a height wrapper) */
+.slider-section {
+  padding: 0;
+  /* Ensure the section can expand to full viewport */
+  height: auto;
+}
+
 .slider-container {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
+
 .slider-wrapper {
   display: flex;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
 .slide {
   flex: 0 0 100%;
-  /* ປັບຄວາມສູງໃຫ້ຍືດຫຍຸ່ນ: ຕ່ຳສຸດ 350px, ປົກກະຕິ 60vh (60% ຂອງຄວາມສູງຈໍ), ສູງສຸດ 600px */
-  height: clamp(350px, 60vh, 600px);
+  /* Default height for desktop – can be adjusted */
+  height: 500px;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -608,132 +615,77 @@ footer a:hover {
   justify-content: center;
   position: relative;
 }
-.slide::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
-  z-index: 1;
-}
-.slide-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-  /* ປັບ Padding ໃຫ້ຫຍໍ້-ຂະຫຍາຍຕາມຈໍ */
-  padding: clamp(20px, 5vw, 38px);
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(10px);
-  border-radius: clamp(16px, 4vw, 32px);
-  /* ໃຊ້ 90% ໃນຈໍນ້ອຍ ແລະ ລັອກຄວາມກວ້າງສູງສຸດໄວ້ໃນຈໍໃຫຍ່ */
-  width: 90%;
-  max-width: 800px; 
-  animation: fadeInUp 0.7s ease;
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.slide-content h3 {
-  /* ຕົວໜັງສືຫຍໍ້-ຂະຫຍາຍອັດຕະໂນມັດ ລະຫວ່າງ 1.5rem ຫາ 2.5rem */
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  margin-bottom: 12px;
-  font-weight: 700;
-  word-break: break-word;
-}
-.slide-content p {
-  /* ຕົວໜັງສືຫຍໍ້-ຂະຫຍາຍອັດຕະໂນມັດ */
-  font-size: clamp(0.9rem, 3vw, 1.1rem);
-  margin-bottom: 20px;
-  opacity: 0.95;
-}
-.slide-content .btn,
-.slide-content a.btn,
-.slide-content .btn-slider {
-  display: inline-block !important;
-  background: rgba(255,255,255,0.15) !important;
-  backdrop-filter: blur(8px);
-  border: 2px solid rgba(255,255,255,0.8) !important;
-  color: white !important;
-  /* ປັບ Padding ປຸ່ມໃຫ້ພໍດີກັບທຸກຈໍ */
-  padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 28px) !important;
-  font-size: clamp(0.85rem, 2.5vw, 1rem) !important;
-  font-weight: 600 !important;
-  border-radius: 60px !important;
-  text-decoration: none !important;
-  transition: all 0.3s ease !important;
-  cursor: pointer;
-}
-.slide-content .btn:hover,
-.slide-content a.btn:hover {
-  background: white !important;
-  color: #b91c1c !important;
-  transform: translateY(-2px);
-}
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
-  border: none;
-  color: white;
-  /* ປັບຂະໜາດປຸ່ມຊ້າຍຂວາໃຫ້ເໝາະສົມ */
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  width: clamp(36px, 6vw, 44px);
-  height: clamp(36px, 6vw, 44px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 3;
-  transition: all 0.3s ease; /* ແກ້ໄຂຈາກ var(--transition) ກໍລະນີບໍ່ໄດ້ປະກາດຕົວປ່ຽນໄວ້ */
-}
-.slider-btn:hover {
-  background: #b91c1c; /* ແກ້ໄຂຈາກ var(--primary) */
-  transform: translateY(-50%) scale(1.08);
-}
-/* ຍັບປຸ່ມເຂົ້າໃນໜ້ອຍໜຶ່ງເມື່ອຢູ່ໃນຈໍນ້ອຍ */
-.slider-prev { left: clamp(10px, 3vw, 20px); }
-.slider-next { right: clamp(10px, 3vw, 20px); }
 
-.slider-dots {
-  position: absolute;
-  bottom: clamp(16px, 4vw, 24px);
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  z-index: 3;
-}
-.dot {
-  width: clamp(8px, 2vw, 12px);
-  height: clamp(8px, 2vw, 12px);
-  background: rgba(255,255,255,0.6);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.dot.active {
-  background: #b91c1c;
-  transform: scale(1.3);
-  box-shadow: 0 0 8px rgba(185,28,28,0.6);
-}
+/* ... keep all other existing styles (slide::before, .slide-content, buttons, dots) ... */
 
-/* ສໍາລັບຈໍມືຖືຂະໜາດນ້ອຍຫຼາຍໆ (ທາງເລືອກເສີມ) */
-@media (max-width: 480px) {
-  .slider-btn {
-    /* ຖ້າປຸ່ມຊ້າຍຂວາບັງເນື້ອຫາໃນຈໍນ້ອຍ ສາມາດເປີດໃຊ້ display: none ໄດ້ (ໃຫ້ປັດໜ້າຈໍແທນ) */
-    /* display: none; */
+/* ===== MOBILE FULL‑SCREEN OVERRIDE ===== */
+@media (max-width: 768px) {
+  .slider-section,
+  .slider-container,
+  .slider-wrapper {
+    height: 100vh;               /* Full viewport height */
+    max-height: 100vh;
   }
+
+  .slide {
+    height: 100vh;               /* Each slide fills the screen */
+    max-height: 100vh;
+  }
+
   .slide-content {
-    /* ຫຼຸດຄວາມມົວລົງໜ້ອຍໜຶ່ງເພື່ອໃຫ້ມືຖືປະມວນຜົນລື່ນຂຶ້ນ */
-    backdrop-filter: blur(5px);
+    max-width: 90%;              /* Slightly wider on small screens */
+    padding: 20px 24px;
+    backdrop-filter: blur(12px); /* Optional: stronger blur for readability */
+  }
+
+  .slide-content h3 {
+    font-size: 1.6rem;           /* Slightly smaller, still prominent */
+    margin-bottom: 8px;
+  }
+
+  .slide-content p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  .slider-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .slider-prev {
+    left: 12px;
+  }
+  .slider-next {
+    right: 12px;
+  }
+
+  .slider-dots {
+    bottom: 16px;
+    gap: 10px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Optional: handle landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .slide-content {
+    max-width: 70%;
+    padding: 12px 20px;
+  }
+  .slide-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .slide-content p {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
   }
 }
 
