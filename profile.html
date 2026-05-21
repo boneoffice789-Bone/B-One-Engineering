@@ -94,6 +94,29 @@
       font-size: 0.85rem;
     }
     .back-link:hover { color: #b91c1c; }
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: #6c757d;
+    }
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #28a745;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      z-index: 1000;
+      font-weight: bold;
+      animation: fadeOut 3s forwards;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
   </style>
 </head>
 <body>
@@ -103,31 +126,86 @@
     <h2>ບັນຊີຂອງຂ້ອຍ</h2>
   </div>
   <div class="profile-body">
-    <div class="info-card">
-      <div class="info-item"><i class="fas fa-user"></i><span class="label">ຊື່:</span><span class="value" id="displayName">-</span></div>
-      <div class="info-item"><i class="fas fa-envelope"></i><span class="label">ອີເມວ:</span><span class="value" id="userEmail">-</span></div>
-      <div class="info-item"><i class="fas fa-phone"></i><span class="label">ເບີໂທ:</span><span class="value" id="userPhone">-</span></div>
+    <div id="loadingIndicator" class="loading">
+      <i class="fas fa-spinner fa-pulse"></i> ກຳລັງໂຫຼດຂໍ້ມູນ...
     </div>
-    <div class="btn-group">
-      <a href="/orders" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ປະຫວັດຄຳສັ່ງຊື້</a>
-      <button id="logoutBtn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> ອອກຈາກລະບົບ</button>
+    <div id="profileContent" style="display: none;">
+      <div class="info-card">
+        <div class="info-item"><i class="fas fa-user"></i><span class="label">ຊື່:</span><span class="value" id="displayName">-</span></div>
+        <div class="info-item"><i class="fas fa-envelope"></i><span class="label">ອີເມວ:</span><span class="value" id="userEmail">-</span></div>
+        <div class="info-item"><i class="fas fa-phone"></i><span class="label">ເບີໂທ:</span><span class="value" id="userPhone">-</span></div>
+      </div>
+      <div class="btn-group">
+        <a href="/orders" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> ປະຫວັດຄຳສັ່ງຊື້</a>
+        <button id="logoutBtn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> ອອກຈາກລະບົບ</button>
+      </div>
+      <a href="/" class="back-link"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
     </div>
-    <a href="/" class="back-link"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
   </div>
 </div>
+
 <script type="module">
   import { auth, db, doc, getDoc, signOut, onAuthStateChanged } from '/firebase-config.js';
+
+  function showToast(message, isError = false) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.style.backgroundColor = isError ? '#dc3545' : '#28a745';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  const loadingDiv = document.getElementById('loadingIndicator');
+  const profileDiv = document.getElementById('profileContent');
+
   onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = '/login'; return; }
-    document.getElementById('displayName').textContent = user.displayName || 'ບໍ່ລະບຸ';
-    document.getElementById('userEmail').textContent = user.email;
-    const snap = await getDoc(doc(db, 'users', user.uid));
-    if (snap.exists()) document.getElementById('userPhone').textContent = snap.data().phone || '-';
+    if (!user) {
+      showToast('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນ', true);
+      setTimeout(() => window.location.href = '/login', 2000);
+      return;
+    }
+
+    try {
+      // ສະແດງຂໍ້ມູນພື້ນຖານຈາກ Auth ກ່ອນ
+      document.getElementById('displayName').textContent = user.displayName || 'ບໍ່ລະບຸ';
+      document.getElementById('userEmail').textContent = user.email || 'ບໍ່ລະບຸ';
+
+      // ດຶງຂໍ້ມູນເພີ່ມເຕີມຈາກ Firestore
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        document.getElementById('userPhone').textContent = userData.phone || 'ບໍ່ລະບຸ';
+      } else {
+        document.getElementById('userPhone').textContent = 'ບໍ່ລະບຸ';
+      }
+
+      // ປິດ loading ແລະ ສະແດງເນື້ອຫາ
+      loadingDiv.style.display = 'none';
+      profileDiv.style.display = 'block';
+    } catch (err) {
+      console.error('Error loading profile:', err);
+      loadingDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ເກີດຂໍ້ຜິດພາດໃນການໂຫຼດຂໍ້ມູນ<br><button onclick="location.reload()" style="margin-top:10px; padding:8px 16px; background:#b91c1c; color:white; border:none; border-radius:20px;">ລອງໃໝ່</button>';
+    }
   });
-  document.getElementById('logoutBtn').addEventListener('click', async () => {
-    await signOut(auth);
-    window.location.href = '/login';
-  });
+
+  // ຈັດການປຸ່ມອອກລະບົບ ພ້ອມຢືນຢັນ
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      const confirmLogout = confirm('ທ່ານຕ້ອງການອອກຈາກລະບົບ ແທ້ ຫຼື ບໍ່?');
+      if (!confirmLogout) return;
+      
+      try {
+        await signOut(auth);
+        showToast('ອອກຈາກລະບົບສຳເລັດ', false);
+        setTimeout(() => window.location.href = '/login', 1500);
+      } catch (err) {
+        console.error('Logout error:', err);
+        showToast('ອອກຈາກລະບົບລົ້ມເຫຼວ, ກະລຸນາລອງໃໝ່', true);
+      }
+    });
+  }
 </script>
 </body>
 </html>
