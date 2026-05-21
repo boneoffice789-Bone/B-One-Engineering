@@ -1074,3 +1074,41 @@ footer {
     font-size: 2rem !important;
   }
 }
+/* ກອບນອກຂອງ slider */
+.slider-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* ກອບພາຍໃນທີ່ໃຊ້ transform */
+.slider-wrapper {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+/* ແຕ່ລະສະໄລ້ (slide) */
+.slide {
+  flex: 0 0 100%;   /* ບັງຄັບໃຫ້ແຕ່ລະ slide ກວ້າງ 100% ຂອງ container */
+  width: 100%;
+}
+
+/* ຮູບພາຍໃນ slide */
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;   /* ຕັດຮູບໃຫ້ພໍດີກັບຂອບ, ຫຼື ໃຊ້ contain ຖ້າຕ້ອງການບໍ່ຕັດ */
+  aspect-ratio: 16 / 9; /* ກຳນົດອັດຕາສ່ວນຕາມຄວາມເໝາະສົມ (ຕົວຢ່າງ: 16:9) */
+}
+
+/* ສຳລັບຈໍມືຖື ອາດຕ້ອງການຄວາມສູງຄົງທີ່ */
+@media (max-width: 768px) {
+  .slide img {
+    height: 200px;      /* ປັບຕາມຄວາມຕ້ອງການ */
+    object-fit: cover;
+  }
+}
