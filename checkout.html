@@ -14,108 +14,45 @@
       min-height: 100vh;
       padding: 40px 20px;
     }
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 32px;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-      overflow: hidden;
-    }
-    .page-header {
-      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
-      padding: 30px 25px;
-      text-align: center;
-      color: white;
-    }
+    .container { max-width: 700px; margin: 0 auto; background: white; border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); overflow: hidden; }
+    .page-header { background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%); padding: 30px 25px; text-align: center; color: white; }
     .page-header i { font-size: 2rem; margin-bottom: 10px; }
     .page-header h2 { font-size: 1.5rem; font-weight: 700; }
     .page-body { padding: 30px 25px; }
-    .cart-summary {
-      background: #f8f9fa;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 25px;
-    }
+    .cart-summary { background: #f8f9fa; border-radius: 20px; padding: 20px; margin-bottom: 25px; }
     .cart-summary h3 { margin-bottom: 15px; color: #b91c1c; }
     .cart-item-line { display: flex; justify-content: space-between; margin-bottom: 8px; }
     .cart-total { font-size: 1.2rem; font-weight: 700; margin-top: 10px; padding-top: 10px; border-top: 1px solid #dee2e6; }
     .form-group { margin-bottom: 20px; }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #333;
-    }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
     .form-group label i { color: #b91c1c; margin-right: 8px; width: 20px; }
     .form-group input, .form-group textarea, .form-group select {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      font-family: inherit;
-      transition: all 0.3s;
-      background: #fefefe;
+      width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 16px;
+      font-family: inherit; transition: all 0.3s; background: #fefefe;
     }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      border-color: #b91c1c;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
+      border-color: #b91c1c; outline: none; box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
     }
-    .form-group input:disabled {
-      background: #f0f0f0;
-      color: #555;
-    }
-    .info-row {
-      background: #e8f0fe;
-      border-radius: 16px;
-      padding: 12px 16px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-    }
+    .form-group input:disabled { background: #f0f0f0; color: #555; }
+    .info-row { background: #e8f0fe; border-radius: 16px; padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
     .info-row i { color: #b91c1c; font-size: 1.1rem; }
     .btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
-      color: white;
-      border: none;
-      border-radius: 40px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
+      width: 100%; padding: 14px; background: linear-gradient(135deg, #b91c1c 0%, #d43f3f 100%);
+      color: white; border: none; border-radius: 40px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all 0.3s;
     }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(185,28,28,0.4); }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .back-link { display: block; text-align: center; margin-top: 20px; color: #6c757d; text-decoration: none; }
     .back-link:hover { color: #b91c1c; }
-    .slip-preview {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .slip-preview img {
-      max-width: 100px;
-      max-height: 100px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-    .btn-sm {
-      background: #6c757d;
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      border-radius: 20px;
-    }
-    @media (max-width: 550px) {
-      .page-body { padding: 20px; }
-      .form-group input, .form-group textarea, .form-group select { padding: 12px 14px; }
-    }
+    .slip-preview { margin-top: 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .slip-preview img { max-width: 100px; max-height: 100px; border-radius: 8px; border: 1px solid #ddd; }
+    .btn-sm { background: #6c757d; padding: 6px 12px; font-size: 0.8rem; border-radius: 20px; color: white; border: none; cursor: pointer; }
+    @media (max-width: 550px) { .page-body { padding: 20px; } .form-group input, .form-group textarea, .form-group select { padding: 12px 14px; } }
+    .toast-message { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; border-radius: 8px; color: white; font-weight: bold; z-index: 9999; animation: fadeOut 4s forwards; }
+    .toast-error { background: #dc3545; }
+    .toast-success { background: #28a745; }
+    @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
   </style>
 </head>
 <body>
@@ -128,44 +65,18 @@
   <div class="page-body">
     <div class="cart-summary" id="cartSummary"></div>
     <form id="orderForm">
-      <div class="info-row">
-        <i class="fas fa-user-circle"></i>
-        <span>ຂໍ້ມູນຈາກບັນຊີຂອງທ່ານ</span>
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-user"></i> ຊື່ຜູ້ຮັບ</label>
-        <input type="text" id="name" disabled>
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-phone"></i> ເບີໂທລະສັບ</label>
-        <input type="tel" id="phone" disabled>
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-envelope"></i> ອີເມວ</label>
-        <input type="email" id="email" disabled>
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-map-marker-alt"></i> ທີ່ຢູ່ຈັດສົ່ງ *</label>
-        <textarea id="address" rows="3" placeholder="ບ້ານ, ເມືອງ, ແຂວງ..." required></textarea>
-      </div>
+      <div class="info-row"><i class="fas fa-user-circle"></i><span>ຂໍ້ມູນຈາກບັນຊີຂອງທ່ານ</span></div>
+      <div class="form-group"><label><i class="fas fa-user"></i> ຊື່ຜູ້ຮັບ</label><input type="text" id="name" disabled></div>
+      <div class="form-group"><label><i class="fas fa-phone"></i> ເບີໂທລະສັບ</label><input type="tel" id="phone" disabled></div>
+      <div class="form-group"><label><i class="fas fa-envelope"></i> ອີເມວ</label><input type="email" id="email" disabled></div>
+      <div class="form-group"><label><i class="fas fa-map-marker-alt"></i> ທີ່ຢູ່ຈັດສົ່ງ *</label><textarea id="address" rows="3" placeholder="ບ້ານ, ເມືອງ, ແຂວງ..." required></textarea></div>
       <div class="form-group">
         <label><i class="fas fa-money-bill-wave"></i> ວິທີຊຳລະ *</label>
-        <select id="paymentMethod" required>
-          <option value="">-- ກະລຸນາເລືອກ --</option>
-          <option value="cash">ເງິນສົດ (ເກັບປາຍທາງ)</option>
-          <option value="transfer">ໂອນເງິນ (ຜ່ານທະນາຄານ)</option>
-        </select>
+        <select id="paymentMethod" required><option value="">-- ກະລຸນາເລືອກ --</option><option value="cash">ເງິນສົດ (ເກັບປາຍທາງ)</option><option value="transfer">ໂອນເງິນ (ຜ່ານທະນາຄານ)</option></select>
       </div>
-
       <div id="slipUploadSection" style="display: none;">
-        <div class="form-group">
-          <label><i class="fas fa-receipt"></i> ແນບສະລິບການໂອນເງິນ</label>
-          <input type="file" id="slipFile" accept="image/*">
-          <div id="slipPreview" class="slip-preview"></div>
-          <small>ອັບໂຫຼດຮູບສະລິບ (ສະຫນັບສະຫນູນ JPG, PNG)</small>
-        </div>
+        <div class="form-group"><label><i class="fas fa-receipt"></i> ແນບສະລິບການໂອນເງິນ</label><input type="file" id="slipFile" accept="image/*"><div id="slipPreview" class="slip-preview"></div><small>ອັບໂຫຼດຮູບສະລິບ (JPG, PNG)</small></div>
       </div>
-
       <button type="submit" class="btn" id="submitBtn">ຢືນຢັນການສັ່ງຊື້</button>
     </form>
     <a href="/cart" class="back-link"><i class="fas fa-arrow-left"></i> ກັບໄປກະຕ່າສິນຄ້າ</a>
@@ -173,17 +84,43 @@
 </div>
 
 <script type="module">
+  // ========== ນຳເຂົ້າ Firebase ==========
   import { auth, db, doc, getDoc, collection, addDoc, serverTimestamp, onAuthStateChanged } from '/firebase-config.js';
 
-  const cart = JSON.parse(localStorage.getItem('b_one_cart') || '[]');
-  if (cart.length === 0) window.location.href = '/cart';
+  // ຟັງຊັນສະແດງ Toast (ແທນ alert)
+  function showToast(message, isError = true) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.className = `toast-message ${isError ? 'toast-error' : 'toast-success'}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
 
+  // ອ່ານກະຕ່າຈາກ localStorage ຢ່າງປອດໄພ
+  let cart = [];
+  try {
+    const raw = localStorage.getItem('b_one_cart');
+    cart = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(cart)) cart = [];
+  } catch (e) {
+    console.error('Invalid cart data', e);
+    cart = [];
+  }
+
+  if (cart.length === 0) {
+    showToast('ກະຕ່າສິນຄ້າຫວ່າງ, ກະລຸນາເພີ່ມສິນຄ້າກ່ອນ', true);
+    setTimeout(() => window.location.href = '/cart', 2000);
+  }
+
+  // ຄຳນວນລາຄາລວມ
   let total = 0;
   const summaryDiv = document.getElementById('cartSummary');
   let itemsHtml = '';
   cart.forEach(item => {
-    total += item.price * item.quantity;
-    itemsHtml += `<div class="cart-item-line"><span>${item.name} x ${item.quantity}</span><span>₭${(item.price * item.quantity).toLocaleString()}</span></div>`;
+    const qty = Number(item.quantity) || 1;
+    const price = Number(item.price) || 0;
+    total += price * qty;
+    itemsHtml += `<div class="cart-item-line"><span>${escapeHtml(item.name)} x ${qty}</span><span>₭${(price * qty).toLocaleString()}</span></div>`;
   });
   summaryDiv.innerHTML = `
     <h3><i class="fas fa-shopping-cart"></i> ລາຍການສິນຄ້າ</h3>
@@ -191,6 +128,7 @@
     <div class="cart-total"><span>ລວມທັງໝົດ:</span> <span>₭${total.toLocaleString()}</span></div>
   `;
 
+  // ຕົວແປສຳລັບອັບໂຫຼດສະລິບ
   let uploadedSlipUrl = '';
   let isUploading = false;
 
@@ -199,31 +137,24 @@
   const slipFileInput = document.getElementById('slipFile');
   const slipPreview = document.getElementById('slipPreview');
 
+  // ຟັງຊັນອັບໂຫຼດຮູບໄປ ImgBB (ມີ fallback ແຈ້ງເຕືອນ)
   async function uploadImageToImgBB(file) {
     const formData = new FormData();
     formData.append('image', file);
-    try {
-      const res = await fetch(`https://api.imgbb.com/1/upload?key=85d8acf7f765f021b6c76dfae3650f53`, {
-        method: 'POST',
-        body: formData
-      });
-      const data = await res.json();
-      if (data.success) {
-        return data.data.url;
-      } else {
-        throw new Error('ອັບໂຫຼດບໍ່ສຳເລັດ');
-      }
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
+    // ໃຊ້ API key ໃໝ່ (ສາມາດປ່ຽນໄດ້)
+    const response = await fetch('https://api.imgbb.com/1/upload?key=85d8acf7f765f021b6c76dfae3650f53', {
+      method: 'POST',
+      body: formData
+    });
+    if (!response.ok) throw new Error('ອັບໂຫຼດລົ້ມເຫຼວ (HTTP ' + response.status + ')');
+    const data = await response.json();
+    if (!data.success) throw new Error('ImgBB: ' + (data.error?.message || 'Unknown error'));
+    return data.data.url;
   }
 
   paymentMethodSelect.addEventListener('change', (e) => {
-    if (e.target.value === 'transfer') {
-      slipUploadSection.style.display = 'block';
-    } else {
-      slipUploadSection.style.display = 'none';
+    slipUploadSection.style.display = e.target.value === 'transfer' ? 'block' : 'none';
+    if (e.target.value !== 'transfer') {
       uploadedSlipUrl = '';
       slipPreview.innerHTML = '';
       slipFileInput.value = '';
@@ -234,31 +165,32 @@
     const file = e.target.files[0];
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      alert('ກະລຸນາເລືອກໄຟລ໌ຮູບພາບເທົ່ານັ້ນ');
+      showToast('ກະລຸນາເລືອກໄຟລ໌ຮູບພາບເທົ່ານັ້ນ', true);
       slipFileInput.value = '';
       return;
     }
+    // preview ກ່ອນ
     const reader = new FileReader();
-    reader.onload = (e) => {
-      slipPreview.innerHTML = `<img src="${e.target.result}" alt="preview"><button type="button" class="btn-sm" id="removeSlipBtn">ລຶບ</button>`;
+    reader.onload = (ev) => {
+      slipPreview.innerHTML = `<img src="${ev.target.result}" alt="preview"><button type="button" class="btn-sm" id="removeSlipBtn">ລຶບ</button>`;
       const removeBtn = document.getElementById('removeSlipBtn');
-      if (removeBtn) {
-        removeBtn.addEventListener('click', () => {
-          slipPreview.innerHTML = '';
-          slipFileInput.value = '';
-          uploadedSlipUrl = '';
-        });
-      }
+      if (removeBtn) removeBtn.onclick = () => {
+        slipPreview.innerHTML = '';
+        slipFileInput.value = '';
+        uploadedSlipUrl = '';
+      };
     };
     reader.readAsDataURL(file);
-
+    // ອັບໂຫຼດ
     try {
       isUploading = true;
+      showToast('ກຳລັງອັບໂຫຼດສະລິບ...', false);
       const url = await uploadImageToImgBB(file);
       uploadedSlipUrl = url;
-      alert('ອັບໂຫຼດສະລິບສຳເລັດ');
+      showToast('ອັບໂຫຼດສະລິບສຳເລັດ', false);
     } catch (err) {
-      alert('ອັບໂຫຼດສະລິບລົ້ມເຫຼວ, ກະລຸນາລອງໃໝ່');
+      console.error(err);
+      showToast('ອັບໂຫຼດສະລິບລົ້ມເຫຼວ: ' + err.message, true);
       uploadedSlipUrl = '';
       slipPreview.innerHTML = '';
       slipFileInput.value = '';
@@ -267,34 +199,35 @@
     }
   });
 
-  function showAlert(msg, isError = true) {
-    const alertBox = document.createElement('div');
-    alertBox.textContent = msg;
-    alertBox.style.position = 'fixed';
-    alertBox.style.bottom = '20px';
-    alertBox.style.left = '50%';
-    alertBox.style.transform = 'translateX(-50%)';
-    alertBox.style.backgroundColor = isError ? '#dc3545' : '#28a745';
-    alertBox.style.color = 'white';
-    alertBox.style.padding = '12px 24px';
-    alertBox.style.borderRadius = '8px';
-    alertBox.style.zIndex = '9999';
-    alertBox.style.fontWeight = 'bold';
-    document.body.appendChild(alertBox);
-    setTimeout(() => alertBox.remove(), 4000);
+  // ຟັງຊັນນ້ອຍ escape HTML
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
   }
 
+  // ດຶງຂໍ້ມູນຜູ້ໃຊ້ເມື່ອມີການປ່ຽນແປງສະຖານະ
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
-      showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້', true);
+      showToast('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້', true);
       setTimeout(() => window.location.href = '/login', 2000);
       return;
     }
-    const userDoc = await getDoc(doc(db, 'users', user.uid));
-    const userData = userDoc.data();
-    document.getElementById('name').value = user.displayName || userData?.displayName || 'ບໍ່ລະບຸ';
-    document.getElementById('phone').value = userData?.phone || '';
-    document.getElementById('email').value = user.email || '';
+    try {
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      const userData = userDoc.data() || {};
+      document.getElementById('name').value = user.displayName || userData.displayName || 'ບໍ່ລະບຸ';
+      document.getElementById('phone').value = userData.phone || '';
+      document.getElementById('email').value = user.email || '';
+    } catch (err) {
+      console.error(err);
+      document.getElementById('name').value = user.displayName || 'ບໍ່ລະບຸ';
+      document.getElementById('email').value = user.email || '';
+    }
   });
 
   const form = document.getElementById('orderForm');
@@ -304,27 +237,31 @@
     e.preventDefault();
     const user = auth.currentUser;
     if (!user) {
-      showAlert('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນ', true);
+      showToast('ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນ', true);
       window.location.href = '/login';
       return;
     }
     const address = document.getElementById('address').value.trim();
     const paymentMethod = document.getElementById('paymentMethod').value;
-    if (!address) { showAlert('ກະລຸນາຕື່ມທີ່ຢູ່ຈັດສົ່ງ', true); return; }
-    if (!paymentMethod) { showAlert('ກະລຸນາເລືອກວິທີຊຳລະ', true); return; }
+    if (!address) { showToast('ກະລຸນາຕື່ມທີ່ຢູ່ຈັດສົ່ງ', true); return; }
+    if (!paymentMethod) { showToast('ກະລຸນາເລືອກວິທີຊຳລະ', true); return; }
     if (paymentMethod === 'transfer' && !uploadedSlipUrl) {
-      showAlert('ກະລຸນາອັບໂຫຼດສະລິບການໂອນເງິນ', true);
+      showToast('ກະລຸນາອັບໂຫຼດສະລິບການໂອນເງິນ', true);
       return;
     }
     if (paymentMethod === 'transfer' && isUploading) {
-      showAlert('ກຳລັງອັບໂຫຼດສະລິບ, ກະລຸນາລໍຖ້າ...', true);
+      showToast('ກຳລັງອັບໂຫຼດສະລິບ, ກະລຸນາລໍຖ້າ...', true);
       return;
     }
 
-    const userDoc = await getDoc(doc(db, 'users', user.uid));
-    const userData = userDoc.data();
-    const customerName = user.displayName || userData?.displayName || 'ບໍ່ລະບຸ';
-    const customerPhone = userData?.phone || '';
+    // ອ່ານຂໍ້ມູນຜູ້ໃຊ້ອີກຄັ້ງ (ເຜື່ອງມີການປ່ຽນແປງ)
+    let userData = {};
+    try {
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      userData = userDoc.data() || {};
+    } catch (err) { console.warn(err); }
+    const customerName = user.displayName || userData.displayName || 'ບໍ່ລະບຸ';
+    const customerPhone = userData.phone || '';
     const customerEmail = user.email || '';
 
     submitBtn.disabled = true;
@@ -335,11 +272,11 @@
         userId: user.uid,
         customerInfo: { name: customerName, phone: customerPhone, email: customerEmail },
         items: cart.map(item => ({
-          productId: item.id,
-          productName: item.name,
-          quantity: item.quantity,
-          unitPrice: item.price,
-          totalPrice: item.price * item.quantity
+          productId: item.id || '',
+          productName: item.name || 'ສິນຄ້າ',
+          quantity: Number(item.quantity) || 1,
+          unitPrice: Number(item.price) || 0,
+          totalPrice: (Number(item.price) || 0) * (Number(item.quantity) || 1)
         })),
         totalAmount: total,
         paymentMethod: paymentMethod,
@@ -353,11 +290,11 @@
       }
       await addDoc(collection(db, 'orders'), orderData);
       localStorage.removeItem('b_one_cart');
-      showAlert('ສັ່ງຊື້ສຳເລັດ! ກຳລັງໄປຍັງໜ້າປະຫວັດຄຳສັ່ງຊື້', false);
+      showToast('ສັ່ງຊື້ສຳເລັດ! ກຳລັງໄປໜ້າປະຫວັດຄຳສັ່ງ', false);
       setTimeout(() => window.location.href = '/orders', 2000);
     } catch (err) {
       console.error(err);
-      showAlert('ເກີດຂໍ້ຜິດພາດ: ' + err.message, true);
+      showToast('ເກີດຂໍ້ຜິດພາດ: ' + (err.message || 'ກະລຸນາລອງໃໝ່'), true);
       submitBtn.disabled = false;
       submitBtn.innerHTML = 'ຢືນຢັນການສັ່ງຊື້';
     }
