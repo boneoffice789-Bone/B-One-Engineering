@@ -73,6 +73,7 @@
       margin-top: 10px;
     }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(185,28,28,0.4); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
     .message {
       padding: 14px 16px;
       border-radius: 16px;
@@ -88,6 +89,12 @@
       border-left: 4px solid #dc3545;
       display: flex;
     }
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      border-left: 4px solid #28a745;
+      display: flex;
+    }
     .links { text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
     .links a {
       color: #b91c1c;
@@ -97,8 +104,27 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      margin: 0 8px;
     }
     .footer { background: #f9fafb; padding: 15px 25px; text-align: center; font-size: 0.7rem; color: #6b7280; }
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #28a745;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      z-index: 1000;
+      font-weight: bold;
+      animation: fadeOut 3s forwards;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
   </style>
 </head>
 <body>
@@ -109,7 +135,7 @@
     <p>ເຂົ້າສູ່ລະບົບເພື່ອເຂົ້າໃຊ້ບໍລິການ</p>
   </div>
   <div class="auth-body">
-    <div id="error" class="message"></div>
+    <div id="messageBox" class="message"></div>
     <form id="loginForm">
       <div class="form-group">
         <label><i class="fas fa-envelope"></i> ອີເມວ</label>
@@ -122,38 +148,78 @@
       <button type="submit" class="btn" id="submitBtn"><i class="fas fa-sign-in-alt"></i> ເຂົ້າສູ່ລະບົບ</button>
     </form>
     <div class="links">
-      <a href="/register"><i class="fas fa-user-plus"></i> ຍັງບໍ່ມີບັນຊີ? ລົງທະບຽນ</a>
-      <br><br>
-      <a href="/"><i class="fas fa-home"></i> ກັບໜ້າຫຼັກ</a>
+      <a href="/register"><i class="fas fa-user-plus"></i> ລົງທະບຽນ</a>
+      <a href="/forgot-password"><i class="fas fa-key"></i> ລືມລະຫັດຜ່ານ?</a>
+      <a href="/"><i class="fas fa-home"></i> ໜ້າຫຼັກ</a>
     </div>
   </div>
   <div class="footer">© 2026 B-One Engineering Sole Co., Ltd</div>
 </div>
+
 <script type="module">
   import { auth, signInWithEmailAndPassword } from '/firebase-config.js';
+
   const form = document.getElementById('loginForm');
-  const errorDiv = document.getElementById('error');
+  const errorDiv = document.getElementById('messageBox');
   const submitBtn = document.getElementById('submitBtn');
-  function showError(msg) {
-    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${msg}`;
-    errorDiv.className = 'message error';
-    setTimeout(() => errorDiv.style.display = 'none', 5000);
+
+  function showMessage(msg, type) {
+    errorDiv.innerHTML = `<i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'}"></i> ${msg}`;
+    errorDiv.className = `message ${type}`;
+    setTimeout(() => {
+      errorDiv.style.display = 'none';
+    }, 5000);
   }
+
+  function showToast(message, isError = false) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.style.backgroundColor = isError ? '#dc3545' : '#28a745';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
+
+    // ປິດ message ເກົ່າ
     errorDiv.style.display = 'none';
-    if (!email || !password) { showError('ກະລຸນາຕື່ມອີເມວ ແລະ ລະຫັດຜ່ານ'); return; }
+    if (!email || !password) {
+      showMessage('ກະລຸນາຕື່ມອີເມວ ແລະ ລະຫັດຜ່ານ', 'error');
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ກຳລັງເຂົ້າສູ່ລະບົບ...';
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      showToast('ເຂົ້າສູ່ລະບົບສຳເລັດ!', false);
       window.location.href = '/profile';
     } catch (err) {
-      if (err.code === 'auth/user-not-found') showError('ບໍ່ພົບບັນຊີນີ້');
-      else if (err.code === 'auth/wrong-password') showError('ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ');
-      else showError('ອີເມວ ຫຼື ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ');
+      console.error('Login error:', err);
+      let errorMsg = 'ການເຂົ້າສູ່ລະບົບລົ້ມເຫຼວ';
+      switch (err.code) {
+        case 'auth/user-not-found':
+          errorMsg = 'ບໍ່ພົບບັນຊີນີ້, ກະລຸນາລົງທະບຽນ';
+          break;
+        case 'auth/wrong-password':
+          errorMsg = 'ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ';
+          break;
+        case 'auth/invalid-email':
+          errorMsg = 'ຮູບແບບອີເມວບໍ່ຖືກຕ້ອງ';
+          break;
+        case 'auth/network-request-failed':
+          errorMsg = 'ກວດສອບການເຊື່ອມຕໍ່ອິນເຕີເນັດ';
+          break;
+        default:
+          errorMsg = err.message;
+      }
+      showMessage(errorMsg, 'error');
+      showToast(errorMsg, true);
     } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ເຂົ້າສູ່ລະບົບ';
