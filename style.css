@@ -1,14 +1,9 @@
 /* =============================================
-   B-One Engineering - COMPLETE CSS (2026)
-   Responsive for Mobile, Tablet, Desktop
+   B-One Engineering - COMPLETE CSS (2026) 
+   FIXED SLIDER: 1200px width + horizontal scroll on mobile
    ============================================= */
 
-/* Font setup:
-   - Lao content -> Phetsarath OT
-   - English content -> Tahoma
-   Note: Phetsarath OT must be installed on the device or available on the server.
-*/
-
+/* Font setup */
 :root {
   --primary: #b91c1c;
   --primary-dark: #8b1515;
@@ -51,71 +46,34 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   width: 100%;
+  background: radial-gradient(circle at top right, rgba(185,28,28,0.03), transparent 30%), #ffffff;
 }
 
-.eng,
-.nav-links li a .eng,
-.section-sub,
-.hero-badge,
-.news-badge,
-.news-date,
-#userDisplay a,
-#loginDisplay a,
-[lang="en"] {
+/* Typography */
+.eng, .nav-links li a .eng, .section-sub, .hero-badge, .news-badge, .news-date,
+#userDisplay a, #loginDisplay a, [lang="en"] {
   font-family: var(--font-eng) !important;
 }
 
-/* ປຸ່ມພາສາລາວ */
-.btn,
-.slide-content .btn {
+.btn, .slide-content .btn, .lao, h1, h2, h3, h4, h5, h6,
+.section-title, .service-card h3, .portfolio-card h3, .team-card h4,
+.customer-item h4, .logo h1, .logo p, .hero-content h1, .slide-content h3,
+.news-card h3, [lang="lo"], :lang(lo) {
   font-family: var(--font-lao) !important;
 }
 
-.lao, .nav-links li a .lao, h1, h2, h3, h4, h5, h6,
-.section-title, .service-card h3, .portfolio-card h3,
-.team-card h4, .customer-item h4, .logo h1, .logo p,
-.hero-content h1, .slide-content h3, .news-card h3, [lang="lo"], :lang(lo) {
-  font-family: var(--font-lao) !important;
-}
-
-/* Font Awesome icons */
-i, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands,
-[class*="fa-"] {
+/* Icons */
+i, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands, [class*="fa-"] {
   font-family: 'Font Awesome 6 Free' !important;
   font-weight: 900;
 }
+.fab, .fa-brands { font-family: 'Font Awesome 6 Brands' !important; font-weight: 400; }
+.far, .fa-regular { font-family: 'Font Awesome 6 Free' !important; font-weight: 400; }
 
-.fab, .fa-brands {
-  font-family: 'Font Awesome 6 Brands' !important;
-  font-weight: 400;
-}
-
-.far, .fa-regular {
-  font-family: 'Font Awesome 6 Free' !important;
-  font-weight: 400;
-}
-
-/* Centering */
+/* Utility */
 .text-center, .section-title, .section-sub, .hero-content,
 .team-grid, .customer-grid, .nav-links, .slider-dots {
   text-align: center;
-}
-
-/* Grid layout */
-.services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
-  display: grid;
-  justify-content: center;
-}
-
-.services-grid, .portfolio-grid, .brands-grid {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
-  gap: 30px;
-}
-
-.team-grid, .customer-grid {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
-  gap: 2rem;
-  margin: 2rem auto;
 }
 
 .container {
@@ -125,7 +83,22 @@ i, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands,
   width: 100%;
 }
 
-/* ---------- HEADER & NAVBAR ---------- */
+/* Grids */
+.services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
+  display: grid;
+  justify-content: center;
+}
+.services-grid, .portfolio-grid, .brands-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+  gap: 30px;
+}
+.team-grid, .customer-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
+  gap: 2rem;
+  margin: 2rem auto;
+}
+
+/* Header & Navbar */
 header {
   background: rgba(185, 28, 28, 0.96);
   backdrop-filter: blur(12px);
@@ -135,7 +108,8 @@ header {
   z-index: 100;
   box-shadow: var(--shadow-sm);
   width: 100%;
-  overflow-x: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 .navbar {
@@ -149,35 +123,10 @@ header {
   flex-wrap: wrap;
 }
 
-.logo {
-  flex: 1;
-  min-width: 0;
-  max-width: 70%;
-}
-
-.logo a {
-  text-decoration: none;
-  display: inline-block;
-  width: 100%;
-}
-
-.logo h1 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  color: white;
-  line-height: 1.2;
-  margin: 0;
-  word-break: break-word;
-}
-
-.logo p {
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 500;
-  margin-top: 2px;
-  word-break: break-word;
-}
+.logo { flex: 1; min-width: 0; max-width: 70%; }
+.logo a { text-decoration: none; display: inline-block; width: 100%; }
+.logo h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.3px; color: white; line-height: 1.2; margin: 0; word-break: break-word; }
+.logo p { font-size: 0.7rem; color: rgba(255,255,255,0.75); font-weight: 500; margin-top: 2px; word-break: break-word; }
 
 .menu-toggle {
   display: none;
@@ -201,7 +150,8 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .nav-links li a {
@@ -213,60 +163,59 @@ header {
   align-items: center;
   padding: 6px 14px;
   border-radius: 40px;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255,255,255,0.92);
+  position: relative;
+  overflow: hidden;
 }
 
-.nav-links li a .lao {
-  font-size: 0.85rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
+.nav-links li a .lao { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+.nav-links li a .eng { font-size: 0.55rem; font-weight: 500; letter-spacing: 0.3px; margin-top: 2px; opacity: 0.8; white-space: nowrap; }
 
-.nav-links li a .eng {
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  margin-top: 2px;
-  opacity: 0.8;
-  white-space: nowrap;
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #ffd700;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
-
+.nav-links li a:hover::after { width: 70%; }
+.nav-links li a:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 .nav-links li a.active {
   background: white;
   color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
+.nav-links li a.active::after { width: 70%; background: #b91c1c; }
 
-/* ========== AUTH SECTION ========== */
-#auth-section {
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
-}
-
+/* Auth section */
+#auth-section { margin-left: 10px; display: flex; align-items: center; }
 #userDisplay a, #loginDisplay a {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255,255,255,0.15);
   border-radius: 40px;
   padding: 6px 16px;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
-
 #userDisplay a:hover, #loginDisplay a:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255,255,255,0.3);
   transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
+#userName { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-#userName {
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* ---------- ປຸ່ມທົ່ວໄປ ---------- */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -283,57 +232,63 @@ header {
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: 0 15px 35px rgba(185,28,28,0.22);
 }
-
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 45px rgba(185,28,28,0.32);
+}
 .btn-outline {
   background: transparent;
   border: 2px solid var(--primary);
   color: var(--primary);
   white-space: nowrap;
 }
+.btn-outline:hover { background: var(--primary); color: white; }
 
-.btn-outline:hover {
-  background: var(--primary);
-  color: white;
-}
-
-/* ---------- Hero ---------- */
+/* Hero Section */
 .hero {
   background: linear-gradient(125deg, #fff8f3 0%, #ffffff 40%, #fffaf7 100%);
   padding: 80px 0;
+  position: relative;
+  overflow: hidden;
 }
-
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(185,28,28,0.04);
+  border-radius: 50%;
+  top: -250px;
+  right: -180px;
+}
 .hero-grid {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 40px;
 }
-
 .hero-content {
   flex: 1.2;
   text-align: center;
   max-width: 100%;
   margin: 0 auto;
 }
-
 .hero-content h1 {
-  font-size: 2rem;
-  line-height: 1.3;
+  font-size: 3.2rem;
+  line-height: 1.2;
   margin: 15px 0;
   font-weight: 800;
   letter-spacing: -0.5px;
   word-break: break-word;
 }
-
 .hero-content p {
   font-size: 1.05rem;
   color: var(--text-medium);
   margin-bottom: 28px;
   word-break: break-word;
-  max-width: 100%;
 }
-
 .hero-badge {
   background: rgba(185,28,28,0.12);
   color: var(--primary-dark);
@@ -346,29 +301,21 @@ header {
   font-weight: 700;
   margin: 0 auto;
 }
-
-.hero-content .btn,
-.hero-content .btn-outline {
-  display: inline-flex;
-  margin: 0.5rem 0.5rem;
-}
-
-.hero-image {
-  flex: 0.9;
-}
-
+.hero-image { flex: 0.9; }
 .hero-image img {
   width: 100%;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   height: auto;
+  transition: transform 0.4s;
+}
+.hero-image img:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
 }
 
-/* ---------- Sections ທົ່ວໄປ ---------- */
-section {
-  padding: 65px 0;
-}
-
+/* Sections general */
+section { padding: 65px 0; }
 .section-title {
   text-align: center;
   font-size: 2.4rem;
@@ -377,17 +324,15 @@ section {
   letter-spacing: -0.3px;
   word-break: break-word;
 }
-
 .section-title::after {
   content: '';
   display: block;
-  width: 60px;
-  height: 3px;
+  width: 90px;
+  height: 4px;
   background: var(--primary-gradient);
   margin: 15px auto 0;
   border-radius: 4px;
 }
-
 .section-sub {
   text-align: center;
   max-width: 650px;
@@ -397,8 +342,8 @@ section {
   word-break: break-word;
 }
 
-/* ---------- Cards ---------- */
-.service-card, .portfolio-card, .brand-card, .team-card, .customer-item {
+/* Cards */
+.service-card, .portfolio-card, .brand-card, .team-card, .customer-item, .news-card {
   background: var(--bg-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -409,13 +354,11 @@ section {
   display: flex;
   flex-direction: column;
 }
-
 .service-card:hover, .portfolio-card:hover, .brand-card:hover,
-.team-card:hover, .customer-item:hover {
-  transform: translateY(-6px);
+.team-card:hover, .customer-item:hover, .news-card:hover {
+  transform: translateY(-10px);
   box-shadow: var(--shadow-hover);
 }
-
 .card-icon {
   background: linear-gradient(145deg, #fff6f6, #ffffff);
   padding: 28px 20px 20px;
@@ -423,13 +366,7 @@ section {
   font-size: 2.8rem;
   color: var(--primary);
 }
-
-.card-icon img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
+.card-icon img { width: 60px; height: 60px; object-fit: contain; }
 .service-card h3, .portfolio-card h3, .brand-name, .team-card h4, .customer-item h4 {
   font-size: 1.2rem;
   padding: 16px 20px 8px;
@@ -437,7 +374,6 @@ section {
   word-break: break-word;
   text-align: center;
 }
-
 .service-card p, .portfolio-card p, .team-card p {
   padding: 0 20px 24px;
   color: var(--text-light);
@@ -445,7 +381,6 @@ section {
   word-break: break-word;
   text-align: center;
 }
-
 .team-avatar {
   width: 120px;
   height: 120px;
@@ -455,28 +390,16 @@ section {
   background-position: center;
   border: 3px solid var(--primary);
 }
+.portfolio-img { height: 220px; background-size: cover; background-position: center; transition: transform 0.4s; }
 
-.portfolio-img {
-  height: 220px;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.4s;
-}
-
-/* ---------- About page ---------- */
+/* About */
 .about-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 45px;
   align-items: flex-start;
 }
-
-.about-text {
-  flex: 1;
-  min-width: 280px;
-  text-align: center;
-}
-
+.about-text { flex: 1; min-width: 280px; text-align: center; }
 .ev-badge {
   background: var(--primary-light);
   border-left: 4px solid var(--primary);
@@ -487,13 +410,11 @@ section {
   word-break: break-word;
   text-align: center;
 }
-
 .contact-list {
   list-style: none;
   margin-top: 20px;
   text-align: center;
 }
-
 .contact-list li {
   display: flex;
   align-items: center;
@@ -503,24 +424,15 @@ section {
   word-break: break-word;
   flex-wrap: wrap;
 }
+.contact-list i { width: 28px; color: var(--primary); font-size: 1.2rem; }
 
-.contact-list i {
-  width: 28px;
-  color: var(--primary);
-  font-size: 1.2rem;
-}
-
-/* ---------- Contact Form ---------- */
+/* Contact Form */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 45px;
 }
-
-.form-group {
-  margin-bottom: 20px;
-}
-
+.form-group { margin-bottom: 20px; }
 input, textarea, select {
   width: 100%;
   padding: 12px 16px;
@@ -530,7 +442,6 @@ input, textarea, select {
   font-size: 0.9rem;
   transition: var(--transition);
 }
-
 input:focus, textarea:focus {
   outline: none;
   border-color: var(--primary);
@@ -538,9 +449,40 @@ input:focus, textarea:focus {
   transform: translateY(-1px);
 }
 
-/* ---------- Footer ---------- */
+/* News */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+.news-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 15px 20px 0;
+  width: fit-content;
+}
+.news-badge.news { background: #e3f2fd; color: #1565c0; }
+.news-badge.promotion { background: #fef0f0; color: #b91c1c; }
+.news-card h3 { font-size: 1.3rem; padding: 12px 20px 8px; font-weight: 700; word-break: break-word; }
+.news-card p { padding: 0 20px 20px; color: var(--text-light); line-height: 1.6; flex: 1; word-break: break-word; }
+.news-date {
+  padding: 0 20px 15px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Footer */
 footer {
-  background: #0a0a0f;
+  background: linear-gradient(135deg, #09090f, #17171f);
   color: #b0b3c0;
   text-align: center;
   padding: 40px 20px;
@@ -548,19 +490,10 @@ footer {
   font-size: 0.85rem;
   word-break: break-word;
 }
+footer a { color: #f0a0a0; text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: white; text-decoration: underline; }
 
-footer a {
-  color: #f0a0a0;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-footer a:hover {
-  color: white;
-  text-decoration: underline;
-}
-
-/* ---------- WhatsApp Float ---------- */
+/* WhatsApp Float */
 .whatsapp-float {
   position: fixed;
   bottom: 25px;
@@ -579,34 +512,45 @@ footer a:hover {
   transition: var(--transition);
   text-decoration: none;
 }
-
 .whatsapp-float:hover {
   transform: scale(1.08);
   background: #128C7E;
   box-shadow: 0 10px 25px rgba(37,211,102,0.5);
 }
 
-/* Base slider styles (unchanged except adding a height wrapper) */
-.slider-section {
-  padding: 0;
-  /* Ensure the section can expand to full viewport */
-  height: auto;
-}
-
-.slider-container {
-  position: relative;
+/* ========== SLIDER FIX - DESKTOP WIDTH + MOBILE SCROLL ========== */
+/* Important: wrap your .slider-container inside <div class="slider-outside-wrapper"> */
+.slider-outside-wrapper {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
-
-.slider-wrapper {
+.slider-outside-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+.slider-outside-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.slider-outside-wrapper::-webkit-scrollbar-thumb {
+  background: #b91c1c;
+  border-radius: 10px;
+}
+.slider-outside-wrapper .slider-container {
+  width: 1200px !important;
+  max-width: none !important;
+  overflow: hidden;  /* keep for carousel functionality */
+  position: relative;
+}
+.slider-outside-wrapper .slider-wrapper {
   display: flex;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
-.slide {
-  flex: 0 0 100%;
-  /* Default height for desktop – can be adjusted */
+.slider-outside-wrapper .slide {
+  flex: 0 0 1200px !important;
+  width: 1200px !important;
   height: 500px;
   background-size: cover;
   background-position: center;
@@ -615,147 +559,143 @@ footer a:hover {
   justify-content: center;
   position: relative;
 }
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
+  z-index: 1;
+}
+.slide-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 28px 38px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  max-width: 80%;
+  animation: fadeInUp 0.7s ease;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.slide-content h3 { font-size: 2rem; margin-bottom: 12px; font-weight: 700; }
+.slide-content p { font-size: 1rem; margin-bottom: 20px; }
+.slide-content .btn {
+  display: inline-block !important;
+  background: rgba(255,255,255,0.15) !important;
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255,255,255,0.8) !important;
+  color: white !important;
+  padding: 6px 22px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  border-radius: 60px !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+}
+.slide-content .btn:hover {
+  background: white !important;
+  color: #b91c1c !important;
+  transform: translateY(-2px);
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  border: none;
+  color: white;
+  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 3;
+  transition: var(--transition);
+}
+.slider-btn:hover {
+  background: var(--primary);
+  transform: translateY(-50%) scale(1.08);
+}
+.slider-prev { left: 20px; }
+.slider-next { right: 20px; }
+.slider-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  z-index: 3;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.dot.active {
+  background: var(--primary);
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(185,28,28,0.6);
+}
 
-/* ... keep all other existing styles (slide::before, .slide-content, buttons, dots) ... */
-
-/* ===== MOBILE FULL‑SCREEN OVERRIDE ===== */
+/* Override any old mobile full-screen on slider-outside-wrapper */
 @media (max-width: 768px) {
-  .slider-section,
-  .slider-container,
-  .slider-wrapper {
-    height: 100vh;               /* Full viewport height */
-    max-height: 100vh;
+  .slider-outside-wrapper .slider-section,
+  .slider-outside-wrapper .slider-container,
+  .slider-outside-wrapper .slider-wrapper,
+  .slider-outside-wrapper .slide {
+    height: auto !important;
+    max-height: none !important;
   }
-
-  .slide {
-    height: 100vh;               /* Each slide fills the screen */
-    max-height: 100vh;
+  .slider-outside-wrapper .slide {
+    min-height: 350px;
   }
-
-  .slide-content {
-    max-width: 90%;              /* Slightly wider on small screens */
+  .slider-outside-wrapper .slide-content {
+    max-width: 90%;
     padding: 20px 24px;
-    backdrop-filter: blur(12px); /* Optional: stronger blur for readability */
   }
-
-  .slide-content h3 {
-    font-size: 1.6rem;           /* Slightly smaller, still prominent */
-    margin-bottom: 8px;
+  .slider-outside-wrapper .slide-content h3 {
+    font-size: 1.6rem;
   }
-
-  .slide-content p {
+  .slider-outside-wrapper .slide-content p {
     font-size: 0.9rem;
-    margin-bottom: 16px;
   }
-
-  .slider-btn {
+  .slider-outside-wrapper .slider-btn {
     width: 38px;
     height: 38px;
     font-size: 1.2rem;
-    background: rgba(0, 0, 0, 0.5);
   }
+  .slider-prev { left: 12px; }
+  .slider-next { right: 12px; }
+  .slider-dots { bottom: 16px; gap: 10px; }
+  .dot { width: 8px; height: 8px; }
+}
 
-  .slider-prev {
-    left: 12px;
-  }
-  .slider-next {
-    right: 12px;
-  }
-
-  .slider-dots {
-    bottom: 16px;
-    gap: 10px;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
+/* Center slider on large screens (optional) */
+@media (min-width: 1200px) {
+  .slider-outside-wrapper {
+    display: flex;
+    justify-content: center;
   }
 }
 
-/* Optional: handle landscape orientation on mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-  .slide-content {
-    max-width: 70%;
-    padding: 12px 20px;
-  }
-  .slide-content h3 {
-    font-size: 1.4rem;
-    margin-bottom: 4px;
-  }
-  .slide-content p {
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-  }
-}
-
-/* ========== NEWS SECTION ========== */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 30px;
-  margin-top: 20px;
-}
-.news-card {
-  background: var(--bg-white);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: var(--transition);
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-sm);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.news-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(185,28,28,0.2);
-  box-shadow: var(--shadow-hover);
-}
-.news-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  margin: 15px 20px 0;
-  width: fit-content;
-}
-.news-badge.news {
-  background: #e3f2fd;
-  color: #1565c0;
-}
-.news-badge.promotion {
-  background: #fef0f0;
-  color: #b91c1c;
-}
-.news-card h3 {
-  font-size: 1.3rem;
-  padding: 12px 20px 8px;
-  font-weight: 700;
-  word-break: break-word;
-}
-.news-card p {
-  padding: 0 20px 20px;
-  color: var(--text-light);
-  line-height: 1.6;
-  flex: 1;
-  word-break: break-word;
-}
-.news-date {
-  padding: 0 20px 15px;
-  font-size: 0.75rem;
-  color: var(--text-light);
-  border-top: 1px solid var(--border-light);
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* ========== ENHANCED RESPONSIVE (ປັບປຸງໃໝ່) ========== */
-
-/* ສຳລັບແທັບເລັດ ແລະ ມືຖືແນວນອນ */
+/* Responsive for other parts */
 @media (max-width: 1024px) {
   .container { padding: 0 20px; }
   .hero-content h1 { font-size: 2.2rem; }
@@ -766,17 +706,14 @@ footer a:hover {
   }
 }
 
-/* ສຳລັບມືຖື (ແນວຕັ້ງ) */
 @media (max-width: 768px) {
   body { font-size: 14px; }
   .container { padding: 0 16px; }
   section { padding: 40px 0; }
-  
   .navbar { flex-direction: column; align-items: stretch; }
   .logo { max-width: 100%; text-align: center; margin-bottom: 10px; }
   .logo h1 { font-size: 1.3rem; }
   .logo p { font-size: 0.65rem; }
-  
   .menu-toggle { display: block; align-self: flex-end; margin-top: -50px; }
   .nav-links {
     display: none;
@@ -790,36 +727,20 @@ footer a:hover {
   .nav-links.active { display: flex; }
   .nav-links li a { padding: 10px; flex-direction: row; justify-content: center; gap: 8px; }
   .nav-links li a .lao, .nav-links li a .eng { white-space: normal; }
-  
   #auth-section { margin-top: 10px; justify-content: center; }
-  
   .hero-grid { flex-direction: column; text-align: center; }
   .hero-content h1 { font-size: 1.8rem; }
   .hero-content p { font-size: 0.9rem; }
-  .hero-image img { max-width: 100%; height: auto; }
-  
   .services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
   .news-grid { grid-template-columns: 1fr; }
-  
-  .slide { height: 350px; }
-  .slide-content { padding: 15px 20px; max-width: 95%; }
-  .slide-content h3 { font-size: 1.3rem; }
-  .slide-content .btn { padding: 5px 12px; font-size: 0.7rem; }
-  .slider-btn { width: 32px; height: 32px; font-size: 1rem; }
-  
   .contact-grid { grid-template-columns: 1fr; gap: 30px; }
-  .cart-item { flex-direction: column; text-align: center; }
-  .cart-item img { width: 80px; height: 80px; }
-  .item-total { width: 100%; text-align: center; margin-top: 10px; }
-  
   footer { font-size: 0.75rem; padding: 30px 15px; }
   .whatsapp-float { width: 44px; height: 44px; font-size: 24px; bottom: 15px; right: 15px; }
 }
 
-/* ມືຖືຂະໜາດນ້ອຍ (ຕ່ຳກວ່າ 550px) */
 @media (max-width: 550px) {
   .services-grid, .portfolio-grid, .brands-grid, .team-grid, .customer-grid {
     grid-template-columns: 1fr !important;
@@ -828,262 +749,50 @@ footer a:hover {
   .section-title { font-size: 1.5rem; }
   .section-title::after { width: 50px; height: 2px; }
   .btn, .btn-outline { padding: 8px 16px; font-size: 0.8rem; white-space: normal; }
-  .cart-summary .total { font-size: 1.4rem; }
-  .order-header { flex-direction: column; align-items: flex-start; }
-  .page-body { padding: 20px; }
 }
 
-/* ເພີ່ມຄວາມສະດວກໃນການສຳຜັດ (touch) */
+/* Touch friendly */
 @media (hover: none) and (pointer: coarse) {
   .btn, .nav-links li a, .product-card .btn-add-to-cart {
-    min-height: 44px; /* ຂະໜາດຕ່ຳສຸດສຳລັບການກົດງ່າຍ */
+    min-height: 44px;
   }
 }
 
-/* ໃຫ້ຕາຕະລາງໃນ Admin ເລື່ອນນອນໄດ້ລຽບງ່າຍ */
+/* Table wrapper scroll */
 .table-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* ປ້ອງກັນ bullet point ຊ້ອນ */
-.service-cat ul li:before {
-  content: none !important;
-  display: none !important;
-}
-.service-cat ul li {
-  list-style: none;
-  margin-bottom: 8px;
-  padding-left: 0;
-}
+/* Remove extra bullet points */
+.service-cat ul li:before { content: none !important; display: none !important; }
+.service-cat ul li { list-style: none; margin-bottom: 8px; padding-left: 0; }
 
-/* ========== ENHANCED NAVBAR HOVER EFFECTS ========== */
-.nav-links li a {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  overflow: hidden;
-}
-
-.nav-links li a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: #ffd700;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.nav-links li a:hover::after {
-  width: 70%;
-}
-
-.nav-links li a:hover {
-  transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.nav-links li a.active {
-  background: white;
-  color: #b91c1c;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.nav-links li a.active::after {
-  width: 70%;
-  background: #b91c1c;
-}
-
-#userDisplay a, #loginDisplay a {
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-#userDisplay a:hover, #loginDisplay a:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.nav-links li a i,
-#userDisplay a i,
-#loginDisplay a i {
-  transition: transform 0.2s ease;
-}
-
-.nav-links li a:hover i,
-#userDisplay a:hover i,
-#loginDisplay a:hover i {
-  transform: translateX(3px);
-}
-
-.nav-links li a:hover {
-  box-shadow: 0 0 12px rgba(185, 28, 28, 0.6);
-  transform: translateY(-3px) scale(1.02);
-}
-
-/* ==================================================
-   B-ONE ENGINEERING - CSS PRO VERSION 2026 ULTIMATE
-================================================== */
-
-body {
-  background:
-    radial-gradient(circle at top right, rgba(185,28,28,0.03), transparent 30%),
-    #ffffff;
-}
-
-header {
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.nav-links {
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.hero {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: rgba(185,28,28,0.04);
-  border-radius: 50%;
-  top: -250px;
-  right: -180px;
-}
-
-.hero-content h1 {
-  font-size: 3.2rem;
-  line-height: 1.2;
-}
-
-.hero-image img:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
-}
-
-.btn {
-  box-shadow: 0 15px 35px rgba(185,28,28,0.22);
-}
-
-.btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 45px rgba(185,28,28,0.32);
-}
-
-.service-card:hover,
-.portfolio-card:hover,
-.brand-card:hover,
-.team-card:hover,
-.customer-item:hover,
-.news-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 35px 70px rgba(0,0,0,0.14);
-}
-
-.tech-modern .hero {
-  background:
-    radial-gradient(circle at top left, rgba(37,99,235,0.2), transparent 35%),
-    linear-gradient(135deg,#020617,#0f172a,#111827);
-}
-
-.luxury-red-black {
-  background: #050505;
-  color: #f3f4f6;
-}
-
-.luxury-red-black header {
-  background: rgba(0,0,0,0.92);
-}
-
-.section-title::after {
-  width: 90px;
-  height: 4px;
-}
-
-footer {
-  background: linear-gradient(135deg,#09090f,#17171f);
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
+/* Scrollbar global */
+::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg,#b91c1c,#ef4444);
+  background: linear-gradient(180deg, #b91c1c, #ef4444);
   border-radius: 50px;
 }
 
-.fade-up {
-  animation: fadeUp 0.8s ease;
-}
-
+/* Animation */
+.fade-up { animation: fadeUp 0.8s ease; }
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.1rem !important;
-  }
-
-  .section-title {
-    font-size: 2rem !important;
-  }
-}
-/* ກອບນອກຂອງ slider */
-.slider-container {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  position: relative;
-  margin: 0 auto;
-}
-
-/* ກອບພາຍໃນທີ່ໃຊ້ flex ເພື່ອຈັດລຽງສະໄລ້ */
-.slider-wrapper {
-  display: flex;
-  flex-wrap: nowrap;
-  width: 100%;
-  transition: transform 0.4s ease;
-}
-
-/* ແຕ່ລະສະໄລ້ */
-.slide {
-  flex: 0 0 100%;   /* ບັງຄັບໃຫ້ແຕ່ລະ slide ກວ້າງ 100% ຂອງ container */
-  width: 100%;
-}
-
-/* ຮູບພາຍໃນ slide */
-.slide img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;    /* ຕັດຮູບໃຫ້ພໍດີກັບກອບ ແຕ່ຮັກສາອັດຕາສ່ວນ (ບໍ່ໃຫ້ຮູບຍືດ) */
-  aspect-ratio: 16 / 9; /* ກຳນົດອັດຕາສ່ວນຕາມຄວາມເໝາະສົມ, ອາດໃຊ້ auto ກໍໄດ້ */
-}
-
-/* ສຳລັບຈໍມືຖື: ອາດກຳນົດຄວາມສູງຕາມຕ້ອງການ */
-@media (max-width: 768px) {
-  .slide img {
-    aspect-ratio: 4 / 3;    /* ປັບຕາມຄວາມຕ້ອງການ (ເຊັ່ນ: 4:3 ຫຼື 16:9) */
-    object-fit: cover;
-  }
-}
+/* ========== AUTO WRAPPER SCRIPT (optional, if you can't edit HTML) ==========
+   Add this JavaScript just before </body> if your HTML does not have .slider-outside-wrapper
+   <script>
+     document.addEventListener('DOMContentLoaded', function() {
+       var slider = document.querySelector('.slider-container');
+       if (slider && !slider.parentElement.classList.contains('slider-outside-wrapper')) {
+         var wrapper = document.createElement('div');
+         wrapper.className = 'slider-outside-wrapper';
+         slider.parentNode.insertBefore(wrapper, slider);
+         wrapper.appendChild(slider);
+       }
+     });
+   </script>
+*/
