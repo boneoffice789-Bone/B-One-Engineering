@@ -618,58 +618,53 @@ footer a:hover {
 
 /* ... keep all other existing styles (slide::before, .slide-content, buttons, dots) ... */
 
-/* ===== MOBILE FULL‑SCREEN OVERRIDE ===== */
+/* ===== MOBILE SLIDER OVERRIDE ===== */
 @media (max-width: 768px) {
-  .slider-section,
-  .slider-container,
-  .slider-wrapper {
-    height: 100vh;               /* Full viewport height */
-    max-height: 100vh;
+  /* 1. ປັບຄວາມສູງຂອງສະໄລ້ໃຫ້ພໍດີ ບໍ່ໃຫ້ເຕັມຈໍ (100vh) */
+  .slider-section, .slider-container, .slider-wrapper {
+    height: 250px !important; /* ສາມາດປັບຕົວເລກນີ້ຂຶ້ນລົງໄດ້ເຊັ່ນ: 200px ຫຼື 300px ເພື່ອໃຫ້ກົງກັບພາບແຕ່ງຂອງທ່ານ */
+    max-height: 250px !important;
   }
-
+  
   .slide {
-    height: 100vh;               /* Each slide fills the screen */
-    max-height: 100vh;
+    height: 250px !important; 
+    /* ຖ້າຢາກໃຫ້ຂອບຮູບມົນໆໃນມືຖື ສາມາດເພີ່ມ: border-radius: 12px; */
   }
 
+  /* 2. ປັບກ່ອງຂໍ້ຄວາມ (Text) ເທິງສະໄລ້ໃຫ້ກະທັດຮັດອ່ານງ່າຍ */
   .slide-content {
-    max-width: 90%;              /* Slightly wider on small screens */
-    padding: 20px 24px;
-    backdrop-filter: blur(12px); /* Optional: stronger blur for readability */
+    max-width: 90% !important;
+    padding: 12px 16px !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 8px !important;
   }
 
   .slide-content h3 {
-    font-size: 1.6rem;           /* Slightly smaller, still prominent */
-    margin-bottom: 8px;
+    font-size: 1.2rem !important; /* ຫຼຸດຂະໜາດຫົວຂໍ້ລົງໃຫ້ພໍດີກັບມືຖື */
+    margin-bottom: 4px !important;
   }
 
   .slide-content p {
-    font-size: 0.9rem;
-    margin-bottom: 16px;
+    font-size: 0.85rem !important;
+    margin-bottom: 10px !important;
+    /* ຖ້າບໍ່ຢາກໃຫ້ສະແດງລາຍລະອຽດຍ່ອຍໃນມືຖື ເພື່ອປະຢັດພື້ນທີ່ ໃຫ້ເພີ່ມ: display: none; */
   }
 
+  /* 3. ປັບຂະໜາດປຸ່ມເລື່ອນ (ຊ້າຍ-ຂວາ) ໃຫ້ນ້ອຍລົງ */
   .slider-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 1.2rem;
-    background: rgba(0, 0, 0, 0.5);
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
   }
 
-  .slider-prev {
-    left: 12px;
-  }
-  .slider-next {
-    right: 12px;
-  }
-
+  /* 4. ປັບຈຸດໄຂ່ປາ (Dots) ດ້ານລຸ່ມໃຫ້ພໍດີ */
   .slider-dots {
-    bottom: 16px;
-    gap: 10px;
+    bottom: 10px !important;
   }
-
+  
   .dot {
-    width: 8px;
-    height: 8px;
+    width: 8px !important;
+    height: 8px !important;
   }
 }
 
