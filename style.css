@@ -618,53 +618,50 @@ footer a:hover {
 
 /* ... keep all other existing styles (slide::before, .slide-content, buttons, dots) ... */
 
-/* ===== MOBILE SLIDER OVERRIDE ===== */
 @media (max-width: 768px) {
-  /* 1. ປັບຄວາມສູງຂອງສະໄລ້ໃຫ້ພໍດີ ບໍ່ໃຫ້ເຕັມຈໍ (100vh) */
+  /* 1. ບັງຄັບກ່ອງສະໄລ້ໃຫ້ມີອັດຕາສ່ວນ 430:150 ພໍດີເປະ */
   .slider-section, .slider-container, .slider-wrapper {
-    height: 250px !important; /* ສາມາດປັບຕົວເລກນີ້ຂຶ້ນລົງໄດ້ເຊັ່ນ: 200px ຫຼື 300px ເພື່ອໃຫ້ກົງກັບພາບແຕ່ງຂອງທ່ານ */
-    max-height: 250px !important;
+    height: auto !important; 
+    aspect-ratio: 430 / 150 !important; /* ຕັ້ງອັດຕາສ່ວນກົງກັບຮູບພາບ */
+    max-height: none !important;
+    min-height: unset !important;
   }
   
+  /* 2. ບັງຄັບຮູບໃຫ້ສະແດງເຕັມ 100% ຂອງກ່ອງທີ່ເຮົາສ້າງໄວ້ຂ້າງເທິງ */
   .slide {
-    height: 250px !important; 
-    background-size: contain !important; /* ປ່ຽນຈາກ cover ມາເປັນ contain ຈະບັງຄັບໃຫ້ຮູບສະແດງຄົບທຸກສ່ວນ */
-    background-repeat: no-repeat !important;
+    height: 100% !important; 
+    width: 100% !important;
+    background-size: 100% 100% !important; /* ຍືດພາບໃຫ້ພໍດີກັບກ່ອງທຸກມຸມ */
     background-position: center !important;
-    background-color: #f9fafb !important; /* ໃສ່ສີພື້ນຫຼັງຖ້າຮູບບໍ່ເຕັມຈໍ */
+    background-repeat: no-repeat !important;
   }
 
+  /* 3. ຫຍໍ້ກ່ອງຂໍ້ຄວາມລົງ ເພື່ອບໍ່ໃຫ້ບັງພາບ (ຍ້ອນພາບຈະນ້ອຍລົງຕາມລວງຍາວ) */
   .slide-content {
-    max-width: 95% !important;
-    padding: 8px 12px !important; /* ຫຼຸດຂະໜາດກ່ອງລົງອີກ */
+    max-width: 85% !important;
+    padding: 5px 10px !important;
+    transform: scale(0.8); /* ຫຍໍ້ທັງກ່ອງລົງ 20% */
+    transform-origin: center;
   }
 
   .slide-content h3 {
-    font-size: 1.2rem !important; /* ຫຼຸດຂະໜາດຫົວຂໍ້ລົງໃຫ້ພໍດີກັບມືຖື */
-    margin-bottom: 4px !important;
+    font-size: 1rem !important;
+    margin-bottom: 2px !important;
   }
 
   .slide-content p {
-    font-size: 0.85rem !important;
-    margin-bottom: 10px !important;
-    /* ຖ້າບໍ່ຢາກໃຫ້ສະແດງລາຍລະອຽດຍ່ອຍໃນມືຖື ເພື່ອປະຢັດພື້ນທີ່ ໃຫ້ເພີ່ມ: display: none; */
-  }
-
-  /* 3. ປັບຂະໜາດປຸ່ມເລື່ອນ (ຊ້າຍ-ຂວາ) ໃຫ້ນ້ອຍລົງ */
-  .slider-btn {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 14px !important;
-  }
-
-  /* 4. ປັບຈຸດໄຂ່ປາ (Dots) ດ້ານລຸ່ມໃຫ້ພໍດີ */
-  .slider-dots {
-    bottom: 10px !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 5px !important;
   }
   
-  .dot {
-    width: 8px !important;
-    height: 8px !important;
+  /* 4. ປັບປຸ່ມ ແລະ ຈຸດໄຂ່ປາໃຫ້ນ້ອຍລົງ ບໍ່ໃຫ້ບັງຮູບ */
+  .slider-btn {
+    width: 25px !important;
+    height: 25px !important;
+    font-size: 12px !important;
+  }
+  .slider-dots {
+    bottom: 5px !important;
   }
 }
 
