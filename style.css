@@ -619,41 +619,36 @@ footer a:hover {
 /* ... keep all other existing styles (slide::before, .slide-content, buttons, dots) ... */
 
 @media (max-width: 768px) {
-  /* 1. ບັງຄັບກ່ອງສະໄລ້ໃຫ້ມີອັດຕາສ່ວນ 430:150 ພໍດີເປະ */
+  /* ... (Code ອື່ນໆຂອງມືຖືຖ້າມີ) ... */
+
+  /* 1. Code ປັບຂະໜາດກ່ອງສະໄລ້ (ທີ່ເຮົາໃສ່ໄປກ່ອນໜ້ານີ້) */
   .slider-section, .slider-container, .slider-wrapper {
     height: auto !important; 
-    aspect-ratio: 430 / 150 !important; /* ຕັ້ງອັດຕາສ່ວນກົງກັບຮູບພາບ */
+    aspect-ratio: 430 / 150 !important;
     max-height: none !important;
     min-height: unset !important;
   }
   
-  /* 2. ບັງຄັບຮູບໃຫ້ສະແດງເຕັມ 100% ຂອງກ່ອງທີ່ເຮົາສ້າງໄວ້ຂ້າງເທິງ */
   .slide {
     height: 100% !important; 
     width: 100% !important;
-    background-size: 100% 100% !important; /* ຍືດພາບໃຫ້ພໍດີກັບກ່ອງທຸກມຸມ */
+    background-size: 100% 100% !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
   }
 
-  /* 3. ຫຍໍ້ກ່ອງຂໍ້ຄວາມລົງ ເພື່ອບໍ່ໃຫ້ບັງພາບ (ຍ້ອນພາບຈະນ້ອຍລົງຕາມລວງຍາວ) */
   .slide-content {
     max-width: 85% !important;
     padding: 5px 10px !important;
-    transform: scale(0.8); /* ຫຍໍ້ທັງກ່ອງລົງ 20% */
+    transform: scale(0.8);
     transform-origin: center;
   }
 
-  .slide-content h3 {
-    font-size: 1rem !important;
-    margin-bottom: 2px !important;
-  }
+  /* ... (Code ຫົວຂໍ້ h3, p ທີ່ກ່ຽວຂ້ອງ) ... */
 
-  .slide-content p {
-    font-size: 0.75rem !important;
-    margin-bottom: 5px !important;
-  }
-  
+  /* =========================================
+     2. ເອົາ Code ປຸ່ມເລື່ອນມາວາງຕໍ່ທ້າຍລົງມາເລີຍ (ແຕ່ຍັງຢູ່ໃນປີກກາຂອງ media)
+     ========================================= */
   .slider-btn {
     display: flex !important;
     align-items: center !important;
@@ -675,10 +670,12 @@ footer a:hover {
   .slider-btn.next, .next-btn { 
     right: 8px !important; 
   }
+  
   .slider-dots {
     bottom: 5px !important;
   }
-}
+
+} /* <-- ຢ່າລືມ! ຕ້ອງໃຫ້ Code ທັງໝົດຢູ່ກ່ອນວົງປີກກາປິດໂຕນີ້ */
 
 /* Optional: handle landscape orientation on mobile */
 @media (max-width: 768px) and (orientation: landscape) {
