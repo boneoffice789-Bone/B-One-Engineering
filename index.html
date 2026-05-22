@@ -2,11 +2,38 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>B-One Engineering | ໜ້າຫຼັກ</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="/style.css">
+  <style>
+    /* ກຳນົດເພີ່ມເຕີມນ້ອຍໆ ເພື່ອຮອງຮັບ slider ຮູບແບບ img */
+    .slide {
+      position: relative;
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 16 / 9;
+    }
+    @media (max-width: 768px) {
+      .slide img {
+        width: 1200px;
+        max-width: 1200px;
+        min-width: 1200px;
+        height: auto;
+        object-fit: contain;
+        aspect-ratio: auto;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -49,15 +76,16 @@
 </header>
 
 <main>
-  <!-- Slider section -->
+  <!-- Slider section (ປັບປຸງໃຫ້ໃຊ້ຮູບແບບ img ແລະ ຮອງຮັບທັງ Desktop/Mobile) -->
   <section class="slider-section">
-    <div class="slider-container">
+    <div class="slider-container" id="sliderContainer">
       <div class="slider-wrapper" id="sliderWrapper"></div>
       <button class="slider-btn slider-prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
       <button class="slider-btn slider-next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
       <div class="slider-dots" id="sliderDots"></div>
     </div>
   </section>
+
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="container hero-grid">
@@ -73,7 +101,8 @@
       </div>
     </div>
   </section>
-  <!-- Why choose us (static) -->
+
+  <!-- Why choose us -->
   <section style="padding: 60px 0; background: #fefaf8;">
     <div class="container">
       <h2 class="section-title">ເປັນຫຍັງຕ້ອງເລືອກ B-One?</h2>
@@ -85,6 +114,7 @@
       </div>
     </div>
   </section>
+
   <!-- Featured services (dynamic) -->
   <section style="padding: 60px 0;">
     <div class="container">
@@ -94,6 +124,7 @@
       <div class="text-center" style="margin-top: 40px;"><a href="/services" class="btn btn-outline">ເບິ່ງບໍລິການທັງໝົດ →</a></div>
     </div>
   </section>
+
   <!-- Featured products (dynamic) -->
   <section style="padding: 60px 0; background: #fefaf8;">
     <div class="container">
@@ -114,22 +145,16 @@
   </section>
 </main>
 
-<!--- Modern Premium Footer — ພື້ນສີເດີມ (Dark Gradient), B-One Engineering ສີແດງ, ສີສະບາຍຕາ --->
+<!-- Footer -->
 <footer style="background: linear-gradient(135deg, #0a0f1c 0%, #0b1323 100%); color: #e2e8f0; padding: 60px 0 30px; font-family: 'Inter', 'Noto Sans Lao', sans-serif; border-top: 1px solid rgba(255,255,255,0.05);">
   <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
-    
-    <!-- ແຖວຫຼັກ 4 ຖັນ -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 50px;">
-      
-      <!-- ຖັນ 1: ໂລໂກ້ ສີແດງ + ຄຳຂວັນ -->
       <div>
         <div style="margin-bottom: 20px;">
           <span style="font-size: 28px; font-weight: 700; color: #b30000; letter-spacing: -0.5px;">B-One Engineering</span>
         </div>
         <p style="font-size: 14px; line-height: 1.6; color: #cbd5e0;">ວິສະວະກຳຄົບວົງຈອນ ທີ່ທ່ານໄວ້ໃຈ | Complete Engineering Solutions You Can Trust</p>
       </div>
-      
-      <!-- ຖັນ 2: ລິ້ງດ່ວນ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Quick Links</h3>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -140,8 +165,6 @@
           <li style="margin-bottom: 12px;"><a href="/contact" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">📞 Contact</a></li>
         </ul>
       </div>
-      
-      <!-- ຖັນ 3: ບໍລິການຫຼັກ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Key Services</h3>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -151,8 +174,6 @@
           <li style="margin-bottom: 12px; color: #cbd5e0;"><span style="color: #b30000;">▹</span> Training & Testing</li>
         </ul>
       </div>
-      
-      <!-- ຖັນ 4: ຂໍ້ມູນຕິດຕໍ່ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Contact Info</h3>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
@@ -164,23 +185,19 @@
           <span style="font-size: 14px; color: #cbd5e0;">+856 20 59478899</span>
         </div>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
-      <i class="fas fa-envelope" style="color: #b30000;"></i>
-        <a href="mailto:info@b-one-engineering.com" style="font-size: 14px; color: #cbd5e0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#b30000'" onmouseout="this.style.color='#cbd5e0'">info@b-one-engineering.com</a>
-          </div>
+          <i class="fas fa-envelope" style="color: #b30000;"></i>
+          <a href="mailto:info@b-one-engineering.com" style="font-size: 14px; color: #cbd5e0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#b30000'" onmouseout="this.style.color='#cbd5e0'">info@b-one-engineering.com</a>
+        </div>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
           <i class="fas fa-clock" style="color: #b30000;"></i>
           <span style="font-size: 14px; color: #cbd5e0;">Mon – Sun: 8:00 – 17:30</span>
         </div>
       </div>
     </div>
-    
-    <!-- ເສັ້ນຂີດຄັ້ນປະດັບ (ສີແດງ) -->
     <div style="height: 1px; background: linear-gradient(90deg, transparent, #b30000, #b30000, transparent); margin: 20px 0 25px;"></div>
-    
-    <!-- ແຖວລຸ່ມ: ລິຂະສິດ ແລະ ນະໂຍບາຍ -->
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 13px; color: #94a3b8;">
       <p>© 2026 B-One Engineering Sole Co., Ltd. All Rights Reserved. | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
-         <div style="display: flex; gap: 20px;">
+      <div style="display: flex; gap: 20px;">
         <span style="color: #94a3b8;">Privacy Policy</span>
         <span style="color: #94a3b8;">Terms of Service</span>
         <span style="color: #94a3b8;">Sitemap</span>
@@ -189,32 +206,10 @@
   </div>
 </footer>
 
-<!-- CSS ເພີ່ມເຕີມ (Hover ແລະ Responsive) -->
-<style>
-  footer a:hover {
-    color: #b30000 !important;
-    transform: translateX(2px);
-    transition: all 0.2s ease;
-  }
-  footer ul li a:hover {
-    color: #b30000 !important;
-    padding-left: 5px;
-  }
-  @media (max-width: 768px) {
-    footer div[style*="display: grid"] {
-      gap: 30px;
-      text-align: center;
-    }
-    footer div[style*="display: flex"]:last-child {
-      flex-direction: column;
-      gap: 12px;
-      text-align: center;
-    }
-  }
-</style>
 <a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
+  // Mobile menu toggle
   const mobileBtn = document.getElementById('mobile-menu');
   mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
 </script>
@@ -237,58 +232,246 @@
     }
   });
 
-  // Slider
-  let sliders = [], currentSlide = 0, autoInterval;
+  // ======================
+  // SLIDER - UPDATED: ຮອງຮັບທັງ Desktop (auto-slide, transform) ແລະ Mobile (horizontal scroll, 1200px)
+  // ======================
+  let sliders = [];
+  let currentSlide = 0;
+  let autoInterval;
+  let isMobile = window.innerWidth <= 768;
+  let slideElements = []; // ເກັບ DOM ຂອງ slides ຫຼັງຈາກສ້າງ
+  let scrollTimeout;
+
+  const wrapper = document.getElementById('sliderWrapper');
+  const container = document.getElementById('sliderContainer');
+  const prevBtn = document.getElementById('prevSlide');
+  const nextBtn = document.getElementById('nextSlide');
+  const dotsDiv = document.getElementById('sliderDots');
+
+  // ຟັງຊັນສ້າງ slide ຈາກຂໍ້ມູນ (ໃຊ້ <img> ແທນ background)
+  function buildSlides(slidesData) {
+    if (!wrapper) return [];
+    wrapper.innerHTML = '';
+    const slidesDom = [];
+    slidesData.forEach((s, idx) => {
+      const slideDiv = document.createElement('div');
+      slideDiv.className = 'slide';
+      // ຮູບພາບ
+      const img = document.createElement('img');
+      img.src = s.image || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop';
+      img.alt = s.title || 'Slide';
+      img.loading = 'lazy';
+      slideDiv.appendChild(img);
+      // ເນື້ອຫາ (ຖ້າມີ)
+      if (s.title || s.linkUrl) {
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'slide-content';
+        if (s.title) {
+          const h3 = document.createElement('h3');
+          h3.textContent = s.title;
+          contentDiv.appendChild(h3);
+        }
+        if (s.linkUrl) {
+          const a = document.createElement('a');
+          a.href = s.linkUrl;
+          a.className = 'btn';
+          a.textContent = 'ເບິ່ງລາຍລະອຽດ →';
+          contentDiv.appendChild(a);
+        }
+        slideDiv.appendChild(contentDiv);
+      }
+      wrapper.appendChild(slideDiv);
+      slidesDom.push(slideDiv);
+    });
+    return slidesDom;
+  }
+
+  // ສ້າງ dots
+  function createDots(count) {
+    if (!dotsDiv) return;
+    dotsDiv.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === currentSlide) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsDiv.appendChild(dot);
+    }
+  }
+
+  function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  // Desktop: ໃຊ້ transform
+  function goToSlideDesktop(index) {
+    if (!wrapper || sliders.length === 0) return;
+    if (index < 0) index = 0;
+    if (index >= sliders.length) index = sliders.length - 1;
+    currentSlide = index;
+    wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+    updateDots();
+  }
+
+  // Mobile: ໃຊ້ scrollLeft (ເລື່ອນແບບ native)
+  function goToSlideMobile(index, smooth = true) {
+    if (!container || sliders.length === 0) return;
+    if (index < 0) index = 0;
+    if (index >= sliders.length) index = sliders.length - 1;
+    currentSlide = index;
+    // ຫາຄວາມກວ້າງຂອງ slide (ໃນມືຖື, ຮູບກວ້າງ 1200px)
+    let slideWidth = 1200;
+    const firstSlide = document.querySelector('.slide');
+    if (firstSlide) slideWidth = firstSlide.offsetWidth;
+    container.scrollTo({
+      left: currentSlide * slideWidth,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+    updateDots();
+  }
+
+  // ຟັງຊັນລວມ (ຈະເລືອກວິທີຕາມ isMobile)
+  function goToSlide(index) {
+    if (isMobile) {
+      goToSlideMobile(index);
+    } else {
+      goToSlideDesktop(index);
+    }
+  }
+
+  function nextSlide() {
+    if (sliders.length === 0) return;
+    let newIndex = currentSlide + 1;
+    if (newIndex >= sliders.length) newIndex = 0;
+    goToSlide(newIndex);
+    resetAutoSlide();
+  }
+
+  function prevSlide() {
+    if (sliders.length === 0) return;
+    let newIndex = currentSlide - 1;
+    if (newIndex < 0) newIndex = sliders.length - 1;
+    goToSlide(newIndex);
+    resetAutoSlide();
+  }
+
+  function startAutoSlide() {
+    if (autoInterval) clearInterval(autoInterval);
+    if (!isMobile && sliders.length > 1) {
+      autoInterval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    }
+  }
+
+  function resetAutoSlide() {
+    if (!isMobile) {
+      clearInterval(autoInterval);
+      startAutoSlide();
+    }
+  }
+
+  // ຟັງເຫດການ scroll ໃນມືຖື ເພື່ອອັບເດດ currentSlide
+  function initMobileScrollSync() {
+    if (!container) return;
+    const onScroll = () => {
+      if (!isMobile) return;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        let slideWidth = 1200;
+        const firstSlide = document.querySelector('.slide');
+        if (firstSlide) slideWidth = firstSlide.offsetWidth;
+        const scrollPos = container.scrollLeft;
+        let newIndex = Math.round(scrollPos / slideWidth);
+        if (newIndex < 0) newIndex = 0;
+        if (newIndex >= sliders.length) newIndex = sliders.length - 1;
+        if (newIndex !== currentSlide) {
+          currentSlide = newIndex;
+          updateDots();
+        }
+      }, 50);
+    };
+    container.addEventListener('scroll', onScroll);
+  }
+
+  // ເມື່ອປ່ຽນຂະໜາດໜ້າຈໍ
+  function handleResize() {
+    const newIsMobile = window.innerWidth <= 768;
+    if (newIsMobile !== isMobile) {
+      isMobile = newIsMobile;
+      // ຣີເຊັດສະຖານະ
+      if (isMobile) {
+        // ປ່ຽນເປັນໂໝດມືຖື: ລຶບ transition, ປັບ scroll
+        if (wrapper) wrapper.style.transition = '';
+        container.style.overflowX = 'auto';
+        container.style.scrollSnapType = 'x mandatory';
+        goToSlideMobile(currentSlide, false);
+        initMobileScrollSync();
+        clearInterval(autoInterval);
+      } else {
+        // ປ່ຽນເປັນ Desktop: ກັບໃຊ້ transform
+        container.style.overflowX = 'hidden';
+        container.style.scrollSnapType = 'none';
+        if (wrapper) wrapper.style.transition = 'transform 0.5s ease-in-out';
+        goToSlideDesktop(currentSlide);
+        startAutoSlide();
+      }
+    }
+  }
+
+  // ໂຫຼດຂໍ້ມູນ slider ຈາກ Firestore
   async function loadSliders() {
-    const wrapper = document.getElementById('sliderWrapper');
-    const dotsDiv = document.getElementById('sliderDots');
     try {
       const q = query(collection(db, 'sliders'), where('status', '==', 'active'));
       const snap = await getDocs(q);
       if (snap.empty) {
-        wrapper.innerHTML = `<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop');"><div class="slide-content"><h3>B-One Engineering</h3><p>ວິສະວະກຳຄົບວົງຈອນ</p><a href="/contact" class="btn">ຕິດຕໍ່ພວກເຮົາ →</a></div></div>`;
-        return;
+        // ຂໍ້ມູນສຳຮອງ
+        const defaultSliders = [{
+          id: 'default1',
+          title: 'B-One Engineering',
+          image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop',
+          linkUrl: '/contact'
+        }];
+        sliders = defaultSliders;
+      } else {
+        sliders = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       }
-      sliders = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      wrapper.innerHTML = '';
-      sliders.forEach(s => {
-        const div = document.createElement('div');
-        div.className = 'slide';
-        div.style.backgroundImage = `url('${s.image || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=580&fit=crop'}')`;
-        div.style.backgroundSize = 'cover';
-        div.style.backgroundPosition = 'center';
-        div.innerHTML = `<div class="slide-content"><h3>${s.title || ''}</h3>${s.linkUrl ? `<a href="${s.linkUrl}" class="btn">ເບິ່ງລາຍລະອຽດ →</a>` : ''}</div>`;
-        wrapper.appendChild(div);
-      });
-      dotsDiv.innerHTML = '';
-      sliders.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsDiv.appendChild(dot);
-      });
-      goToSlide(0);
-      startAutoSlide();
-    } catch(e) { console.error(e); }
+      // ສ້າງ DOM
+      slideElements = buildSlides(sliders);
+      createDots(sliders.length);
+      // ກຳນົດໂໝດເລີ່ມຕົ້ນ
+      isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        container.style.overflowX = 'auto';
+        container.style.scrollSnapType = 'x mandatory';
+        if (wrapper) wrapper.style.transition = '';
+        goToSlideMobile(0, false);
+        initMobileScrollSync();
+      } else {
+        container.style.overflowX = 'hidden';
+        container.style.scrollSnapType = 'none';
+        if (wrapper) wrapper.style.transition = 'transform 0.5s ease-in-out';
+        goToSlideDesktop(0);
+        startAutoSlide();
+      }
+      window.addEventListener('resize', handleResize);
+    } catch (err) {
+      console.error('Slider load error:', err);
+    }
   }
-  function goToSlide(index) {
-    const wrapper = document.getElementById('sliderWrapper');
-    const dots = document.querySelectorAll('.dot');
-    if (!wrapper || sliders.length === 0) return;
-    currentSlide = (index + sliders.length) % sliders.length;
-    wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-  }
-  function nextSlide() { if(sliders.length) goToSlide(currentSlide+1); resetAuto(); }
-  function prevSlide() { if(sliders.length) goToSlide(currentSlide-1); resetAuto(); }
-  function startAutoSlide() { autoInterval = setInterval(() => nextSlide(), 5000); }
-  function resetAuto() { clearInterval(autoInterval); startAutoSlide(); }
-  document.getElementById('prevSlide')?.addEventListener('click', prevSlide);
-  document.getElementById('nextSlide')?.addEventListener('click', nextSlide);
+
+  // ເຊື່ອມປຸ່ມ
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevSlide(); });
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); });
+
   loadSliders();
 
-  // Featured Services
+  // ======================
+  // Featured Services, Products, News (ຄືເດີມ)
+  // ======================
   async function loadFeaturedServices() {
     const grid = document.getElementById('featuredServicesGrid');
     try {
@@ -304,7 +487,6 @@
     } catch(e) { grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
   }
 
-  // Featured Products
   async function loadFeaturedProducts() {
     const grid = document.getElementById('featuredProductsGrid');
     try {
@@ -319,7 +501,6 @@
     } catch(e) { grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
   }
 
-  // News
   async function loadNews() {
     const grid = document.getElementById('newsGrid');
     try {
