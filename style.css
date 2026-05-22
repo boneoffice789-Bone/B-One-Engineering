@@ -586,97 +586,6 @@ footer a:hover {
   box-shadow: 0 10px 25px rgba(37,211,102,0.5);
 }
 
-/* Base slider styles (unchanged except adding a height wrapper) */
-.slider-section {
-  padding: 0;
-  /* Ensure the section can expand to full viewport */
-  height: auto;
-}
-
-.slider-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.slider-wrapper {
-  display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.slide {
-  flex: 0 0 100%;
-  /* Default height for desktop – can be adjusted */
-  height: 500px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-/* ... keep all other existing styles (slide::before, .slide-content, buttons, dots) ... */
-
-@media (max-width: 768px) {
-  /* ... (Code ອື່ນໆຂອງມືຖືຖ້າມີ) ... */
-
-  /* 1. Code ປັບຂະໜາດກ່ອງສະໄລ້ (ທີ່ເຮົາໃສ່ໄປກ່ອນໜ້ານີ້) */
-  .slider-section, .slider-container, .slider-wrapper {
-    height: auto !important; 
-    aspect-ratio: 430 / 150 !important;
-    max-height: none !important;
-    min-height: unset !important;
-  }
-  
-  .slide {
-    height: 100% !important; 
-    width: 100% !important;
-    background-size: 100% 100% !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-  }
-
-  .slide-content {
-    max-width: 85% !important;
-    padding: 5px 10px !important;
-    transform: scale(0.8);
-    transform-origin: center;
-  }
-
-  /* ... (Code ຫົວຂໍ້ h3, p ທີ່ກ່ຽວຂ້ອງ) ... */
-
-  /* =========================================
-     2. ເອົາ Code ປຸ່ມເລື່ອນມາວາງຕໍ່ທ້າຍລົງມາເລີຍ (ແຕ່ຍັງຢູ່ໃນປີກກາຂອງ media)
-     ========================================= */
-  .slider-btn {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;   
-    height: 38px !important;
-    background: rgba(255, 255, 255, 0.85) !important; 
-    color: #1a1a2e !important; 
-    border-radius: 50% !important; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important; 
-    border: none !important;
-    font-size: 16px !important;
-    z-index: 10 !important;
-  }
-
-  .slider-btn.prev, .prev-btn { 
-    left: 8px !important; 
-  }
-  .slider-btn.next, .next-btn { 
-    right: 8px !important; 
-  }
-  
-  .slider-dots {
-    bottom: 5px !important;
-  }
-
-} /* <-- ຢ່າລືມ! ຕ້ອງໃຫ້ Code ທັງໝົດຢູ່ກ່ອນວົງປີກກາປິດໂຕນີ້ */
-
 /* Optional: handle landscape orientation on mobile */
 @media (max-width: 768px) and (orientation: landscape) {
   .slide-content {
@@ -807,12 +716,6 @@ footer a:hover {
     gap: 15px;
   }
   .news-grid { grid-template-columns: 1fr; }
-  
-  .slide { height: 350px; }
-  .slide-content { padding: 15px 20px; max-width: 95%; }
-  .slide-content h3 { font-size: 1.3rem; }
-  .slide-content .btn { padding: 5px 12px; font-size: 0.7rem; }
-  .slider-btn { width: 32px; height: 32px; font-size: 1rem; }
   
   .contact-grid { grid-template-columns: 1fr; gap: 30px; }
   .cart-item { flex-direction: column; text-align: center; }
@@ -1052,7 +955,15 @@ footer {
     font-size: 2rem !important;
   }
 }
-/* ກອບນອກຂອງ slider */
+
+/* ==================================================
+   B-ONE ENGINEERING - SLIDER & MOBILE BUTTONS PRO
+   ================================================== */
+/* 1. ສະໄລ້ສຳລັບ Desktop (ຈໍໃຫຍ່) */
+.slider-section {
+  padding: 0;
+  height: auto;
+}
 .slider-container {
   width: 100%;
   max-width: 100%;
@@ -1060,34 +971,97 @@ footer {
   position: relative;
   margin: 0 auto;
 }
-
-/* ກອບພາຍໃນທີ່ໃຊ້ flex ເພື່ອຈັດລຽງສະໄລ້ */
 .slider-wrapper {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
   transition: transform 0.4s ease;
 }
-
-/* ແຕ່ລະສະໄລ້ */
 .slide {
-  flex: 0 0 100%;   /* ບັງຄັບໃຫ້ແຕ່ລະ slide ກວ້າງ 100% ຂອງ container */
+  flex: 0 0 100%;
   width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
-
-/* ຮູບພາຍໃນ slide */
 .slide img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: cover;    /* ຕັດຮູບໃຫ້ພໍດີກັບກອບ ແຕ່ຮັກສາອັດຕາສ່ວນ (ບໍ່ໃຫ້ຮູບຍືດ) */
-  aspect-ratio: 16 / 9; /* ກຳນົດອັດຕາສ່ວນຕາມຄວາມເໝາະສົມ, ອາດໃຊ້ auto ກໍໄດ້ */
+  object-fit: cover;
 }
 
-/* ສຳລັບຈໍມືຖື: ອາດກຳນົດຄວາມສູງຕາມຕ້ອງການ */
+/* ປຸ່ມເລື່ອນສະໄລ້ (Desktop) */
+.slider-btn, .prev-btn, .next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--primary);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+.slider-btn:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.05);
+}
+.slider-prev, .prev-btn { left: 20px; }
+.slider-next, .next-btn { right: 20px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 999;
+}
+
+/* 2. ປັບສະໄລ້ ແລະ ປຸ່ມໃຫ້ພໍດີກັບໜ້າຈໍມືຖື (Mobile) */
 @media (max-width: 768px) {
-  .slide img {
-    aspect-ratio: 4 / 3;    /* ປັບຕາມຄວາມຕ້ອງການ (ເຊັ່ນ: 4:3 ຫຼື 16:9) */
-    object-fit: cover;
+  /* ບັງຄັບ 430x150, ບໍ່ຕັດຮູບ */
+  .slider-section, .slider-container, .slider-wrapper {
+    height: auto !important; 
+    aspect-ratio: 430 / 150 !important;
+    max-height: none !important;
+    min-height: unset !important;
   }
+  
+  .slide, .slide img {
+    height: 100% !important; 
+    width: 100% !important;
+    background-size: 100% 100% !important;
+    object-fit: fill !important; 
+    aspect-ratio: 430 / 150 !important;
+  }
+
+  .slide-content {
+    max-width: 80% !important;
+    padding: 6px 12px !important;
+    transform: scale(0.75) !important;
+    transform-origin: center !important;
+  }
+
+  /* ປຸ່ມລອຍ, ວົງມົນ, ສີຂາວໂປ່ງແສງ ໃນມືຖື */
+  .slider-btn, .prev-btn, .next-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 14px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+  .slider-prev, .prev-btn { left: 10px !important; }
+  .slider-next, .next-btn { right: 10px !important; }
+  .slider-dots { bottom: 5px !important; }
 }
