@@ -628,15 +628,15 @@ footer a:hover {
   
   .slide {
     height: 250px !important; 
-    /* ຖ້າຢາກໃຫ້ຂອບຮູບມົນໆໃນມືຖື ສາມາດເພີ່ມ: border-radius: 12px; */
+    background-size: contain !important; /* ປ່ຽນຈາກ cover ມາເປັນ contain ຈະບັງຄັບໃຫ້ຮູບສະແດງຄົບທຸກສ່ວນ */
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: #f9fafb !important; /* ໃສ່ສີພື້ນຫຼັງຖ້າຮູບບໍ່ເຕັມຈໍ */
   }
 
-  /* 2. ປັບກ່ອງຂໍ້ຄວາມ (Text) ເທິງສະໄລ້ໃຫ້ກະທັດຮັດອ່ານງ່າຍ */
   .slide-content {
-    max-width: 90% !important;
-    padding: 12px 16px !important;
-    backdrop-filter: blur(8px) !important;
-    border-radius: 8px !important;
+    max-width: 95% !important;
+    padding: 8px 12px !important; /* ຫຼຸດຂະໜາດກ່ອງລົງອີກ */
   }
 
   .slide-content h3 {
