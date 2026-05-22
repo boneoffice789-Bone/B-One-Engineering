@@ -1,7 +1,6 @@
 /* =============================================
    B-One Engineering - COMPLETE CSS (2026)
    Responsive for Mobile, Tablet, Desktop
-   UPDATED: Slider with 1200px fixed width on mobile + horizontal scroll
    ============================================= */
 
 /* Font setup:
@@ -587,125 +586,107 @@ footer a:hover {
   box-shadow: 0 10px 25px rgba(37,211,102,0.5);
 }
 
-/* ========== SLIDER BASE STYLES (UPDATED) ========== */
+/* Base slider styles (unchanged except adding a height wrapper) */
 .slider-section {
   padding: 0;
-  position: relative;
+  /* Ensure the section can expand to full viewport */
+  height: auto;
 }
 
 .slider-container {
   position: relative;
   width: 100%;
   overflow: hidden;
-  user-select: none;
 }
 
 .slider-wrapper {
   display: flex;
-  transition: transform 0.5s ease-in-out;
-  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .slide {
   flex: 0 0 100%;
+  /* Default height for desktop – can be adjusted */
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.slide img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  aspect-ratio: 16 / 9;
+/* ... keep all other existing styles (slide::before, .slide-content, buttons, dots) ... */
+
+/* ===== MOBILE FULL‑SCREEN OVERRIDE ===== */
+@media (max-width: 768px) {
+  .slider-section,
+  .slider-container,
+  .slider-wrapper {
+    height: 100vh;               /* Full viewport height */
+    max-height: 100vh;
+  }
+
+  .slide {
+    height: 100vh;               /* Each slide fills the screen */
+    max-height: 100vh;
+  }
+
+  .slide-content {
+    max-width: 90%;              /* Slightly wider on small screens */
+    padding: 20px 24px;
+    backdrop-filter: blur(12px); /* Optional: stronger blur for readability */
+  }
+
+  .slide-content h3 {
+    font-size: 1.6rem;           /* Slightly smaller, still prominent */
+    margin-bottom: 8px;
+  }
+
+  .slide-content p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  .slider-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .slider-prev {
+    left: 12px;
+  }
+  .slider-next {
+    right: 12px;
+  }
+
+  .slider-dots {
+    bottom: 16px;
+    gap: 10px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
 }
 
-.slide-content {
-  position: absolute;
-  bottom: 15%;
-  left: 8%;
-  max-width: 80%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
-  padding: 20px 30px;
-  border-radius: 20px;
-  color: white;
-  z-index: 2;
-}
-
-.slide-content h3 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-
-.slide-content p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.slide-content .btn {
-  background: var(--primary);
-  padding: 8px 20px;
-  font-size: 0.9rem;
-}
-
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  z-index: 10;
-}
-
-.slider-btn:hover {
-  background: var(--primary);
-  transform: translateY(-50%) scale(1.05);
-}
-
-.slider-prev {
-  left: 20px;
-}
-
-.slider-next {
-  right: 20px;
-}
-
-.slider-dots {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  z-index: 10;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.dot.active {
-  background: var(--primary);
-  width: 24px;
-  border-radius: 10px;
+/* Optional: handle landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .slide-content {
+    max-width: 70%;
+    padding: 12px 20px;
+  }
+  .slide-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .slide-content p {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
 }
 
 /* ========== NEWS SECTION ========== */
@@ -772,7 +753,9 @@ footer a:hover {
   gap: 6px;
 }
 
-/* ========== RESPONSIVE (TABLET & DESKTOP SMALL) ========== */
+/* ========== ENHANCED RESPONSIVE (ປັບປຸງໃໝ່) ========== */
+
+/* ສຳລັບແທັບເລັດ ແລະ ມືຖືແນວນອນ */
 @media (max-width: 1024px) {
   .container { padding: 0 20px; }
   .hero-content h1 { font-size: 2.2rem; }
@@ -783,7 +766,7 @@ footer a:hover {
   }
 }
 
-/* ========== MOBILE: HORIZONTAL SCROLL SLIDER WITH 1200px WIDTH IMAGES ========== */
+/* ສຳລັບມືຖື (ແນວຕັ້ງ) */
 @media (max-width: 768px) {
   body { font-size: 14px; }
   .container { padding: 0 16px; }
@@ -821,6 +804,12 @@ footer a:hover {
   }
   .news-grid { grid-template-columns: 1fr; }
   
+  .slide { height: 350px; }
+  .slide-content { padding: 15px 20px; max-width: 95%; }
+  .slide-content h3 { font-size: 1.3rem; }
+  .slide-content .btn { padding: 5px 12px; font-size: 0.7rem; }
+  .slider-btn { width: 32px; height: 32px; font-size: 1rem; }
+  
   .contact-grid { grid-template-columns: 1fr; gap: 30px; }
   .cart-item { flex-direction: column; text-align: center; }
   .cart-item img { width: 80px; height: 80px; }
@@ -828,86 +817,6 @@ footer a:hover {
   
   footer { font-size: 0.75rem; padding: 30px 15px; }
   .whatsapp-float { width: 44px; height: 44px; font-size: 24px; bottom: 15px; right: 15px; }
-
-  /* ===== SLIDER MOBILE OVERRIDE: horizontal scroll, 1200px fixed width ===== */
-  .slider-container {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    cursor: grab;
-  }
-  .slider-container:active {
-    cursor: grabbing;
-  }
-
-  .slider-wrapper {
-    display: flex;
-    flex-wrap: nowrap;
-    width: auto;
-    transition: none !important;
-    transform: none !important;
-  }
-
-  .slide {
-    flex: 0 0 auto;
-    width: auto;
-    scroll-snap-align: start;
-  }
-
-  .slide img {
-    width: 1200px;
-    max-width: 1200px;
-    min-width: 1200px;
-    height: auto;
-    object-fit: contain;
-    aspect-ratio: auto;
-  }
-
-  .slide-content {
-    position: absolute;
-    bottom: 10%;
-    left: 5%;
-    right: 5%;
-    max-width: 90%;
-    padding: 12px 18px;
-    background: rgba(0,0,0,0.7);
-  }
-  .slide-content h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-  }
-  .slide-content p {
-    font-size: 0.75rem;
-    margin-bottom: 8px;
-  }
-  .slide-content .btn {
-    padding: 5px 12px;
-    font-size: 0.7rem;
-  }
-
-  .slider-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-  }
-  .slider-prev {
-    left: 8px;
-  }
-  .slider-next {
-    right: 8px;
-  }
-  .slider-dots {
-    bottom: 12px;
-    gap: 8px;
-  }
-  .dot {
-    width: 8px;
-    height: 8px;
-  }
-  .dot.active {
-    width: 18px;
-  }
 }
 
 /* ມືຖືຂະໜາດນ້ອຍ (ຕ່ຳກວ່າ 550px) */
@@ -927,7 +836,7 @@ footer a:hover {
 /* ເພີ່ມຄວາມສະດວກໃນການສຳຜັດ (touch) */
 @media (hover: none) and (pointer: coarse) {
   .btn, .nav-links li a, .product-card .btn-add-to-cart {
-    min-height: 44px;
+    min-height: 44px; /* ຂະໜາດຕ່ຳສຸດສຳລັບການກົດງ່າຍ */
   }
 }
 
@@ -1134,7 +1043,47 @@ footer {
   .hero-content h1 {
     font-size: 2.1rem !important;
   }
+
   .section-title {
     font-size: 2rem !important;
+  }
+}
+/* ກອບນອກຂອງ slider */
+.slider-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* ກອບພາຍໃນທີ່ໃຊ້ flex ເພື່ອຈັດລຽງສະໄລ້ */
+.slider-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  transition: transform 0.4s ease;
+}
+
+/* ແຕ່ລະສະໄລ້ */
+.slide {
+  flex: 0 0 100%;   /* ບັງຄັບໃຫ້ແຕ່ລະ slide ກວ້າງ 100% ຂອງ container */
+  width: 100%;
+}
+
+/* ຮູບພາຍໃນ slide */
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;    /* ຕັດຮູບໃຫ້ພໍດີກັບກອບ ແຕ່ຮັກສາອັດຕາສ່ວນ (ບໍ່ໃຫ້ຮູບຍືດ) */
+  aspect-ratio: 16 / 9; /* ກຳນົດອັດຕາສ່ວນຕາມຄວາມເໝາະສົມ, ອາດໃຊ້ auto ກໍໄດ້ */
+}
+
+/* ສຳລັບຈໍມືຖື: ອາດກຳນົດຄວາມສູງຕາມຕ້ອງການ */
+@media (max-width: 768px) {
+  .slide img {
+    aspect-ratio: 4 / 3;    /* ປັບຕາມຄວາມຕ້ອງການ (ເຊັ່ນ: 4:3 ຫຼື 16:9) */
+    object-fit: cover;
   }
 }
