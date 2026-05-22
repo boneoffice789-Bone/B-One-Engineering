@@ -654,11 +654,26 @@ footer a:hover {
     margin-bottom: 5px !important;
   }
   
-  /* 4. ປັບປຸ່ມ ແລະ ຈຸດໄຂ່ປາໃຫ້ນ້ອຍລົງ ບໍ່ໃຫ້ບັງຮູບ */
   .slider-btn {
-    width: 25px !important;
-    height: 25px !important;
-    font-size: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;   
+    height: 38px !important;
+    background: rgba(255, 255, 255, 0.85) !important; 
+    color: #1a1a2e !important; 
+    border-radius: 50% !important; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important; 
+    border: none !important;
+    font-size: 16px !important;
+    z-index: 10 !important;
+  }
+
+  .slider-btn.prev, .prev-btn { 
+    left: 8px !important; 
+  }
+  .slider-btn.next, .next-btn { 
+    right: 8px !important; 
   }
   .slider-dots {
     bottom: 5px !important;
