@@ -1087,3 +1087,65 @@ footer {
     object-fit: cover;
   }
 }
+/* ========== FIX: SLIDER IMAGES ON MOBILE - DESKTOP WIDTH 1200px ========== */
+@media (max-width: 768px) {
+  /* ໃຫ້ container ສາມາດເລື່ອນນອນໄດ້ */
+  .slider-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* ຍົກເລີກການບັງຄັບຄວາມສູງຈາກ fullscreen ເກົ່າ */
+  .slider-section,
+  .slider-container,
+  .slider-wrapper {
+    height: auto;
+    max-height: none;
+  }
+
+  /* wrapper ບໍ່ຈຳກັດຄວາມກວ້າງ, ປ່ອຍໃຫ້ກວ້າງຕາມເນື້ອຫາ */
+  .slider-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    width: auto;
+    transition: none; /* ປິດ slide transition ອັດຕະໂນມັດເພື່ອບໍ່ໃຫ້ກະທົບກັບການເລື່ອນ */
+    transform: none !important;
+  }
+
+  /* ແຕ່ລະ slide ມີຄວາມກວ້າງຕາມຮູບ (1200px) ແລະ ບໍ່ຫຍໍ້ */
+  .slide {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    scroll-snap-align: start;
+  }
+
+  /* ຮູບພາຍໃນ slide ຈະສະແດງຂະໜາດ 1200px ຕາມຕົ້ນສະບັບ desktop */
+  .slide img {
+    width: 1200px;
+    max-width: 1200px;
+    min-width: 1200px;
+    height: auto;
+    object-fit: contain;  /* ໃຫ້ເຫັນຮູບຄົບທັງຮູບ, ບໍ່ຕັດທິ້ງ */
+    aspect-ratio: auto;    /* ຍົກເລີກ aspect-ratio ທີ່ບັງຄັບຈາກຕົ້ນ */
+  }
+
+  /* ປິດປຸ່ມກົດເລື່ອນສະໄລ້ ຫຼື ເຊື່ອງໄວ້ເພື່ອບໍ່ໃຫ້ສັບສົນ (ຖ້າຕ້ອງການໃຫ້ເຫັນ ສາມາດຄົງໄວ້ກໍໄດ້) */
+  .slider-btn,
+  .slider-dots {
+    display: none;
+  }
+
+  /* ຖ້າຕ້ອງການໃຫ້ເຫັນຈຸດເຕືອນ ຫຼື ປຸ່ມ ໃຫ້ລຶບສ່ວນນີ້ອອກ ຫຼື ປັບຕຳແໜ່ງໃໝ່ */
+}
+
+/* ຕົວເລືອກ: ສຳລັບຈໍຂະໜາດນ້ອຍກວ່າ 550px ຍັງຮັກສາ 1200px ເຊັ່ນດຽວກັນ */
+@media (max-width: 550px) {
+  .slide img {
+    width: 1200px;
+    max-width: 1200px;
+    min-width: 1200px;
+  }
+}
