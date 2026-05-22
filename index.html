@@ -34,6 +34,67 @@
       }
     }
   </style>
+  /* ========== FIX: SLIDER FULL-WIDTH NO GAPS ========== */
+.slider-section,
+.slider-container,
+.slider-wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+.slider-container {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Desktop: ຮູບກວມເອົາຄວາມກວ້າງຈໍ ແລະ ຮັກສາອັດຕາສ່ວນ */
+@media (min-width: 769px) {
+  .slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16 / 9; /* ປັບຕາມຄວາມຕ້ອງການ, ຫຼືໃຊ້ auto */
+  }
+}
+
+/* Mobile: ຮູບກວ້າງ 1200px ຄົງທີ່, ສາມາດເລື່ອນນິ້ວ, ບໍ່ມີຊ່ອງຫວ່າງດ້ານນອກ */
+@media (max-width: 768px) {
+  .slider-section {
+    margin: 0;
+    padding: 0;
+  }
+  .slider-container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    left: auto;
+    right: auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+  .slider-wrapper {
+    display: flex;
+    gap: 0;
+  }
+  .slide {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+  .slide img {
+    width: 1200px;
+    max-width: 1200px;
+    min-width: 1200px;
+    height: auto;
+    display: block;
+    object-fit: contain; /* ໃຫ້ເຫັນຮູບຄົບ, ບໍ່ຕັດ */
+    aspect-ratio: auto;
+  }
+}
 </head>
 <body>
 
