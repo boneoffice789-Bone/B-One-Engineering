@@ -8,244 +8,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="/style.css">
   <style>
-    /* ສ່ວນທີ່ເພີ່ມເຕີມ ສຳລັບຟີດເຈີໃໝ່ */
     .cart-icon-wrapper { position: relative; }
     .cart-count { position: absolute; top: -8px; right: -12px; background: #ffd700; color: #b30000; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-    .notification { position: fixed; bottom: 20px; right: 20px; background: #1e293b; backdrop-filter: blur(12px); color: white; padding: 12px 24px; border-radius: 60px; z-index: 1500; display: none; font-family: inherit; }
+    .product-card .btn-add-to-cart { background: #b91c1c; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: pointer; transition: 0.3s; width: 100%; }
+    .product-card .btn-add-to-cart:hover { background: #8b1515; transform: translateY(-2px); }
+    .product-card .btn-out-of-stock { background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: not-allowed; width: 100%; }
+    .notification { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 12px 20px; border-radius: 8px; z-index: 1000; display: none; }
     .stock-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-top: 5px; }
     .stock-in { background: #d4edda; color: #155724; }
     .stock-low { background: #fff3cd; color: #856404; }
     .stock-out { background: #f8d7da; color: #721c24; }
-    
-    /* Layout ສຳລັບ 2 ຖັນ */
-    .products-layout {
-      display: flex;
-      gap: 32px;
-      margin: 20px 0 40px;
-    }
-    .sidebar {
-      width: 280px;
-      flex-shrink: 0;
-      background: white;
-      border-radius: 28px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-      align-self: start;
-      position: sticky;
-      top: 20px;
-    }
-    .sidebar h3 {
-      font-size: 1.2rem;
-      margin-bottom: 16px;
-      border-bottom: 2px solid #b91c1c;
-      display: inline-block;
-    }
-    .category-tree {
-      list-style: none;
-      margin-top: 10px;
-    }
-    .cat-main {
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      border-radius: 12px;
-      transition: 0.2s;
-    }
-    .cat-main:hover {
-      background: #f1f5f9;
-    }
-    .cat-main.active-cat {
-      color: #b91c1c;
-      background: #fff0f0;
-    }
-    .subcat-list {
-      list-style: none;
-      padding-left: 20px;
-      margin-top: 4px;
-      display: none;
-    }
-    .subcat-list.open {
-      display: block;
-    }
-    .subcat-list li {
-      padding: 6px 8px;
-      cursor: pointer;
-      border-radius: 10px;
-      font-size: 0.85rem;
-    }
-    .subcat-list li:hover {
-      background: #f1f5f9;
-    }
-    .subcat-list li.active-sub {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
-    .brands-section {
-      margin-top: 30px;
-      padding-top: 16px;
-      border-top: 1px solid #e2e8f0;
-    }
-    .brand-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-      cursor: pointer;
-      border-radius: 12px;
-      transition: 0.2s;
-    }
-    .brand-item:hover {
-      background: #f1f5f9;
-    }
-    .brand-item.active-brand {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
-    .brand-logo {
-      width: 32px;
-      height: 32px;
-      background: #e2e8f0;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-    .main-content {
-      flex: 1;
-    }
-    .filter-bar {
-      background: white;
-      border-radius: 48px;
-      padding: 12px 24px;
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .search-wrapper {
-      display: flex;
-      align-items: center;
-      background: #f1f5f9;
-      border-radius: 60px;
-      padding: 5px 16px;
-    }
-    .search-wrapper input {
-      border: none;
-      background: transparent;
-      padding: 10px 12px;
-      outline: none;
-      width: 220px;
-      font-family: inherit;
-    }
-    .active-filter-badge {
-      font-size: 0.8rem;
-      color: #475569;
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 28px;
-    }
-    .product-card {
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      transition: 0.25s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15);
-    }
-    .product-img {
-      height: 200px;
-      background: #f1f5f9;
-      overflow: hidden;
-    }
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: 0.3s;
-    }
-    .product-card:hover .product-img img {
-      transform: scale(1.03);
-    }
-    .product-info {
-      padding: 16px;
-    }
-    .product-category {
-      font-size: 0.7rem;
-      color: #b91c1c;
-      background: #fff0f0;
-      display: inline-block;
-      padding: 3px 12px;
-      border-radius: 30px;
-      margin-bottom: 8px;
-    }
-    .product-title {
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 6px;
-    }
-    .product-price {
-      color: #b91c1c;
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin: 8px 0;
-    }
-    .btn-add-to-cart {
-      background: #b91c1c;
-      color: white;
-      border: none;
-      width: 100%;
-      padding: 10px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .btn-add-to-cart:hover {
-      background: #8b1515;
-    }
-    .btn-out-of-stock {
-      background: #94a3b8;
-      color: white;
-      border: none;
-      width: 100%;
-      padding: 10px;
-      border-radius: 40px;
-      cursor: not-allowed;
-    }
-    .empty-state {
-      text-align: center;
-      padding: 60px 0;
-      background: white;
-      border-radius: 32px;
-    }
-    @media (max-width: 768px) {
-      .products-layout {
-        flex-direction: column;
-      }
-      .sidebar {
-        width: 100%;
-        position: static;
-      }
-      .filter-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .search-wrapper input {
-        width: 100%;
-      }
-    }
   </style>
 </head>
 <body>
@@ -272,51 +44,31 @@
 </header>
 
 <main>
-  <!-- Hero Banner ຄືເດີມເລັກນ້ອຍ -->
-  <section style="background: linear-gradient(105deg, #0a0f1c 0%, #1a1f2e 100%); padding: 50px 0; text-align: center; border-bottom: 4px solid #b91c1c;">
-    <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
-      <h2 style="color: white; font-size: 2rem;">ຈຳໜ່າຍສິນຄ້າ <span style="color: #ffd700;">ຄຸນນະພາບສູງ</span></h2>
-      <p style="color: #cbd5e1; margin-top: 12px;">ນຳເຂົ້າ ແລະ ຈຳໜ່າຍອຸປະກອນວິສະວະກຳຄົບວົງຈອນ ຈາກຜູ້ນຳທົ່ວໂລກ</p>
+  <section style="background: #fefaf8; padding: 60px 0;">
+    <div class="container">
+      <h2 class="section-title">ຈຳໜ່າຍສິນຄ້າ <span style="font-size:1.4rem;">| PRODUCTS</span></h2>
+      <p class="section-sub">ນຳເຂົ້າ ແລະ ຈຳໜ່າຍສິນຄ້າທີ່ຫຼາກຫຼາຍ ຕອບໂຈດທຸກຄວາມຕ້ອງການ</p>
+      <div class="services-grid" id="productsGrid"></div>
     </div>
   </section>
-
-  <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 24px;">
-    <div class="products-layout">
-      <!-- Sidebar: ໝວດໝູ່ ແລະ ແບຣນ -->
-      <aside class="sidebar">
-        <h3><i class="fas fa-list-ul"></i> ໝວດໝູ່</h3>
-        <ul class="category-tree" id="categoryTree"></ul>
-        <div class="brands-section">
-          <h4><i class="fas fa-trademark"></i> ແບຣນດັງ</h4>
-          <div id="brandsList"></div>
-        </div>
-      </aside>
-
-      <!-- ສ່ວນຫຼັກ: ຊອກຫາ + ສິນຄ້າ -->
-      <div class="main-content">
-        <div class="filter-bar">
-          <div class="search-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="ຄົ້ນຫາສິນຄ້າ... | Search product">
-          </div>
-          <div class="active-filter-badge" id="activeFilterBadge"></div>
-        </div>
-        <div id="productsGrid" class="products-grid"></div>
-      </div>
-    </div>
-  </div>
 </main>
 
-<!-- footer ແບບເດີມທີ່ທ່ານມີ (ຂ້ອຍຂໍຄັດມາໃຫ້ຄົບ) -->
+<!--- Modern Premium Footer — ພື້ນສີເດີມ (Dark Gradient), B-One Engineering ສີແດງ, ສີສະບາຍຕາ --->
 <footer style="background: linear-gradient(135deg, #0a0f1c 0%, #0b1323 100%); color: #e2e8f0; padding: 60px 0 30px; font-family: 'Inter', 'Noto Sans Lao', sans-serif; border-top: 1px solid rgba(255,255,255,0.05);">
   <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+    
+    <!-- ແຖວຫຼັກ 4 ຖັນ -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 50px;">
+      
+      <!-- ຖັນ 1: ໂລໂກ້ ສີແດງ + ຄຳຂວັນ -->
       <div>
         <div style="margin-bottom: 20px;">
           <span style="font-size: 28px; font-weight: 700; color: #b30000; letter-spacing: -0.5px;">B-One Engineering</span>
         </div>
         <p style="font-size: 14px; line-height: 1.6; color: #cbd5e0;">ວິສະວະກຳຄົບວົງຈອນ ທີ່ທ່ານໄວ້ໃຈ | Complete Engineering Solutions You Can Trust</p>
       </div>
+      
+      <!-- ຖັນ 2: ລິ້ງດ່ວນ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Quick Links</h3>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -327,6 +79,8 @@
           <li style="margin-bottom: 12px;"><a href="/contact" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">📞 Contact</a></li>
         </ul>
       </div>
+      
+      <!-- ຖັນ 3: ບໍລິການຫຼັກ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Key Services</h3>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -336,6 +90,8 @@
           <li style="margin-bottom: 12px; color: #cbd5e0;"><span style="color: #b30000;">▹</span> Training & Testing</li>
         </ul>
       </div>
+      
+      <!-- ຖັນ 4: ຂໍ້ມູນຕິດຕໍ່ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Contact Info</h3>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
@@ -347,19 +103,23 @@
           <span style="font-size: 14px; color: #cbd5e0;">+856 20 59478899</span>
         </div>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
-          <i class="fas fa-envelope" style="color: #b30000;"></i>
-          <a href="mailto:info@b-one-engineering.com" style="font-size: 14px; color: #cbd5e0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#b30000'" onmouseout="this.style.color='#cbd5e0'">info@b-one-engineering.com</a>
-        </div>
+      <i class="fas fa-envelope" style="color: #b30000;"></i>
+        <a href="mailto:info@b-one-engineering.com" style="font-size: 14px; color: #cbd5e0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#b30000'" onmouseout="this.style.color='#cbd5e0'">info@b-one-engineering.com</a>
+          </div>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
           <i class="fas fa-clock" style="color: #b30000;"></i>
           <span style="font-size: 14px; color: #cbd5e0;">Mon – Sun: 8:00 – 17:30</span>
         </div>
       </div>
     </div>
+    
+    <!-- ເສັ້ນຂີດຄັ້ນປະດັບ (ສີແດງ) -->
     <div style="height: 1px; background: linear-gradient(90deg, transparent, #b30000, #b30000, transparent); margin: 20px 0 25px;"></div>
+    
+    <!-- ແຖວລຸ່ມ: ລິຂະສິດ ແລະ ນະໂຍບາຍ -->
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 13px; color: #94a3b8;">
       <p>© 2026 B-One Engineering Sole Co., Ltd. All Rights Reserved. | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
-      <div style="display: flex; gap: 20px;">
+          <div style="display: flex; gap: 20px;">
         <span style="color: #94a3b8;">Privacy Policy</span>
         <span style="color: #94a3b8;">Terms of Service</span>
         <span style="color: #94a3b8;">Sitemap</span>
@@ -368,248 +128,46 @@
   </div>
 </footer>
 
+<!-- CSS ເພີ່ມເຕີມ (Hover ແລະ Responsive) -->
+<style>
+  footer a:hover {
+    color: #b30000 !important;
+    transform: translateX(2px);
+    transition: all 0.2s ease;
+  }
+  footer ul li a:hover {
+    color: #b30000 !important;
+    padding-left: 5px;
+  }
+  @media (max-width: 768px) {
+    footer div[style*="display: grid"] {
+      gap: 30px;
+      text-align: center;
+    }
+    footer div[style*="display: flex"]:last-child {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+</style>
+
 <a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 <div id="notification" class="notification"></div>
 
 <script>
-  // ຟັງຊັນທົ່ວໄປ (mobile menu, cart)
   const mobileBtn = document.getElementById('mobile-menu');
   mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
   
   function getCart() { return JSON.parse(localStorage.getItem('b_one_cart') || '[]'); }
   function saveCart(cart) { localStorage.setItem('b_one_cart', JSON.stringify(cart)); updateCartCount(); }
   function updateCartCount() { document.getElementById('cartCount').innerText = getCart().reduce((s,i)=>s+i.quantity,0); }
-  function showNotification(msg) { const n = document.getElementById('notification'); n.innerText = msg; n.style.display = 'block'; setTimeout(()=>n.style.display='none',2500); }
+  function showNotification(msg) { const n = document.getElementById('notification'); n.innerText = msg; n.style.display = 'block'; setTimeout(()=>n.style.display='none',2000); }
   updateCartCount();
 </script>
 
 <script type="module">
   import { db, collection, getDocs, query, where, auth, onAuthStateChanged } from '/firebase-config.js';
-
-  // --- Global state ---
-  let allProducts = [];
-  let categoriesData = [];        // { id, name, subcategories, order }
-  let brandsData = [];            // { id, name, logoUrl, order }
-  let activeCategory = null;      // ຊື່ໝວດຫຼັກ
-  let activeSubcategory = null;
-  let activeBrand = null;
-  let searchKeyword = '';
-
-  // DOM elements
-  const categoryTreeEl = document.getElementById('categoryTree');
-  const brandsListEl = document.getElementById('brandsList');
-  const productsGrid = document.getElementById('productsGrid');
-  const searchInput = document.getElementById('searchInput');
-  const activeFilterBadge = document.getElementById('activeFilterBadge');
-
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : (m === '<' ? '&lt;' : '&gt;'));
-  }
-
-  // --- ດຶງຂໍ້ມູນຈາກ Firestore ---
-  async function fetchCategories() {
-    const snap = await getDocs(collection(db, 'categories'));
-    categoriesData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    categoriesData.sort((a,b) => (a.order||0) - (b.order||0));
-  }
-  async function fetchBrands() {
-    const snap = await getDocs(collection(db, 'brands'));
-    brandsData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    brandsData.sort((a,b) => (a.order||0) - (b.order||0));
-  }
-  async function fetchProducts() {
-    const q = query(collection(db, 'products'), where('status', '==', 'active'));
-    const snap = await getDocs(q);
-    allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  }
-
-  // --- ສ້າງ Sidebar (ໝວດ ແລະ ແບຣນ) ---
-  function renderSidebar() {
-    if (!categoryTreeEl) return;
-    categoryTreeEl.innerHTML = '';
-    for (const cat of categoriesData) {
-      const li = document.createElement('li');
-      const mainDiv = document.createElement('div');
-      mainDiv.className = 'cat-main';
-      if (activeCategory === cat.name && !activeSubcategory) mainDiv.classList.add('active-cat');
-      mainDiv.innerHTML = `<span>${escapeHtml(cat.name)}</span> <i class="fas fa-chevron-down toggle-icon"></i>`;
-      
-      const subUl = document.createElement('ul');
-      subUl.className = 'subcat-list';
-      if (activeCategory === cat.name) subUl.classList.add('open');
-      
-      (cat.subcategories || []).forEach(sub => {
-        const subLi = document.createElement('li');
-        subLi.textContent = sub;
-        if (activeSubcategory === sub) subLi.classList.add('active-sub');
-        subLi.addEventListener('click', (e) => {
-          e.stopPropagation();
-          activeCategory = cat.name;
-          activeSubcategory = sub;
-          activeBrand = null;
-          searchKeyword = '';
-          searchInput.value = '';
-          updateActiveFilterBadge();
-          renderSidebar();
-          renderProducts();
-        });
-        subUl.appendChild(subLi);
-      });
-      
-      mainDiv.addEventListener('click', () => {
-        if (activeCategory === cat.name && !activeSubcategory) {
-          subUl.classList.toggle('open');
-        } else {
-          activeCategory = cat.name;
-          activeSubcategory = null;
-          activeBrand = null;
-          searchKeyword = '';
-          searchInput.value = '';
-          updateActiveFilterBadge();
-          renderSidebar();
-          renderProducts();
-        }
-      });
-      li.appendChild(mainDiv);
-      li.appendChild(subUl);
-      categoryTreeEl.appendChild(li);
-    }
-
-    // ແບຣນ
-    brandsListEl.innerHTML = '';
-    brandsData.forEach(b => {
-      const div = document.createElement('div');
-      div.className = 'brand-item';
-      if (activeBrand === b.name) div.classList.add('active-brand');
-      div.innerHTML = `<div class="brand-logo">${b.name.charAt(0)}</div><span>${escapeHtml(b.name)}</span>`;
-      div.addEventListener('click', () => {
-        activeBrand = b.name;
-        activeCategory = null;
-        activeSubcategory = null;
-        searchKeyword = '';
-        searchInput.value = '';
-        updateActiveFilterBadge();
-        renderSidebar();
-        renderProducts();
-      });
-      brandsListEl.appendChild(div);
-    });
-  }
-
-  function updateActiveFilterBadge() {
-    if (activeBrand) activeFilterBadge.innerHTML = `<i class="fas fa-filter"></i> ກຳລັງສະແດງ: ${activeBrand}`;
-    else if (activeSubcategory) activeFilterBadge.innerHTML = `<i class="fas fa-filter"></i> ກຳລັງສະແດງ: ${activeSubcategory}`;
-    else if (activeCategory) activeFilterBadge.innerHTML = `<i class="fas fa-filter"></i> ກຳລັງສະແດງ: ${activeCategory}`;
-    else activeFilterBadge.innerHTML = `<i class="fas fa-store"></i> ສິນຄ້າທັງໝົດ`;
-  }
-
-  // --- ສະແດງສິນຄ້າ ---
-  function renderProducts() {
-    let filtered = allProducts.filter(p => {
-      if (activeBrand && p.brand !== activeBrand) return false;
-      if (activeSubcategory && p.subcategory !== activeSubcategory) return false;
-      if (activeCategory && !activeSubcategory && p.category !== activeCategory) return false;
-      if (searchKeyword.trim()) {
-        const kw = searchKeyword.trim().toLowerCase();
-        return p.name.toLowerCase().includes(kw) || (p.category && p.category.toLowerCase().includes(kw)) || (p.subcategory && p.subcategory.toLowerCase().includes(kw));
-      }
-      return true;
-    });
-    if (filtered.length === 0) {
-      productsGrid.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h3>ບໍ່ພົບສິນຄ້າ</h3><p>ລອງປ່ຽນໝວດຫມູ່ ຫຼື ຄຳຄົ້ນຫາ</p></div>`;
-      return;
-    }
-    productsGrid.innerHTML = filtered.map(p => {
-      const stock = p.stock ?? 0;
-      let stockClass = 'stock-in', stockText = `ສະຕ໋ອກ: ${stock}`;
-      if (stock <= 0) { stockClass = 'stock-out'; stockText = 'ສິນຄ້າຫມົດ'; }
-      else if (stock <= 10) { stockClass = 'stock-low'; stockText = `ເຫຼືອ ${stock} ອັນ`; }
-      const buttonHtml = (stock > 0)
-        ? `<button class="btn-add-to-cart add-cart-btn" data-id="${p.id}" data-name="${escapeHtml(p.name)}" data-price="${p.price}" data-image="${p.image || ''}" data-stock="${stock}"><i class="fas fa-cart-plus"></i> ເພີ່ມໃສ່ກະຕ່າ</button>`
-        : `<button class="btn-out-of-stock" disabled><i class="fas fa-times-circle"></i> ສິນຄ້າຫມົດ</button>`;
-      return `
-        <div class="product-card">
-          <div class="product-img">
-            <img src="${p.image || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${escapeHtml(p.name)}" loading="lazy">
-          </div>
-          <div class="product-info">
-            <span class="product-category">${escapeHtml(p.subcategory || p.category || 'ທົ່ວໄປ')}</span>
-            <div class="product-title">${escapeHtml(p.name)}</div>
-            <div class="product-price">₭${(p.price || 0).toLocaleString()}</div>
-            <div class="stock-badge ${stockClass}"><i class="fas fa-boxes"></i> ${stockText}</div>
-            ${buttonHtml}
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    // ເພີ່ມ event ໃຫ້ປຸ່ມເພີ່ມສິນຄ້າໃສ່ກະຕ່າ
-    document.querySelectorAll('.add-cart-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.dataset.id;
-        const name = btn.dataset.name;
-        const price = parseInt(btn.dataset.price);
-        const image = btn.dataset.image;
-        const stockLimit = parseInt(btn.dataset.stock);
-        let cart = getCart();
-        const existing = cart.find(item => item.id === id);
-        const currentQty = existing ? existing.quantity : 0;
-        if (currentQty >= stockLimit) {
-          showNotification(`ສິນຄ້າ ${name} ມີສະຕ໋ອກເຫຼືອ ${stockLimit} ອັນ, ບໍ່ສາມາດເພີ່ມໄດ້ອີກ`);
-          return;
-        }
-        if (existing) existing.quantity++;
-        else cart.push({ id, name, price, image, quantity: 1, stock: stockLimit });
-        saveCart(cart);
-        showNotification(`ເພີ່ມ ${name} ໃສ່ກະຕ່າສຳເລັດ!`);
-      });
-    });
-  }
-
-  // --- ຟັງຊັນເລີ່ມຕົ້ນ ---
-  async function init() {
-    productsGrid.innerHTML = '<div style="text-align:center; padding:60px;"><i class="fas fa-spinner fa-pulse"></i> ກຳລັງໂຫຼດ...</div>';
-    try {
-      await Promise.all([fetchCategories(), fetchBrands(), fetchProducts()]);
-      
-      // Mock ຂໍ້ມູນຖ້າຍັງບໍ່ມີ (ສະເພາະຕອນທົດສອບ)
-      if (categoriesData.length === 0) {
-        categoriesData = [
-          { name: "ສາຍໄຟ", subcategories: ["ສາຍໄຟ THW", "ສາຍໄຟ VAF", "ສາຍໄຟ VCT"], order: 1 },
-          { name: "ສາຍສັນຍານ", subcategories: ["ສາຍໂທລະສັບ", "ສາຍເລນ (LAN)"], order: 2 },
-          { name: "ໂຄມໄຟ", subcategories: ["ໂຄມໄຟ LED"], order: 3 }
-        ];
-      }
-      if (brandsData.length === 0) {
-        brandsData = [{ name: "PHILIPS" }, { name: "Panasonic" }, { name: "B-ONE" }];
-      }
-      if (allProducts.length === 0) {
-        allProducts = [
-          { id: "mock1", name: "ສາຍໄຟ THW 2.5 sq.mm.", price: 185000, image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400", category: "ສາຍໄຟ", subcategory: "ສາຍໄຟ THW", brand: "B-ONE", stock: 50, status: "active" },
-          { id: "mock2", name: "ສາຍໄຟ VAF 1x2.5", price: 210000, image: "https://images.unsplash.com/photo-1581094288338-1c4b3a3e3b2c?w=400", category: "ສາຍໄຟ", subcategory: "ສາຍໄຟ VAF", brand: "B-ONE", stock: 32, status: "active" },
-          { id: "mock3", name: "ໂຄມໄຟ LED PHILIPS 18W", price: 185000, image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400", category: "ໂຄມໄຟ", subcategory: "ໂຄມໄຟ LED", brand: "PHILIPS", stock: 60, status: "active" }
-        ];
-      }
-    } catch (err) {
-      console.error(err);
-      productsGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><h3>ເກີດຂໍ້ຜິດພາດ</h3><p>ກະລຸນາລອງໃໝ່ພາຍຫຼັງ</p></div>';
-      return;
-    }
-    renderSidebar();
-    updateActiveFilterBadge();
-    renderProducts();
-  }
-
-  searchInput.addEventListener('input', (e) => {
-    searchKeyword = e.target.value;
-    activeCategory = null;
-    activeSubcategory = null;
-    activeBrand = null;
-    updateActiveFilterBadge();
-    renderSidebar();
-    renderProducts();
-  });
 
   onAuthStateChanged(auth, (user) => {
     const userDisplay = document.getElementById('userDisplay');
@@ -625,7 +183,69 @@
     }
   });
 
-  init();
+  async function loadProducts() {
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = '<div style="text-align:center;">ກຳລັງໂຫຼດ...</div>';
+    try {
+      const q = query(collection(db, 'products'), where('status', '==', 'active'));
+      const snap = await getDocs(q);
+      if (snap.empty) { grid.innerHTML = '<div>ຍັງບໍ່ມີສິນຄ້າ</div>'; return; }
+      grid.innerHTML = '';
+      snap.forEach(doc => {
+        const p = doc.data();
+        const stock = p.stock !== undefined ? p.stock : 0;
+        let stockClass = 'stock-out';
+        let stockText = 'ສິນຄ້າຫມົດ';
+        if (stock > 10) {
+          stockClass = 'stock-in';
+          stockText = `ສະຕ໋ອກ: ${stock} ອັນ`;
+        } else if (stock > 0 && stock <= 10) {
+          stockClass = 'stock-low';
+          stockText = `ສະຕ໋ອກ: ${stock} ອັນ (ເຫຼືອໜ້ອຍ)`;
+        } else {
+          stockClass = 'stock-out';
+          stockText = 'ສິນຄ້າຫມົດ';
+        }
+        const product = { id: doc.id, name: p.name, price: p.price, image: p.image || 'https://via.placeholder.com/300x200', category: p.category || 'ທົ່ວໄປ', stock: stock };
+        
+        grid.innerHTML += `
+          <div class="product-card" style="background:white; border-radius:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+            <div style="height:200px; overflow:hidden;"><img src="${product.image}" style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:20px; flex:1; display:flex; flex-direction:column;">
+              <h3 style="font-size:1.2rem;">${product.name}</h3>
+              <p style="color:#6c757d;">${product.category}</p>
+              <p style="color:#b91c1c; font-weight:700; font-size:1.2rem;">₭${product.price.toLocaleString()}</p>
+              <div class="stock-badge ${stockClass}"><i class="fas fa-boxes"></i> ${stockText}</div>
+              ${stock > 0 ? `<button class="btn-add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image}" data-stock="${product.stock}"><i class="fas fa-cart-plus"></i> ເພີ່ມໃສ່ກະຕ່າ</button>` : `<button class="btn-out-of-stock" disabled><i class="fas fa-times-circle"></i> ສິນຄ້າຫມົດ</button>`}
+            </div>
+          </div>
+        `;
+      });
+      document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const product = { 
+            id: btn.dataset.id, 
+            name: btn.dataset.name, 
+            price: parseInt(btn.dataset.price), 
+            image: btn.dataset.image,
+            stock: parseInt(btn.dataset.stock)
+          };
+          let cart = getCart();
+          const existing = cart.find(item => item.id === product.id);
+          const currentQtyInCart = existing ? existing.quantity : 0;
+          if (currentQtyInCart >= product.stock) {
+            showNotification(`ສິນຄ້າ ${product.name} ມີສະຕ໋ອກເຫຼືອພຽງ ${product.stock} ອັນ, ທ່ານຈຶ່ງບໍ່ສາມາດເພີ່ມໄດ້ອີກ`);
+            return;
+          }
+          if (existing) existing.quantity++;
+          else cart.push({ ...product, quantity: 1 });
+          saveCart(cart);
+          showNotification(`ເພີ່ມ ${product.name} ໃສ່ກະຕ່າສິນຄ້າ`);
+        });
+      });
+    } catch(e) { console.error(e); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
+  }
+  loadProducts();
 </script>
 </body>
 </html>
