@@ -149,7 +149,7 @@
     </div>
   </div>
 
- <div id="products" class="tab-content">
+<div id="products" class="tab-content">
     <h2>📦 ຈັດການສິນຄ້າ <button class="btn btn-primary" onclick="openProductModal()"><i class="fas fa-plus"></i> ເພີ່ມສິນຄ້າ</button></h2>
     <div class="table-wrapper">
       <table id="productTable">
@@ -157,6 +157,8 @@
           <tr>
             <th>ຊື່</th>
             <th>ລາຄາ</th>
+            <th>ໝວດໝູ່</th>
+            <th>ແບຣນ</th>
             <th>ສະຕ໋ອກ</th>
             <th>ລາຍລະອຽດ</th>
             <th>ສະຖານະ</th>
@@ -255,8 +257,12 @@
         <input type="number" id="prodPrice" required>
       </div>
       <div class="form-group">
-        <label>ໝວດ</label>
-        <input type="text" id="prodCategory">
+        <label>ໝວດໝູ່</label>
+        <input type="text" id="prodCategory" placeholder="ປ້ອນໝວດໝູ່...">
+      </div>
+      <div class="form-group">
+        <label>ແບຣນ</label>
+        <input type="text" id="prodBrand" placeholder="ປ້ອນຊື່ແບຣນ...">
       </div>
       <div class="form-group">
         <label>ລາຍລະອຽດ / ລາຍການ</label>
@@ -474,28 +480,30 @@
     const snap = await getDocs(collection(db, 'products')); 
     snap.forEach(d => { 
       const p = d.data(); 
-      // ຕັດຂໍ້ຄວາມລາຍລະອຽດບໍ່ໃຫ້ຍາວເກີນໄປ ຖ້າຍາວເກີນ 40 ຕົວອັກສອນ
       const shortDesc = p.description ? (p.description.length > 40 ? p.description.substring(0, 40) + '...' : p.description) : '-';
       
       tbody.innerHTML += `<tr>
         <td data-label="ຊື່">${escapeHtml(p.name || '-')}</td>
         <td data-label="ລາຄາ">${p.price || 0}</td>
+        <td data-label="ໝວດໝູ່">${escapeHtml(p.category || '-')}</td>
+        <td data-label="ແບຣນ">${escapeHtml(p.brand || '-')}</td>
         <td data-label="ສະຕ໋ອກ">${p.stock || 0}</td>
         <td data-label="ລາຍລະອຽດ">${escapeHtml(shortDesc)}</td>
         <td data-label="ສະຖານະ">${p.status || 'active'}</td>
         <td data-label="ຈັດການ" class="btn-group">
-          <button class="btn btn-warning btn-sm" onclick="editProduct('${d.id}','${escapeHtml(p.name||'')}','${p.price||0}','${escapeHtml(p.category||'')}','${escapeHtml(p.image||'')}','${p.status||'active'}','${p.stock||0}', '${escapeHtml(p.description||'')}')"><i class="fas fa-edit"></i> ແກ້</button> 
+          <button class="btn btn-warning btn-sm" onclick="editProduct('${d.id}','${escapeHtml(p.name||'')}','${p.price||0}','${escapeHtml(p.category||'')}','${escapeHtml(p.brand||'')}','${escapeHtml(p.image||'')}','${p.status||'active'}','${p.stock||0}', '${escapeHtml(p.description||'')}')"><i class="fas fa-edit"></i> ແກ້</button> 
           <button class="btn btn-danger btn-sm" onclick="deleteItem('products','${d.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
         </td>
       </tr>`; 
     }); 
   }
 
-  window.editProduct = (id, n, p, c, i, s, stock, desc) => { 
+  window.editProduct = (id, n, p, c, b, i, s, stock, desc) => { 
     document.getElementById('prodId').value = id; 
     document.getElementById('prodName').value = n; 
     document.getElementById('prodPrice').value = p; 
     document.getElementById('prodCategory').value = c; 
+    document.getElementById('prodBrand').value = b; 
     document.getElementById('prodImage').value = i; 
     document.getElementById('prodStatus').value = s; 
     document.getElementById('prodStock').value = stock; 
@@ -509,6 +517,7 @@
     document.getElementById('prodId').value = ''; 
     document.getElementById('prodStock').value = 0; 
     document.getElementById('prodDesc').value = ''; 
+    document.getElementById('prodBrand').value = ''; 
     document.getElementById('productModalTitle').innerText = 'ເພີ່ມສິນຄ້າ'; 
     document.getElementById('productModal').classList.add('show'); 
   }; 
@@ -520,6 +529,7 @@
       name: document.getElementById('prodName').value, 
       price: parseFloat(document.getElementById('prodPrice').value) || 0, 
       category: document.getElementById('prodCategory').value, 
+      brand: document.getElementById('prodBrand').value, 
       description: document.getElementById('prodDesc').value, 
       image: document.getElementById('prodImage').value, 
       stock: parseInt(document.getElementById('prodStock').value) || 0, 
