@@ -668,24 +668,32 @@
     };
 
     window.exportReportExcel = () => {
-      if(!window.reportData || !window.reportData.filtered.length){ alert('ກະລຸນາໂຫຼດລາຍງານກ່ອນ'); return; }
-      const rows = [['ວັນທີ', 'ຈຳນວນຄຳສັ່ງ', 'ຍອດຂາຍລວມ (ກີບ)']]; const map = new Map();
-      window.reportData.filtered.forEach(o => { const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10); map.set(day, { count: (map.get(day)?.count||0)+1, total: (map.get(day)?.total||0)+(o.totalAmount||0) }); });
-      for(let [day,val] of map) rows.push([day, val.count, val.total]);
-      rows.push(['ລວມທັງໝົດ', window.reportData.totalOrders, window.reportData.totalSales]);
-      const ws = XLSX.utils.aoa_to_sheet(rows); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'SalesReport'); XLSX.writeFile(wb, `sales_report_${window.reportData.start}_to_${window.reportData.end}.xlsx`);
-    };
+    if(!window.reportData || !window.reportData.filtered.length){ alert('ກະລຸນາໂຫຼດລາຍງານກ່ອນ'); return; }
+    const rows = [['ວັນທີ', 'ຈຳນວນຄຳສັ່ງ', 'ຍອດຂາຍລວມ (ກີບ)']];
+    const map = new Map();
+    window.reportData.filtered.forEach(o => { const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10); map.set(day, { count: (map.get(day)?.count||0)+1, total: (map.get(day)?.total||0)+(o.totalAmount||0) }); });
+    for(let [day,val] of map) rows.push([day, val.count, val.total]);
+    rows.push(['ລວມທັງໝົດ', window.reportData.totalOrders, window.reportData.totalSales]);
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'SalesReport');
+    XLSX.writeFile(wb, `sales_report_${window.reportData.start}_to_${window.reportData.end}.xlsx`);
+  };
 
-    window.exportReportPDF = () => {
-      if (!window.reportData || !window.reportData.filtered.length) { alert('ກະລຸນາໂຫຼດລາຍງານກ່ອນ'); return; }
-      const startDate = window.reportData.start, endDate = window.reportData.end, generatedDate = new Date().toLocaleDateString('lo-LA');
-      const dataMap = new Map(); window.reportData.filtered.forEach(order => { if (order.createdAt?.seconds) { const day = new Date(order.createdAt.seconds * 1000).toISOString().slice(0, 10); const cur = dataMap.get(day) || { count: 0, total: 0 }; cur.count++; cur.total += (order.totalAmount || 0); dataMap.set(day, cur); } });
-      const sortedDays = Array.from(dataMap.keys()).sort(); let totalOrders = 0, totalSales = 0, tableRows = '';
-      for (const day of sortedDays) { const row = dataMap.get(day); totalOrders += row.count; totalSales += row.total; tableRows += `<tr><td style="padding:8px;border:1px solid #ddd;">${day}</td><td>${row.count}</td><td>${row.total.toLocaleString()} ກີບ</td></tr>`; }
-      tableRows += `<tr style="font-weight:bold;"><td>ລວມທັງໝົດ</td><td>${totalOrders}</td><td>${totalSales.toLocaleString()} ກີບ</td></tr>`;
-      const printHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>ລາຍງານການຂາຍ</title><style>body{font-family:sans-serif;padding:30px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ddd;padding:8px;}</style></head><body><h2>B-One Engineering - ລາຍງານການຂາຍ ${startDate} ຫາ ${endDate}</h2><table><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody></table><p>ສ້າງເມື່ອ ${generatedDate}</p></body></html>`;
-      const win = window.open(); win.document.write(printHtml); win.document.close(); win.focus();
-    };
+  window.exportReportPDF = () => {
+    if (!window.reportData || !window.reportData.filtered.length) { alert('ກະລຸນາໂຫຼດລາຍງານກ່ອນ'); return; }
+    const startDate = window.reportData.start, endDate = window.reportData.end, generatedDate = new Date().toLocaleDateString('lo-LA');
+    const dataMap = new Map();
+    window.reportData.filtered.forEach(order => {
+      if (order.createdAt?.seconds) {
+        const day = new Date(order.createdAt.seconds * 1000).toISOString().slice(0, 10);
+        const cur = dataMap.get(day) || { count: 0, total: 0 };
+        cur.count++; cur.total += (order.totalAmount || 0);
+        dataMap.set(day, cur);
+      }
+    });
+
+
 
     // ========== ຈັດການສິນຄ້າ ==========
     async function loadProducts() { 
