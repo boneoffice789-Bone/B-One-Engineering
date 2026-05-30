@@ -1065,3 +1065,33 @@ footer {
   .slider-next, .next-btn { right: 10px !important; }
   .slider-dots { bottom: 5px !important; }
 }
+/* =============================================
+   ແກ້ໄຂບັນຫາຂໍ້ຄວາມລົ້ນຕາຕະລາງ ແລະ ໃຫ້ຂຶ້ນແຖວໃໝ່ອັດຕະໂນມັດ
+   ============================================= */
+table th, 
+table td {
+  white-space: normal !important;    /* ປ່ຽນຈາກ nowrap ເປັນ normal ເພື່ອໃຫ້ຂໍ້ຄວາມຂຶ້ນແຖວໃໝ່ */
+  word-break: break-word !important; /* ຖ້າມີຄຳສັບຍາວຫຼາຍ ຫຼື ມີລິ້ງ URL ຍາວໆ ໃຫ້ຕັດຄຳລົງແຖວໃໝ່ */
+  vertical-align: top;               /* ຈັດໃຫ້ຂໍ້ຄວາມຢູ່ດ້ານເທິງຂອງຫ້ອງຕາຕະລາງເພື່ອຄວາມສວຍງາມ */
+}
+
+/* ກຳນົດຄວາມກວ້າງສູງສຸດຂອງຫ້ອງຕາຕະລາງທີ່ເກັບຂໍ້ຄວາມຍາວໆ */
+table td:nth-child(3), 
+table td:nth-child(6) { 
+  max-width: 280px;                  /* ບັງຄັບຄວາມກວ້າງສູງສຸດ ບໍ່ໃຫ້ກວ້າງເກີນໄປ */
+}
+
+/* ສໍາລັບໜ້າຈໍມືຖື (Mobile Layout) */
+@media (max-width: 768px) {
+  .table-wrapper {
+    overflow-x: auto;                /* ໃຫ້ສາມາດໃຊ້ນິ້ວເລື້ອນ ຊ້າຍ-ຂວາ ເບິ່ງຕາຕະລາງໄດ້ */
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    min-width: 750px;                /* ບັງຄັບຂະໜາດຕາຕະລາງຂັ້ນຕ່ຳໃນມືຖື ເພື່ອບໍ່ໃຫ້ຂໍ້ມູນບີບກັນເກີນໄປ */
+  }
+  table td {
+    padding: 8px 10px !important;
+    font-size: 13px !important;      /* ຫຍໍ້ຂະໜາດຟອນຕ໌ລົງເລັກນ້ອຍໃນມືຖື */
+  }
+}
