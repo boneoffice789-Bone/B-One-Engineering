@@ -311,18 +311,27 @@
         <label>ລາຄາ</label>
         <input type="number" id="prodPrice" required>
       </div>
+      
       <div class="form-group">
         <label>ໝວດໝູ່</label>
-        <select id="prodCategory" required>
-          <option value="">-- ເລືອກໝວດໝູ່ --</option>
-        </select>
+        <div style="display: flex; gap: 8px;">
+          <select id="prodCategory" required style="flex: 1;">
+            <option value="">-- ເລືອກໝວດໝູ່ --</option>
+          </select>
+          <button type="button" class="btn btn-primary btn-sm" onclick="openCategoryModal()" style="padding: 0 12px;"><i class="fas fa-plus"></i></button>
+        </div>
       </div>
+
       <div class="form-group">
         <label>ແບຣນ</label>
-        <select id="prodBrand" required>
-          <option value="">-- ເລືອກແບຣນ --</option>
-        </select>
+        <div style="display: flex; gap: 8px;">
+          <select id="prodBrand" required style="flex: 1;">
+            <option value="">-- ເລືອກແບຣນ --</option>
+          </select>
+          <button type="button" class="btn btn-primary btn-sm" onclick="openBrandModal()" style="padding: 0 12px;"><i class="fas fa-plus"></i></button>
+        </div>
       </div>
+
       <div class="form-group">
         <label>ລາຍລະອຽດ / ລາຍການ</label>
         <textarea id="prodDesc" rows="3" placeholder="ປ້ອນລາຍລະອຽດ ຫຼື ລາຍການຍ່ອຍຂອງສິນຄ້າ..."></textarea>
@@ -387,7 +396,7 @@
 
   let salesChart, statusChart;
   
-  // Maps ໄວ້ເກັບຊື່ເພື່ອເອົາມາສະແດງແທນ ID ໃນຕາຕະລາງສິນຄ້າ
+  // Maps ໄວ້ເກັບຂໍ້ມູນຄວາມສັມພັນລະຫວ່າງ ID ແລະ ຊື່
   let categoriesMap = new Map();
   let brandsMap = new Map();
 
@@ -532,7 +541,6 @@
   };
 
   async function loadAll() {
-    // ຜູກລະບົບ Form Submit ຂອງໝວດໝູ່ ແລະ ແບຣນ
     const catForm = document.getElementById('categoryForm');
     if (catForm) {
       catForm.removeEventListener('submit', handleCategorySubmit);
@@ -544,12 +552,10 @@
       brForm.addEventListener('submit', handleBrandSubmit);
     }
     
-    // ດຶງຂໍ້ມູນພື້ນຖານເພື່ອມາທຳຄວາມເຂົ້າໃຈກັບ ID
+    // ດຶງຂໍ້ມູນພື້ນຖານທັງໝົດກ່ອນ
     await window.loadCategoriesAdmin();
     await window.loadBrandsAdmin();
-    await window.loadBrandsForSelect();
 
-    // ໂຫຼດຂໍ້ມູນສ່ວນອື່ນໆ
     await Promise.all([
       loadProducts(), 
       loadServices(), 
@@ -568,7 +574,6 @@
     if(!tbody) return; 
     tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">ກຳລັງໂຫຼດສິນຄ້າ...</td></tr>'; 
     
-    // ໂຫຼດ Maps ກ່ອນເພື່ອປ້ອງກັນຊື່ບໍ່ຖືກຕ້ອງ
     const [catsSnap, brandsSnap] = await Promise.all([
       getDocs(collection(db, 'categories')),
       getDocs(collection(db, 'brands'))
@@ -576,7 +581,7 @@
     categoriesMap.clear();
     catsSnap.forEach(d => categoriesMap.set(d.id, d.data().name));
     brandsMap.clear();
-    brandsSnap.forEach(d => brandsMap.set(d.id, d.data().name || d.data().brandName));
+    brandsSnap.forEach(d => brandsMap.set(d.id, d.data().name));
 
     const snap = await getDocs(collection(db, 'products')); 
     tbody.innerHTML = '';
@@ -585,7 +590,6 @@
       const p = d.data(); 
       const shortDesc = p.description ? (p.description.length > 40 ? p.description.substring(0, 40) + '...' : p.description) : '-';
       
-      // ດຶງຊື່ຂໍ້ຄວາມມາສະແດງ, ຖ້າເປັນຂໍ້ມູນເກົ່າທີ່ເກັບເປັນ string ຢູ່ແລ້ວ ກໍໃຫ້ໃຊ້ຄ່າເດີມ
       const catDisplay = categoriesMap.get(p.category) || p.category || '-';
       const brandDisplay = brandsMap.get(p.brand) || p.brand || '-';
 
@@ -636,8 +640,8 @@
     const data = { 
       name: document.getElementById('prodName').value, 
       price: parseFloat(document.getElementById('prodPrice').value) || 0, 
-      category: document.getElementById('prodCategory').value, // ເກັບເປັນ ID ແລ້ວ
-      brand: document.getElementById('prodBrand').value,       // ເກັບເປັນ ID ແລ້ວ
+      category: document.getElementById('prodCategory').value, // ເກັບຄ່າເປັນ ID ຢ່າງຖືກຕ້ອງ
+      brand: document.getElementById('prodBrand').value,       // ເກັບຄ່າເປັນ ID ຢ່າງຖືກຕ້ອງ
       description: document.getElementById('prodDesc').value, 
       image: document.getElementById('prodImage').value, 
       stock: parseInt(document.getElementById('prodStock').value) || 0, 
@@ -733,7 +737,7 @@
     loadPortfolio();
   });
 
-  // --- ຈັດການລະບົບແບຣນໃໝ່ (ເປີດ Modal, ເພີ່ມ, ແກ້ໄຂ, ລຶບ) ---
+  // --- ຈັດການລະບົບແບຣນ (ເພີ່ມ/ແກ້ໄຂ/ລຶບ) ---
   window.openBrandModal = function() {
     const modal = document.getElementById('brandModal');
     if (modal) modal.classList.add('show');
@@ -766,7 +770,6 @@
       }
       window.closeBrandModal();
       await window.loadBrandsAdmin();
-      await window.loadBrandsForSelect();
     } catch (err) {
       alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message);
     }
@@ -776,11 +779,16 @@
     try {
       const snapshot = await getDocs(collection(db, 'brands'));
       const tbody = document.querySelector('#brandTable tbody');
-      if (tbody) {
-        tbody.innerHTML = '';
-        snapshot.forEach(docSnap => {
-          const data = docSnap.data();
-          const bName = data.name || data.brandName || '-';
+      const prodSelect = document.getElementById('prodBrand');
+      
+      if (tbody) tbody.innerHTML = '';
+      if (prodSelect) prodSelect.innerHTML = '<option value="">-- ເລືອກແບຣນ --</option>';
+      
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const bName = data.name || '-';
+        
+        if (tbody) {
           tbody.innerHTML += `
             <tr>
               <td>${escapeHtml(bName)}</td>
@@ -791,8 +799,11 @@
               </td>
             </tr>
           `;
-        });
-      }
+        }
+        if (prodSelect) {
+          prodSelect.innerHTML += `<option value="${docSnap.id}">${escapeHtml(bName)}</option>`;
+        }
+      });
     } catch (error) {
       console.error(error);
     }
@@ -812,7 +823,6 @@
         await deleteDoc(doc(db, 'brands', id));
         alert('ລຶບແບຣນສຳເລັດ');
         await window.loadBrandsAdmin();
-        await window.loadBrandsForSelect();
       } catch (error) {
         alert(error.message);
       }
@@ -1068,7 +1078,6 @@
     if (modal) modal.classList.remove('show');
   };
 
-  // --- ຟັງຊັນບັນທຶກໝວດໝູ່ ---
   async function handleCategorySubmit(e) {
     e.preventDefault();
     const id = document.getElementById('categoryId').value;
@@ -1090,7 +1099,6 @@
     }
   }
 
-  // --- ໂຫຼດໝວດໝູ່ເຂົ້າຕາຕະລາງ ແລະ Dropdown ສິນຄ້າ ---
   window.loadCategoriesAdmin = async function() {
     try {
       const snapshot = await getDocs(collection(db, 'categories'));
@@ -1117,24 +1125,6 @@
           prodSelect.innerHTML += `<option value="${docSnap.id}">${escapeHtml(data.name)}</option>`;
         }
       });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // --- ດຶງຂໍ້ມູນແບຣນເຂົ້າ Dropdown ສິນຄ້າ ---
-  window.loadBrandsForSelect = async function() {
-    try {
-      const snapshot = await getDocs(collection(db, 'brands'));
-      const brandSelect = document.getElementById('prodBrand');
-      if (brandSelect) {
-        brandSelect.innerHTML = '<option value="">-- ເລືອກແບຣນ --</option>';
-        snapshot.forEach(docSnap => {
-          const data = docSnap.data();
-          const brandName = data.name || data.brandName || '-'; 
-          brandSelect.innerHTML += `<option value="${docSnap.id}">${escapeHtml(brandName)}</option>`;
-        });
-      }
     } catch (error) {
       console.error(error);
     }
