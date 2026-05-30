@@ -117,7 +117,7 @@
         </div>
         <div class="footer-contact">
           <h4>ຂໍ້ມູນຕິດຕໍ່</h4>
-          <p><i class="fas fa-map-marker-alt"></i> ບ້ານໂ%ຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ</p>
+          <p><i class="fas fa-map-marker-alt"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ</p>
           <p><i class="fas fa-phone-alt"></i> +856 20 5947 8899</p>
           <p><i class="fas fa-envelope"></i> info@b-one-engineering.com</p>
         </div>
@@ -133,11 +133,11 @@
   <div id="notificationToast" class="notification-toast"></div>
 
 <script type="module">
-  import { db, collection, getDocs, doc, getDoc } from '/firebase-config.js';
+  import { db, collection, getDocs } from '/firebase-config.js';
 
   let allProducts = [];
   let categoriesMap = new Map();
-  let productBrandsMap = new Map(); // 👑 ປ່ຽນມາເກັບ Map ຂອງແບຣນສິນຄ້າ (product_brands) ແທນ
+  let productBrandsMap = new Map(); // 👑 ປ່ຽນມາເກັບ Map ຂອງແບຣນສິນຄ້າ (product_brands) ແທນ brands ຕົວແທນ
 
   // Cart Management Functions
   function getCart() {
@@ -166,12 +166,12 @@
     }, 3000);
   }
 
-  // 👑 ໂຫຼດ Options ໃສ່ FilterDropdowns ໂດຍດຶງຈາກ 'product_brands'
+  // 👑 ໂຫຼດ Options ໃສ່ Filter Dropdowns ໂດຍດຶງຈາກ 'product_brands'
   async function loadFilterOptions() {
     try {
       const [catSnap, brandSnap] = await Promise.all([
         getDocs(collection(db, 'categories')),
-        getDocs(collection(db, 'product_brands')) // 👑 ດຶງຂໍ້ມູນຈາກ collection ໃຫມ່ຢ່າງຖືກຕ້ອງ
+        getDocs(collection(db, 'product_brands')) // 👑 ດຶງຂໍ້ມູນຈາກ collection ແບຣນສິນຄ້າແຍກ
       ]);
 
       categoriesMap.clear();
@@ -187,7 +187,7 @@
         catFilter.innerHTML += `<option value="${id}">${name}</option>`;
       });
 
-      // 👑 ຕື່ມ Option ແບຣນສິນຄ້າ (ເກັບຄ່າ value ເປັນ ID ເພື່ອປຽບທຽບໃຫ້ກົງກັນ)
+      // 👑 ຕື່ມ Option ແບຣນສິນຄ້າ (Value ເກັບເປັນ ID ເພື່ອເອົາໄປ Filter ໃຫ້ກົງກັບໜ້າ Admin)
       const brandFilter = document.getElementById('brandFilter');
       brandFilter.innerHTML = '<option value="all">ທັງໝົດ</option>';
       productBrandsMap.forEach((name, id) => {
@@ -232,7 +232,7 @@
     let html = '';
     productsList.forEach(p => {
       const catName = categoriesMap.get(p.category) || p.category || 'ທົ່ວໄປ';
-      const brandName = productBrandsMap.get(p.brand) || p.brand || '-'; // 👑 ສະແດງຊື່ແບຣນຈາກ product_brands ຢ່າງຖືກຕ້ອງ
+      const brandName = productBrandsMap.get(p.brand) || p.brand || '-'; // 👑 ສະແດງຊື່ແບຣນສິນຄ້າຈາກ product_brands Map
       const isOutOfStock = !p.stock || p.stock <= 0;
       
       html += `
@@ -299,7 +299,7 @@
     });
   }
 
-  // 👑 ລະບົບປະມວນຜົນ Filter ປຽບທຽບດ້ວຍ ID ໝວດໝູ່ ແລະ ID ແບຣນສິນຄ້າ
+  // 👑 ລະບົບປະມວນຜົນ Filter ປຽບທຽບດ້ວຍ ID ໝວດໝູ່ ແລະ ID ແບຣນສິນຄ້າ (product_brands)
   function applyFilters() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const selectedCat = document.getElementById('categoryFilter').value;
@@ -309,7 +309,7 @@
       const matchesSearch = p.name.toLowerCase().includes(searchTerm) || (p.description && p.description.toLowerCase().includes(searchTerm));
       // ປຽບທຽບ ID ໝວດໝູ່
       const matchesCat = selectedCat === 'all' || p.category === selectedCat;
-      // 👑 ປຽບທຽບ ID ແບຣນສິນຄ້າ (product_brands ID)
+      // 👑 ປຽບທຽບ ID ແບຣນສິນຄ້າຢ່າງຖືກຕ້ອງ
       const matchesBrand = selectedBrand === 'all' || p.brand === selectedBrand;
 
       return matchesSearch && matchesCat && matchesBrand;
