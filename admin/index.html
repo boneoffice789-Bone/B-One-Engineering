@@ -98,7 +98,7 @@
   <div class="logo"><h2>⚙️ B-One Admin</h2><small>Engineering Solutions</small></div>
   <a onclick="showTab('dashboard')" class="active" id="nav-dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a>
   <a onclick="showTab('salesReport')" id="nav-salesReport"><i class="fas fa-chart-line"></i> ລາຍງານການຂາຍ</a>
-  <a onclick="showTab('products')" id="nav-products"><i class="fas fa-box"></i> ສິນຄ້າ</a>
+  <a onclick="showTab('products')" id="nav-products"><i class="fas fa-box"></i> ສինຄ້າ</a>
   <a onclick="showTab('categories')" id="nav-categories"><i class="fas fa-folder"></i> ໝວດໝູ່</a>
   <a onclick="showTab('services')" id="nav-services"><i class="fas fa-tools"></i> ບໍລິການ</a>
   <a onclick="showTab('portfolio')" id="nav-portfolio"><i class="fas fa-trophy"></i> ຜົນງານ</a>
@@ -311,27 +311,24 @@
         <label>ລາຄາ</label>
         <input type="number" id="prodPrice" required>
       </div>
-      
       <div class="form-group">
         <label>ໝວດໝູ່</label>
         <div style="display: flex; gap: 8px;">
           <select id="prodCategory" required style="flex: 1;">
             <option value="">-- ເລືອກໝວດໝູ່ --</option>
           </select>
-          <button type="button" class="btn btn-primary btn-sm" onclick="openCategoryModal()" style="padding: 0 12px;"><i class="fas fa-plus"></i></button>
+          <button type="button" class="btn btn-primary" onclick="openCategoryModal()" style="padding: 0 15px;"><i class="fas fa-plus"></i></button>
         </div>
       </div>
-
       <div class="form-group">
         <label>ແບຣນ</label>
         <div style="display: flex; gap: 8px;">
           <select id="prodBrand" required style="flex: 1;">
             <option value="">-- ເລືອກແບຣນ --</option>
           </select>
-          <button type="button" class="btn btn-primary btn-sm" onclick="openBrandModal()" style="padding: 0 12px;"><i class="fas fa-plus"></i></button>
+          <button type="button" class="btn btn-primary" onclick="openBrandModal()" style="padding: 0 15px;"><i class="fas fa-plus"></i></button>
         </div>
       </div>
-
       <div class="form-group">
         <label>ລາຍລະອຽດ / ລາຍການ</label>
         <textarea id="prodDesc" rows="3" placeholder="ປ້ອນລາຍລະອຽດ ຫຼື ລາຍການຍ່ອຍຂອງສິນຄ້າ..."></textarea>
@@ -395,8 +392,6 @@
   import { auth, db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, onAuthStateChanged, signOut, getDoc, query, orderBy, where } from '/firebase-config.js';
 
   let salesChart, statusChart;
-  
-  // Maps ໄວ້ເກັບຂໍ້ມູນຄວາມສັມພັນລະຫວ່າງ ID ແລະ ຊື່
   let categoriesMap = new Map();
   let brandsMap = new Map();
 
@@ -552,7 +547,6 @@
       brForm.addEventListener('submit', handleBrandSubmit);
     }
     
-    // ດຶງຂໍ້ມູນພື້ນຖານທັງໝົດກ່ອນ
     await window.loadCategoriesAdmin();
     await window.loadBrandsAdmin();
 
@@ -640,8 +634,8 @@
     const data = { 
       name: document.getElementById('prodName').value, 
       price: parseFloat(document.getElementById('prodPrice').value) || 0, 
-      category: document.getElementById('prodCategory').value, // ເກັບຄ່າເປັນ ID ຢ່າງຖືກຕ້ອງ
-      brand: document.getElementById('prodBrand').value,       // ເກັບຄ່າເປັນ ID ຢ່າງຖືກຕ້ອງ
+      category: document.getElementById('prodCategory').value, 
+      brand: document.getElementById('prodBrand').value, 
       description: document.getElementById('prodDesc').value, 
       image: document.getElementById('prodImage').value, 
       stock: parseInt(document.getElementById('prodStock').value) || 0, 
@@ -737,7 +731,7 @@
     loadPortfolio();
   });
 
-  // --- ຈັດການລະບົບແບຣນ (ເພີ່ມ/ແກ້ໄຂ/ລຶບ) ---
+  // --- ຈັດການລະບົບແບຣນ ---
   window.openBrandModal = function() {
     const modal = document.getElementById('brandModal');
     if (modal) modal.classList.add('show');
@@ -757,15 +751,14 @@
     const id = document.getElementById('brandId').value;
     const name = document.getElementById('brandName').value.trim();
     const category = document.getElementById('brandCategory').value.trim();
-    
     if (!name) return alert('ກະລຸນາປ້ອນຊື່ແບຣນ');
 
     try {
       if (id) {
-        await updateDoc(doc(db, 'brands', id), { name: name, category: category, updatedAt: serverTimestamp() });
+        await updateDoc(doc(db, 'brands', id), { name: name, category: category });
         alert('ແກ້ໄຂແບຣນສຳເລັດ');
       } else {
-        await addDoc(collection(db, 'brands'), { name: name, category: category, status: 'active', createdAt: serverTimestamp() });
+        await addDoc(collection(db, 'brands'), { name: name, category: category, createdAt: serverTimestamp() });
         alert('ເພີ່ມແບຣນໃໝ່ສຳເລັດ');
       }
       window.closeBrandModal();
@@ -787,7 +780,6 @@
       snapshot.forEach(docSnap => {
         const data = docSnap.data();
         const bName = data.name || '-';
-        
         if (tbody) {
           tbody.innerHTML += `
             <tr>
@@ -829,241 +821,7 @@
     }
   };
 
-  // Contacts
-  async function loadContacts() {
-    const tbody = document.querySelector('#contactTable tbody');
-    if(!tbody) return;
-    tbody.innerHTML = '';
-    const snap = await getDocs(query(collection(db, 'contact_messages'), orderBy('createdAt', 'desc')));
-    snap.forEach(d => {
-      const c = d.data();
-      const date = c.createdAt ? new Date(c.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-';
-      tbody.innerHTML += `<tr><td data-label="ຊື່">${escapeHtml(c.fullName || '-')}</td><td data-label="ເບີໂທ">${escapeHtml(c.phone || '-')}</td><td data-label="ຂໍ້ຄວາມ">${escapeHtml((c.message || '').substring(0,50))}...</td><td data-label="ສະຖານະ"><span class="badge ${c.status==='new'?'badge-new':'badge-pending'}">${c.status||'new'}</span></td><td data-label="ວັນທີ">${date}</td><td data-label="ຈັດການ" class="btn-group"><button class="btn btn-success btn-sm" onclick="updateStatus('contact_messages','${d.id}','status','read')">ອ່ານແລ້ວ</button> <button class="btn btn-danger btn-sm" onclick="deleteItem('contact_messages','${d.id}')">ລຶບ</button></td></tr>`;
-    });
-    if(snap.empty) tbody.innerHTML = '<tr><td colspan="6">ຍັງບໍ່ມີຂໍ້ຄວາມ</td></tr>';
-  }
-
-  // Orders
-  async function loadOrders() {
-    const tbody = document.querySelector('#orderTable tbody');
-    if(!tbody) return;
-    tbody.innerHTML = '';
-    const snap = await getDocs(query(collection(db, 'orders'), orderBy('createdAt', 'desc')));
-    if(snap.empty) { tbody.innerHTML = '<tr><td colspan="8">ຍັງບໍ່ມີຄຳສັ່ງ</td></tr>'; return; }
-    snap.forEach(d => {
-      const o = d.data();
-      const date = o.createdAt ? new Date(o.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-';
-      let paymentHtml = '', slipHtml = '', verifyHtml = '';
-      if (o.paymentMethod === 'transfer') {
-        if (o.paymentStatus === 'waiting_verification') { paymentHtml = '<span class="badge" style="background:#fff3cd;">ລໍຖ້າກວດສອບ</span>'; verifyHtml = `<button class="btn btn-success btn-sm" onclick="verifyPayment('${d.id}')">ຢັ້ງຢືນ</button>`; }
-        else if (o.paymentStatus === 'verified') paymentHtml = '<span class="badge" style="background:#d4edda;">ຢັ້ງຢືນແລ້ວ</span>';
-        else paymentHtml = '<span class="badge">ບໍ່ມີຂໍ້ມູນ</span>';
-        slipHtml = o.slipUrl ? `<a href="${escapeHtml(o.slipUrl)}" target="_blank">ເບິ່ງສະລິບ</a>` : '-';
-      } else { paymentHtml = '<span class="badge">ເງິນສົດ</span>'; slipHtml = '-'; }
-      tbody.innerHTML += `<tr><td data-label="ເລກຄຳສັ່ງ">#${d.id.slice(0,8)}</td><td data-label="ລູກຄ້າ">${escapeHtml(o.customerInfo?.name || '-')}</td><td data-label="ລວມ">₭${(o.totalAmount||0).toLocaleString()}</td><td data-label="ສະຖານະສົ່ງມອບ"><span class="badge ${o.orderStatus==='delivered'?'badge-new':'badge-pending'}">${o.orderStatus||'pending'}</span></td><td data-label="ສະຖານະການຈ່າຍ">${paymentHtml}</td><td data-label="ສະລິບ">${slipHtml}</td><td data-label="ວັນທີ">${date}</td><td data-label="ຈັດການ" class="btn-group"><select onchange="updateStatus('orders','${d.id}','orderStatus',this.value)"><option value="">ປ່ຽນສະຖານະ</option><option value="confirmed">ຢືນຢັນ</option><option value="processing">ກຳລັງດຳເນີນ</option><option value="shipped">ຈັດສົ່ງ</option><option value="delivered">ສຳເລັດ</option><option value="cancelled">ຍົກເລີກ</option></select> ${verifyHtml} <button class="btn btn-danger btn-sm" onclick="deleteItem('orders','${d.id}')">ລຶບ</button></td></tr>`;
-    });
-  }
-  window.verifyPayment = async(orderId) => {
-    if(!confirm('ຢືນຢັນການຊຳລະ?')) return;
-    try { await updateDoc(doc(db,'orders',orderId), { paymentStatus:'verified', updatedAt:serverTimestamp() }); alert('ສຳເລັດ'); loadOrders(); }
-    catch(e){ alert('ຜິດພາດ: '+e.message); }
-  };
-
-  // Users
-  async function loadUsers() {
-    const tbody = document.querySelector('#userTable tbody');
-    if(!tbody) return;
-    tbody.innerHTML = '';
-    const snap = await getDocs(collection(db, 'users'));
-    snap.forEach(d => {
-      const u = d.data();
-      tbody.innerHTML += `<tr><td data-label="ຊື່">${escapeHtml(u.displayName || '-')}</td><td data-label="ອີເມວ">${escapeHtml(u.email || '-')}</td><td data-label="ສິດ"><span class="badge ${u.role==='admin'?'badge-new':'badge-pending'}">${u.role||'customer'}</span></td><td data-label="ສະຖານະ">${u.status || 'active'}</td><td data-label="ຈັດການ" class="btn-group"><button class="btn btn-warning btn-sm" onclick="toggleRole('${d.id}','${u.role||'customer'}')">ປ່ຽນສິດ</button> <button class="btn btn-danger btn-sm" onclick="deleteItem('users','${d.id}')">ລຶບ</button></td></tr>`;
-    });
-    if(snap.empty) tbody.innerHTML = '<tr><td colspan="5">ຍັງບໍ່ມີຜູ້ໃຊ້</td></tr>';
-  }
-  window.toggleRole = async(uid,role) => {
-    const newRole = role==='admin'?'customer':'admin';
-    if(confirm(`ປ່ຽນສິດຈາກ ${role} ເປັນ ${newRole}?`)) {
-      await updateDoc(doc(db,'users',uid), { role: newRole });
-      loadUsers();
-    }
-  };
-
-  // ================== NEWS ==================
-  async function loadNews() {
-    const tbody = document.querySelector('#newsTable tbody');
-    if (!tbody) return;
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">ກຳລັງໂຫຼດ...</td></tr>';
-    try {
-      const q = query(collection(db, 'news'), orderBy('createdAt', 'desc'));
-      const snap = await getDocs(q);
-      if (snap.empty) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">ຍັງບໍ່ມີຂ່າວ</td></tr>';
-        return;
-      }
-      let rows = '';
-      snap.forEach(doc => {
-        const n = doc.data();
-        const date = n.createdAt?.seconds ? new Date(n.createdAt.seconds * 1000).toLocaleDateString('lo-LA') : '-';
-        rows += `
-          <tr>
-            <td data-label="ຫົວຂໍ້">${escapeHtml(n.title || '-')}</td>
-            <td data-label="ໝວດ">${escapeHtml(n.category || '-')}</td>
-            <td data-label="ວັນທີ">${date}</td>
-            <td data-label="ສະຖານະ"><span class="badge ${n.status === 'active' ? 'badge-new' : 'badge-pending'}">${n.status === 'active' ? 'ເປີດ' : 'ປິດ'}</span></td>
-            <td data-label="ຈັດການ" class="btn-group">
-              <button class="btn btn-warning btn-sm" onclick="editNews('${doc.id}','${escapeHtml(n.title || '')}','${escapeHtml(n.category || '')}','${escapeHtml(n.content || '')}','${n.status || 'active'}')"><i class="fas fa-edit"></i> ແກ້</button>
-              <button class="btn btn-danger btn-sm" onclick="deleteItem('news','${doc.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
-            </td>
-          </tr>
-        `;
-      });
-      tbody.innerHTML = rows;
-    } catch (err) {
-      console.error(err);
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">ເກີດຂໍ້ຜິດພາດ</td></tr>';
-    }
-  }
-
-  window.editNews = (id, title, category, content, status) => {
-    document.getElementById('newsId').value = id;
-    document.getElementById('newsTitle').value = title;
-    document.getElementById('newsCategory').value = category;
-    document.getElementById('newsContent').value = content;
-    document.getElementById('newsStatus').value = status;
-    document.getElementById('newsModalTitle').innerText = 'ແກ້ໄຂຂ່າວ';
-    document.getElementById('newsModal').classList.add('show');
-  };
-
-  window.openNewsModal = () => {
-    document.getElementById('newsForm').reset();
-    document.getElementById('newsId').value = '';
-    document.getElementById('newsModalTitle').innerText = 'ເພີ່ມຂ່າວ';
-    document.getElementById('newsModal').classList.add('show');
-  };
-
-  document.getElementById('newsForm').addEventListener('submit', async(e) => {
-    e.preventDefault();
-    const id = document.getElementById('newsId').value;
-    const data = {
-      title: document.getElementById('newsTitle').value,
-      category: document.getElementById('newsCategory').value,
-      content: document.getElementById('newsContent').value,
-      status: document.getElementById('newsStatus').value,
-      updatedAt: serverTimestamp()
-    };
-    if (id) {
-      await updateDoc(doc(db, 'news', id), data);
-    } else {
-      data.createdAt = serverTimestamp();
-      await addDoc(collection(db, 'news'), data);
-    }
-    closeModal('newsModal');
-    loadNews();
-  });
-
-  // ================== SLIDERS ==================
-  async function loadSliders() {
-    const tbody = document.querySelector('#sliderTable tbody');
-    if (!tbody) return;
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">ກຳລັງໂຫຼດ...</td></tr>';
-    try {
-      const q = query(collection(db, 'sliders'), orderBy('createdAt', 'desc'));
-      const snap = await getDocs(q);
-      if (snap.empty) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">ຍັງບໍ່ມີຂໍ້ມູນສະໄລເດີ</td></tr>';
-        return;
-      }
-      let rows = '';
-      snap.forEach(doc => {
-        const s = doc.data();
-        rows += `
-          <tr>
-            <td data-label="ຫົວຂໍ້">${escapeHtml(s.title || '-')}</td>
-            <td data-label="ລິ້ງ"><a href="${escapeHtml(s.linkUrl || '#')}" target="_blank">${escapeHtml(s.linkUrl || '-')}</a></td>
-            <td data-label="ຮູບ">${s.image ? `<a href="${escapeHtml(s.image)}" target="_blank">ເບິ່ງຮູບ</a>` : '-'}</td>
-            <td data-label="ສະຖານະ"><span class="badge ${s.status === 'active' ? 'badge-new' : 'badge-pending'}">${s.status === 'active' ? 'ເປີດ' : 'ປິດ'}</span></td>
-            <td data-label="ຈັດການ" class="btn-group">
-              <button class="btn btn-warning btn-sm" onclick="editSlider('${doc.id}','${escapeHtml(s.title || '')}','${escapeHtml(s.linkUrl || '')}','${escapeHtml(s.image || '')}','${s.status || 'active'}')"><i class="fas fa-edit"></i> ແກ້</button>
-              <button class="btn btn-danger btn-sm" onclick="deleteItem('sliders','${doc.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
-            </td>
-          </tr>
-        `;
-      });
-      tbody.innerHTML = rows;
-    } catch (err) {
-      console.error(err);
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">ເກີດຂໍ້ຜິດພາດ</td></tr>';
-    }
-  }
-
-  window.editSlider = (id, title, link, image, status) => {
-    document.getElementById('sliderId').value = id;
-    document.getElementById('sliderTitle').value = title;
-    document.getElementById('sliderLink').value = link;
-    document.getElementById('sliderImage').value = image;
-    document.getElementById('sliderStatus').value = status;
-    document.getElementById('sliderModalTitle').innerText = 'ແກ້ໄຂສະໄລເດີ';
-    document.getElementById('sliderModal').classList.add('show');
-  };
-
-  window.openSliderModal = () => {
-    document.getElementById('sliderForm').reset();
-    document.getElementById('sliderId').value = '';
-    document.getElementById('sliderModalTitle').innerText = 'ເພີ່ມສະໄລເດີ';
-    document.getElementById('sliderModal').classList.add('show');
-  };
-
-  document.getElementById('sliderForm').addEventListener('submit', async(e) => {
-    e.preventDefault();
-    const id = document.getElementById('sliderId').value;
-    const data = {
-      title: document.getElementById('sliderTitle').value,
-      linkUrl: document.getElementById('sliderLink').value,
-      image: document.getElementById('sliderImage').value,
-      status: document.getElementById('sliderStatus').value,
-      updatedAt: serverTimestamp()
-    };
-    if (id) {
-      await updateDoc(doc(db, 'sliders', id), data);
-    } else {
-      data.createdAt = serverTimestamp();
-      await addDoc(collection(db, 'sliders'), data);
-    }
-    closeModal('sliderModal');
-    loadSliders();
-  });
-
-  // General functions
-  window.closeModal = (id) => document.getElementById(id).classList.remove('show');
-  window.deleteItem = async(col,id) => { if(confirm('ລຶບ?')){ await deleteDoc(doc(db,col,id)); loadAll(); loadDashboard(); } };
-  window.updateStatus = async(col,id,field,val) => { if(field==='orderStatus' && !val) return; await updateDoc(doc(db,col,id), { [field]: val||field, updatedAt:serverTimestamp() }); loadAll(); };
-  window.logout = async() => { await signOut(auth); window.location.href='/login'; };
-
-  // Image upload
-  window.uploadProductImage = () => { uploadImageToImgBB((url)=>document.getElementById('prodImage').value=url); };
-  window.uploadServiceImage = () => { uploadImageToImgBB((url)=>document.getElementById('svcImage').value=url); };
-  window.uploadPortfolioImage = () => { uploadImageToImgBB((url)=>document.getElementById('portImage').value=url); };
-  window.uploadBrandLogo = () => { uploadImageToImgBB((url)=>document.getElementById('brandLogo').value=url); };
-  window.uploadSliderImage = () => { uploadImageToImgBB((url)=>document.getElementById('sliderImage').value=url); };
-
-  function uploadImageToImgBB(callback){
-    const input = document.createElement('input'); input.type='file'; input.accept='image/*';
-    input.onchange = async(e) => {
-      const file = e.target.files[0]; if(!file) return;
-      const fd = new FormData(); fd.append('image',file);
-      try{
-        const res = await fetch('https://api.imgbb.com/1/upload?key=85d8acf7f765f021b6c76dfae3650f53', { method:'POST', body:fd });
-        const data = await res.json();
-        if(data.success){ callback(data.data.url); alert('ອັບໂຫຼດສຳເລັດ'); } else alert('ອັບໂຫຼດບໍ່ສຳເລັດ');
-      }catch(err){ alert('ເກີດຂໍ້ຜິດພາດ'); }
-    };
-    input.click();
-  }
-
-  document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('show'); }));
-
-  // --- ຈັດການ Modal ໝວດໝູ່ ---
+  // --- ຈັດການລະບົບໝວດໝູ່ ---
   window.openCategoryModal = function() {
     const modal = document.getElementById('categoryModal');
     if (modal) modal.classList.add('show');
@@ -1148,6 +906,62 @@
       }
     }
   };
+
+  // Contacts, Orders, Users, News, Sliders (ຄືເກົ່າ)
+  async function loadContacts() {
+    const tbody = document.querySelector('#contactTable tbody'); if(!tbody) return; tbody.innerHTML = '';
+    const snap = await getDocs(query(collection(db, 'contact_messages'), orderBy('createdAt', 'desc')));
+    snap.forEach(d => { const c = d.data(); const date = c.createdAt ? new Date(c.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-'; tbody.innerHTML += `<tr><td>${escapeHtml(c.fullName || '-')}</td><td>${escapeHtml(c.phone || '-')}</td><td>${escapeHtml((c.message || '').substring(0,50))}...</td><td><span class="badge ${c.status==='new'?'badge-new':'badge-pending'}">${c.status||'new'}</span></td><td>${date}</td><td><button class="btn btn-success btn-sm" onclick="updateStatus('contact_messages','${d.id}','status','read')">ອ່ານແລ້ວ</button> <button class="btn btn-danger btn-sm" onclick="deleteItem('contact_messages','${d.id}')">ລຶບ</button></td></tr>`; });
+  }
+  async function loadOrders() {
+    const tbody = document.querySelector('#orderTable tbody'); if(!tbody) return; tbody.innerHTML = '';
+    const snap = await getDocs(query(collection(db, 'orders'), orderBy('createdAt', 'desc')));
+    snap.forEach(d => { const o = d.data(); const date = o.createdAt ? new Date(o.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-'; let paymentHtml = o.paymentMethod === 'transfer' ? (o.paymentStatus === 'waiting_verification' ? `<button class="btn btn-success btn-sm" onclick="verifyPayment('${d.id}')">ຢັ້ງຢືນ</button>` : 'ຢັ້ງຢືນແລ້ວ') : 'ເງິນສົດ'; tbody.innerHTML += `<tr><td>#${d.id.slice(0,8)}</td><td>${escapeHtml(o.customerInfo?.name || '-')}</td><td>₭${(o.totalAmount||0).toLocaleString()}</td><td>${o.orderStatus||'pending'}</td><td>${paymentHtml}</td><td>${o.slipUrl?`<a href="${o.slipUrl}" target="_blank">ເບິ່ງ</a>` : '-'}</td><td>${date}</td><td><select onchange="updateStatus('orders','${d.id}','orderStatus',this.value)"><option value="">ປ່ຽນສະຖານະ</option><option value="delivered">ສຳເລັດ</option><option value="cancelled">ຍົກເລີກ</option></select></td></tr>`; });
+  }
+  window.verifyPayment = async(orderId) => { await updateDoc(doc(db,'orders',orderId), { paymentStatus:'verified' }); loadOrders(); };
+  async function loadUsers() {
+    const tbody = document.querySelector('#userTable tbody'); if(!tbody) return; tbody.innerHTML = '';
+    const snap = await getDocs(collection(db, 'users'));
+    snap.forEach(d => { const u = d.data(); tbody.innerHTML += `<tr><td>${escapeHtml(u.displayName || '-')}</td><td>${escapeHtml(u.email || '-')}</td><td>${u.role||'customer'}</td><td>${u.status || 'active'}</td><td><button class="btn btn-warning btn-sm" onclick="toggleRole('${d.id}','${u.role||'customer'}')">ປ່ຽນສິດ</button></td></tr>`; });
+  }
+  window.toggleRole = async(uid,role) => { await updateDoc(doc(db,'users',uid), { role: role==='admin'?'customer':'admin' }); loadUsers(); };
+  async function loadNews() {
+    const tbody = document.querySelector('#newsTable tbody'); if(!tbody) return; tbody.innerHTML = '';
+    const snap = await getDocs(collection(db, 'news'));
+    snap.forEach(d => { const n = d.data(); tbody.innerHTML += `<tr><td>${escapeHtml(n.title)}</td><td>${n.category}</td><td>-</td><td>${n.status}</td><td><button class="btn btn-danger btn-sm" onclick="deleteItem('news','${d.id}')">ລຶບ</button></td></tr>`; });
+  }
+  async function loadSliders() {
+    const tbody = document.querySelector('#sliderTable tbody'); if(!tbody) return; tbody.innerHTML = '';
+    const snap = await getDocs(collection(db, 'sliders'));
+    snap.forEach(d => { const s = d.data(); tbody.innerHTML += `<tr><td>${escapeHtml(s.title)}</td><td>${s.linkUrl}</td><td><a href="${s.image}" target="_blank">ເບິ່ງ</a></td><td>${s.status}</td><td><button class="btn btn-danger btn-sm" onclick="deleteItem('sliders','${d.id}')">ລຶບ</button></td></tr>`; });
+  }
+
+  window.closeModal = (id) => document.getElementById(id).classList.remove('show');
+  window.deleteItem = async(col,id) => { if(confirm('ລຶບ?')){ await deleteDoc(doc(db,col,id)); loadAll(); } };
+  window.updateStatus = async(col,id,field,val) => { if(!val) return; await updateDoc(doc(db,col,id), { [field]: val }); loadAll(); };
+  window.logout = async() => { await signOut(auth); window.location.href='/login'; };
+
+  window.uploadProductImage = () => { uploadImageToImgBB((url)=>document.getElementById('prodImage').value=url); };
+  window.uploadServiceImage = () => { uploadImageToImgBB((url)=>document.getElementById('svcImage').value=url); };
+  window.uploadPortfolioImage = () => { uploadImageToImgBB((url)=>document.getElementById('portImage').value=url); };
+  window.uploadBrandLogo = () => { uploadImageToImgBB((url)=>document.getElementById('brandLogo').value=url); };
+  window.uploadSliderImage = () => { uploadImageToImgBB((url)=>document.getElementById('sliderImage').value=url); };
+
+  function uploadImageToImgBB(callback){
+    const input = document.createElement('input'); input.type='file'; input.accept='image/*';
+    input.onchange = async(e) => {
+      const file = e.target.files[0]; if(!file) return;
+      const fd = new FormData(); fd.append('image',file);
+      try{
+        const res = await fetch('https://api.imgbb.com/1/upload?key=85d8acf7f765f021b6c76dfae3650f53', { method:'POST', body:fd });
+        const data = await res.json();
+        if(data.success){ callback(data.data.url); alert('ອັບໂຫຼດສຳເລັດ'); }
+      }catch(err){ alert('ເກີດຂໍ້ຜິດພາດ'); }
+    };
+    input.click();
+  }
+
+  document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('show'); }));
 
   document.addEventListener('DOMContentLoaded', () => {
     loadAll();
