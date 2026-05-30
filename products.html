@@ -263,25 +263,39 @@
 
   // Load filter options (categories and brands)
   async function loadFilterOptions() {
-    try {
-      const catsSnap = await getDocs(collection(db, 'categories'));
-      catsSnap.forEach(doc => { categoriesMap.set(doc.id, doc.data().name); });
-      const brandsSnap = await getDocs(collection(db, 'brands'));
-      brandsSnap.forEach(doc => { brandsMap.set(doc.id, doc.data().name); });
-      
-      const categorySelect = document.getElementById('categoryFilter');
-      const brandSelect = document.getElementById('brandFilter');
-      categorySelect.innerHTML = '<option value="all">ທຸກໝວດໝູ່</option>';
-      brandSelect.innerHTML = '<option value="all">ທຸກແບຣນ</option>';
-      
-      categoriesMap.forEach((name, id) => {
-        categorySelect.innerHTML += `<option value="${id}">${name}</option>`;
-      });
-      brandsMap.forEach((name, id) => {
-        brandSelect.innerHTML += `<option value="${id}">${name}</option>`;
-      });
-    } catch(e) { console.error(e); }
+  try {
+    // 1. ດຶງຂໍ້ມູນໝວດໝູ່
+    const categorySelect = document.getElementById('categoryFilter');
+    const catSnapshot = await getDocs(collection(db, 'categories'));
+    
+    // ເລີ່ມຕົ້ນດ້ວຍການລ້າງຄ່າເກົ່າ ແລ້ວໃສ່ຄ່າ Default ເຂົ້າໄປ
+    categorySelect.innerHTML = '<option value="all">ທຸກໝວດໝູ່</option>';
+    catSnapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      categorySelect.innerHTML += `<option value="${data.name}">${data.name}</option>`;
+    });
+
+    // 2. ດຶງຂໍ້ມູນແບຣນ
+    const brandSelect = document.getElementById('brandFilter');
+    const brandSnapshot = await getDocs(collection(db, 'brands'));
+    
+    brandSelect.innerHTML = '<option value="all">ທຸກແບຣນ</option>';
+    brandSnapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      const brandName = data.name || data.brandName; 
+      brandSelect.innerHTML += `<option value="${brandName}">${brandName}</option>`;
+    });
+
+  } catch (error) {
+    console.error("Error loading filters: ", error);
   }
+}
+
+// ເອີ້ນໃຊ້ຟັງຊັນນີ້ເມື່ອໜ້າ products.html ໂຫຼດສຳເລັດ
+document.addEventListener('DOMContentLoaded', () => {
+  loadFilterOptions();
+  // ... ເອີ້ນໃຊ້ loadProducts() ຂອງທ່ານ ...
+});
 
   async function loadProducts() {
     const grid = document.getElementById('productsGrid');
