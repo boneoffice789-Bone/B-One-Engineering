@@ -98,13 +98,13 @@
   <div class="logo"><h2>⚙️ B-One Admin</h2><small>Engineering Solutions</small></div>
   <a onclick="showTab('dashboard')" class="active" id="nav-dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a>
   <a onclick="showTab('salesReport')" id="nav-salesReport"><i class="fas fa-chart-line"></i> ລາຍງານການຂາຍ</a>
-  <a onclick="showTab('products')" id="nav-products"><i class="fas fa-box"></i> ສինຄ້າ</a>
+  <a onclick="showTab('products')" id="nav-products"><i class="fas fa-box"></i> ສິນຄ້າ</a>
   <a onclick="showTab('categories')" id="nav-categories"><i class="fas fa-folder"></i> ໝວດໝູ່</a>
   <a onclick="showTab('services')" id="nav-services"><i class="fas fa-tools"></i> ບໍລິການ</a>
   <a onclick="showTab('portfolio')" id="nav-portfolio"><i class="fas fa-trophy"></i> ຜົນງານ</a>
   <a onclick="showTab('brands')" id="nav-brands"><i class="fas fa-tag"></i> ແບຣນ</a>
   <a onclick="showTab('contacts')" id="nav-contacts"><i class="fas fa-envelope"></i> ຂໍ້ຄວາມ</a>
-  <a onclick="showTab('orders')" id="nav-orders"><i class="fas fa-shopping-cart"></i> ຄຳສັ່ງຊື້</a>
+  <a onclick="showTab('orders')" id="nav-orders"><i class="fas fa-shopping-cart"></i> คမ္ສັ່ງຊື້</a>
   <a onclick="showTab('users')" id="nav-users"><i class="fas fa-users"></i> ຜູ້ໃຊ້</a>
   <a onclick="showTab('news')" id="nav-news"><i class="fas fa-newspaper"></i> ຂ່າວ</a>
   <a onclick="showTab('sliders')" id="nav-sliders"><i class="fas fa-image"></i> ສະໄລເດີ</a>
@@ -158,7 +158,7 @@
             <th>ລາຄາ</th>
             <th>ໝວດໝູ່</th>
             <th>ແບຣນ</th>
-            <th>ສະຕ໋ອກ</th>
+            <th>...</th>
             <th>ລາຍລະອຽດ</th>
             <th>ສະຖານະ</th>
             <th>ຈັດການ</th>
@@ -175,12 +175,7 @@
     </h2>
     <div class="table-wrapper">
       <table id="categoryTable">
-        <thead>
-          <tr>
-            <th>ຊື່ໝວດໝູ່</th>
-            <th>ຈັດການ</th>
-          </tr>
-        </thead>
+        <thead><tr><th>ຊື່ໝວດໝູ່</th><th>ຈັດການ</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -200,13 +195,7 @@
     <h2>🏷️ ຈັດການແບຣນ <button class="btn btn-primary" onclick="openBrandModal()"><i class="fas fa-plus"></i> ເພີ່ມແບຣນ</button></h2>
     <div class="table-wrapper">
       <table id="brandTable">
-        <thead>
-          <tr>
-            <th>ຊື່ແບຣນ</th>
-            <th>ໝວດ</th>
-            <th>ຈັດການ</th>
-          </tr>
-        </thead>
+        <thead><tr><th>ຊື່ແບຣນ</th><th>ໝວດ</th><th>ຈັດການ</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -311,27 +300,30 @@
         <label>ລາຄາ</label>
         <input type="number" id="prodPrice" required>
       </div>
+      
       <div class="form-group">
         <label>ໝວດໝູ່</label>
         <div style="display: flex; gap: 8px;">
           <select id="prodCategory" required style="flex: 1;">
             <option value="">-- ເລືອກໝວດໝູ່ --</option>
           </select>
-          <button type="button" class="btn btn-primary" onclick="openCategoryModal()" style="padding: 0 15px;"><i class="fas fa-plus"></i></button>
+          <button type="button" class="btn btn-primary" onclick="window.openCategoryModal()" style="padding: 0 15px;"><i class="fas fa-plus"></i></button>
         </div>
       </div>
+
       <div class="form-group">
         <label>ແບຣນ</label>
         <div style="display: flex; gap: 8px;">
           <select id="prodBrand" required style="flex: 1;">
             <option value="">-- ເລືອກແບຣນ --</option>
           </select>
-          <button type="button" class="btn btn-primary" onclick="openBrandModal()" style="padding: 0 15px;"><i class="fas fa-plus"></i></button>
+          <button type="button" class="btn btn-primary" onclick="window.openBrandModal()" style="padding: 0 15px;"><i class="fas fa-plus"></i></button>
         </div>
       </div>
+
       <div class="form-group">
         <label>ລາຍລະອຽດ / ລາຍການ</label>
-        <textarea id="prodDesc" rows="3" placeholder="ປ້ອນລາຍລະອຽດ ຫຼື ລາຍການຍ່ອຍຂອງສິນຄ້າ..."></textarea>
+        <textarea id="prodDesc" rows="3" placeholder="ປ້ອນລາຍລະອຽດ..."></textarea>
       </div>
       <div class="form-group">
         <label>ຮູບ URL</label>
@@ -409,9 +401,7 @@
     if (!user) { window.location.href = '/login'; return; }
     const snap = await getDoc(doc(db, 'users', user.uid));
     if (!snap.exists() || (snap.data().role !== 'admin' && snap.data().role !== 'staff')) {
-      alert('ບໍ່ມີສິດເຂົ້າເຖິງ!');
-      window.location.href = '/login';
-      return;
+      alert('ບໍ່ມີສິດເຂົ້າເຖິງ!'); window.location.href = '/login'; return;
     }
     loadDashboard();
     loadAll();
@@ -480,20 +470,16 @@
     filteredOrders.forEach(o => {
       const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10);
       const cur = reportMap.get(day) || { count:0, total:0 };
-      cur.count++;
-      cur.total += o.totalAmount || 0;
+      cur.count++; cur.total += o.totalAmount || 0;
       reportMap.set(day, cur);
     });
     const sortedDays = Array.from(reportMap.keys()).sort();
-    let totalOrders = 0, totalSales = 0;
-    let html = '';
+    let totalOrders = 0, totalSales = 0; let html = '';
     for(let day of sortedDays){
-      const row = reportMap.get(day);
-      totalOrders += row.count;
-      totalSales += row.total;
-      html += `<tr><td data-label="ວັນທີ">${day}</td><td data-label="ຈຳນວນຄຳສັ່ງ">${row.count}</td><td data-label="ຍອດຂາຍລວມ">${row.total.toLocaleString()} ກີບ</td></tr>`;
+      const row = reportMap.get(day); totalOrders += row.count; totalSales += row.total;
+      html += `<tr><td>${day}</td><td>${row.count}</td><td>${row.total.toLocaleString()} ກີບ</td></tr>`;
     }
-    html += `<tr style="background:#f0f0f0; font-weight:bold;"><td data-label="ວັນທີ">ລວມທັງໝົດ</td><td data-label="ຈຳນວນຄຳສັ່ງ">${totalOrders}</td><td data-label="ຍອດຂາຍລວມ">${totalSales.toLocaleString()} ກີບ</td></tr>`;
+    html += `<tr style="background:#f0f0f0; font-weight:bold;"><td>ລວມທັງໝົດ</td><td>${totalOrders}</td><td>${totalSales.toLocaleString()} ກີບ</td></tr>`;
     tbody.innerHTML = html || '<tr><td colspan="3">ບໍ່ມີຂໍ້ມູນ</td></tr>';
     window.reportData = { filtered: filteredOrders, totalOrders, totalSales, start, end };
   };
@@ -505,10 +491,8 @@
     window.reportData.filtered.forEach(o => { const day = new Date(o.createdAt.seconds*1000).toISOString().slice(0,10); map.set(day, { count: (map.get(day)?.count||0)+1, total: (map.get(day)?.total||0)+(o.totalAmount||0) }); });
     for(let [day,val] of map) rows.push([day, val.count, val.total]);
     rows.push(['ລວມທັງໝົດ', window.reportData.totalOrders, window.reportData.totalSales]);
-    const ws = XLSX.utils.aoa_to_sheet(rows);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'SalesReport');
-    XLSX.writeFile(wb, `sales_report_${window.reportData.start}_to_${window.reportData.end}.xlsx`);
+    const ws = XLSX.utils.aoa_to_sheet(rows); const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'SalesReport'); XLSX.writeFile(wb, `sales_report_${window.reportData.start}_to_${window.reportData.end}.xlsx`);
   };
 
   window.exportReportPDF = () => {
@@ -519,19 +503,17 @@
       if (order.createdAt?.seconds) {
         const day = new Date(order.createdAt.seconds * 1000).toISOString().slice(0, 10);
         const cur = dataMap.get(day) || { count: 0, total: 0 };
-        cur.count++; cur.total += (order.totalAmount || 0);
-        dataMap.set(day, cur);
+        cur.count++; cur.total += (order.totalAmount || 0); dataMap.set(day, cur);
       }
     });
     const sortedDays = Array.from(dataMap.keys()).sort();
     let totalOrders = 0, totalSales = 0, tableRows = '';
     for (const day of sortedDays) {
-      const row = dataMap.get(day);
-      totalOrders += row.count; totalSales += row.total;
+      const row = dataMap.get(day); totalOrders += row.count; totalSales += row.total;
       tableRows += `<tr><td style="padding:10px;border:1px solid #ddd;text-align:center;">${day}</td><td style="padding:10px;border:1px solid #ddd;text-align:center;">${row.count}</td><td style="padding:10px;border:1px solid #ddd;text-align:right;">${row.total.toLocaleString()} ກີບ</td></tr>`;
     }
     tableRows += `<tr style="font-weight:bold;background:#f0f0f0;"><td style="padding:10px;border:1px solid #ddd;text-align:center;">ລວມທັງໝົດ</td><td style="padding:10px;border:1px solid #ddd;text-align:center;">${totalOrders}</td><td style="padding:10px;border:1px solid #ddd;text-align:right;">${totalSales.toLocaleString()} ກີບ</td></tr>`;
-    const printHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>ລາຍງານການຂາຍ | B-One Engineering</title><style>body{font-family:'Noto Sans Lao',sans-serif;padding:30px;} .header{text-align:center;border-bottom:2px solid #b30000;} h1{color:#b30000;} table{width:100%;border-collapse:collapse;margin-top:15px;} th{background:#b30000;color:white;padding:12px;} td{padding:10px;border:1px solid #ddd;} .footer{margin-top:30px;text-align:center;font-size:10px;}</style></head><body><div class="header"><h1>B-One Engineering</h1><p>ລາຍງານການຂາຍ ${startDate} ຫາ ${endDate}</p></div><table><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody></table><div class="footer">© 2026 B-One Engineering — ສ້າງເມື່ອ ${generatedDate}</div><div style="text-align:center;margin-top:20px;"><button onclick=\"window.print()\">ພິມ</button></div></body></html>`;
+    const printHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>ລາຍງານການຂາຍ | B-One Engineering</title><style>body{font-family:'Noto Sans Lao',sans-serif;padding:30px;} .header{text-align:center;border-bottom:2px solid #b30000;} h1{color:#b30000;} table{width:100%;border-collapse:collapse;margin-top:15px;} th{background:#b30000;color:white;padding:12px;} td{padding:10px;border:1px solid #ddd;} .footer{margin-top:30px;text-align:center;font-size:10px;}</style></head><body><div class="header"><h1>B-One Engineering</h1><p>ລາຍງານການຂາຍ ${startDate} ຫາ ${endDate}</p></div><table><thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead><tbody>${tableRows}</tbody></table><div class="footer">© 2026 B-One Engineering — ສ້າງເມື່ອ ${generatedDate}</div><div style="text-align:center;margin-top:20px;"><button onclick="window.print()">ພິມ</button></div></body></html>`;
     const win = window.open(); win.document.write(printHtml); win.document.close(); win.focus();
   };
 
@@ -551,51 +533,36 @@
     await window.loadBrandsAdmin();
 
     await Promise.all([
-      loadProducts(), 
-      loadServices(), 
-      loadPortfolio(), 
-      loadContacts(), 
-      loadOrders(), 
-      loadUsers(), 
-      loadNews(), 
-      loadSliders()
+      loadProducts(), loadServices(), loadPortfolio(), loadContacts(), loadOrders(), loadUsers(), loadNews(), loadSliders()
     ]);
   }
   
   // Products
   async function loadProducts() { 
-    const tbody = document.querySelector('#productTable tbody'); 
-    if(!tbody) return; 
+    const tbody = document.querySelector('#productTable tbody'); if(!tbody) return; 
     tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">ກຳລັງໂຫຼດສິນຄ້າ...</td></tr>'; 
     
     const [catsSnap, brandsSnap] = await Promise.all([
-      getDocs(collection(db, 'categories')),
-      getDocs(collection(db, 'brands'))
+      getDocs(collection(db, 'categories')), getDocs(collection(db, 'brands'))
     ]);
-    categoriesMap.clear();
-    catsSnap.forEach(d => categoriesMap.set(d.id, d.data().name));
-    brandsMap.clear();
-    brandsSnap.forEach(d => brandsMap.set(d.id, d.data().name));
+    categoriesMap.clear(); catsSnap.forEach(d => categoriesMap.set(d.id, d.data().name));
+    brandsMap.clear(); brandsSnap.forEach(d => brandsMap.set(d.id, d.data().name));
 
-    const snap = await getDocs(collection(db, 'products')); 
-    tbody.innerHTML = '';
-    
+    const snap = await getDocs(collection(db, 'products')); tbody.innerHTML = '';
     snap.forEach(d => { 
-      const p = d.data(); 
-      const shortDesc = p.description ? (p.description.length > 40 ? p.description.substring(0, 40) + '...' : p.description) : '-';
-      
+      const p = d.data(); const shortDesc = p.description ? (p.description.length > 40 ? p.description.substring(0, 40) + '...' : p.description) : '-';
       const catDisplay = categoriesMap.get(p.category) || p.category || '-';
       const brandDisplay = brandsMap.get(p.brand) || p.brand || '-';
 
       tbody.innerHTML += `<tr>
-        <td data-label="ຊື່">${escapeHtml(p.name || '-')}</td>
-        <td data-label="ລາຄາ">${(p.price || 0).toLocaleString()} ₭</td>
-        <td data-label="ໝວດໝູ່">${escapeHtml(catDisplay)}</td>
-        <td data-label="ແບຣນ">${escapeHtml(brandDisplay)}</td>
-        <td data-label="ສະຕ໋ອກ">${p.stock || 0}</td>
-        <td data-label="ລາຍລະອຽດ">${escapeHtml(shortDesc)}</td>
-        <td data-label="ສະຖານະ">${p.status || 'active'}</td>
-        <td data-label="ຈັດການ" class="btn-group">
+        <td>${escapeHtml(p.name || '-')}</td>
+        <td>${(p.price || 0).toLocaleString()} ₭</td>
+        <td>${escapeHtml(catDisplay)}</td>
+        <td>${escapeHtml(brandDisplay)}</td>
+        <td>${p.stock || 0}</td>
+        <td>${escapeHtml(shortDesc)}</td>
+        <td>${p.status || 'active'}</td>
+        <td class="btn-group">
           <button class="btn btn-warning btn-sm" onclick="editProduct('${d.id}','${escapeHtml(p.name||'')}','${p.price||0}','${p.category||''}','${p.brand||''}','${escapeHtml(p.image||'')}','${p.status||'active'}','${p.stock||0}', '${escapeHtml(p.description||'')}')"><i class="fas fa-edit"></i> ແກ້</button> 
           <button class="btn btn-danger btn-sm" onclick="deleteItem('products','${d.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
         </td>
@@ -604,307 +571,139 @@
   }
 
   window.editProduct = (id, n, p, c, b, i, s, stock, desc) => { 
-    document.getElementById('prodId').value = id; 
-    document.getElementById('prodName').value = n; 
-    document.getElementById('prodPrice').value = p; 
-    document.getElementById('prodCategory').value = c; 
-    document.getElementById('prodBrand').value = b; 
-    document.getElementById('prodImage').value = i; 
-    document.getElementById('prodStatus').value = s; 
-    document.getElementById('prodStock').value = stock; 
-    document.getElementById('prodDesc').value = desc || ''; 
-    document.getElementById('productModalTitle').innerText = 'ແກ້ໄຂສິນຄ້າ'; 
+    document.getElementById('prodId').value = id; document.getElementById('prodName').value = n; 
+    document.getElementById('prodPrice').value = p; document.getElementById('prodCategory').value = c; 
+    document.getElementById('prodBrand').value = b; document.getElementById('prodImage').value = i; 
+    document.getElementById('prodStatus').value = s; document.getElementById('prodStock').value = stock; 
+    document.getElementById('prodDesc').value = desc || ''; document.getElementById('productModalTitle').innerText = 'ແກ້ໄຂສິນຄ້າ'; 
     document.getElementById('productModal').classList.add('show'); 
   }; 
 
   window.openProductModal = () => { 
-    document.getElementById('productForm').reset(); 
-    document.getElementById('prodId').value = ''; 
-    document.getElementById('prodStock').value = 0; 
-    document.getElementById('prodDesc').value = ''; 
-    document.getElementById('prodBrand').value = ''; 
-    document.getElementById('prodCategory').value = '';
-    document.getElementById('productModalTitle').innerText = 'ເພີ່ມສິນຄ້າ'; 
-    document.getElementById('productModal').classList.add('show'); 
+    document.getElementById('productForm').reset(); document.getElementById('prodId').value = ''; 
+    document.getElementById('prodStock').value = 0; document.getElementById('prodDesc').value = ''; 
+    document.getElementById('prodBrand').value = ''; document.getElementById('prodCategory').value = '';
+    document.getElementById('productModalTitle').innerText = 'ເພີ່ມສິນຄ້າ'; document.getElementById('productModal').classList.add('show'); 
   }; 
 
   document.getElementById('productForm').addEventListener('submit', async(e) => { 
-    e.preventDefault(); 
-    const id = document.getElementById('prodId').value; 
+    e.preventDefault(); const id = document.getElementById('prodId').value; 
     const data = { 
-      name: document.getElementById('prodName').value, 
-      price: parseFloat(document.getElementById('prodPrice').value) || 0, 
-      category: document.getElementById('prodCategory').value, 
-      brand: document.getElementById('prodBrand').value, 
-      description: document.getElementById('prodDesc').value, 
-      image: document.getElementById('prodImage').value, 
-      stock: parseInt(document.getElementById('prodStock').value) || 0, 
-      status: document.getElementById('prodStatus').value, 
+      name: document.getElementById('prodName').value, price: parseFloat(document.getElementById('prodPrice').value) || 0, 
+      category: document.getElementById('prodCategory').value, brand: document.getElementById('prodBrand').value, 
+      description: document.getElementById('prodDesc').value, image: document.getElementById('prodImage').value, 
+      stock: parseInt(document.getElementById('prodStock').value) || 0, status: document.getElementById('prodStatus').value, 
       updatedAt: serverTimestamp() 
     }; 
-    
-    if (id) {
-      await updateDoc(doc(db,'products',id), data); 
-      alert('ແກ້ໄຂສິນຄ້າສຳເລັດ');
-    } else { 
-      data.createdAt = serverTimestamp(); 
-      await addDoc(collection(db,'products'), data); 
-      alert('ເພີ່ມສິນຄ້າໃໝ່ສຳເລັດ');
-    } 
-    
-    closeModal('productModal'); 
-    loadProducts(); 
-    if (typeof loadDashboard === "function") loadDashboard(); 
+    if (id) { await updateDoc(doc(db,'products',id), data); alert('ແກ້ໄຂສິນຄ້າສຳເລັດ'); } 
+    else { data.createdAt = serverTimestamp(); await addDoc(collection(db,'products'), data); alert('ເພີ່ມສິນຄ້າໃໝ່ສຳເລັດ'); } 
+    closeModal('productModal'); loadProducts(); if (typeof loadDashboard === "function") loadDashboard(); 
   });
 
   // Services
   async function loadServices() {
-    const tbody = document.querySelector('#serviceTable tbody');
-    if(!tbody) return;
-    tbody.innerHTML = '';
+    const tbody = document.querySelector('#serviceTable tbody'); if(!tbody) return; tbody.innerHTML = '';
     const snap = await getDocs(collection(db, 'services'));
-    snap.forEach(d => {
-      const s = d.data();
-      tbody.innerHTML += `<tr><td data-label="ຊື່">${escapeHtml(s.name || '-')}</td><td data-label="ໝວດ">${escapeHtml(s.category || '-')}</td><td data-label="ສະຖານະ">${s.status || 'active'}</td><td data-label="ຈັດການ" class="btn-group"><button class="btn btn-warning btn-sm" onclick="editService('${d.id}','${escapeHtml(s.name||'')}','${escapeHtml(s.category||'')}','${escapeHtml(s.description||'')}','${escapeHtml(s.imageUrl||'')}')"><i class="fas fa-edit"></i> ແກ້</button> <button class="btn btn-danger btn-sm" onclick="deleteItem('services','${d.id}')"><i class="fas fa-trash"></i> ລຶບ</button></td></tr>`;
-    });
+    snap.forEach(d => { const s = d.data(); tbody.innerHTML += `<tr><td>${escapeHtml(s.name || '-')}</td><td>${escapeHtml(s.category || '-')}</td><td>${s.status || 'active'}</td><td class="btn-group"><button class="btn btn-warning btn-sm" onclick="editService('${d.id}','${escapeHtml(s.name||'')}','${escapeHtml(s.category||'')}','${escapeHtml(s.description||'')}','${escapeHtml(s.imageUrl||'')}')"><i class="fas fa-edit"></i> ແກ້</button> <button class="btn btn-danger btn-sm" onclick="deleteItem('services','${d.id}')"><i class="fas fa-trash"></i> ລຶບ</button></td></tr>`; });
   }
   window.editService = (id,n,c,d,i) => {
-    document.getElementById('svcId').value = id;
-    document.getElementById('svcName').value = n;
-    document.getElementById('svcCategory').value = c;
-    document.getElementById('svcDesc').value = d;
-    document.getElementById('svcImage').value = i || '';
-    document.getElementById('serviceModal').classList.add('show');
+    document.getElementById('svcId').value = id; document.getElementById('svcName').value = n; document.getElementById('svcCategory').value = c; document.getElementById('svcDesc').value = d; document.getElementById('svcImage').value = i || ''; document.getElementById('serviceModal').classList.add('show');
   };
   window.openServiceModal = () => { document.getElementById('serviceForm').reset(); document.getElementById('svcId').value = ''; document.getElementById('serviceModal').classList.add('show'); };
   document.getElementById('serviceForm').addEventListener('submit', async(e) => {
-    e.preventDefault();
-    const id = document.getElementById('svcId').value;
-    const data = {
-      name: document.getElementById('svcName').value,
-      category: document.getElementById('svcCategory').value,
-      description: document.getElementById('svcDesc').value,
-      imageUrl: document.getElementById('svcImage').value,
-      status: 'active',
-      updatedAt: serverTimestamp()
-    };
-    if (id) await updateDoc(doc(db,'services',id), data);
-    else { data.createdAt = serverTimestamp(); await addDoc(collection(db,'services'), data); }
-    closeModal('serviceModal');
-    loadServices();
+    e.preventDefault(); const id = document.getElementById('svcId').value;
+    const data = { name: document.getElementById('svcName').value, category: document.getElementById('svcCategory').value, description: document.getElementById('svcDesc').value, imageUrl: document.getElementById('svcImage').value, status: 'active', updatedAt: serverTimestamp() };
+    if (id) await updateDoc(doc(db,'services',id), data); else { data.createdAt = serverTimestamp(); await addDoc(collection(db,'services'), data); }
+    closeModal('serviceModal'); loadServices();
   });
 
   // Portfolio
   async function loadPortfolio() {
-    const tbody = document.querySelector('#portfolioTable tbody');
-    if(!tbody) return;
-    tbody.innerHTML = '';
+    const tbody = document.querySelector('#portfolioTable tbody'); if(!tbody) return; tbody.innerHTML = '';
     const snap = await getDocs(collection(db, 'portfolio'));
-    snap.forEach(d => {
-      const p = d.data();
-      tbody.innerHTML += `<tr><td data-label="ຊື່ໂຄງການ">${escapeHtml(p.title || '-')}</td><td data-label="ໝວດ">${escapeHtml(p.category || '-')}</td><td data-label="ຈັດການ" class="btn-group"><button class="btn btn-warning btn-sm" onclick="editPortfolio('${d.id}','${escapeHtml(p.title||'')}','${escapeHtml(p.category||'')}','${escapeHtml(p.description||'')}','${escapeHtml(p.imageUrl||'')}')"><i class="fas fa-edit"></i> ແກ້</button> <button class="btn btn-danger btn-sm" onclick="deleteItem('portfolio','${d.id}')"><i class="fas fa-trash"></i> ລຶບ</button></td></tr>`;
-    });
+    snap.forEach(d => { const p = d.data(); tbody.innerHTML += `<tr><td>${escapeHtml(p.title || '-')}</td><td>${escapeHtml(p.category || '-')}</td><td class="btn-group"><button class="btn btn-warning btn-sm" onclick="editPortfolio('${d.id}','${escapeHtml(p.title||'')}','${escapeHtml(p.category||'')}','${escapeHtml(p.description||'')}','${escapeHtml(p.imageUrl||'')}')"><i class="fas fa-edit"></i> ແກ້</button> <button class="btn btn-danger btn-sm" onclick="deleteItem('portfolio','${d.id}')"><i class="fas fa-trash"></i> ລຶບ</button></td></tr>`; });
   }
   window.editPortfolio = (id,t,c,d,i) => {
-    document.getElementById('portId').value = id;
-    document.getElementById('portTitle').value = t;
-    document.getElementById('portCategory').value = c;
-    document.getElementById('portDesc').value = d;
-    document.getElementById('portImage').value = i || '';
-    document.getElementById('portfolioModal').classList.add('show');
+    document.getElementById('portId').value = id; document.getElementById('portTitle').value = t; document.getElementById('portCategory').value = c; document.getElementById('portDesc').value = d; document.getElementById('portImage').value = i || ''; document.getElementById('portfolioModal').classList.add('show');
   };
   window.openPortfolioModal = () => { document.getElementById('portfolioForm').reset(); document.getElementById('portId').value = ''; document.getElementById('portfolioModal').classList.add('show'); };
   document.getElementById('portfolioForm').addEventListener('submit', async(e) => {
-    e.preventDefault();
-    const id = document.getElementById('portId').value;
-    const data = {
-      title: document.getElementById('portTitle').value,
-      category: document.getElementById('portCategory').value,
-      description: document.getElementById('portDesc').value,
-      imageUrl: document.getElementById('portImage').value,
-      status: 'active',
-      updatedAt: serverTimestamp()
-    };
-    if (id) await updateDoc(doc(db,'portfolio',id), data);
-    else { data.createdAt = serverTimestamp(); await addDoc(collection(db,'portfolio'), data); }
-    closeModal('portfolioModal');
-    loadPortfolio();
+    e.preventDefault(); const id = document.getElementById('portId').value;
+    const data = { title: document.getElementById('portTitle').value, category: document.getElementById('portCategory').value, description: document.getElementById('portDesc').value, imageUrl: document.getElementById('portImage').value, status: 'active', updatedAt: serverTimestamp() };
+    if (id) await updateDoc(doc(db,'portfolio',id), data); else { data.createdAt = serverTimestamp(); await addDoc(collection(db,'portfolio'), data); }
+    closeModal('portfolioModal'); loadPortfolio();
   });
 
-  // --- ຈັດການລະບົບແບຣນ ---
+  // --- ຈັດການລະບົບແບຣນ (ແກ້ໃຫ້ HTML ກົດເອີ້ນໃຊ້ໄດ້) ---
   window.openBrandModal = function() {
-    const modal = document.getElementById('brandModal');
-    if (modal) modal.classList.add('show');
-    const form = document.getElementById('brandForm');
-    if (form) form.reset();
-    document.getElementById('brandId').value = '';
-    document.getElementById('brandModalTitle').innerText = 'ເພີ່ມແບຣນ';
+    const modal = document.getElementById('brandModal'); if (modal) modal.classList.add('show');
+    const form = document.getElementById('brandForm'); if (form) form.reset();
+    document.getElementById('brandId').value = ''; document.getElementById('brandModalTitle').innerText = 'ເພີ່ມແບຣນ';
   };
-
   window.closeBrandModal = function() {
-    const modal = document.getElementById('brandModal');
-    if (modal) modal.classList.remove('show');
+    const modal = document.getElementById('brandModal'); if (modal) modal.classList.remove('show');
   };
-
   async function handleBrandSubmit(e) {
-    e.preventDefault();
-    const id = document.getElementById('brandId').value;
-    const name = document.getElementById('brandName').value.trim();
-    const category = document.getElementById('brandCategory').value.trim();
+    e.preventDefault(); const id = document.getElementById('brandId').value; const name = document.getElementById('brandName').value.trim(); const category = document.getElementById('brandCategory').value.trim();
     if (!name) return alert('ກະລຸນາປ້ອນຊື່ແບຣນ');
-
     try {
-      if (id) {
-        await updateDoc(doc(db, 'brands', id), { name: name, category: category });
-        alert('ແກ້ໄຂແບຣນສຳເລັດ');
-      } else {
-        await addDoc(collection(db, 'brands'), { name: name, category: category, createdAt: serverTimestamp() });
-        alert('ເພີ່ມແບຣນໃໝ່ສຳເລັດ');
-      }
-      window.closeBrandModal();
-      await window.loadBrandsAdmin();
-    } catch (err) {
-      alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message);
-    }
+      if (id) { await updateDoc(doc(db, 'brands', id), { name: name, category: category }); alert('ແກ້ໄຂແບຣນສຳເລັດ'); } 
+      else { await addDoc(collection(db, 'brands'), { name: name, category: category, createdAt: serverTimestamp() }); alert('ເພີ່ມແບຣນໃໝ່ສຳເລັດ'); }
+      window.closeBrandModal(); await window.loadBrandsAdmin();
+    } catch (err) { alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message); }
   }
-
   window.loadBrandsAdmin = async function() {
     try {
-      const snapshot = await getDocs(collection(db, 'brands'));
-      const tbody = document.querySelector('#brandTable tbody');
-      const prodSelect = document.getElementById('prodBrand');
-      
-      if (tbody) tbody.innerHTML = '';
-      if (prodSelect) prodSelect.innerHTML = '<option value="">-- ເລືອກແບຣນ --</option>';
-      
+      const snapshot = await getDocs(collection(db, 'brands')); const tbody = document.querySelector('#brandTable tbody'); const prodSelect = document.getElementById('prodBrand');
+      if (tbody) tbody.innerHTML = ''; if (prodSelect) prodSelect.innerHTML = '<option value="">-- ເລືອກແບຣນ --</option>';
       snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const bName = data.name || '-';
-        if (tbody) {
-          tbody.innerHTML += `
-            <tr>
-              <td>${escapeHtml(bName)}</td>
-              <td>${escapeHtml(data.category || '-')}</td>
-              <td>
-                <button class="btn btn-warning btn-sm" onclick="editBrandAdmin('${docSnap.id}', '${escapeHtml(bName)}', '${escapeHtml(data.category||'')}')"><i class="fas fa-edit"></i> ແກ້ໄຂ</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteBrandAdmin('${docSnap.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
-              </td>
-            </tr>
-          `;
-        }
-        if (prodSelect) {
-          prodSelect.innerHTML += `<option value="${docSnap.id}">${escapeHtml(bName)}</option>`;
-        }
+        const data = docSnap.data(); const bName = data.name || '-';
+        if (tbody) { tbody.innerHTML += `<tr><td>${escapeHtml(bName)}</td><td>${escapeHtml(data.category || '-')}</td><td><button class="btn btn-warning btn-sm" onclick="editBrandAdmin('${docSnap.id}', '${escapeHtml(bName)}', '${escapeHtml(data.category||'')}')"><i class="fas fa-edit"></i> ແກ້ໄຂ</button> <button class="btn btn-danger btn-sm" onclick="deleteBrandAdmin('${docSnap.id}')"><i class="fas fa-trash"></i> ລຶບ</button></td></tr>`; }
+        if (prodSelect) { prodSelect.innerHTML += `<option value="${docSnap.id}">${escapeHtml(bName)}</option>`; }
       });
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) { console.error(error); }
   };
-
   window.editBrandAdmin = function(id, name, cat) {
-    window.openBrandModal();
-    document.getElementById('brandId').value = id;
-    document.getElementById('brandName').value = name;
-    document.getElementById('brandCategory').value = cat;
-    document.getElementById('brandModalTitle').innerText = 'ແກ້ໄຂແບຣນ';
+    window.openBrandModal(); document.getElementById('brandId').value = id; document.getElementById('brandName').value = name; document.getElementById('brandCategory').value = cat; document.getElementById('brandModalTitle').innerText = 'ແກ້ໄຂແບຣນ';
   };
-
   window.deleteBrandAdmin = async function(id) {
-    if (confirm('ທ່ານຕ້ອງການລຶບແບຣນນີ້ແທ້ບໍ່?')) {
-      try {
-        await deleteDoc(doc(db, 'brands', id));
-        alert('ລຶບແບຣນສຳເລັດ');
-        await window.loadBrandsAdmin();
-      } catch (error) {
-        alert(error.message);
-      }
-    }
+    if (confirm('ທ່ານຕ້ອງການລຶບແບຣນນີ້ແທ້ບໍ່?')) { try { await deleteDoc(doc(db, 'brands', id)); alert('ລຶບແບຣນສຳເລັດ'); await window.loadBrandsAdmin(); } catch (error) { alert(error.message); } }
   };
 
-  // --- ຈັດການລະບົບໝວດໝູ່ ---
+  // --- ຈັດການລະບົບໝວດໝູ່ (ແກ້ໃຫ້ HTML ກົດເອີ້ນໃຊ້ໄດ້) ---
   window.openCategoryModal = function() {
-    const modal = document.getElementById('categoryModal');
-    if (modal) modal.classList.add('show');
-    const form = document.getElementById('categoryForm');
-    if (form) form.reset();
-    document.getElementById('categoryId').value = '';
-    document.getElementById('categoryModalTitle').innerText = 'ເພີ່ມໝວດໝູ່';
+    const modal = document.getElementById('categoryModal'); if (modal) modal.classList.add('show');
+    const form = document.getElementById('categoryForm'); if (form) form.reset();
+    document.getElementById('categoryId').value = ''; document.getElementById('categoryModalTitle').innerText = 'ເພີ່ມໝວດໝູ່';
   };
-
   window.closeCategoryModal = function() {
-    const modal = document.getElementById('categoryModal');
-    if (modal) modal.classList.remove('show');
+    const modal = document.getElementById('categoryModal'); if (modal) modal.classList.remove('show');
   };
-
   async function handleCategorySubmit(e) {
-    e.preventDefault();
-    const id = document.getElementById('categoryId').value;
-    const name = document.getElementById('categoryName').value.trim();
+    e.preventDefault(); const id = document.getElementById('categoryId').value; const name = document.getElementById('categoryName').value.trim();
     if (!name) return alert('ກະລຸນາປ້ອນຊື່ໝວດໝູ່');
-
     try {
-      if (id) {
-        await updateDoc(doc(db, 'categories', id), { name: name });
-        alert('ແກ້ໄຂໝວດໝູ່ສຳເລັດ');
-      } else {
-        await addDoc(collection(db, 'categories'), { name: name });
-        alert('ເພີ່ມໝວດໝູ່ໃໝ່ສຳເລັດ');
-      }
-      window.closeCategoryModal();
-      await window.loadCategoriesAdmin();
-    } catch (err) {
-      alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message);
-    }
+      if (id) { await updateDoc(doc(db, 'categories', id), { name: name }); alert('ແກ້ໄຂໝວດໝູ່ສຳເລັດ'); } 
+      else { await addDoc(collection(db, 'categories'), { name: name }); alert('ເພີ່ມໝວດໝູ່ໃໝ່ສຳເລັດ'); }
+      window.closeCategoryModal(); await window.loadCategoriesAdmin();
+    } catch (err) { alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message); }
   }
-
   window.loadCategoriesAdmin = async function() {
     try {
-      const snapshot = await getDocs(collection(db, 'categories'));
-      const tbody = document.querySelector('#categoryTable tbody');
-      const prodSelect = document.getElementById('prodCategory');
-      
-      if (tbody) tbody.innerHTML = '';
-      if (prodSelect) prodSelect.innerHTML = '<option value="">-- ເລືອກໝວດໝູ່ --</option>';
-      
+      const snapshot = await getDocs(collection(db, 'categories')); const tbody = document.querySelector('#categoryTable tbody'); const prodSelect = document.getElementById('prodCategory');
+      if (tbody) tbody.innerHTML = ''; if (prodSelect) prodSelect.innerHTML = '<option value="">-- ເລືອກໝວດໝູ່ --</option>';
       snapshot.forEach(docSnap => {
         const data = docSnap.data();
-        if (tbody) {
-          tbody.innerHTML += `
-            <tr>
-              <td>${escapeHtml(data.name)}</td>
-              <td>
-                <button class="btn btn-warning btn-sm" onclick="editCategory('${docSnap.id}', '${escapeHtml(data.name)}')"><i class="fas fa-edit"></i> ແກ້ໄຂ</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteCategory('${docSnap.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
-              </td>
-            </tr>
-          `;
-        }
-        if (prodSelect) {
-          prodSelect.innerHTML += `<option value="${docSnap.id}">${escapeHtml(data.name)}</option>`;
-        }
+        if (tbody) { tbody.innerHTML += `<tr><td>${escapeHtml(data.name)}</td><td><button class="btn btn-warning btn-sm" onclick="editCategory('${docSnap.id}', '${escapeHtml(data.name)}')"><i class="fas fa-edit"></i> ແກ້ໄຂ</button> <button class="btn btn-danger btn-sm" onclick="deleteCategory('${docSnap.id}')"><i class="fas fa-trash"></i> ລຶບ</button></td></tr>`; }
+        if (prodSelect) { prodSelect.innerHTML += `<option value="${docSnap.id}">${escapeHtml(data.name)}</option>`; }
       });
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) { console.error(error); }
   };
-
   window.editCategory = function(id, name) {
-    window.openCategoryModal();
-    document.getElementById('categoryId').value = id;
-    document.getElementById('categoryName').value = name;
-    document.getElementById('categoryModalTitle').innerText = 'ແກ້ໄຂໝວດໝູ່';
+    window.openCategoryModal(); document.getElementById('categoryId').value = id; document.getElementById('categoryName').value = name; document.getElementById('categoryModalTitle').innerText = 'ແກ້ໄຂໝວດໝູ່';
   };
-
   window.deleteCategory = async function(id) {
-    if (confirm('ທ່ານຕ້ອງການລຶບໝວດໝູ່ນີ້ແທ້ບໍ່?')) {
-      try {
-        await deleteDoc(doc(db, 'categories', id));
-        alert('ລຶບໝວດໝູ່ສຳເລັດ');
-        await window.loadCategoriesAdmin();
-      } catch (error) {
-        alert(error.message);
-      }
-    }
+    if (confirm('ທ່ານຕ້ອງການລຶບໝວດໝູ່ນີ້ແທ້ບໍ່?')) { try { await deleteDoc(doc(db, 'categories', id)); alert('ລຶບໝວດໝູ່ສຳເລັດ'); await window.loadCategoriesAdmin(); } catch (error) { alert(error.message); } }
   };
 
   // Contacts, Orders, Users, News, Sliders (ຄືເກົ່າ)
@@ -916,7 +715,7 @@
   async function loadOrders() {
     const tbody = document.querySelector('#orderTable tbody'); if(!tbody) return; tbody.innerHTML = '';
     const snap = await getDocs(query(collection(db, 'orders'), orderBy('createdAt', 'desc')));
-    snap.forEach(d => { const o = d.data(); const date = o.createdAt ? new Date(o.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-'; let paymentHtml = o.paymentMethod === 'transfer' ? (o.paymentStatus === 'waiting_verification' ? `<button class="btn btn-success btn-sm" onclick="verifyPayment('${d.id}')">ຢັ້ງຢືນ</button>` : 'ຢັ້ງຢືນແລ້ວ') : 'ເງິນສົດ'; tbody.innerHTML += `<tr><td>#${d.id.slice(0,8)}</td><td>${escapeHtml(o.customerInfo?.name || '-')}</td><td>₭${(o.totalAmount||0).toLocaleString()}</td><td>${o.orderStatus||'pending'}</td><td>${paymentHtml}</td><td>${o.slipUrl?`<a href="${o.slipUrl}" target="_blank">ເບິ່ງ</a>` : '-'}</td><td>${date}</td><td><select onchange="updateStatus('orders','${d.id}','orderStatus',this.value)"><option value="">ປ່ຽນສະຖານະ</option><option value="delivered">ສຳເລັດ</option><option value="cancelled">ຍົກເລີກ</option></select></td></tr>`; });
+    snap.forEach(d => { const o = d.data(); const date = o.createdAt ? new Date(o.createdAt.seconds*1000).toLocaleDateString('lo-LA') : '-'; let paymentHtml = o.paymentMethod === 'transfer' ? (o.paymentStatus === 'waiting_verification' ? `<button class="btn btn-success btn-sm" onclick="verifyPayment('${d.id}')">ຢັ້ງຢືນ</button>` : 'ຢັ້ງຢືນແລ້ວ') : 'Inter'; tbody.innerHTML += `<tr><td>#${d.id.slice(0,8)}</td><td>${escapeHtml(o.customerInfo?.name || '-')}</td><td>₭${(o.totalAmount||0).toLocaleString()}</td><td>${o.orderStatus||'pending'}</td><td>${paymentHtml}</td><td>${o.slipUrl?`<a href="${o.slipUrl}" target="_blank">ເບິ່ງ</a>` : '-'}</td><td>${date}</td><td><select onchange="updateStatus('orders','${d.id}','orderStatus',this.value)"><option value="">ປ່ຽນສະຖານະ</option><option value="delivered">ສຳເລັດ</option><option value="cancelled">ຍົກເລີກ</option></select></td></tr>`; });
   }
   window.verifyPayment = async(orderId) => { await updateDoc(doc(db,'orders',orderId), { paymentStatus:'verified' }); loadOrders(); };
   async function loadUsers() {
@@ -963,9 +762,7 @@
 
   document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('show'); }));
 
-  document.addEventListener('DOMContentLoaded', () => {
-    loadAll();
-  });
+  document.addEventListener('DOMContentLoaded', () => { loadAll(); });
 </script>
 </body>
 </html>
