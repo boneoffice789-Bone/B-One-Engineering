@@ -508,8 +508,32 @@
     const win = window.open(); win.document.write(printHtml); win.document.close(); win.focus();
   };
 
-  async function loadAll() { await Promise.all([loadProducts(), loadServices(), loadPortfolio(), loadBrands(), loadContacts(), loadOrders(), loadUsers(), loadNews(), loadSliders()]); }
+  async function loadAll() {
+    // ຜູກລະບົບ Form Submit ຂອງໝວດໝູ່ ຕອນໂຫຼດໜ້າ
+    const catForm = document.getElementById('categoryForm');
+    if (catForm) {
+      catForm.removeEventListener('submit', handleCategorySubmit);
+      catForm.addEventListener('submit', handleCategorySubmit);
+    }
+    
+    // ສັ່ງໃຫ້ໂຫຼດຂໍ້ມູນໝວດໝູ່ ແລະ ແບຣນ ເຂົ້າ Dropdown/ຕາຕະລາງ ທັນທີ
+    await window.loadCategoriesAdmin();
+    await window.loadBrandsForSelect();
 
+    // ໂຫຼດຂໍ້ມູນສ່ວນອື່ນໆ ທີ່ມີຢູ່ແລ້ວຂອງທ່ານ
+    await Promise.all([
+      loadProducts(), 
+      loadServices(), 
+      loadPortfolio(), 
+      loadBrands(), 
+      loadContacts(), 
+      loadOrders(), 
+      loadUsers(), 
+      loadNews(), 
+      loadSliders()
+    ]);
+  }
+  
 // Products
   async function loadProducts() { 
     const tbody = document.querySelector('#productTable tbody'); 
@@ -929,90 +953,112 @@
   }
 
   document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('show'); }));
-  // --- ຈັດການ Modal ໝວດໝູ່ ---
-function openCategoryModal() {
-  document.getElementById('categoryModal').classList.add('show');
-  document.getElementById('categoryForm').reset();
-  document.getElementById('categoryId').value = '';
-  document.getElementById('categoryModalTitle').innerText = 'ເພີ່ມໝວດໝູ່';
-}
-function closeCategoryModal() {
-  document.getElementById('categoryModal').classList.remove('show');
-}
-
-// --- ບັນທຶກໝວດໝູ່ ---
-document.getElementById('categoryForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const id = document.getElementById('categoryId').value;
-  const name = document.getElementById('categoryName').value;
-  
-  try {
-    if(id) {
-      // ຖ້າມີ ID ແມ່ນແກ້ໄຂ
-      await updateDoc(doc(db, 'categories', id), { name: name });
-    } else {
-      // ຖ້າບໍ່ມີ ID ແມ່ນເພີ່ມໃໝ່
-      await addDoc(collection(db, 'categories'), { name: name });
+// --- ແກ້ໄຂ: ຈັດການ Modal ໝວດໝູ່ ໃຫ້ HTML ກົດເອີ້ນໃຊ້ໄດ້ ---
+  window.openCategoryModal = function() {
+    const modal = document.getElementById('categoryModal');
+    if (modal) {
+      modal.classList.add('show');
+      modal.style.display = 'flex'; // ຮັບປະກັນໃຫ້ Modal ສະແດງຜົນຂຶ້ນມາ
     }
-    closeCategoryModal();
-    loadCategoriesAdmin();
-  } catch(err) {
-    alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message);
+    const form = document.getElementById('categoryForm');
+    if (form) form.reset();
+    document.getElementById('categoryId').value = '';
+    document.getElementById('categoryModalTitle').innerText = 'ເພີ່ມໝວດໝູ່';
+  };
+
+  window.closeCategoryModal = function() {
+    const modal = document.getElementById('categoryModal');
+    if (modal) {
+      modal.classList.remove('show');
+      modal.style.display = 'none'; // ປິດການສະແດງຜົນ
+    }
+  };
+
+  // --- ແກ້ໄຂ: ຟັງຊັນບັນທຶກໝວດໝູ່ (ເພີ່ມ/ແກ້ໄຂ) ---
+  // ເຮັດເປັນຟັງຊັນພາຍໃນ module ເພື່ອຜູກກັບ Event Listener ດ້ານລຸ່ມ
+  async function handleCategorySubmit(e) {
+    e.preventDefault();
+    const id = document.getElementById('categoryId').value;
+    const name = document.getElementById('categoryName').value.trim();
+    
+    if (!name) {
+      alert('ກະລຸນາປ້ອນຊື່ໝວດໝູ່');
+      return;
+    }
+
+    try {
+      if (id) {
+        // ຖ້າມີ ID ແມ່ນແກ້ໄຂ
+        await updateDoc(doc(db, 'categories', id), { name: name });
+        alert('ແກ້ໄຂໝວດໝູ່ອັດຕະໂນມັດສຳເລັດ');
+      } else {
+        // ຖ້າບໍ່ມີ ID ແມ່ນເພີ່ມໃໝ່
+        await addDoc(collection(db, 'categories'), { name: name });
+        alert('ເພີ່ມໝວດໝູ່ໃໝ່ສຳເລັດ');
+      }
+      window.closeCategoryModal();
+      await window.loadCategoriesAdmin(); // ໂຫຼດຂໍ້ມູນໃໝ່ຫຼັງຈາກບັນທຶກ
+    } catch (err) {
+      console.error(err);
+      alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message);
+    }
   }
-});
 
-// --- ໂຫຼດໝວດໝູ່ເຂົ້າຕາຕະລາງ ແລະ Dropdown ຕອນເພີ່ມສິນຄ້າ ---
-async function loadCategoriesAdmin() {
-  const snapshot = await getDocs(collection(db, 'categories'));
-  const tbody = document.querySelector('#categoryTable tbody');
-  const prodSelect = document.getElementById('prodCategory');
-  
-  tbody.innerHTML = '';
-  prodSelect.innerHTML = '<option value="">-- ເລືອກໝວດໝູ່ --</option>';
-  
-  snapshot.forEach(docSnap => {
-    const data = docSnap.data();
-    // ໃສ່ຕາຕະລາງ
-    tbody.innerHTML += `
-      <tr>
-        <td>${data.name}</td>
-        <td>
-          <button class="btn btn-warning btn-sm" onclick="editCategory('${docSnap.id}', '${data.name}')"><i class="fas fa-edit"></i> ແກ້ໄຂ</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteCategory('${docSnap.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
-        </td>
-      </tr>
-    `;
-    // ໃສ່ Dropdown
-    prodSelect.innerHTML += `<option value="${data.name}">${data.name}</option>`;
-  });
-}
+  // --- ແກ້ໄຂ: ໂຫຼດໝວດໝູ່ເຂົ້າຕາຕະລາງ ແລະ Dropdown ສິນຄ້າ ---
+  window.loadCategoriesAdmin = async function() {
+    try {
+      const snapshot = await getDocs(collection(db, 'categories'));
+      const tbody = document.querySelector('#categoryTable tbody');
+      const prodSelect = document.getElementById('prodCategory');
+      
+      if (tbody) tbody.innerHTML = '';
+      if (prodSelect) prodSelect.innerHTML = '<option value="">-- ເລືອກໝວດໝູ່ --</option>';
+      
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        
+        // 1. ສະແດງໃນຕາຕະລາງ Admin
+        if (tbody) {
+          tbody.innerHTML += `
+            <tr>
+              <td>${data.name}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="editCategory('${docSnap.id}', '${data.name}')"><i class="fas fa-edit"></i> ແກ້ໄຂ</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteCategory('${docSnap.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
+              </td>
+            </tr>
+          `;
+        }
+        
+        // 2. ໃສ່ Dropdown (ເກັບ value ເປັນ ID ເພື່ອໃຫ້ກົງກັບໜ້າລູກຄ້າ products.html)
+        if (prodSelect) {
+          prodSelect.innerHTML += `<option value="${docSnap.id}">${data.name}</option>`;
+        }
+      });
+    } catch (error) {
+      console.error("ໂຫຼດໝວດໝູ່ຜິດພາດ: ", error);
+    }
+  };
 
-// --- ດຶງຂໍ້ມູນແບຣນເຂົ້າ Dropdown ຕອນເພີ່ມສິນຄ້າ (ທ່ານມີລະບົບແບຣນຢູ່ແລ້ວ) ---
-async function loadBrandsForSelect() {
-  const snapshot = await getDocs(collection(db, 'brands'));
-  const brandSelect = document.getElementById('prodBrand');
-  brandSelect.innerHTML = '<option value="">-- ເລືອກແບຣນ --</option>';
-  snapshot.forEach(docSnap => {
-    const data = docSnap.data();
-    // ສົມມຸດວ່າແບຣນຂອງທ່ານເກັບຊື່ໄວ້ໃນ field: name ຫຼື brandName
-    const brandName = data.name || data.brandName; 
-    brandSelect.innerHTML += `<option value="${brandName}">${brandName}</option>`;
-  });
-}
+  // --- ແກ້ໄຂ: ຟັງຊັນເອີ້ນແກ້ໄຂ ແລະ ລຶບ ໃຫ້ HTML ຮຽກໃຊ້ໄດ້ ---
+  window.editCategory = function(id, name) {
+    window.openCategoryModal();
+    document.getElementById('categoryId').value = id;
+    document.getElementById('categoryName').value = name;
+    document.getElementById('categoryModalTitle').innerText = 'ແກ້ໄຂໝວດໝູ່';
+  };
 
-function editCategory(id, name) {
-  openCategoryModal();
-  document.getElementById('categoryId').value = id;
-  document.getElementById('categoryName').value = name;
-  document.getElementById('categoryModalTitle').innerText = 'ແກ້ໄຂໝວດໝູ່';
-}
-
-async function deleteCategory(id) {
-  if(confirm('ລຶບໝວດໝູ່ນີ້ແທ້ບໍ່?')) {
-    await deleteDoc(doc(db, 'categories', id));
-    loadCategoriesAdmin();
-  }
-}
+  window.deleteCategory = async function(id) {
+    if (confirm('ທ່ານຕ້ອງການລຶບໝວດໝູ່ນີ້ແທ້ບໍ່?')) {
+      try {
+        await deleteDoc(doc(db, 'categories', id));
+        alert('ລຶບໝວດໝູ່ສຳເລັດ');
+        await window.loadCategoriesAdmin();
+      } catch (error) {
+        alert('ເກີດຂໍ້ຜິດພາດໃນການລຶບ: ' + error.message);
+      }
+    }
+  };
 
 // ຢ່າລືມເອີ້ນໃຊ້ 2 ຟັງຊັນນີ້ຕອນໂຫຼດໜ້າແລ້ວ
 document.addEventListener('DOMContentLoaded', () => {
