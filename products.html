@@ -11,314 +11,394 @@
     /* Additional styles for product page */
     .cart-icon-wrapper { position: relative; }
     .cart-count { position: absolute; top: -8px; right: -12px; background: #ffd700; color: #b30000; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-    .product-card .btn-add-to-cart { background: #b91c1c; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.9rem; transition: background 0.2s; font-family: inherit; }
-    .product-card .btn-add-to-cart:hover { background: #991b1b; }
-    .product-card .btn-add-to-cart:disabled { background: #9ca3af; cursor: not-allowed; }
-    .out-of-stock-badge { background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; position: absolute; top: 10px; right: 10px; z-index: 10; }
+    .product-card .btn-add-to-cart { background: #b91c1c; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: pointer; transition: 0.3s; width: 100%; }
+    .product-card .btn-add-to-cart:hover { background: #8b1515; transform: translateY(-2px); }
+    .product-card .btn-out-of-stock { background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 40px; margin-top: 10px; cursor: not-allowed; width: 100%; }
+    .notification { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 12px 20px; border-radius: 8px; z-index: 1000; display: none; }
+    .stock-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-top: 5px; }
+    .stock-in { background: #d4edda; color: #155724; }
+    .stock-low { background: #fff3cd; color: #856404; }
+    .stock-out { background: #f8d7da; color: #721c24; }
+    
+    /* Filter bar styles */
+    .filter-bar {
+      background: white;
+      border-radius: 60px;
+      padding: 10px 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-group {
+      flex: 1;
+      min-width: 150px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8f9fa;
+      padding: 5px 15px;
+      border-radius: 40px;
+    }
+    .filter-group i {
+      color: #b30000;
+      font-size: 1.1rem;
+    }
+    .filter-group select, .filter-group input {
+      border: none;
+      background: transparent;
+      padding: 10px 0;
+      font-family: inherit;
+      width: 100%;
+      outline: none;
+      font-size: 0.9rem;
+    }
+    .btn-filter-reset {
+      background: #e9ecef;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .btn-filter-reset:hover {
+      background: #dee2e6;
+    }
+    .products-count {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-top: 10px;
+      text-align: right;
+    }
+    @media (max-width: 768px) {
+      .filter-bar {
+        border-radius: 20px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-group {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="/" class="nav-logo">
-        <span class="logo-icon">⚙️</span>
-        <div class="logo-text">
-          <span class="logo-title">B-ONE</span>
-          <span class="logo-sub">ENGINEERING</span>
-        </div>
-      </a>
-      <button class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      <div class="nav-menu" id="nav-list">
-        <a href="/" class="nav-item">ໜ້າຫຼັກ</a>
-        <a href="/about" class="nav-item">ກ່ຽວກັບເຮົາ</a>
-        <a href="/services" class="nav-item">ບໍລິການ</a>
-        <a href="/portfolio" class="nav-item">ຜົນງານ</a>
-        <a href="/products" class="nav-item active">ສິນຄ້າ</a>
-        <a href="/news" class="nav-item">ຂ່າວສານ</a>
-        <a href="/contact" class="nav-item">ຕິດຕໍ່ເຮົາ</a>
-        <a href="/cart" class="nav-item cart-icon-wrapper">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="cart-count" id="globalCartCount">0</span>
-        </a>
-      </div>
-    </div>
-  </nav>
+<header>
+  <div class="navbar">
+    <div class="logo"><a href="/"><h1>B-One Engineering</h1><p>Sole Co., Ltd | ວິສະວະກຳຄົບວົງຈອນ</p></a></div>
+    <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/"><span class="lao">ໜ້າຫຼັກ</span><span class="eng">HOME</span></a></li>
+      <li><a href="/about"><span class="lao">ກ່ຽວກັບພວກເຮົາ</span><span class="eng">ABOUT</span></a></li>
+      <li><a href="/services"><span class="lao">ບໍລິການ</span><span class="eng">SERVICES</span></a></li>
+      <li><a href="/products" class="active"><span class="lao">ຈຳໜ່າຍສິນຄ້າ</span><span class="eng">PRODUCTS</span></a></li>
+      <li><a href="/brands"><span class="lao">ແບຣນຕົວແທນ</span><span class="eng">BRANDS</span></a></li>
+      <li><a href="/portfolio"><span class="lao">ຜົນງານ</span><span class="eng">PORTFOLIO</span></a></li>
+      <li><a href="/contact"><span class="lao">ຕິດຕໍ່</span><span class="eng">CONTACT</span></a></li>
+      <li><a href="/cart" class="cart-icon-wrapper"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a></li>
+      <li id="auth-section">
+        <div id="userDisplay" style="display: none;"><a href="/profile"><i class="fas fa-user-circle"></i><span id="userName" class="lao"></span></a></div>
+        <div id="loginDisplay"><a href="/login"><i class="fas fa-sign-in-alt"></i><span class="lao">ເຂົ້າສູ່ລະບົບ</span><span class="eng">LOGIN</span></a></div>
+      </li>
+    </ul>
+  </div>
+</header>
 
-  <header class="page-header products-header">
-    <div class="header-content">
-      <h1>ຄັງສິນຄ້າ ແລະ ອຸປະກອນເຕັກນິກ</h1>
-      <p>ບໍລິການຈັດຫາ ແລະ ຈຳໜ່າຍອຸປະກອນວິສະວະກຳໄຟຟ້າ-ກົນຈັກ ມາດຕະຖານສາກົນ</p>
-    </div>
-  </header>
-
-  <section class="products-section section-padding">
+<main>
+  <section style="background: #fefaf8; padding: 60px 0;">
     <div class="container">
+      <h2 class="section-title">ຈຳໜ່າຍສິນຄ້າ <span style="font-size:1.4rem;">| PRODUCTS</span></h2>
+      <p class="section-sub">ນຳເຂົ້າ ແລະ ຈຳໜ່າຍສິນຄ້າທີ່ຫຼາກຫຼາຍ ຕອບໂຈດທຸກຄວາມຕ້ອງການ</p>
       
-      <div class="filter-toolbar">
-        <div class="search-box">
+      <div class="filter-bar">
+        <div class="filter-group">
           <i class="fas fa-search"></i>
-          <input type="text" id="searchInput" placeholder="ຄົ້ນຫາສິນຄ້າ...">
+          <input type="text" id="searchInput" placeholder="ຄົ້ນຫາຕາມຊື່ສິນຄ້າ...">
         </div>
-        <div class="filter-groups">
-          <div class="filter-group">
-            <label for="categoryFilter">ໝວດໝູ່:</label>
-            <select id="categoryFilter">
-              <option value="all">ທັງໝົດ</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="brandFilter">ແບຣນສິນຄ້າ:</label>
-            <select id="brandFilter">
-              <option value="all">ທັງໝົດ</option>
-            </select>
-          </div>
-          <button class="btn-reset" id="resetFilters">
-            <i class="fas fa-undo"></i> ລ້າງ Filter
-          </button>
+        <div class="filter-group">
+          <i class="fas fa-folder"></i>
+          <select id="categoryFilter">
+            <option value="all">ທຸກໝວດໝູ່</option>
+          </select>
         </div>
+        <div class="filter-group">
+          <i class="fas fa-tag"></i>
+          <select id="brandFilter">
+            <option value="all">ທຸກແບຣນ</option>
+          </select>
+        </div>
+        <button class="btn-filter-reset" id="resetFilters"><i class="fas fa-undo-alt"></i> ຣີເຊັດ</button>
       </div>
-
-      <div class="products-grid" id="productsGrid">
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <p>ກຳລັງໂຫຼດລາຍການສິນຄ້າ...</p>
-        </div>
-      </div>
-
+      
+      <div class="products-count" id="productsCount"></div>
+      <div class="services-grid" id="productsGrid"></div>
     </div>
   </section>
+</main>
 
-  <footer class="footer">
-    <div class="footer-top section-padding">
-      <div class="container footer-grid">
-        <div class="footer-info">
-          <h3>B-ONE ENGINEERING</h3>
-          <p>ມຸ່ງໝັ້ນສູ່ການເປັນຜູ້ນຳດ້ານວິສະວະກຳ ແລະ ການບໍລິການເຕັກນິກທີ່ຄົບວົງຈອນໃນສປປ ລາວ</p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="far fa-envelope"></i></a>
-          </div>
+<footer style="background: linear-gradient(135deg, #0a0f1c 0%, #0b1323 100%); color: #e2e8f0; padding: 60px 0 30px; font-family: 'Inter', 'Noto Sans Lao', sans-serif; border-top: 1px solid rgba(255,255,255,0.05);">
+  <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 50px;">
+      <div>
+        <div style="margin-bottom: 20px;">
+          <span style="font-size: 28px; font-weight: 700; color: #b30000; letter-spacing: -0.5px;">B-One Engineering</span>
         </div>
-        <div class="footer-links">
-          <h4>ເມນູເວັບໄຊ</h4>
-          <ul>
-            <li><a href="/">ໜ້າຫຼັກ</a></li>
-            <li><a href="/about">ກ່ຽວກັບເຮົາ</a></li>
-            <li><a href="/services">ບໍລິການ</a></li>
-            <li><a href="/portfolio">ຜົນງານ</a></li>
-            <li><a href="/products">ສິນຄ້າ</a></li>
-          </ul>
+        <p style="font-size: 14px; line-height: 1.6; color: #cbd5e0;">ວິສະວະກຳຄົບວົງຈອນ ທີ່ທ່ານໄວ້ໃຈ | Complete Engineering Solutions You Can Trust</p>
+      </div>
+      <div>
+        <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Quick Links</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 12px;"><a href="/" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">🏠 Home</a></li>
+          <li style="margin-bottom: 12px;"><a href="/about" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">📄 About Us</a></li>
+          <li style="margin-bottom: 12px;"><a href="/services" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">🔧 Services</a></li>
+          <li style="margin-bottom: 12px;"><a href="/products" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">📦 Products</a></li>
+          <li style="margin-bottom: 12px;"><a href="/contact" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">📞 Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Key Services</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 12px; color: #cbd5e0;"><span style="color: #b30000;">▹</span> Installation & Maintenance</li>
+          <li style="margin-bottom: 12px; color: #cbd5e0;"><span style="color: #b30000;">▹</span> Electrical Engineering</li>
+          <li style="margin-bottom: 12px; color: #cbd5e0;"><span style="color: #b30000;">▹</span> Equipment Supply</li>
+          <li style="margin-bottom: 12px; color: #cbd5e0;"><span style="color: #b30000;">▹</span> Training & Testing</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Contact Info</h3>
+        <div style="display: flex; gap: 12px; margin-bottom: 15px;">
+          <i class="fas fa-map-marker-alt" style="color: #b30000; margin-top: 3px;"></i>
+          <span style="font-size: 14px; color: #cbd5e0;">Xoknoy Village, Saysettha District, Vientiane Capital, Laos</span>
         </div>
-        <div class="footer-contact">
-          <h4>ຂໍ້ມູນຕິດຕໍ່</h4>
-          <p><i class="fas fa-map-marker-alt"></i> ບ້ານໂຊກນ້ອຍ, ເມືອງໄຊເສດຖາ, ນະຄອນຫຼວງວຽງຈັນ</p>
-          <p><i class="fas fa-phone-alt"></i> +856 20 5947 8899</p>
-          <p><i class="fas fa-envelope"></i> info@b-one-engineering.com</p>
+        <div style="display: flex; gap: 12px; margin-bottom: 15px;">
+          <i class="fas fa-phone-alt" style="color: #b30000;"></i>
+          <span style="font-size: 14px; color: #cbd5e0;">+856 20 59478899</span>
+        </div>
+        <div style="display: flex; gap: 12px; margin-bottom: 15px;">
+          <i class="fas fa-envelope" style="color: #b30000;"></i>
+          <a href="mailto:info@b-one-engineering.com" style="font-size: 14px; color: #cbd5e0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#b30000'" onmouseout="this.style.color='#cbd5e0'">info@b-one-engineering.com</a>
+        </div>
+        <div style="display: flex; gap: 12px; margin-bottom: 15px;">
+          <i class="fas fa-clock" style="color: #b30000;"></i>
+          <span style="font-size: 14px; color: #cbd5e0;">Mon – Sun: 8:00 – 17:30</span>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; 2026 B-One Engineering Sole Co., Ltd. All Rights Reserved.</p>
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, #b30000, #b30000, transparent); margin: 20px 0 25px;"></div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 13px; color: #94a3b8;">
+      <p>© 2026 B-One Engineering Sole Co., Ltd. All Rights Reserved. | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
+      <div style="display: flex; gap: 20px;">
+        <span style="color: #94a3b8;">Privacy Policy</span>
+        <span style="color: #94a3b8;">Terms of Service</span>
+        <span style="color: #94a3b8;">Sitemap</span>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <div id="notificationToast" class="notification-toast"></div>
+<style>
+  footer a:hover {
+    color: #b30000 !important;
+    transform: translateX(2px);
+    transition: all 0.2s ease;
+  }
+  footer ul li a:hover {
+    color: #b30000 !important;
+    padding-left: 5px;
+  }
+  @media (max-width: 768px) {
+    footer div[style*="display: grid"] {
+      gap: 30px;
+      text-align: center;
+    }
+    footer div[style*="display: flex"]:last-child {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+</style>
+
+<a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div id="notification" class="notification"></div>
+
+<script>
+  const mobileBtn = document.getElementById('mobile-menu');
+  mobileBtn?.addEventListener('click', () => document.getElementById('nav-links')?.classList.toggle('active'));
+  
+  function getCart() { return JSON.parse(localStorage.getItem('b_one_cart') || '[]'); }
+  function saveCart(cart) { localStorage.setItem('b_one_cart', JSON.stringify(cart)); updateCartCount(); }
+  function updateCartCount() { document.getElementById('cartCount').innerText = getCart().reduce((s,i)=>s+i.quantity,0); }
+  function showNotification(msg) { const n = document.getElementById('notification'); n.innerText = msg; n.style.display = 'block'; setTimeout(()=>n.style.display='none',2000); }
+  updateCartCount();
+</script>
 
 <script type="module">
-  import { db, collection, getDocs } from '/firebase-config.js';
+  import { db, collection, getDocs, query, where, auth, onAuthStateChanged } from '/firebase-config.js';
 
   let allProducts = [];
-  let categoriesMap = new Map();
-  let productBrandsMap = new Map(); // 👑 ປ່ຽນມາເກັບ Map ຂອງແບຣນສິນຄ້າ (product_brands) ແທນ brands ຕົວແທນ
+  let categoriesMap = new Map(); // id -> name
+  let productBrandsMap = new Map(); // 👑 ປ່ຽນມາເກັບ Map ຂອງແບຣນສິນຄ້າ (product_brands) ແທນ
 
-  // Cart Management Functions
-  function getCart() {
-    return JSON.parse(localStorage.getItem('b_one_cart')) || [];
-  }
+  onAuthStateChanged(auth, (user) => {
+    const userDisplay = document.getElementById('userDisplay');
+    const loginDisplay = document.getElementById('loginDisplay');
+    const userNameSpan = document.getElementById('userName');
+    if (user) {
+      userNameSpan.textContent = user.displayName || user.email.split('@')[0];
+      userDisplay.style.display = 'block';
+      loginDisplay.style.display = 'none';
+    } else {
+      userDisplay.style.display = 'none';
+      loginDisplay.style.display = 'block';
+    }
+  });
 
-  function saveCart(cart) {
-    localStorage.setItem('b_one_cart', JSON.stringify(cart));
-    updateGlobalCartCount();
-  }
-
-  function updateGlobalCartCount() {
-    const cart = getCart();
-    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const countEl = document.getElementById('globalCartCount');
-    if (countEl) countEl.innerText = totalQty;
-  }
-
-  function showNotification(message) {
-    const toast = document.getElementById('notificationToast');
-    if (!toast) return;
-    toast.innerText = message;
-    toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
-  }
-
-  // 👑 ໂຫຼດ Options ໃສ່ Filter Dropdowns ໂດຍດຶງຈາກ 'product_brands'
+  // 👑 ໂຫຼດ Options ໃສ່ Filter Dropdowns (ເກັບຄ່າເປັນ ID ປ້ອງກັນຂໍ້ມູນຫຼົ່ນ)
   async function loadFilterOptions() {
     try {
-      const [catSnap, brandSnap] = await Promise.all([
-        getDocs(collection(db, 'categories')),
-        getDocs(collection(db, 'product_brands')) // 👑 ດຶງຂໍ້ມູນຈາກ collection ແບຣນສິນຄ້າແຍກ
-      ]);
-
+      // 1. ດຶງຂໍ້ມູນໝວດໝູ່
+      const categorySelect = document.getElementById('categoryFilter');
+      const catSnapshot = await getDocs(collection(db, 'categories'));
+      
       categoriesMap.clear();
-      catSnap.forEach(d => categoriesMap.set(d.id, d.data().name));
-
-      productBrandsMap.clear();
-      brandSnap.forEach(d => productBrandsMap.set(d.id, d.data().name));
-
-      // ຕື່ມ Option ໝວດໝູ່
-      const catFilter = document.getElementById('categoryFilter');
-      catFilter.innerHTML = '<option value="all">ທັງໝົດ</option>';
-      categoriesMap.forEach((name, id) => {
-        catFilter.innerHTML += `<option value="${id}">${name}</option>`;
+      categorySelect.innerHTML = '<option value="all">ທຸກໝວດໝູ່</option>';
+      catSnapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        categoriesMap.set(docSnap.id, data.name); // ເກັບໃສ່ Map (id -> name)
+        categorySelect.innerHTML += `<option value="${docSnap.id}">${data.name}</option>`; // value ເປັນ id
       });
 
-      // 👑 ຕື່ມ Option ແບຣນສິນຄ້າ (Value ເກັບເປັນ ID ເພື່ອເອົາໄປ Filter ໃຫ້ກົງກັບໜ້າ Admin)
-      const brandFilter = document.getElementById('brandFilter');
-      brandFilter.innerHTML = '<option value="all">ທັງໝົດ</option>';
-      productBrandsMap.forEach((name, id) => {
-        brandFilter.innerHTML += `<option value="${id}">${name}</option>`;
+      // 2. 👑 ດຶງຂໍ້ມູນແບຣນສິນຄ້າຈາກ collection 'product_brands' ແທນ 'brands'
+      const brandSelect = document.getElementById('brandFilter');
+      const brandSnapshot = await getDocs(collection(db, 'product_brands'));
+      
+      productBrandsMap.clear();
+      brandSelect.innerHTML = '<option value="all">ທຸກແບຣນ</option>';
+      brandSnapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const brandName = data.name || data.brandName; 
+        productBrandsMap.set(docSnap.id, brandName); // ເກັບໃສ່ Map (id -> name)
+        brandSelect.innerHTML += `<option value="${docSnap.id}">${brandName}</option>`; // value ເປັນ id
       });
 
     } catch (error) {
-      console.error("Error loading filter options: ", error);
+      console.error("Error loading filters: ", error);
     }
   }
 
-  // ໂຫຼດລາຍການສິນຄ້າທັງໝົດ
+  // ໂຫຼດສິນຄ້າ
   async function loadProducts() {
     const grid = document.getElementById('productsGrid');
+    grid.innerHTML = '<div style="text-align:center;">ກຳລັງໂຫຼດ...</div>';
     try {
-      const querySnapshot = await getDocs(collection(db, 'products'));
+      const q = query(collection(db, 'products'), where('status', '==', 'active'));
+      const snap = await getDocs(q);
       allProducts = [];
-      
-      querySnapshot.forEach(docSnap => {
-        if(docSnap.data().status !== 'inactive') {
-          allProducts.push({ id: docSnap.id, ...docSnap.data() });
-        }
+      snap.forEach(doc => {
+        const p = doc.data();
+        allProducts.push({
+          id: doc.id,
+          name: p.name,
+          price: p.price,
+          image: p.image || 'https://via.placeholder.com/300x200',
+          category: p.category || null, // ດຶງຄ່າ field category (ID ໝວດໝູ່)
+          brand: p.brand || null,       // ດຶງຄ່າ field brand (ID ແບຣນສິນຄ້າ)
+          stock: p.stock !== undefined ? p.stock : 0,
+          status: p.status
+        });
       });
-
-      renderProducts(allProducts);
-    } catch (error) {
-      console.error("Error loading products: ", error);
-      grid.innerHTML = `<div class="error-state"><p>ເກີດຂໍ້ຜິດພາດໃນການໂຫຼດຂໍ້ມູນສິນຄ້າ: ${error.message}</p></div>`;
-    }
+      applyFilters();
+    } catch(e) { console.error(e); grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
   }
 
-  // ສະແດງຜົນ Card ສິນຄ້າ
-  function renderProducts(productsList) {
-    const grid = document.getElementById('productsGrid');
-    if (!grid) return;
+  // 👑 ລະບົບປະມວນຜົນ Filter ປຽບທຽບດ້ວຍ ID
+  function applyFilters() {
+    const searchText = document.getElementById('searchInput').value.toLowerCase();
+    const selectedCatId = document.getElementById('categoryFilter').value;
+    const selectedBrandId = document.getElementById('brandFilter').value;
+    
+    let filtered = allProducts.filter(p => {
+      if (searchText && !p.name.toLowerCase().includes(searchText)) return false;
+      // 👑 ປຽບທຽບ ID ໝວດໝູ່
+      if (selectedCatId !== 'all' && p.category !== selectedCatId) return false;
+      // 👑 ປຽບທຽບ ID ແບຣນສິນຄ້າ
+      if (selectedBrandId !== 'all' && p.brand !== selectedBrandId) return false;
+      return true;
+    });
+    
+    renderProducts(filtered);
+    document.getElementById('productsCount').innerHTML = `ພົບ ${filtered.length} ລາຍການ`;
+  }
 
-    if (productsList.length === 0) {
-      grid.innerHTML = '<div class="empty-state"><p>ບໍ່ພົບລາຍການສິນຄ້າທີ່ທ່ານຄົ້ນຫາ</p></div>';
+  function renderProducts(products) {
+    const grid = document.getElementById('productsGrid');
+    if (!products.length) {
+      grid.innerHTML = '<div style="text-align:center; padding:40px;">ບໍ່ພົບສິນຄ້າທີ່ຕ້ອງການ</div>';
       return;
     }
-
-    let html = '';
-    productsList.forEach(p => {
-      const catName = categoriesMap.get(p.category) || p.category || 'ທົ່ວໄປ';
-      const brandName = productBrandsMap.get(p.brand) || p.brand || '-'; // 👑 ສະແດງຊື່ແບຣນສິນຄ້າຈາກ product_brands Map
-      const isOutOfStock = !p.stock || p.stock <= 0;
+    grid.innerHTML = '';
+    products.forEach(product => {
+      const stock = product.stock;
+      let stockClass = 'stock-out';
+      let stockText = 'ສິນຄ້າຫມົດ';
+      if (stock > 10) {
+        stockClass = 'stock-in';
+        stockText = `ສະຕ໋ອກ: ${stock} ອັນ`;
+      } else if (stock > 0 && stock <= 10) {
+        stockClass = 'stock-low';
+        stockText = `ສະຕ໋อก: ${stock} ອັນ (ເຫຼືອໜ້ອຍ)`;
+      }
       
-      html += `
-        <div class="product-card" style="position: relative;">
-          ${isOutOfStock ? '<div class="out-of-stock-badge">ສິນຄ້າໝົດ</div>' : ''}
-          <div class="product-image">
-            <img src="${p.image || '/images/product-placeholder.jpg'}" alt="${p.name}" onerror="this.src='/images/product-placeholder.jpg'">
-          </div>
-          <div class="product-details">
-            <span class="product-category">${catName}</span>
-            <h3 class="product-title">${p.name}</h3>
-            <div class="product-meta" style="margin-bottom: 8px; font-size: 0.85rem; color: #666;">
-              <span>ແບຣນ: <strong>${brandName}</strong></span>
-              <span style="margin-left: 10px;">ສະຕ໋ອກ: <strong>${p.stock || 0}</strong></span>
-            </div>
-            <p class="product-description">${p.description || ''}</p>
-            <div class="product-footer">
-              <span class="product-price">${(p.price || 0).toLocaleString()} ₭</span>
-              <button class="btn-add-to-cart" 
-                      data-id="${p.id}" 
-                      data-name="${p.name}" 
-                      data-price="${p.price}" 
-                      data-image="${p.image || ''}" 
-                      data-stock="${p.stock || 0}"
-                      ${isOutOfStock ? 'disabled' : ''}>
-                <i class="fas fa-cart-plus"></i> ໃສ່ກະຕ່າ
-              </button>
-            </div>
+      // 👑 ດຶງຊື່ໝວດໝູ່ ແລະ ແບຣນສິນຄ້າອອກມາສະແດງຈາກ Map ດ້ວຍ ID ຢ່າງຖືກຕ້ອງ
+      const categoryName = product.category ? categoriesMap.get(product.category) || '-' : '-';
+      const brandName = product.brand ? productBrandsMap.get(product.brand) || '-' : '-';
+      
+      grid.innerHTML += `
+        <div class="product-card" style="background:white; border-radius:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+          <div style="height:200px; overflow:hidden;"><img src="${product.image}" style="width:100%; height:100%; object-fit:cover;"></div>
+          <div style="padding:20px; flex:1; display:flex; flex-direction:column;">
+            <h3 style="font-size:1.2rem;">${product.name}</h3>
+            <p style="color:#6c757d; font-size:0.8rem;"><i class="fas fa-folder"></i> ${categoryName} &nbsp;|&nbsp; <i class="fas fa-tag"></i> ${brandName}</p>
+            <p style="color:#b91c1c; font-weight:700; font-size:1.2rem;">₭${product.price.toLocaleString()}</p>
+            <div class="stock-badge ${stockClass}"><i class="fas fa-boxes"></i> ${stockText}</div>
+            ${stock > 0 ? `<button class="btn-add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image}" data-stock="${product.stock}"><i class="fas fa-cart-plus"></i> ເພີ່ມໃສ່ກະຕ່າ</button>` : `<button class="btn-out-of-stock" disabled><i class="fas fa-times-circle"></i> สິນຄ້າຫມົດ</button>`}
           </div>
         </div>
       `;
     });
-    grid.innerHTML = html;
-    attachCartEvents();
-  }
 
-  // ຜູກ Event ໃຫ້ປຸ່ມ "ໃສ່ກະຕ່າ"
-  function attachCartEvents() {
+    // Attach event listeners to all add-to-cart buttons
     document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
-      btn.onclick = function() {
+      btn.onclick = () => {
         const product = { 
-          id: this.dataset.id, 
-          name: this.dataset.name, 
-          price: parseInt(this.dataset.price) || 0, 
-          image: this.dataset.image,
-          stock: parseInt(this.dataset.stock) || 0
+          id: btn.dataset.id, 
+          name: btn.dataset.name, 
+          price: parseInt(btn.dataset.price), 
+          image: btn.dataset.image,
+          stock: parseInt(btn.dataset.stock)
         };
-        
         let cart = getCart();
         const existing = cart.find(item => item.id === product.id);
         const currentQtyInCart = existing ? existing.quantity : 0;
-        
         if (currentQtyInCart >= product.stock) {
           showNotification(`ສິນຄ້າ ${product.name} ມີສະຕ໋ອກເຫຼືອພຽງ ${product.stock} ອັນ, ທ່ານຈຶ່ງບໍ່ສາມາດເພີ່ມໄດ້ອີກ`);
           return;
         }
-        
         if (existing) existing.quantity++;
         else cart.push({ ...product, quantity: 1 });
-        
         saveCart(cart);
-        showNotification(`ເພີ່ມ ${product.name} ໃສ່ກະຕ່າສິນຄ້າແລ້ວ`);
+        showNotification(`ເພີ່ມ ${product.name} ໃສ່ກະຕ່າສິນຄ້າ`);
       };
     });
   }
 
-  // 👑 ລະບົບປະມວນຜົນ Filter ປຽບທຽບດ້ວຍ ID ໝວດໝູ່ ແລະ ID ແບຣນສິນຄ້າ (product_brands)
-  function applyFilters() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const selectedCat = document.getElementById('categoryFilter').value;
-    const selectedBrand = document.getElementById('brandFilter').value;
-
-    const filtered = allProducts.filter(p => {
-      const matchesSearch = p.name.toLowerCase().includes(searchTerm) || (p.description && p.description.toLowerCase().includes(searchTerm));
-      // ປຽບທຽບ ID ໝວດໝູ່
-      const matchesCat = selectedCat === 'all' || p.category === selectedCat;
-      // 👑 ປຽບທຽບ ID ແບຣນສິນຄ້າຢ່າງຖືກຕ້ອງ
-      const matchesBrand = selectedBrand === 'all' || p.brand === selectedBrand;
-
-      return matchesSearch && matchesCat && matchesBrand;
-    });
-
-    renderProducts(filtered);
-  }
-
-  // Event listeners ສໍາລັບແຖວ Filter ດ້ານເທິງ
+  // Event listeners for filters
   document.getElementById('searchInput').addEventListener('input', () => applyFilters());
   document.getElementById('categoryFilter').addEventListener('change', () => applyFilters());
   document.getElementById('brandFilter').addEventListener('change', () => applyFilters());
@@ -329,21 +409,10 @@
     applyFilters();
   });
 
-  // Mobile Menu Toggle
-  const mobileMenu = document.getElementById('mobile-menu');
-  const navList = document.getElementById('nav-list');
-  if(mobileMenu && navList) {
-    mobileMenu.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-      navList.classList.toggle('active');
-    });
-  }
-
-  // ເລີ່ມຕົ້ນໂຫຼດລະບົບເວັບໄຊ
+  // ເລີ່ມຕົ້ນໂຫຼດໜ້າຕ່າງໆຕາມລຳດັບ
   async function initPage() {
-    updateGlobalCartCount();
-    await loadFilterOptions(); // ໂຫຼດ maps ແລະ dropdown options ກ່ອນ
-    await loadProducts();      // ໂຫຼດລາຍການສິນຄ້າຕາມຫຼັງ
+    await loadFilterOptions(); // ໂຫຼດ Options ໃຫ້ຮຽບຮ້ອຍກ່ອນ
+    await loadProducts();      // ໂຫຼດສິນຄ້າຕາມຫຼັງ
   }
 
   initPage();
