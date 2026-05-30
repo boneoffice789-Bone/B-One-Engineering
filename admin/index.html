@@ -99,6 +99,7 @@
   <a onclick="showTab('dashboard')" class="active" id="nav-dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a>
   <a onclick="showTab('salesReport')" id="nav-salesReport"><i class="fas fa-chart-line"></i> ລາຍງານການຂາຍ</a>
   <a onclick="showTab('products')" id="nav-products"><i class="fas fa-box"></i> ສິນຄ້າ</a>
+  <a onclick="showTab('categories')" id="nav-categories"><i class="fas fa-folder"></i> ໝວດໝູ່</a>
   <a onclick="showTab('services')" id="nav-services"><i class="fas fa-tools"></i> ບໍລິການ</a>
   <a onclick="showTab('portfolio')" id="nav-portfolio"><i class="fas fa-trophy"></i> ຜົນງານ</a>
   <a onclick="showTab('brands')" id="nav-brands"><i class="fas fa-tag"></i> ແບຣນ</a>
@@ -169,7 +170,40 @@
       </table>
     </div>
   </div>
+<div id="categories" class="tab-content">
+  <h2><i class="fas fa-folder"></i> ຈັດການໝວດໝູ່ 
+    <button class="btn btn-primary" onclick="openCategoryModal()"><i class="fas fa-plus"></i> ເພີ່ມໝວດໝູ່</button>
+  </h2>
+  <div class="table-wrapper">
+    <table id="categoryTable">
+      <thead>
+        <tr>
+          <th>ຊື່ໝວດໝູ່</th>
+          <th>ຈັດການ</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
 
+<div class="modal" id="categoryModal">
+  <div class="modal-content" style="max-width: 400px;">
+    <h3 id="categoryModalTitle">ເພີ່ມໝວດໝູ່</h3>
+    <form id="categoryForm">
+      <input type="hidden" id="categoryId">
+      <div class="form-group">
+        <label>ຊື່ໝວດໝູ່</label>
+        <input type="text" id="categoryName" required>
+      </div>
+      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px;">
+        <button type="button" class="btn btn-danger" onclick="closeCategoryModal()">ຍົກເລີກ</button>
+        <button type="submit" class="btn btn-success">ບັນທຶກ</button>
+      </div>
+    </form>
+  </div>
+</div>
+  
   <!-- Services -->
   <div id="services" class="tab-content">
     <h2>🔧 ຈັດການບໍລິການ <button class="btn btn-primary" onclick="openServiceModal()"><i class="fas fa-plus"></i> ເພີ່ມບໍລິການ</button></h2>
@@ -257,13 +291,17 @@
         <input type="number" id="prodPrice" required>
       </div>
       <div class="form-group">
-        <label>ໝວດໝູ່</label>
-        <input type="text" id="prodCategory" placeholder="ປ້ອນໝວດໝູ່...">
-      </div>
-      <div class="form-group">
-        <label>ແບຣນ</label>
-        <input type="text" id="prodBrand" placeholder="ປ້ອນຊື່ແບຣນ...">
-      </div>
+  <label>ໝວດໝູ່</label>
+  <select id="prodCategory" required>
+    <option value="">-- ເລືອກໝວດໝູ່ --</option>
+  </select>
+</div>
+<div class="form-group">
+  <label>ແບຣນ</label>
+  <select id="prodBrand" required>
+    <option value="">-- ເລືອກແບຣນ --</option>
+  </select>
+</div>
       <div class="form-group">
         <label>ລາຍລະອຽດ / ລາຍການ</label>
         <textarea id="prodDesc" rows="3" placeholder="ປ້ອນລາຍລະອຽດ ຫຼື ລາຍການຍ່ອຍຂອງສິນຄ້າ..."></textarea>
@@ -891,6 +929,96 @@
   }
 
   document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('show'); }));
+  // --- ຈັດການ Modal ໝວດໝູ່ ---
+function openCategoryModal() {
+  document.getElementById('categoryModal').classList.add('show');
+  document.getElementById('categoryForm').reset();
+  document.getElementById('categoryId').value = '';
+  document.getElementById('categoryModalTitle').innerText = 'ເພີ່ມໝວດໝູ່';
+}
+function closeCategoryModal() {
+  document.getElementById('categoryModal').classList.remove('show');
+}
+
+// --- ບັນທຶກໝວດໝູ່ ---
+document.getElementById('categoryForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = document.getElementById('categoryId').value;
+  const name = document.getElementById('categoryName').value;
+  
+  try {
+    if(id) {
+      // ຖ້າມີ ID ແມ່ນແກ້ໄຂ
+      await updateDoc(doc(db, 'categories', id), { name: name });
+    } else {
+      // ຖ້າບໍ່ມີ ID ແມ່ນເພີ່ມໃໝ່
+      await addDoc(collection(db, 'categories'), { name: name });
+    }
+    closeCategoryModal();
+    loadCategoriesAdmin();
+  } catch(err) {
+    alert('ເກີດຂໍ້ຜິດພາດ: ' + err.message);
+  }
+});
+
+// --- ໂຫຼດໝວດໝູ່ເຂົ້າຕາຕະລາງ ແລະ Dropdown ຕອນເພີ່ມສິນຄ້າ ---
+async function loadCategoriesAdmin() {
+  const snapshot = await getDocs(collection(db, 'categories'));
+  const tbody = document.querySelector('#categoryTable tbody');
+  const prodSelect = document.getElementById('prodCategory');
+  
+  tbody.innerHTML = '';
+  prodSelect.innerHTML = '<option value="">-- ເລືອກໝວດໝູ່ --</option>';
+  
+  snapshot.forEach(docSnap => {
+    const data = docSnap.data();
+    // ໃສ່ຕາຕະລາງ
+    tbody.innerHTML += `
+      <tr>
+        <td>${data.name}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" onclick="editCategory('${docSnap.id}', '${data.name}')"><i class="fas fa-edit"></i> ແກ້ໄຂ</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteCategory('${docSnap.id}')"><i class="fas fa-trash"></i> ລຶບ</button>
+        </td>
+      </tr>
+    `;
+    // ໃສ່ Dropdown
+    prodSelect.innerHTML += `<option value="${data.name}">${data.name}</option>`;
+  });
+}
+
+// --- ດຶງຂໍ້ມູນແບຣນເຂົ້າ Dropdown ຕອນເພີ່ມສິນຄ້າ (ທ່ານມີລະບົບແບຣນຢູ່ແລ້ວ) ---
+async function loadBrandsForSelect() {
+  const snapshot = await getDocs(collection(db, 'brands'));
+  const brandSelect = document.getElementById('prodBrand');
+  brandSelect.innerHTML = '<option value="">-- ເລືອກແບຣນ --</option>';
+  snapshot.forEach(docSnap => {
+    const data = docSnap.data();
+    // ສົມມຸດວ່າແບຣນຂອງທ່ານເກັບຊື່ໄວ້ໃນ field: name ຫຼື brandName
+    const brandName = data.name || data.brandName; 
+    brandSelect.innerHTML += `<option value="${brandName}">${brandName}</option>`;
+  });
+}
+
+function editCategory(id, name) {
+  openCategoryModal();
+  document.getElementById('categoryId').value = id;
+  document.getElementById('categoryName').value = name;
+  document.getElementById('categoryModalTitle').innerText = 'ແກ້ໄຂໝວດໝູ່';
+}
+
+async function deleteCategory(id) {
+  if(confirm('ລຶບໝວດໝູ່ນີ້ແທ້ບໍ່?')) {
+    await deleteDoc(doc(db, 'categories', id));
+    loadCategoriesAdmin();
+  }
+}
+
+// ຢ່າລືມເອີ້ນໃຊ້ 2 ຟັງຊັນນີ້ຕອນໂຫຼດໜ້າແລ້ວ
+document.addEventListener('DOMContentLoaded', () => {
+  loadCategoriesAdmin();
+  loadBrandsForSelect();
+});
 </script>
 </body>
 </html>
