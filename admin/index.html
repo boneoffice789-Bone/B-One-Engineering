@@ -132,7 +132,7 @@
     <h2>📈 ລາຍງານການຂາຍ</h2>
     <div class="report-toolbar">
       <div class="form-group" style="min-width:150px;"><label>ວັນທີເລີ່ມຕົ້ນ</label><input type="date" id="reportStartDate"></div>
-      <div class="form-group" style="min-width:150px;"><label>ວันທີສິ້ນສຸດ</label><input type="date" id="reportEndDate"></div>
+      <div class="form-group" style="min-width:150px;"><label>ວັນທີສິ້ນສຸດ</label><input type="date" id="reportEndDate"></div>
       <div class="report-buttons">
         <button class="btn btn-primary" onclick="loadSalesReport()"><i class="fas fa-search"></i> ສະແດງລາຍງານ</button>
         <button class="btn btn-success" onclick="exportReportExcel()"><i class="fas fa-file-excel"></i> Excel</button>
@@ -143,7 +143,7 @@
       <h3 style="margin:15px 0 0 15px;">📊 ສະຫຼຸບຍອດຂາຍລາຍວັນ</h3>
       <table id="reportTable">
         <thead><tr><th>ວັນທີ</th><th>ຈຳນວນຄຳສັ່ງ</th><th>ຍອດຂາຍລວມ (ກີບ)</th></tr></thead>
-        <tbody><tr><td colspan="3" style="text-align:center;">ກະລຸນາເລືອກຊ່ວງວັນທີ ແລ້ວກົດ "ສະແດງລາຍງານ"</td></tr></tbody>
+        <tbody><tr><td colspan="3" style="text-align:center;">กະລຸນາເລືອກຊ່ວງວັນທີ ແລ້ວກົດ "ສະແດງລາຍງານ"</td></tr></tbody>
       </table>
     </div>
   </div>
@@ -375,7 +375,7 @@
 
   // --- 👑 ສົ່ງຟັງຊັນອອກໄປ Scope ພາຍນອກ (window) ເພື່ອໃຫ້ປຸ່ມ HTML ກົດເອີ້ນໃຊ້ງານໄດ້ 100% ---
   window.openCategoryModal = function() {
-    const form = document.getElementById('categoryForm'); if (form) form.reset();
+    document.getElementById('categoryForm').reset();
     document.getElementById('categoryId').value = '';
     document.getElementById('categoryModalTitle').innerText = 'ເພີ່ມໝວດໝູ່';
     document.getElementById('categoryModal').classList.add('show');
@@ -383,7 +383,7 @@
   window.closeCategoryModal = function() { document.getElementById('categoryModal').classList.remove('show'); };
 
   window.openBrandModal = function() {
-    const form = document.getElementById('brandForm'); if (form) form.reset();
+    document.getElementById('brandForm').reset();
     document.getElementById('brandId').value = '';
     document.getElementById('brandModalTitle').innerText = 'ເພີ່ມແບຣນ';
     document.getElementById('brandModal').classList.add('show');
@@ -444,7 +444,7 @@
   window.loadSalesReport = async () => {
     const start = document.getElementById('reportStartDate').value; const end = document.getElementById('reportEndDate').value;
     if(!start || !end){ alert('ກະລຸນາເລືອກຊ່ວງວັນທີ'); return; }
-    const tbody = document.querySelector('#reportTable tbody'); if(!tbody){ return; }
+    const tbody = document.querySelector('#reportTable tbody'); if(!tbody) return;
     const startMs = new Date(start).setHours(0,0,0,0); const endMs = new Date(end).setHours(23,59,59,999);
     const snap = await getDocs(collection(db, 'orders'));
     const filteredOrders = snap.docs.filter(doc => { const o = doc.data(); return o.createdAt?.seconds && (o.createdAt.seconds*1000) >= startMs && (o.createdAt.seconds*1000) <= endMs; }).map(doc => ({ id: doc.id, ...doc.data() }));
@@ -540,7 +540,7 @@
   });
 
   // --- ຈັດການລະບົບໝວດໝູ່ ແລະ ແບຣນ ---
-  async function handleCategorySubmit(e) {
+  window.handleCategorySubmit = async function(e) {
     e.preventDefault(); const id = document.getElementById('categoryId').value; const name = document.getElementById('categoryName').value.trim();
     if (!name) return alert('ກະລຸນາປ້ອນຊື່ໝວດໝູ່');
     if (id) { await updateDoc(doc(db, 'categories', id), { name: name }); alert('ແກ້ໄຂໝວດໝູ່ສຳເລັດ'); } 
@@ -548,7 +548,7 @@
     window.closeCategoryModal(); await window.loadCategoriesAdmin();
   }
 
-  async function handleBrandSubmit(e) {
+  window.handleBrandSubmit = async function(e) {
     e.preventDefault(); const id = document.getElementById('brandId').value; const name = document.getElementById('brandName').value.trim(); const category = document.getElementById('brandCategory').value.trim();
     if (!name) return alert('ກະລຸນາປ້ອນຊື່ແບຣນ');
     if (id) { await updateDoc(doc(db, 'brands', id), { name: name, category: category }); alert('ແກ້ໄຂແບຣນສຳເລັດ'); } 
@@ -602,8 +602,8 @@
     await Promise.all([loadProducts(), loadServices(), loadPortfolio(), loadContacts(), loadOrders(), loadUsers(), loadNews(), loadSliders()]);
   }
 
-  document.getElementById('categoryForm').addEventListener('submit', handleCategorySubmit);
-  document.getElementById('brandForm').addEventListener('submit', handleBrandSubmit);
+  document.getElementById('categoryForm').addEventListener('submit', window.handleCategorySubmit);
+  document.getElementById('brandForm').addEventListener('submit', window.handleBrandSubmit);
   loadAll();
 </script>
 </body>
