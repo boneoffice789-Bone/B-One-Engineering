@@ -298,8 +298,7 @@
       snap.forEach(doc => {
         const s = doc.data();
         let iconHtml = s.imageUrl?.startsWith('http') ? `<img src="${s.imageUrl}" style="width:60px;height:60px;object-fit:contain;">` : `<i class="fas ${s.imageUrl || 'fa-cog'}"></i>`;
-        grid.innerHTML += `<div class="service-card"><div class="card-icon">${iconHtml}</div><h3>${s.name}</h3><p>${(s.description || '').substring(0,80)}...</p></div>`;
-      });
+        grid.innerHTML += `<div class="service-card"><div class="card-icon">${iconHtml}</div><h3>${s.name}</h3><p>${(s.description || '')}</p></div>`;
     } catch(e) { grid.innerHTML = '<div>ເກີດຂໍ້ຜິດພາດ</div>'; }
   }
 
