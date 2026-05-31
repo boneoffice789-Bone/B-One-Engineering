@@ -1143,21 +1143,16 @@ footer {
     margin: 8px 0;
     word-break: break-word;
 }
-/* ແກ້ໄຂບັນຫາຂໍ້ຄວາມຖືກຕັດທົ່ວທັງເວັບໄຊ */
-.service-card p,
-.portfolio-card p,
-.news-card p,
-.hero-content p,
+/* ບັງຄັບໃຫ້ຂໍ້ຄວາມສະແດງເຕັມ ແລະ ບໍ່ຕັດ */
+.service-card p, 
+.portfolio-card p, 
+.news-card p, 
+.hero-content p, 
 .section-sub {
-    white-space: normal !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    text-overflow: unset !important;
-}
-
-/* ສຳລັບບໍລິການທີ່ມີຈຸດ ... */
-.service-card p,
-.portfolio-card p {
-    display: block;
-    overflow: visible;
+    display: block !important;
+    -webkit-line-clamp: unset !important; /* ຍົກເລີກການຈຳກັດແຖວ */
+    overflow: visible !important;         /* ໃຫ້ສະແດງສິ່ງທີ່ລົ້ນອອກມາ */
+    text-overflow: clip !important;       /* ບໍ່ໃຫ້ໃສ່ ... */
+    white-space: normal !important;       /* ໃຫ້ຂຶ້ນແຖວໃໝ່ຕາມປົກກະຕິ */
+    max-height: none !important;          /* ບໍ່ຈຳກັດຄວາມສູງ */
 }
