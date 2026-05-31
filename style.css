@@ -1143,29 +1143,22 @@ footer {
     margin: 8px 0;
     word-break: break-word;
 }
-/* 1. ແກ້ໄຂບັນຫາ Text Truncation ໃນ Card */
-.service-card p, 
-.portfolio-card p, 
-.news-card p {
-    display: block !important;
-    -webkit-line-clamp: unset !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    white-space: normal !important;
-    max-height: none !important;
-    /* ບໍ່ຕ້ອງຕັ້ງ height: auto ຢູ່ບ່ອນນີ້ ເພື່ອໃຫ້ flex ຍັງເຮັດວຽກ */
-}
-
-/* 2. ປັບ Container ໃຫ້ຍືດຕາມຂໍ້ຄວາມ */
+/* ປັບໃຫ້ Card ຍືດຕາມເນື້ອຫາ ແລະ ສະແດງຂໍ້ຄວາມເຕັມ */
 .service-card, .portfolio-card, .news-card {
+    height: auto !important; 
+    min-height: 300px;
     display: flex !important;
     flex-direction: column !important;
-    height: auto !important; /* ໃຫ້ມັນຍືດຕາມຄວາມຍາວຂອງເນື້ອຫາ */
-    min-height: 350px;      /* ຕັ້ງຄ່າຄວາມສູງຕໍ່າສຸດໃຫ້ Card ເທົ່າກັນ */
     overflow: visible !important;
 }
 
-/* 3. ແກ້ໄຂບັນຫາຕາຕະລາງ */
+.service-card p, .portfolio-card p, .news-card p {
+    flex: 1 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    text-overflow: clip !important;
+    margin-bottom: 10px;
+}
 .table-wrapper td {
     white-space: normal !important;
     word-break: break-word !important;
