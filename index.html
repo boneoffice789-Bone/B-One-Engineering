@@ -2,11 +2,69 @@
 <html lang="lo">
 <head>
   <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>B-One Engineering | ໜ້າຫຼັກ</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="/style.css">
+  
+  <!-- CSS ເພີ່ມເຕີມສຳລັບປຸ່ມໃໝ່ -->
+  <style>
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+    }
+    .quick-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      min-width: 160px;
+    }
+    .quick-link-item {
+      display: block;
+      padding: 12px 20px;
+      border: 2px solid #b30000;
+      background-color: #ffde00;
+      color: #000;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      box-shadow: 4px 4px 0px rgba(179, 0, 0, 0.4);
+    }
+    .quick-link-item:hover {
+      background-color: #b30000;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+    }
+    .hero-content {
+      flex: 1;
+      min-width: 300px;
+    }
+    .hero-image {
+      flex: 1;
+      min-width: 300px;
+    }
+    @media (max-width: 992px) {
+      .hero-grid {
+        flex-direction: column;
+      }
+      .quick-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+      .quick-link-item {
+        flex: 1 1 40%;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -49,7 +107,7 @@
 </header>
 
 <main>
- <section class="slider-section">
+  <section class="slider-section">
     <div class="slider-container">
       <div class="slider-wrapper" id="sliderWrapper"></div>
       <button class="slider-btn slider-prev prev-btn" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
@@ -57,9 +115,20 @@
       <div class="slider-dots" id="sliderDots"></div>
     </div>
   </section>
-  <!-- Hero Section -->
+
+  <!-- Hero Section (ອັບເດດໃໝ່) -->
   <section id="home" class="hero">
     <div class="container hero-grid">
+      
+      <!-- 4 ລາຍການທີ່ເພີ່ມໃໝ່ -->
+      <div class="quick-links">
+        <a href="/products/electrical-equipment" class="quick-link-item">ອຸປະກອນໄຟຟ້າ</a>
+        <a href="/products/building-electrical" class="quick-link-item">ໄຟຟ້າອາຄານ</a>
+        <a href="/products/electric-motors" class="quick-link-item">ຈັກຂັບໄຟຟ້າ</a>
+        <a href="/products/transformers" class="quick-link-item">ໝໍ້ແປງໄຟຟ້າ</a>
+      </div>
+
+      <!-- ຂໍ້ຄວາມ Hero ເດີມ -->
       <div class="hero-content">
         <div class="hero-badge"><i class="fas fa-cogs"></i> ຜູ້ນຳດ້ານວິສະວະກຳ ແລະ ບໍລິການອຸດສາຫະກຳ | Industry Leader</div>
         <h1>- ຕິດຕັ້ງ <br>- ຈຳໜ່າຍ <br>- ບໍລິການ ຄົບວົງຈອນ</h1>
@@ -67,11 +136,15 @@
         <a href="/contact" class="btn"><i class="fas fa-phone-alt"></i> ຕິດຕໍ່ສອບຖາມ | CONTACT</a>
         <a href="/services" class="btn btn-outline"><i class="fas fa-chart-line"></i> ບໍລິການຂອງພວກເຮົາ | SERVICES</a>
       </div>
+
+      <!-- ຮູບພາບ Hero ເດີມ -->
       <div class="hero-image">
         <img src="https://i.ibb.co/N24nj6B6/Chat-GPT-Image-22-2569-12-05-02.png" alt="B-One Engineering">
       </div>
+
     </div>
   </section>
+
   <!-- Why choose us (static) -->
   <section style="padding: 60px 0; background: #fefaf8;">
     <div class="container">
@@ -84,6 +157,7 @@
       </div>
     </div>
   </section>
+
   <!-- Featured services (dynamic) -->
   <section style="padding: 60px 0;">
     <div class="container">
@@ -93,6 +167,7 @@
       <div class="text-center" style="margin-top: 40px;"><a href="/services" class="btn btn-outline">ເບິ່ງບໍລິການທັງໝົດ →</a></div>
     </div>
   </section>
+
   <!-- Featured products (dynamic) -->
   <section style="padding: 60px 0; background: #fefaf8;">
     <div class="container">
@@ -111,153 +186,90 @@
       <div class="news-grid" id="newsGrid"><div class="loading">ກຳລັງໂຫຼດຂ່າວ...</div></div>
     </div>
   </section>
-<!-- ===== ລູກຄ້າທີ່ໄວ້ໃຈ — Logo Marquee ===== -->
-<style>
-  .customers-section {
-    padding: 60px 0;
-    background: #ffffff;
-    overflow: hidden;
-  }
-  .marquee {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  }
-  .marquee-track {
-    display: flex;
-    gap: 40px;
-    width: max-content;
-    align-items: center;
-    padding: 10px 0;
-  }
-  .track-left  { animation: scrollLeft 40s linear infinite; }
-  .track-right { animation: scrollRight 45s linear infinite; }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
 
-  @keyframes scrollLeft {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  @keyframes scrollRight {
-    from { transform: translateX(-50%); }
-    to   { transform: translateX(0); }
-  }
+  <!-- ===== ລູກຄ້າທີ່ໄວ້ໃຈ — Logo Marquee ===== -->
+  <style>
+    .customers-section { padding: 60px 0; background: #ffffff; overflow: hidden; }
+    .marquee { width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+    .marquee-track { display: flex; gap: 40px; width: max-content; align-items: center; padding: 10px 0; }
+    .track-left  { animation: scrollLeft 40s linear infinite; }
+    .track-right { animation: scrollRight 45s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes scrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    .customer-logo { flex: 0 0 auto; width: 140px; height: 90px; background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s; filter: grayscale(30%); opacity: 0.85; }
+    .customer-logo:hover { transform: scale(1.08); box-shadow: 0 6px 18px rgba(179,0,0,0.25); filter: grayscale(0%); opacity: 1; }
+    @media (max-width: 768px) { .customer-logo { width: 100px; height: 70px; } .marquee-track { gap: 25px; } .track-left  { animation-duration: 30s; } .track-right { animation-duration: 35s; } }
+  </style>
 
-  .customer-logo {
-    flex: 0 0 auto;
-    width: 140px;
-    height: 90px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s;
-    filter: grayscale(30%);
-    opacity: 0.85;
-  }
-  .customer-logo:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 18px rgba(179,0,0,0.25);
-    filter: grayscale(0%);
-    opacity: 1;
-  }
-
-  @media (max-width: 768px) {
-    .customer-logo { width: 100px; height: 70px; }
-    .marquee-track { gap: 25px; }
-    .track-left  { animation-duration: 30s; }
-    .track-right { animation-duration: 35s; }
-  }
-</style>
-
-<section class="customers-section">
-  <div class="container">
-    <h2 class="section-title" style="color: #b30000; text-align: center;">
-      <i class="fas fa-handshake"></i> ບັນດາລູກຄ້າຜູ້ທີ່ໄວ້ໃຈພວກເຮົາ
-    </h2>
-    <p class="section-sub" style="text-align: center;">Our Valued Customers</p>
-  </div>
-
-  <!-- ແຖວທີ 1: ເລື່ອນຊ້າຍ -->
-  <div class="marquee">
-    <div class="marquee-track track-left">
-      <!-- ຊຸດທີ 1 -->
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/LD6GdzSL/699e98f9ea339df6c7b82273-LOGO-CP.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/HTHP3nCR/Picture2.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbJ4nCZv/PTT-Digital-PTT-PR-Laos.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5tDYcCz/Picture1.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/twXgnw28/Picture3.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5sf5fsg/Picture4.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/5WYhSRfY/Picture5.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/LdMxVRTX/Picture6.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/XfcsCB9f/Picture7.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbZN5tFd/Picture8.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/0jVbMbGg/Picture9.jpg');"></div>
-      <!-- ສຳເນົາ ຊຸດທີ 2 (ຈຳເປັນ ເພື່ອວົນຕໍ່ເນື່ອງ) -->
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/LD6GdzSL/699e98f9ea339df6c7b82273-LOGO-CP.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/HTHP3nCR/Picture2.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbJ4nCZv/PTT-Digital-PTT-PR-Laos.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5tDYcCz/Picture1.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/twXgnw28/Picture3.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5sf5fsg/Picture4.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/5WYhSRfY/Picture5.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/LdMxVRTX/Picture6.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/XfcsCB9f/Picture7.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbZN5tFd/Picture8.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/0jVbMbGg/Picture9.jpg');"></div>
+  <section class="customers-section">
+    <div class="container">
+      <h2 class="section-title" style="color: #b30000; text-align: center;"><i class="fas fa-handshake"></i> ບັນດາລູກຄ້າຜູ້ທີ່ໄວ້ໃຈພວກເຮົາ</h2>
+      <p class="section-sub" style="text-align: center;">Our Valued Customers</p>
     </div>
-  </div>
-
-  <!-- ແຖວທີ 2: ເລື່ອນຂວາ -->
-  <div class="marquee" style="margin-top: 25px;">
-    <div class="marquee-track track-right">
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/GQsZSSvR/Picture10.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/SDWd7nV3/Picture11.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/RpMt8vhZ/Picture12.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/MDCH5P4W/Picture13.jpg');"></div>
-      <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVUrM_ebEVWRhVZSDelJv3xOEEuACmj3nfsg&s');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/LXqbWrfx/Picture15.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/DP4nrwM7/Picture16.jpg');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/1JXCB9j7/Picture17.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/mCrJDLt1/Picture18.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2FSBfr21hcjn3NAHMD67XAV5EWqe3D1xrgw&s');"></div>
-      <!-- ສຳເນົາ -->
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/GQsZSSvR/Picture10.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/SDWd7nV3/Picture11.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/RpMt8vhZ/Picture12.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/MDCH5P4W/Picture13.jpg');"></div>
-      <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVUrM_ebEVWRhVZSDelJv3xOEEuACmj3nfsg&s');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/LXqbWrfx/Picture15.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/DP4nrwM7/Picture16.jpg');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/1JXCB9j7/Picture17.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://i.ibb.co/mCrJDLt1/Picture18.png');"></div>
-      <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2FSBfr21hcjn3NAHMD67XAV5EWqe3D1xrgw&s');"></div>
+    <div class="marquee">
+      <div class="marquee-track track-left">
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/LD6GdzSL/699e98f9ea339df6c7b82273-LOGO-CP.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/HTHP3nCR/Picture2.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbJ4nCZv/PTT-Digital-PTT-PR-Laos.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5tDYcCz/Picture1.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/twXgnw28/Picture3.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5sf5fsg/Picture4.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/5WYhSRfY/Picture5.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/LdMxVRTX/Picture6.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/XfcsCB9f/Picture7.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbZN5tFd/Picture8.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/0jVbMbGg/Picture9.jpg');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/LD6GdzSL/699e98f9ea339df6c7b82273-LOGO-CP.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/HTHP3nCR/Picture2.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbJ4nCZv/PTT-Digital-PTT-PR-Laos.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5tDYcCz/Picture1.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/twXgnw28/Picture3.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/m5sf5fsg/Picture4.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/5WYhSRfY/Picture5.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/LdMxVRTX/Picture6.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/XfcsCB9f/Picture7.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/gbZN5tFd/Picture8.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/0jVbMbGg/Picture9.jpg');"></div>
+      </div>
     </div>
-  </div>
-</section>
-  
+    <div class="marquee" style="margin-top: 25px;">
+      <div class="marquee-track track-right">
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/GQsZSSvR/Picture10.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/SDWd7nV3/Picture11.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/RpMt8vhZ/Picture12.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/MDCH5P4W/Picture13.jpg');"></div>
+        <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVUrM_ebEVWRhVZSDelJv3xOEEuACmj3nfsg&s');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/LXqbWrfx/Picture15.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/DP4nrwM7/Picture16.jpg');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/1JXCB9j7/Picture17.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/mCrJDLt1/Picture18.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2FSBfr21hcjn3NAHMD67XAV5EWqe3D1xrgw&s');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/GQsZSSvR/Picture10.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/SDWd7nV3/Picture11.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/RpMt8vhZ/Picture12.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/MDCH5P4W/Picture13.jpg');"></div>
+        <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVUrM_ebEVWRhVZSDelJv3xOEEuACmj3nfsg&s');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/LXqbWrfx/Picture15.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/DP4nrwM7/Picture16.jpg');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/1JXCB9j7/Picture17.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://i.ibb.co/mCrJDLt1/Picture18.png');"></div>
+        <div class="customer-logo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2FSBfr21hcjn3NAHMD67XAV5EWqe3D1xrgw&s');"></div>
+      </div>
+    </div>
+  </section>
 </main>
 
-<!--- Modern Premium Footer — ພື້ນສີເດີມ (Dark Gradient), B-One Engineering ສີແດງ, ສີສະບາຍຕາ --->
+<!-- Footer ເດີມ -->
 <footer style="background: linear-gradient(135deg, #0a0f1c 0%, #0b1323 100%); color: #e2e8f0; padding: 60px 0 30px; font-family: 'Inter', 'Noto Sans Lao', sans-serif; border-top: 1px solid rgba(255,255,255,0.05);">
   <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
-    
-    <!-- ແຖວຫຼັກ 4 ຖັນ -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 50px;">
-      
-      <!-- ຖັນ 1: ໂລໂກ້ ສີແດງ + ຄຳຂວັນ -->
       <div>
         <div style="margin-bottom: 20px;">
           <span style="font-size: 28px; font-weight: 700; color: #b30000; letter-spacing: -0.5px;">B-One Engineering</span>
         </div>
         <p style="font-size: 14px; line-height: 1.6; color: #cbd5e0;">ວິສະວະກຳຄົບວົງຈອນ ທີ່ທ່ານໄວ້ໃຈ | Complete Engineering Solutions You Can Trust</p>
       </div>
-      
-      <!-- ຖັນ 2: ລິ້ງດ່ວນ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Quick Links</h3>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -268,8 +280,6 @@
           <li style="margin-bottom: 12px;"><a href="/contact" style="color: #cbd5e0; text-decoration: none; font-size: 14px; transition: 0.2s;">📞 Contact</a></li>
         </ul>
       </div>
-      
-      <!-- ຖັນ 3: ບໍລິການຫຼັກ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Key Services</h3>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -279,8 +289,6 @@
           <li style="margin-bottom: 12px; color: #cbd5e0;"><span style="color: #b30000;">▹</span> Training & Testing</li>
         </ul>
       </div>
-      
-      <!-- ຖັນ 4: ຂໍ້ມູນຕິດຕໍ່ -->
       <div>
         <h3 style="color: #f1f5f9; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Contact Info</h3>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
@@ -292,23 +300,19 @@
           <span style="font-size: 14px; color: #cbd5e0;">+856 20 59478899</span>
         </div>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
-      <i class="fas fa-envelope" style="color: #b30000;"></i>
-        <a href="mailto:info@b-one-engineering.com" style="font-size: 14px; color: #cbd5e0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#b30000'" onmouseout="this.style.color='#cbd5e0'">info@b-one-engineering.com</a>
-          </div>
+          <i class="fas fa-envelope" style="color: #b30000;"></i>
+          <a href="mailto:info@b-one-engineering.com" style="font-size: 14px; color: #cbd5e0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#b30000'" onmouseout="this.style.color='#cbd5e0'">info@b-one-engineering.com</a>
+        </div>
         <div style="display: flex; gap: 12px; margin-bottom: 15px;">
           <i class="fas fa-clock" style="color: #b30000;"></i>
           <span style="font-size: 14px; color: #cbd5e0;">Mon – Sun: 8:00 – 17:30</span>
         </div>
       </div>
     </div>
-    
-    <!-- ເສັ້ນຂີດຄັ້ນປະດັບ (ສີແດງ) -->
     <div style="height: 1px; background: linear-gradient(90deg, transparent, #b30000, #b30000, transparent); margin: 20px 0 25px;"></div>
-    
-    <!-- ແຖວລຸ່ມ: ລິຂະສິດ ແລະ ນະໂຍບາຍ -->
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 13px; color: #94a3b8;">
       <p>© 2026 B-One Engineering Sole Co., Ltd. All Rights Reserved. | ວິສະວະກຳທີ່ທ່ານໄວ້ໃຈ</p>
-         <div style="display: flex; gap: 20px;">
+      <div style="display: flex; gap: 20px;">
         <span style="color: #94a3b8;">Privacy Policy</span>
         <span style="color: #94a3b8;">Terms of Service</span>
         <span style="color: #94a3b8;">Sitemap</span>
@@ -317,27 +321,12 @@
   </div>
 </footer>
 
-<!-- CSS ເພີ່ມເຕີມ (Hover ແລະ Responsive) -->
 <style>
-  footer a:hover {
-    color: #b30000 !important;
-    transform: translateX(2px);
-    transition: all 0.2s ease;
-  }
-  footer ul li a:hover {
-    color: #b30000 !important;
-    padding-left: 5px;
-  }
+  footer a:hover { color: #b30000 !important; transform: translateX(2px); transition: all 0.2s ease; }
+  footer ul li a:hover { color: #b30000 !important; padding-left: 5px; }
   @media (max-width: 768px) {
-    footer div[style*="display: grid"] {
-      gap: 30px;
-      text-align: center;
-    }
-    footer div[style*="display: flex"]:last-child {
-      flex-direction: column;
-      gap: 12px;
-      text-align: center;
-    }
+    footer div[style*="display: grid"] { gap: 30px; text-align: center; }
+    footer div[style*="display: flex"]:last-child { flex-direction: column; gap: 12px; text-align: center; }
   }
 </style>
 <a href="https://wa.me/8562059478899" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
